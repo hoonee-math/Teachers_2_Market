@@ -4,8 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/common/sidebar.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/common/sidebar.css">
 
 
 <div class="sidecontainer">

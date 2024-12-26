@@ -7,21 +7,13 @@ body {
     height: 100vh;
     background-color: white;
 }
-/* .sidecontainer {
-    display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 250px;
-    gap: 20px;
-    요놈이 가장 큰 문제 어뚱한데 가있음.
-} */ 
 .header {
     margin: 0 auto;
     /* padding: 0 280px; */
     display: flex;
     flex-direction: column;
     width: 880px;
-	height: 80px;
+	height: 105px;
 }
 .main{
     display: flex;
@@ -68,11 +60,6 @@ body {
     border: none;
     background-color: white;
 }
-/* .container {
-    display: flex;
-    flex-direction: row;
-    height: 100px;
-} */ 요놈이 가장 큰 문제
 #personal-btn button {
 	color : #6f6f6f;
 	background-color : white;
