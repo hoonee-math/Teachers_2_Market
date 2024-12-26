@@ -14,7 +14,7 @@
                     <li>
                         <a href="#" class="button">
                             <div class="icon-container">
-                                <img src="https://img.icons8.com/?size=100&id=10022&format=png&color=cccccc" alt="인기글" class="icon">
+                                <img src="${pageContext.request.contextPath }/resources/images/fire.png" alt="인기글" class="icon">
                             </div>
                         </a>
                         <div class="text">인기글</div>
@@ -22,7 +22,7 @@
                     <li>
                         <a href="#" class="button">
                             <div class="icon-container">
-                                <img src="https://img.icons8.com/?size=100&id=nqzSYKCA7s7h&format=png&color=cccccc" alt="n수생" class="icon">
+                                <img src="${pageContext.request.contextPath }/resources/images/exam.png" alt="n수생" class="icon">
                             </div>
                         </a>
                         <div class="text">n수생</div>
@@ -30,7 +30,7 @@
                     <li>
                         <a href="#" class="button">
                             <div class="icon-container">
-                                <img src="https://img.icons8.com/?size=100&id=EOn31zjdfgcn&format=png&color=cccccc" alt="고등" class="icon">
+                                <img src="${pageContext.request.contextPath }/resources/images/school.png" alt="고등" class="icon">
                             </div>
                         </a>
                         <div class="text">고등</div>
@@ -38,7 +38,7 @@
                     <li>
                         <a href="#" class="button">
                             <div class="icon-container">
-                                <img src="https://img.icons8.com/?size=100&id=EOn31zjdfgcn&format=png&color=cccccc" alt="중등" class="icon">
+                                <img src="${pageContext.request.contextPath }/resources/images/school.png" alt="중등" class="icon">
                             </div>
                         </a>
                         <div class="text">중등</div>
@@ -46,7 +46,7 @@
                     <li>
                         <a href="#" class="button">
                             <div class="icon-container">
-                                <img src="https://img.icons8.com/?size=100&id=102432&format=png&color=cccccc" alt="초등" class="icon">
+                                <img src="${pageContext.request.contextPath }/resources/images/kid.png" alt="초등" class="icon">
                             </div>
                         </a>
                         <div class="text">초등</div>
@@ -54,7 +54,7 @@
                     <li>
                         <a href="#" class="button">
                             <div class="icon-container">
-                                <img src="https://img.icons8.com/?size=100&id=102432&format=png&color=cccccc" alt="미취학" class="icon">
+                                <img src="${pageContext.request.contextPath }/resources/images/kid.png" alt="미취학" class="icon">
                             </div>
                         </a>
                         <div class="text">미취학</div>
@@ -62,7 +62,7 @@
                     <li>
                         <a href="#" class="button">
                             <div class="icon-container">
-                                <img src="https://img.icons8.com/?size=100&id=FVQqbNWLzhcc&format=png&color=cccccc" alt="내 자료실" class="icon">
+                                <img src="${pageContext.request.contextPath }/resources/images/file.png" alt="내 자료실" class="icon">
                             </div>
                         </a>
                         <div class="text">내 자료실</div>
