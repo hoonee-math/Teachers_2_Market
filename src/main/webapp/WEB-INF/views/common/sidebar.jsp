@@ -6,7 +6,6 @@
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/common/sidebar.css">
 
-
 <div class="sidecontainer">
 	<div class="container">
 			<div class="button">

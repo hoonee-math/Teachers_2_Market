@@ -9,7 +9,6 @@ body {
 }
 .header {
     margin: 0 auto;
-    /* padding: 0 280px; */
     display: flex;
     flex-direction: column;
     width: 880px;
