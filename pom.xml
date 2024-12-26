@@ -74,7 +74,7 @@
   <build>
 	<!--패키징시 이름 설정 -> war 파일 이름이 contextPath가 됨! -->
 	<!--war 파일 패키징-->
-	<finalName>teachers</finalName>
+	<finalName>market</finalName>
 	<plugins>
 		<plugin>
 			<groupId>org.apache.maven.plugins</groupId>
