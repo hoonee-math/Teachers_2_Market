@@ -12,14 +12,16 @@
 	box-shadow: 0 0 5px rgba(0,0,0,0.4); /* 초기 설정값 0.1 */
 }
 .card-img {
-	padding: 15px 0 5px 15px;
-	display: flex; 
-	justify-content: center;
+	padding: 15px 15px 5px 15px;
+	height: 190px; /* 고정된 높이 */
+	overflow: hidden; /* 초과 부분 숨김 */
+	position: relative; /* 자식 요소를 기준으로 정렬할 수 있도록 설정 */
 }
 .card-img img {
 	width:190px;
 	height:auto; 
 	object-fit:cover; /* 초과되는 부분 잘라냄 */
+	position: absolute; /* 부모 요소 기준 위치 조정 */
 }
 .card-content p {
 	margin: 0 0 0 15px;
