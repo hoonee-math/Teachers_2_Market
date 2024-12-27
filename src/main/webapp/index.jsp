@@ -11,63 +11,33 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.jpeg">
+	<link rel="icon" href="${path }/resources/images/favicon.jpeg">
 	<title>티꿀모아</title>
 	
 	<!-- 2. 공통 CSS -->
+    <!-- 2-1. Bootstrap CSS (다른 CSS보다 먼저) -->
+    <!-- 2-2. Bootstrap Icons (필요한 경우) -->
+    <!-- 2-3. 직접 제작한 CSS 파일들 (Bootstrap CSS 보다 아래 위치시켜야 함) -->
 	<link rel="stylesheet" href="${path }/resources/css/common/layout.css">
 	<link rel="stylesheet" href="${path }/resources/css/common/header.css">
 	<link rel="stylesheet" href="${path }/resources/css/common/sidebar.css">
 	<link rel="stylesheet" href="${path }/resources/css/common/footer.css">
-	<!-- 3. 컴포넌트 CSS -->
-	<!-- 4. 페이지별 CSS -->
-	<!-- 5. 외부 라이브러리 -->
+    <!-- 3. 컴포넌트 CSS (각 요소) -->
+    <!-- 4. 페이지별 CSS -->
+    <!-- 5. 외부 라이브러리 ex: jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-		
+    <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
+    <!-- 7. 내부 style 태그 -->
+    <style>
+    </style>
 </head>
 <body>
 <!-- 콘텐츠 영역 -->
 <div id="wrap">
 <!-- 헤더 include -->
-<header class="header">
-	<div class="header-container">
-		<a href="#" id="homeButton"> <img
-			src="${pageContext.request.contextPath }/resources/images/logo.jpeg"
-			alt="home으로">
-		</a>
-		<div class="search-bar">
-			<input type="text" placeholder="검색어를 입력해주세요.">
-			<button onclick="search();">
-				<img
-					src="https://img.icons8.com/?size=100&id=7695&format=png&color=cccccc"
-					alt="검색" width="25px" height="100%">
-			</button>
-		</div>
-		<div class="personal-container">
-			<table id="personal-info">
-				<tr rowspan="2">
-					<td id="member-name" colspan="2">OOO님</td>
-					<td>
-						<button id="cart">
-							<img width="30px" height="100%"
-								src="https://img.icons8.com/?size=100&id=85080&format=png&color=6f6f6f" />
-						</button>
-					</td>
-				</tr>
-				<tr id="personal-btn">
-					<td>
-						<button id="write-btn">글쓰기</button>
-					</td>
-					<td>
-						<button id="logout-btn">로그아웃</button>
-					</td>
-				</tr>
-			</table>
-		</div>
-	</div>
-</header>
+<jsp:include page="/WEB-INF/views/common/header.jsp"/>
       
-      <!-- 메인 콘텐츠 -->
+<!-- 메인 콘텐츠 -->
 <main class="main">
 	<div class="main-container">
 		<!-- sidebar include -->
@@ -88,10 +58,8 @@
 	</div>
 </main>
 
-      <!-- 푸터 include -->
-<footer class="footer footer-contnet">
-	<p>© 2025 티꿀모아 | 이용 약관 | 개인정보 보호 정책 | 청소년 보호 정책</p>
-</footer>
+<!-- 푸터 include -->
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 <!-- wrap 태그 종료 -->
 </div>
 
@@ -101,8 +69,3 @@
 <!-- 9. 페이지별 JavaScript -->
 </body>
 </html>
-
-
-
-
-
