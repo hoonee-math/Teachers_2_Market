@@ -30,29 +30,9 @@
     <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
     <!-- 7. 내부 style 태그 -->
     <style>
-/*     	.posts-container {
-    		display: flex;
-    		flex-wrap: wrap;
-    		gap: 70px;
-    		padding: 10px 0px 60px 0;
-    	}
-     	.card-div {
-     		flex: 0 0 calc(25%-15px);
-    		width: 180px;
-    		height: 260px;
-    		background-color: white;
-    		box-shadow: 0 0 5px rgba(0,0,0,0.1);
-    	}
-    	.card-img {
-    		padding: 15px 0 5px 15px;
-    	}
-    	.card-content p {
-    		margin: 0 0 0 15px;
-    		padding: 3px;
-    	}
-    	.card-div:hover {
-    		transform: scale(1.015);
-    	} */
+		#notice-div {
+			color: red;	
+		}
     
     </style>
 </head>
@@ -74,6 +54,7 @@
 				<!-- 섹션 1 -->
 				<div id="notice-div">
 					<p><strong>[공지] 이것은 공지사항입니다.</strong></p>
+					<p><strong>[공지] 이것은 두번째 공지사항입니다.</strong></p>
 				</div>
 			</section>
 			<section class="row card-section">
