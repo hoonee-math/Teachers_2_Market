@@ -19,8 +19,6 @@
     <!-- 2-2. Bootstrap Icons (필요한 경우) -->
     <!-- 2-3. 직접 제작한 CSS 파일들 (Bootstrap CSS 보다 아래 위치시켜야 함) -->
 	<link rel="stylesheet" href="${path }/resources/css/common/layout.css">
-	<link rel="stylesheet" href="${path }/resources/css/common/header.css">
-	<link rel="stylesheet" href="${path }/resources/css/common/sidebar.css">
 	<link rel="stylesheet" href="${path }/resources/css/common/footer.css">
     <!-- 3. 컴포넌트 CSS (각 요소) -->
     <!-- 4. 페이지별 CSS -->
@@ -29,38 +27,42 @@
     <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
     <!-- 7. 내부 style 태그 -->
     <style>
+    body {
+    	background-color : #fffadd;
+    	background : linear-gradient(to right, #fffadd, #ffffff);
+    	
+    }
+	#login-main-container {
+		display : flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+	.main-content {
+		background: #fff;
+	    padding: 45px 30px;
+	    border-radius: 30px;
+	    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+	    width: 600px;
+	    text-align: center;
+	}
     </style>
 </head>
 <body>
 <!-- 콘텐츠 영역 -->
-<div id="wrap">
-<!-- 헤더 include -->>
-<jsp:include page="/WEB-INF/views/common/header.jsp"/>
-
+<div id="wrap">	
 <!-- 메인 콘텐츠 -->
 <main class="main">
-	<div class="main-container">
-		<!-- sidebar include -->
-		<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-        
+	<div id="login-main-container">
+		<div><img src="${path}/resources/images/logo.jpeg" style="width:150px; height:150px;"></div>
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
 			<section class="row main-section">
 				<!-- 섹션 1 -->
-				<!-- 로그인 페이지로 이동 -->
-				<a href="${path}/member/login">로그인 페이지로 이동</a>
+				<div id="login-inner-container">
 				
-			</section>
-			<section class="row main-section">
-				<!-- 섹션 2 -->
-				<div class="main-banner" >
-					<img
-						src="${path }/resources/images/banner.png"
-						alt="검색" width="100%">
+				
 				</div>
-			</section>
-			<section class="row main-section">
-				<!-- 섹션 3 -->
 			</section>
 		</div>
 	</div>
