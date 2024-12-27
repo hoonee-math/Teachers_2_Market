@@ -27,6 +27,6 @@
 	margin: 0 0 0 15px;
 	padding: 3px;
 }
-.card-content:hover {
+.card-container:hover {
 	transform: scale(1.015);
 }
