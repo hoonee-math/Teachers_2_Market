@@ -29,12 +29,35 @@
     <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
     <!-- 7. 내부 style 태그 -->
     <style>
+    	/* .main-section div {
+    		display: grid;
+    		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    		gap: 20px;
+    		padding: 0 20px;
+    		border: 1px solid lightcoral;
+    	}  */
+    	#card-example {
+    		width: 180px;
+    		height: 260px;
+    		background-color: white;
+    		box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    	}
+    	#card-img {
+    		padding: 15px 0 5px 15px;
+    	}
+    	#card-content p {
+    		margin: 0 0 0 15px;
+    		padding: 3px;
+    	}
+    	#card-example:hover {
+    		transform: scale(1.015);
+    	}
     </style>
 </head>
 <body>
 <!-- 콘텐츠 영역 -->
 <div id="wrap">
-<!-- 헤더 include -->>
+<!-- 헤더 include -->
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <!-- 메인 콘텐츠 -->
@@ -47,17 +70,22 @@
 		<div class="main-content">
 			<section class="row main-section">
 				<!-- 섹션 1 -->
-				<!-- 로그인 페이지로 이동 -->
-				<a href="${path}/member/login">로그인 페이지로 이동</a>
-				
+				<div id="card-example">
+					<div id="card-img">
+						<img width="150px" height="150px" src="${path }/resources/images/logo.jpeg">
+					</div>
+					<div id="card-content">
+						<p>판매자명</p>
+							<!-- 판매물품 제목은 10글자까지, 
+								프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
+								ex) 하나둘셋넷다섯여섯...-->
+						<p><strong>판매물품 제목</strong></p>
+						<p>₩ 판매금액</p>
+					</div>
+				</div>
 			</section>
 			<section class="row main-section">
 				<!-- 섹션 2 -->
-				<div class="main-banner" >
-					<img
-						src="${path }/resources/images/banner.png"
-						alt="검색" width="100%">
-				</div>
 			</section>
 			<section class="row main-section">
 				<!-- 섹션 3 -->
