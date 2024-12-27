@@ -7,6 +7,11 @@ body {
     height: 100vh;
     background-color: white;
 }
+#wrap {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 .header {
     margin: 20px auto;
     display: flex;
