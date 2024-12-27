@@ -30,21 +30,59 @@
     body {
     	background-color : #fffadd;
     	background : linear-gradient(to right, #fffadd, #ffffff);
-    	
+    	margin: 0;
     }
 	#login-main-container {
 		display : flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
+		min-height: 90vh;
+		padding: 20px;
 	}
 	.main-content {
+		margin-top:30px;
 		background: #fff;
 	    padding: 45px 30px;
 	    border-radius: 30px;
 	    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
-	    width: 600px;
+	    width: 550px;
+	    height : 400px;
 	    text-align: center;
+	}
+	#login-inner-container {
+		display: flex;
+		flex-direction: column;
+		gap:10px;
+	}
+	#login-font {
+		font-family:Sans-serif;
+		font-style: italic;
+		font-size: 40px;
+		color : grey;
+	}
+	#login-id, #login-pw {
+		width: 60%;
+	    padding: 12px;
+	    border: 2px solid #cccccc;
+	    border-radius: 8px;
+	    font-size: 16px;
+	    outline: none;
+	}
+	#login-btn {
+		margin-top:60px;
+		color:#6f6f6f;
+	}
+	#login-btn, #login-find {
+		background-color: #fffadd;
+		width: 60%;
+	    padding: 12px;
+	    border:none;
+	    color:#6f6f6f;
+	}
+	#login-join {
+		text-decoration:none;
+		color:#6f6f6f;
 	}
     </style>
 </head>
@@ -60,8 +98,12 @@
 			<section class="row main-section">
 				<!-- 섹션 1 -->
 				<div id="login-inner-container">
-				
-				
+					<div><p id="login-font">Login</p></div>
+					<div><input type="text" id="login-id" placeholder="아이디"></div>
+					<div><input type="password" id="login-pw" placeholder="비밀번호"></div>
+					<div><input type="submit" id="login-btn" value="로그인"></div>
+					<div><input type="submit" id="login-find" value="ID/PW찾기"></div>
+					<div><a href="" id="login-join">회원가입</a></div>
 				</div>
 			</section>
 		</div>
