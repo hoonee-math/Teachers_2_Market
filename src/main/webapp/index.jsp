@@ -24,8 +24,8 @@
     <!-- 콘텐츠 영역 -->
     <div id="wrap">
         <!-- 헤더 include -->
-        <div class="header">
-			<div class="main">
+        <header class="header">
+			<div class="header-container">
 				<a href="#" id="homeButton"> <img
 					src="${pageContext.request.contextPath }/resources/images/logo.jpeg"
 					alt="home으로">
@@ -60,12 +60,12 @@
 					</table>
 				</div>
 			</div>
-		</div>
+		</header>
         
         <!-- 메인 콘텐츠 -->
         <main style="height:500px;">
             <!-- 페이지 내용 -->
-            <section>
+            <section class="">
 				<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
             </section>
 			

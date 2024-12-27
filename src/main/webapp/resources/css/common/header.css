@@ -14,7 +14,7 @@ body {
     width: 880px;
 	height: 105px;
 }
-.main{
+.header-container{
     display: flex;
     align-items: center;
     gap: 30px;
