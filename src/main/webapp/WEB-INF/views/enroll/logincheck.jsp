@@ -350,7 +350,7 @@
 				</div>
 				<div id="login-check-btn">
 					<a href="" id="gomain">메인으로</a>
-					<button type="submit" id="login-next">다음으로</button>
+					<button type="submit" id="login-next" style="cursor: pointer;">다음으로</button>
 				</div>
 			</section>
 		</div>
