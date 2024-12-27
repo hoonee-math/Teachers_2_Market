@@ -92,7 +92,7 @@
 <!-- 메인 콘텐츠 -->
 <main class="main">
 	<div id="login-main-container">
-		<div><img src="${path}/resources/images/logo.jpeg" style="width:150px; height:150px;"></div>
+		<div><img src="${path}/resources/images/logo(NoBackGroun).png" style="width:150px; height:150px;"></div>
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
 			<section class="row main-section">
