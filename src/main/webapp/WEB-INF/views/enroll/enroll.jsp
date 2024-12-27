@@ -23,12 +23,10 @@
 	<link rel="stylesheet" href="${path }/resources/css/common/sidebar.css">
 	<link rel="stylesheet" href="${path }/resources/css/common/footer.css">
     <!-- 3. 컴포넌트 CSS (각 요소) -->
-	<link rel="stylesheet" href="${path }/resources/css/component/card.css">
     <!-- 4. 페이지별 CSS -->
     <!-- 5. 외부 라이브러리 ex: jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
-    <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- 7. 내부 style 태그 -->
     <style>
     </style>
@@ -36,7 +34,7 @@
 <body>
 <!-- 콘텐츠 영역 -->
 <div id="wrap">
-<!-- 헤더 include -->
+<!-- 헤더 include -->>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <!-- 메인 콘텐츠 -->
@@ -49,34 +47,13 @@
 		<div class="main-content">
 			<section class="row main-section">
 				<!-- 섹션 1 -->
-				<div class="main-banner" >
-					<img
-						src="${path }/resources/images/banner.png"
-						alt="검색" width="100%">
-				</div>
+				
 			</section>
-			<section class="row card-section">
-				<div class=card-container>
-					<div class="card-img">
-						<img src="${path }/resources/images/ohaeone.jpg">
-					</div>
-					<div class="card-content">
-						<p>판매자명</p>
-							<!-- 판매물품 제목은 10글자까지, 
-								프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
-								ex) 하나둘셋넷다섯여섯...-->
-						<p><strong>판매물품 제목</strong></p>
-						<p>₩ 판매금액</p>
-					</div>
-				</div>
+			<section class="row main-section">
 				<!-- 섹션 2 -->
 			</section>
 			<section class="row main-section">
 				<!-- 섹션 3 -->
-				<!-- 로그인 페이지로 이동 -->
-				<a href="${path}/member/login">로그인 페이지로 이동</a>
-				<a href="${path}/member/logincheck">약관동의 페이지로 이동</a>
-				<a href="${path}/member/enroll">회원가입 정보 입력 페이지로 이동</a>
 			</section>
 		</div>
 	</div>
@@ -89,9 +66,6 @@
 
 <!-- 8. 공통 JavaScript -->
 <!-- 9. API/Ajax 관련 JavaScript -->
-<script>
-
-</script>
 <!-- 10. 컴포넌트 JavaScript -->
 <!-- 11. 페이지별 JavaScript -->
 </body>
