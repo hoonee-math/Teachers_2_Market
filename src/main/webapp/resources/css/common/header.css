@@ -7,22 +7,18 @@ body {
     height: 100vh;
     background-color: white;
 }
-#wrap {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
 .header {
     margin: 20px auto;
     display: flex;
     flex-direction: column;
-    width: 880px;
+    width: 1300px;
 	height: 105px;
 }
 .header-container{
     display: flex;
     align-items: center;
-    gap: 30px;
+    /* gap: 120px; */ /* gap 대신에 justi-content : space-between */
+    justify-content: space-between;
 }
 #homeButton {
     display: flex;
