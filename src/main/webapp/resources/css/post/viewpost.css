@@ -1,0 +1,6 @@
+@charset "UTF-8";
+
+#view-main-content {
+	background-color: white;
+	box-shadow: 0 0 5px rgba(0,0,0,0.2) !important;
+}
