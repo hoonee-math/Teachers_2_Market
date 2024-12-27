@@ -10,7 +10,8 @@
 <head>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Honey T</title>
+    <link rel="icon" href="${pageContext.request.contextPath }/resources/images/favicon.jpeg">
+	<title>티꿀모아</title>
 	
     <!-- 2. 공통 CSS -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/common/header.css">
