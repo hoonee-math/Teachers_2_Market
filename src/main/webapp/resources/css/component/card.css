@@ -5,19 +5,26 @@
 	justify-content: space-between;
 }
 
-#card-container {
-	width: 180px;
-	height: 260px;
+.card-container {
+	width: 220px;
+	height: 320px;
 	background-color: white;
-	box-shadow: 0 0 5px rgba(0,0,0,0.1);
+	box-shadow: 0 0 5px rgba(0,0,0,0.4); /* 초기 설정값 0.1 */
 }
-#card-img {
+.card-img {
 	padding: 15px 0 5px 15px;
+	display: flex; 
+	justify-content: center;
 }
-#card-content p {
+.card-img img {
+	width:190px;
+	height:auto; 
+	object-fit:cover; /* 초과되는 부분 잘라냄 */
+}
+.card-content p {
 	margin: 0 0 0 15px;
 	padding: 3px;
 }
-#card-example:hover {
+.card-content:hover {
 	transform: scale(1.015);
 }

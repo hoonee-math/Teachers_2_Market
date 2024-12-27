@@ -36,7 +36,7 @@
 <body>
 <!-- 콘텐츠 영역 -->
 <div id="wrap">
-<!-- 헤더 include -->>
+<!-- 헤더 include -->
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
 <!-- 메인 콘텐츠 -->
@@ -56,11 +56,11 @@
 				</div>
 			</section>
 			<section class="row card-section">
-				<div id=card-container>
-					<div id="card-img">
-						<img width="150px" height="150px" src="${path }/resources/images/logo.jpeg">
+				<div class=card-container>
+					<div class="card-img">
+						<img src="${path }/resources/images/logo.jpeg">
 					</div>
-					<div id="card-content">
+					<div class="card-content">
 						<p>판매자명</p>
 							<!-- 판매물품 제목은 10글자까지, 
 								프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
