@@ -32,8 +32,28 @@
     <style>
 		#notice-div {
 			color: red;	
+			text-align: center;
 		}
-    
+    	ul {
+    		list-style-type: none;
+    		display: flex;
+    		justify-content: center;
+    		background-color: #fffadd;
+    		padding: 10px;
+    	}
+    	li {
+    		margin: 0 10px;
+    		font-size: 13pt;
+    	}
+    	a {
+    		padding: 10px;
+    		text-decoration: none;
+    		color: #6f6f6f;
+    		background-color: #fffadd
+    	}
+    	a:hover {
+    		background-color: white;
+    	}
     </style>
 </head>
 <body>
@@ -83,6 +103,32 @@
 			</section>
 			<section class="row main-section">
 				<!-- 섹션 2 -->
+				<ul class="pagination">
+					<li class="page-item">
+						<a class="page-link" href="#">이전</a>
+						<!-- <a class="page-link" href="?cPage=&numPerPage=">이전</a> -->
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">1</a>
+						<!-- <a class="page-link" href="?cPage=&numPerPage=&postNo="></a> -->
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">2</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">3</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">4</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">5</a>
+					</li>
+					<li class="page-item">
+						<a class="page-link" href="#">다음</a>
+						<!-- <a class="page-link" href="?cPage=&numPerPage=&postNo=">다음</a> -->
+					</li>
+				</ul>
 			</section>
 			<section class="row main-section">
 				<!-- 섹션 3 -->
