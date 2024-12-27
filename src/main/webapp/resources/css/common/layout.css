@@ -18,11 +18,11 @@
 
 /* main 컨테이너 - header와 동일한 너비(880px) 유지 */
 .main-container {
-    width: 1272px;
+    width: 1270px;
     margin: 0 auto;
     display: flex;
     gap: 30px; /* sidebar와 콘텐츠 사이 간격 조정 */
-    padding-left: 22px; /* sidebar를 살짝 오른쪽으로 이동 */
+    padding-left: 27.5px; /* sidebar를 살짝 오른쪽으로 이동 */
 }
 
 /* 메인 콘텐츠 영역 */
