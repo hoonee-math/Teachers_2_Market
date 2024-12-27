@@ -64,10 +64,14 @@
 		</header>
         
         <!-- 메인 콘텐츠 -->
-        <main style="height:500px;">
+        <main style="display:flex">
+			<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
             <!-- 페이지 내용 -->
-            <section class="">
-				<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+            <section class="row main-container">
+            </section>
+            <section class="row main-container">
+            </section>
+            <section class="row main-container">
             </section>
 			
         </main>
@@ -82,18 +86,20 @@
 		    flex-direction: column;
 		}
 		
-		footer {
+		.footer {
 		    width: 100%;
-		    margin-top: auto; /* 컨텐츠가 적을 때 아래로 밀어줌 */
-		    padding: 20px;
-		    text-align: center;
-		    font-size: 14px;
-		    color: #6f6f6f;
+		    padding: 20px 0; /* 상하 패딩만 적용 */
 		    background-color: #fffadd;
 		    border-top: 1px solid #eee;
 		}
 		
-		footer p {
+		/* footer 내부 컨텐츠 스타일 */
+		.footer-content {
+		    text-align: center;
+		    font-size: 14px;
+		    color: #6f6f6f;
+		}
+		.footer-content p {
 		    margin: 0;
 		}
 		
@@ -102,7 +108,7 @@
 		}
 		</style>
 		
-		<footer>
+		<footer class="footer footer-contnet">
 			<p>© 2025 티꿀모아 | 이용 약관 | 개인정보 보호 정책 | 청소년 보호 정책</p>
 		</footer>
 			

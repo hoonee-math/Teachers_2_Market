@@ -1,22 +1,17 @@
 @charset "UTF-8";
 
-.category {
-	width: 50px;
-	heigth: 200px;
-	
-}
-.icon {
+.side-img-icon {
     width: 30px;
     height: 30px;
 }
-.text {
+.side-btn-text {
     margin-top: 8px;
     font-size: 13px;
     width: 60px;
     text-align: center;
     color: #6f6f6f;
 }
-.button {
+.side-button {
     width: 50px;
     height: 50px;
     background-color: #fffadd;
@@ -26,6 +21,6 @@
     align-items: center;
     cursor: pointer;
 }
-.button:hover {
+.side-button:hover {
     background-color: #fff6c2;
 }
