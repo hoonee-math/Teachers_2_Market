@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+.card-section {
+	display:flex;
+	justify-content: space-between;
+}
+
+#card-container {
+	width: 180px;
+	height: 260px;
+	background-color: white;
+	box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+#card-img {
+	padding: 15px 0 5px 15px;
+}
+#card-content p {
+	margin: 0 0 0 15px;
+	padding: 3px;
+}
+#card-example:hover {
+	transform: scale(1.015);
+}

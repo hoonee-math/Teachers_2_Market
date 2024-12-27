@@ -23,6 +23,7 @@
 	<link rel="stylesheet" href="${path }/resources/css/common/sidebar.css">
 	<link rel="stylesheet" href="${path }/resources/css/common/footer.css">
     <!-- 3. 컴포넌트 CSS (각 요소) -->
+	<link rel="stylesheet" href="${path }/resources/css/component/card.css">
     <!-- 4. 페이지별 CSS -->
     <!-- 5. 외부 라이브러리 ex: jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -47,20 +48,142 @@
 		<div class="main-content">
 			<section class="row main-section">
 				<!-- 섹션 1 -->
-				<!-- 로그인 페이지로 이동 -->
-				<a href="${path}/member/login">로그인 페이지로 이동</a>
-				
-			</section>
-			<section class="row main-section">
-				<!-- 섹션 2 -->
 				<div class="main-banner" >
 					<img
 						src="${path }/resources/images/banner.png"
 						alt="검색" width="100%">
 				</div>
 			</section>
+			<section class="row card-section">
+				<!-- 섹션 2 -->
+				
+				<div id=card-container>
+					<div id="card-img">
+						<img width="150px" height="150px" src="${path }/resources/images/logo.jpeg">                    
+					</div>
+					<div id="card-content">
+						<p>판매자명</p>
+							<!-- 판매물품 제목은 10글자까지, 
+								프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
+								ex) 하나둘셋넷다섯여섯...-->
+						<p><strong>판매물품 제목</strong></p>
+						<p>₩ 판매금액</p>
+					</div>
+				</div>
+				<div id=card-container>
+					<div id="card-img">
+						<img width="150px" height="150px" src="${path }/resources/images/logo.jpeg">
+					</div>
+					<div id="card-content">
+						<p>판매자명</p>
+							<!-- 판매물품 제목은 10글자까지, 
+								프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
+								ex) 하나둘셋넷다섯여섯...-->
+						<p><strong>판매물품 제목</strong></p>
+						<p>₩ 판매금액</p>
+					</div>
+				</div>
+				<div id=card-container>
+					<div id="card-img">
+						<img width="150px" height="150px" src="${path }/resources/images/logo.jpeg">
+					</div>
+					<div id="card-content">
+						<p>판매자명</p>
+							<!-- 판매물품 제목은 10글자까지, 
+								프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
+								ex) 하나둘셋넷다섯여섯...-->
+						<p><strong>판매물품 제목</strong></p>
+						<p>₩ 판매금액</p>
+					</div>
+				</div>
+				<div id=card-container>
+					<div id="card-img">
+						<img width="150px" height="150px" src="${path }/resources/images/logo.jpeg">
+					</div>
+					<div id="card-content">
+						<p>판매자명</p>
+							<!-- 판매물품 제목은 10글자까지, 
+								프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
+								ex) 하나둘셋넷다섯여섯...-->
+						<p><strong>판매물품 제목</strong></p>
+						<p>₩ 판매금액</p>
+					</div>
+				</div>
+			</section>
+			<section class="row card-section">
+				<!-- 섹션 2 -->
+				
+				<div id=card-container>
+					<div id="card-img">
+						<img width="150px" height="150px" src="${path }/resources/images/logo.jpeg">                    
+					</div>
+					<div id="card-content">
+						<p>판매자명</p>
+							<!-- 판매물품 제목은 10글자까지, 
+								프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
+								ex) 하나둘셋넷다섯여섯...-->
+						<p><strong>판매물품 제목</strong></p>
+						<p>₩ 판매금액</p>
+					</div>
+				</div>
+				<div id=card-container>
+					<div id="card-img">
+						<img width="150px" height="150px" src="${path }/resources/images/logo.jpeg">
+					</div>
+					<div id="card-content">
+						<p>판매자명</p>
+							<!-- 판매물품 제목은 10글자까지, 
+								프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
+								ex) 하나둘셋넷다섯여섯...-->
+						<p><strong>판매물품 제목</strong></p>
+						<p>₩ 판매금액</p>
+					</div>
+				</div>
+				<div id=card-container>
+					<div id="card-img">
+						<img width="150px" height="150px" src="${path }/resources/images/logo.jpeg">
+					</div>
+					<div id="card-content">
+						<p>판매자명</p>
+							<!-- 판매물품 제목은 10글자까지, 
+								프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
+								ex) 하나둘셋넷다섯여섯...-->
+						<p><strong>판매물품 제목</strong></p>
+						<p>₩ 판매금액</p>
+					</div>
+				</div>
+				<div id=card-container>
+					<div id="card-img">
+						<img width="150px" height="150px" src="${path }/resources/images/logo.jpeg">
+					</div>
+					<div id="card-content">
+						<p>판매자명</p>
+							<!-- 판매물품 제목은 10글자까지, 
+								프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
+								ex) 하나둘셋넷다섯여섯...-->
+						<p><strong>판매물품 제목</strong></p>
+						<p>₩ 판매금액</p>
+					</div>
+				</div>
+				<div id=card-container>
+					<div id="card-img">
+						<img width="150px" height="150px" src="${path }/resources/images/logo.jpeg">
+					</div>
+					<div id="card-content">
+						<p>판매자명</p>
+							<!-- 판매물품 제목은 10글자까지, 
+								프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
+								ex) 하나둘셋넷다섯여섯...-->
+						<p><strong>판매물품 제목</strong></p>
+						<p>₩ 판매금액</p>
+					</div>
+				</div>
+			</section>
 			<section class="row main-section">
 				<!-- 섹션 3 -->
+				<!-- 로그인 페이지로 이동 -->
+				<a href="${path}/member/login">로그인 페이지로 이동</a>
+				
 			</section>
 		</div>
 	</div>
