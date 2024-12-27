@@ -74,6 +74,7 @@
 				<!-- 섹션 3 -->
 				<!-- 로그인 페이지로 이동 -->
 				<a href="${path}/member/login">로그인 페이지로 이동</a>
+				<a href="${path}/member/logincheck">약관동의 페이지로 이동</a>
 			</section>
 		</div>
 	</div>
@@ -87,48 +88,40 @@
 <!-- 8. 공통 JavaScript -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <!-- 9. API/Ajax 관련 JavaScript -->
-<script>
-// 전역 변수로 컨텍스트 경로 설정
-const contextPath = '${pageContext.request.contextPath}';
-
-// 더미데이터 생성을 위한 함수
-function generateDummyData(count) {
-    const dummyData = [];
-    const words = ['수학', '과학', '영어', '국어', '한국사', '사회', '물리', '화학', '생물'];
-    const types = ['문제집', '워크북', '교과서', '참고서', '요약노트'];
-    
-    for(let i = 0; i < count; i++) {
-        const randomTitle = `${words[Math.floor(Math.random() * words.length)]} ${types[Math.floor(Math.random() * types.length)]}`;
-        const price = Math.floor(Math.random() * 40000) + 10000;
-        
-        dummyData.push({
-            sellerId: `판매자${i + 1}`,
-            title: randomTitle,
-            price: price,
-            imgSrc: `${contextPath}/resources/images/logo.jpeg`
+<script>// 카드 DOM 요소 생성 함수를 Promise를 반환하도록 수정
+async function createCardElement(cardData) {
+    // 이미지 로드를 위한 Promise 생성
+    const loadImage = (src) => {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve(img.src);
+            img.src = src;
         });
+    };
+
+    // 이미지 로드 대기
+    try {
+        const imgSrc = await loadImage(cardData.imgSrc);
+        return `
+            <div id="card-container">
+                <div id="card-img">
+                    <img width="150px" height="150px" src="${imgSrc}" alt="상품이미지">
+                </div>
+                <div id="card-content">
+                    <p>${cardData.sellerId}</p>
+                    <p><strong>${cardData.title.length > 10 ? cardData.title.substring(0, 9) + '...' : cardData.title}</strong></p>
+                    <p>₩ ${cardData.price.toLocaleString()}</p>
+                </div>
+            </div>
+        `;
+    } catch (error) {
+        console.error('이미지 로드 실패:', error);
+        return ''; // 이미지 로드 실패시 빈 문자열 반환
     }
-    return dummyData;
 }
 
-// 카드 DOM 요소 생성 함수
-function createCardElement(cardData) {
-    return `
-        <div id="card-container">
-            <div id="card-img">
-                <img width="150px" height="150px" src="${cardData.imgSrc}" alt="상품이미지">
-            </div>
-            <div id="card-content">
-                <p>${cardData.sellerId}</p>
-                <p><strong>${cardData.title.length > 10 ? cardData.title.substring(0, 9) + '...' : cardData.title}</strong></p>
-                <p>₩ ${cardData.price.toLocaleString()}</p>
-            </div>
-        </div>
-    `;
-}
-
-//문서가 완전히 로드된 후 실행되도록 이벤트 리스너 설정
-document.addEventListener('DOMContentLoaded', function() {
+// 메인 실행 코드도 async로 수정
+document.addEventListener('DOMContentLoaded', async function() {
     const TOTAL_CARDS = 8; // 전체 카드 수
     const CARDS_PER_SECTION = 4; // 섹션당 카드 수
     
@@ -142,8 +135,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // 필요한 섹션 수 계산
     const sectionCount = Math.ceil(TOTAL_CARDS / CARDS_PER_SECTION);
     
-    // 섹션을 추가할 위치 찾기
-    const mainContent = document.querySelector('.main-content');
+    // 메인 섹션 찾기
     const mainSection = document.querySelector('.main-section');
     
     // 섹션별로 카드 생성
@@ -155,18 +147,41 @@ document.addEventListener('DOMContentLoaded', function() {
         // 현재 섹션의 카드 데이터
         const sectionCards = dummyData.slice(i * CARDS_PER_SECTION, (i + 1) * CARDS_PER_SECTION);
         
-        // 카드 요소 생성 및 추가
-        const cardsHtml = sectionCards.map(cardData => createCardElement(cardData)).join('');
-        newSection.innerHTML = cardsHtml;
+        // 카드 요소들을 비동기적으로 생성
+        const cardPromises = sectionCards.map(cardData => createCardElement(cardData));
+        const cardElements = await Promise.all(cardPromises);
+        
+        // 생성된 카드들을 섹션에 추가
+        newSection.innerHTML = cardElements.join('');
         
         // 메인 섹션 다음에 새로운 섹션 추가
         mainSection.after(newSection);
     }
     
-    // 생성된 카드가 제대로 추가되었는지 콘솔에 출력
     console.log('카드 섹션 생성 완료:', document.querySelectorAll('.card-section').length);
-    console.log('카드 개수:', document.querySelectorAll('#card-container').length);
 });
+
+// 이미지 경로도 수정
+function generateDummyData(count) {
+    const dummyData = [];
+    const words = ['수학', '과학', '영어', '국어', '한국사', '사회', '물리', '화학', '생물'];
+    const types = ['문제집', '워크북', '교과서', '참고서', '요약노트'];
+    
+    for(let i = 0; i < count; i++) {
+        const randomTitle = `${words[Math.floor(Math.random() * words.length)]} ${types[Math.floor(Math.random() * types.length)]}`;
+        const price = Math.floor(Math.random() * 40000) + 10000;
+        
+        dummyData.push({
+            sellerId: `판매자${i + 1}`,
+            title: randomTitle,
+            price: price,
+            // 절대 경로로 이미지 경로 설정
+            imgSrc: contextPath + '/resources/images/logo.jpeg'
+        });
+    }
+    return dummyData;
+}
+
 </script>
 <!-- 10. 컴포넌트 JavaScript -->
 <!-- 11. 페이지별 JavaScript -->

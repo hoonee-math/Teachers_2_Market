@@ -27,84 +27,29 @@
     <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
     <!-- 7. 내부 style 태그 -->
     <style>
-    body {
-    	background-color : #fffadd;
-    	background : linear-gradient(to right, #fffadd, #ffffff);
-    	margin: 0;
+    bady {
+    	margin:0px;
     }
-	#login-main-container {
-		display : flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		min-height: 90vh;
-		padding: 20px;
-	}
-	.main-content {
-		margin-top:30px;
-		background: #fff;
-	    padding: 45px 30px;
-	    border-radius: 30px;
-	    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
-	    width: 550px;
-	    height : 400px;
-	    text-align: center;
-	}
-	#login-inner-container {
-		display: flex;
-		flex-direction: column;
-		gap:10px;
-	}
-	#login-font {
-		font-family:Sans-serif;
-		font-style: italic;
-		font-size: 40px;
-		color : grey;
-	}
-	#login-id, #login-pw {
-		width: 60%;
-	    padding: 12px;
-	    border: 2px solid #cccccc;
-	    border-radius: 8px;
-	    font-size: 16px;
-	    outline: none;
-	}
-	#login-btn {
-		margin-top:60px;
-		color:#6f6f6f;
-	}
-	#login-btn, #login-find {
-		background-color: #fffadd;
-		width: 60%;
-	    padding: 12px;
-	    border:none;
-	    color:#6f6f6f;
-	}
-	#login-join {
-		text-decoration:none;
-		color:#6f6f6f;
-	}
+    
     </style>
 </head>
 <body>
 <!-- 콘텐츠 영역 -->
-<div id="wrap">	
+<div id="wrap">
 <!-- 메인 콘텐츠 -->
 <main class="main">
-	<div id="login-main-container">
-		<div><img src="${path}/resources/images/logo(NoBackGroun).png" style="width:150px; height:150px;"></div>
+	<div class="main-container">
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
 			<section class="row main-section">
 				<!-- 섹션 1 -->
-				<div id="login-inner-container">
-					<div><p id="login-font">Login</p></div>
-					<div><input type="text" id="login-id" placeholder="아이디"></div>
-					<div><input type="password" id="login-pw" placeholder="비밀번호"></div>
-					<div><input type="submit" id="login-btn" value="로그인"></div>
-					<div><input type="submit" id="login-find" value="ID/PW찾기"></div>
-					<div><a href="" id="login-join">회원가입</a></div>
-				</div>
+				
+			</section>
+			<section class="row main-section">
+				<!-- 섹션 2 -->
+			</section>
+			<section class="row main-section">
+				<!-- 섹션 3 -->
 			</section>
 		</div>
 	</div>

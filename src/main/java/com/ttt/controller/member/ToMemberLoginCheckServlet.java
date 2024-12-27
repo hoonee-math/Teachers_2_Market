@@ -1,4 +1,4 @@
-package com.ttt.controller.common;
+package com.ttt.controller.member;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/member/login")
-public class ToLoginPageServlet extends HttpServlet {
+
+@WebServlet("/member/logincheck")
+public class ToMemberLoginCheckServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ToLoginPageServlet() {
+
+    public ToMemberLoginCheckServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/enroll/login.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/enroll/logincheck.jsp").forward(request, response);
+		
 	}
+
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
