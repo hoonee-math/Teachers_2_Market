@@ -19,7 +19,64 @@
     <!-- 4. 페이지별 CSS -->
     <!-- 5. 외부 라이브러리 -->
 	<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+		
+	<!-- head 영역에 들어갈 style -->
+	<style>
+	/* 전체 레이아웃 설정 */
+	*{
+		border: 2px solid pink
+	}
+	#wrap {
+	    min-height: 100vh;
+	    display: flex;
+	    flex-direction: column;
+	}
 	
+	/* main 영역 전체 스타일 */
+	.main {
+	    width: 100%;
+	    flex: 1; /* footer를 위한 공간 확보 */
+	}
+	
+	/* main 컨테이너 - header와 동일한 너비(880px) 유지 */
+	.main-container {
+	    width: 850px;
+	    margin: 0 auto;
+	    display: flex;
+	    gap: 30px; /* sidebar와 콘텐츠 사이 간격 조정 */
+	    padding-left: 22px; /* sidebar를 살짝 오른쪽으로 이동 */
+	}
+	
+	/* 메인 콘텐츠 영역 */
+	.main-content {
+	    flex: 1;
+	    display: flex;
+	    flex-direction: column;
+	    gap: 20px; /* 섹션 간 간격 */
+	}
+	
+	/* 각 섹션 스타일 */
+	.main-section {
+	    width: 100%;
+	    min-height: 200px; /* 임시 높이 - 실제 콘텐츠에 맞게 조정 필요 */
+	}
+	
+	/* footer 스타일 */
+	footer {
+	    width: 100%;
+	    padding: 20px 0;
+	    margin-top: auto; /* 컨텐츠가 적을 때 하단에 고정 */
+	    background-color: #fffadd;
+	    border-top: 1px solid #eee;
+	    text-align: center;
+	    font-size: 14px;
+	    color: #6f6f6f;
+	}
+	
+	footer p {
+	    margin: 0;
+	}
+	</style>
 </head>
 <body>
     <!-- 콘텐츠 영역 -->
@@ -64,49 +121,30 @@
 		</header>
         
         <!-- 메인 콘텐츠 -->
-        <main style="display:flex">
-			<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-            <!-- 페이지 내용 -->
-            <section class="row main-container">
-            </section>
-            <section class="row main-container">
-            </section>
-            <section class="row main-container">
-            </section>
-			
+        <main class="main">
+		    <div class="main-container">
+		        <!-- sidebar include -->
+		        <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+		        
+		        <!-- 콘텐츠 영역 -->
+		        <div class="main-content">
+		            <section class="row main-section">
+		                <!-- 섹션 1 -->
+		            </section>
+		            <section class="row main-section">
+		                <!-- 섹션 2 -->
+		            </section>
+		            <section class="row main-section">
+		                <!-- 섹션 3 -->
+		            </section>
+		        </div>
+		    </div>
         </main>
 
         <!-- 푸터 include -->
         
 
-		<style>
-		body {
-		    min-height: 100vh; /* 최소 높이를 뷰포트 높이로 설정 */
-		    display: flex;
-		    flex-direction: column;
-		}
 		
-		.footer {
-		    width: 100%;
-		    padding: 20px 0; /* 상하 패딩만 적용 */
-		    background-color: #fffadd;
-		    border-top: 1px solid #eee;
-		}
-		
-		/* footer 내부 컨텐츠 스타일 */
-		.footer-content {
-		    text-align: center;
-		    font-size: 14px;
-		    color: #6f6f6f;
-		}
-		.footer-content p {
-		    margin: 0;
-		}
-		
-		*{
-			border : 2px solid pink;
-		}
-		</style>
 		
 		<footer class="footer footer-contnet">
 			<p>© 2025 티꿀모아 | 이용 약관 | 개인정보 보호 정책 | 청소년 보호 정책</p>
