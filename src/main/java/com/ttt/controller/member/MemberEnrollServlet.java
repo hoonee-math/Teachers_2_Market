@@ -17,7 +17,7 @@ public class MemberEnrollServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.getRequestDispatcher("/WEB-INF/views/enroll/eeroll.jsp").forward(request, response);
 		
 		
 		
