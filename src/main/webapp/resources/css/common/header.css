@@ -20,49 +20,64 @@ body {
     /* gap: 120px; */ /* gap 대신에 justi-content : space-between */
     justify-content: space-between;
 }
-#homeButton {
+#home-btn {
     display: flex;
     justify-content: center;
-    width: 80px;
-    height: 80px;
+    width: 100px;
+    height: 100px;
     padding: 10px;
-    border-radius: 15px;
 }
-#homeButton>img {
-	border-radius: 15%;
+#home-btn>img {
+	width: 100px;
+    height: 100px;
+	border-radius: 20%;
 }
-#homeButton:hover {
+#home-btn:hover {
     transform: scale(0.95);
 }
-.search-bar {
+.search-container {
+	display: flex;
+	justify-content: center;
+	width: 900px;
+}
+#search-bar {
     display: flex;
     align-items: center;
-    margin-bottom: 8px;
     width:500px;
     padding : 8px;
     border: 1px solid #cccccc;
     border-radius: 25px;
 }
-.search-bar input {
+#search-bar input {
     border: none;
     margin-left: 10px;
     flex-grow: 1;
 }
-.search-bar button {
+#search-bar button {
     border: none;
     background-color: white;
 }
-#member-name {
+.personal-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+}
+#personal-name {
 	color : #6f6f6f;
+	border: none;
 	text-align : center;
+	width: 80px;
+	height: 50px;
+	font-size: 12pt;
 }
-#cart {
-    border: none;
-    background-color: white;
-}
-#personal-btn button {
-	color : #6f6f6f;
-	background-color : white;
+#personal-btn-write, #personal-btn-logout {
+	height: 30px;
+	background-color: white;
 	border: 1px solid #cccccc;
-	border-radius: 5px;
+	border-radius: 15%;
+}
+#personal-btn-cart {
+	background-color : white;
+	border: none;
 }
