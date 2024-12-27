@@ -50,6 +50,11 @@
 			</section>
 			<section class="row main-section">
 				<!-- 섹션 2 -->
+				<div class="main-banner" >
+					<img
+						src="${path }/resources/images/banner.png"
+						alt="검색" width="100%">
+				</div>
 			</section>
 			<section class="row main-section">
 				<!-- 섹션 3 -->
