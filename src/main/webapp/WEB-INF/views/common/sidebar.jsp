@@ -36,6 +36,11 @@
 				<img src="${path }/resources/images/file.png" alt="내 자료실" class="side-img-icon">
 		</div>
 		<div class="side-btn-text">내 자료실</div>
-	
+		<c:if test="${sessionScope.loginMember.memberId=='admin' }">
+			<div class="side-button">
+				<img src="${path }/resources/images/admin.png" alt="관리자 페이지" class="side-img-icon">
+			</div>
+			<div class="side-btn-text">관리자<br>페이지</div>
+		</c:if>
 	</div>
 </div>
