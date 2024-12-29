@@ -47,8 +47,4 @@
 	$("#login-btn").click(function() {
 	    location.assign("${path}/member/login");
 	});
-	//홈 버튼 연결 링크
-	$("#home-btm").click(function(){
-		location.assign("${path}");
-	});
 </script>
