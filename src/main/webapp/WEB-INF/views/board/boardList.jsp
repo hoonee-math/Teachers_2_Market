@@ -45,13 +45,13 @@
     		margin: 0 10px;
     		font-size: 13pt;
     	}
-    	a {
+    	li>a {
     		padding: 10px;
     		text-decoration: none;
     		color: #6f6f6f;
     		background-color: #fffadd
     	}
-    	a:hover {
+    	li>a:hover {
     		background-color: white;
     	}
     </style>
