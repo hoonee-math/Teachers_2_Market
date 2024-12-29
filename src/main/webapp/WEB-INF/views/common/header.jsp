@@ -21,14 +21,23 @@
 				</button>
 			</div>
 		</div>
-		<div class="personal-container">
-			<input type="text" id="personal-name" value="OOO님">
-			<button id="personal-btn-write">글쓰기</button>
-			<button id="personal-btn-logout">로그아웃</button>
-			<button id="personal-btn-cart">
-				<img width="30px" height="30px"
-					src="${path }/resources/images/cart.png" />
-			</button>
-		</div>
+		<!-- 로그인 하지 않은 회원 -->
+		<c:if test="${sessionScope.loginMember == null }">
+			<div class="login-container">
+				<button id="login-btn">로그인/회원가입</button>
+			</div>
+		</c:if>
+		<!-- 로그인한 회원 -->
+		<c:if test="${sessionScope.loginMember != null }">
+			<div class="personal-container">
+				<input type="text" id="personal-name" value="OOO님">
+				<button id="personal-btn-write">글쓰기</button>
+				<button id="personal-btn-logout">로그아웃</button>
+				<button id="personal-btn-cart">
+					<img width="30px" height="30px"
+						src="${path }/resources/images/cart.png" />
+				</button>
+			</div>
+		</c:if>
 	</div>
 </header>

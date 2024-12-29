@@ -81,3 +81,13 @@ body {
 	background-color : white;
 	border: none;
 }
+#login-btn {
+	margin : 15px;
+	height: 40px;
+	width: 120px;
+	font-size: 11pt;
+	color: #6f6f6f;
+	background-color: white;
+	border: 1px solid #cccccc;
+	border-radius: 15px;
+}
