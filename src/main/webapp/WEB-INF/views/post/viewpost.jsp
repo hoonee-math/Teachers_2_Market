@@ -34,7 +34,7 @@
 	<!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
 	<!-- 7. 내부 style 태그 -->
 	<style>
-		*{border:1px solid pink}
+		/* *{border:1px solid pink} */
 		p{margin:0px;}
 	</style>
 </head>
