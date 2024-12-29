@@ -9,7 +9,7 @@
 	
 <header class="header">
 	<div class="header-container">
-		<a href="#" id="home-btn">
+		<a href="${path }" id="home-btn">
 			<img src="${path }/resources/images/logo.jpeg" alt="home으로">
 		</a>
 		<div class="search-container">		
@@ -43,7 +43,6 @@
 </header>
 
 <script>
-
 	//로그인 버튼 연결 링크
 	$("#login-btn").click(function() {
 	    location.assign("${path}/member/login");
