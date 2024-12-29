@@ -138,15 +138,36 @@
 					<button class="tab-btn" data-tab="qna">상품문의</button>
 					<button class="tab-btn" data-tab="review">상품후기</button>
 				</div>
-	
+
 				<!-- 상세정보 탭 -->
 				<div id="detail" class="tab-content active">
-					<div class="post-content">${postContent}</div>
+					<div id="detail" class="tab-content">
+						<!-- 상품 이미지가 있는 경우 -->
+						<c:if test="${not empty detailImages}">
+							<div class="detail-images">
+								<c:forEach var="img" items="${detailImages}">
+									<img src="${path}/resources/upload/${img.rename}"
+										alt="상세 이미지">
+								</c:forEach>
+							</div>
+						</c:if>
+						<!-- 상세 정보 내용 -->
+						<div class="post-content">${postContent}</div>
+					</div>
+			</section>
+			
+			<!-- 하단 탭 -->
+			<section class="row post-board-section" id="board-section">
+				<div class="post-tabs bottom-tabs">
+					<button class="tab-btn" data-tab="detail">상세정보</button>
+					<button class="tab-btn" data-tab="qna">상품문의</button>
+					<button class="tab-btn" data-tab="review">상품후기</button>
 				</div>
-				
-				<!-- 상품문의 탭 -->
-				<div id="qna" class="tab-content">
+
+				<!-- QnA 탭 컨텐츠 -->
+				<div id="qna" class="tab-content" style="display: none;">
 					<div class="qna-list">
+						<!-- QnA 내용 -->
 						<c:forEach var="qna" items="${qnaList}">
 							<div class="qna-item">
 								<p class="q-title">${qna.qnaTitle}</p>
@@ -167,9 +188,10 @@
 					</div>
 				</div>
 
-				<!-- 상품후기 탭 -->
-				<div id="review" class="tab-content">
+				<!-- 리뷰 탭 컨텐츠 -->
+				<div id="review" class="tab-content" style="display: none;">
 					<div class="review-list">
+						<!-- 리뷰 내용 -->
 						<c:forEach var="review" items="${reviewList}">
 							<div class="review-item">
 								<div class="review-header">
@@ -226,17 +248,48 @@
 		// 페이지 로드 시 첫 번째 썸네일을 선택된 상태로 표시
 		$('.thumbnail:first').addClass('selected');
 
-		// 탭 전환
-		$('.tab-btn').click(function() {
-			const tab = $(this).data('tab');
-
-			// 버튼 활성화 상태 변경
+		//////////////////
+		/*   탭 전환 함수  */
+		/////////////////
+		function showTab(tabId) {
+			// 모든 탭 컨텐츠 숨기기
+			$('.tab-content').hide();
+			// 모든 탭 버튼 비활성화
 			$('.tab-btn').removeClass('active');
-			$(this).addClass('active');
 
-			// 컨텐츠 표시 변경
-			$('.tab-content').removeClass('active');
-			$(`#${tab}`).addClass('active');
+			// 선택된 탭 컨텐츠 표시
+			$('#' + tabId).show();
+			// 선택된 탭 버튼들 활성화 (상단과 하단 모두)
+			$('[data-tab="' + tabId + '"]').addClass('active');
+		}
+
+		// 초기 탭 설정
+		showTab('detail');
+
+		// 상단 탭 클릭 이벤트
+		$('.top-tabs .tab-btn').click(function() {
+			const tab = $(this).data('tab');
+			showTab(tab);
+
+			// detail이 아닌 경우 하단 섹션으로 스크롤
+			if (tab !== 'detail') {
+				$('html, body').animate({
+					scrollTop : $('#board-section').offset().top - 100
+				}, 500);
+			}
+		});
+
+		// 하단 탭 클릭 이벤트
+		$('.bottom-tabs .tab-btn').click(function() {
+			const tab = $(this).data('tab');
+			showTab(tab);
+
+			// detail 탭 클릭 시 상단으로 스크롤
+			if (tab === 'detail') {
+				$('html, body').animate({
+					scrollTop : $('.post-info-section').offset().top - 100
+				}, 500);
+			}
 		});
 
 		// 장바구니 버튼 클릭
