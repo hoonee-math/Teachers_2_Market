@@ -47,32 +47,42 @@
         
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
+			<!-- 섹션 1 : 배너 -->
 			<section class="row main-section">
-				<!-- 섹션 1 -->
 				<div class="main-banner" >
 					<img
 						src="${path }/resources/images/banner.png"
 						alt="검색" width="100%">
 				</div>
 			</section>
+			<!-- 나중에 ajax 통신할 때는 append 이용해서 진행해야함 -->
+			<c:forEach var="i" begin="1" end="2">
+			<%-- <c:forEach var="item" items="${post }" varStatus="status"> --%>
 			<section class="row card-section">
-				<div class=card-container>
+				<c:forEach var="j" begin="1" end="4">
+				<div class="card-container">
+					<!-- 백엔드 작업할 때 사용하기 위한 부분은 주석처리해 둠 -->
 					<div class="card-img">
-						<img src="${path }/resources/images/ohaeone.jpg">
+						<img src="${path }/resources/images/logo.jpeg">
+						<!-- <img width="150px" height="150px" src="${path }/resources/images/${item.image.renamed}"> -->
 					</div>
 					<div class="card-content">
 						<p>판매자명</p>
+						<!-- <p>${item.member.memberName}</p> -->
 							<!-- 판매물품 제목은 10글자까지, 
 								프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
 								ex) 하나둘셋넷다섯여섯...-->
 						<p><strong>판매물품 제목</strong></p>
+						<!-- <p><strong>${item.postTitle}</strong></p> -->
 						<p>₩ 판매금액</p>
+						<!-- <p>₩ ${item.price}</p> -->
 					</div>
 				</div>
-				<!-- 섹션 2 -->
+				</c:forEach>
 			</section>
+			</c:forEach>
+			<!-- 섹션 4 -->
 			<section class="row main-section">
-				<!-- 섹션 3 -->
 				<!-- 로그인 페이지로 이동 -->
 				<a href="${path}/member/login">로그인 페이지로 이동</a>
 				<a href="${path}/member/logincheck">약관동의 페이지로 이동</a>
@@ -89,10 +99,12 @@
 
 <!-- 8. 공통 JavaScript -->
 <!-- 9. API/Ajax 관련 JavaScript -->
-<script>
-
-</script>
 <!-- 10. 컴포넌트 JavaScript -->
 <!-- 11. 페이지별 JavaScript -->
+<script>
+	$('.card-container').click(function() {
+		location.assign("${path}/post/viewpost");
+	});
+</script>
 </body>
 </html>
