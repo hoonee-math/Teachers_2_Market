@@ -98,16 +98,16 @@
 									원</p>
 								</c:if>
 								<c:if test="${isFree eq 1 }">
-									<p>무료나눔</p>
+									<p style="color: #2ecc71;">무료나눔</p>
 								</c:if>
 							</c:when>
 							<c:otherwise>
-								<p>판매종료</p>
+								<p style="color: #e74c3c;">판매종료</p>
 							</c:otherwise>
 						</c:choose>
 					</div>
 					<!-- 배송 정보 -->
-					<div class="delivery-info">
+					<div class="post-delivery-info">
 						<c:set var="hasDeliveryFee" value="1"/>
 						<c:if test="${hasDeliveryFee eq 0}">
 							<p>무료배송</p>
@@ -118,6 +118,12 @@
 								<fmt:formatNumber value="${deliveryFee}" pattern="#,###" />
 							</p>
 						</c:if>
+					</div>
+
+					<!-- 구매 버튼 영역 -->
+					<div class="post-purchase-buttons">
+						<button class="post-cart-btn">장바구니</button>
+						<button class="post-buy-btn">바로구매</button>
 					</div>
 				</div>
 			</section>

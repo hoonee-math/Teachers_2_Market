@@ -82,27 +82,19 @@
     margin: 20px 0;
 }
 
-.free-tag {
-    color: #2ecc71;
-}
-
-.sold-out {
-    color: #e74c3c;
-}
-
-.delivery-info {
+.post-delivery-info {
     color: #666;
     margin: 15px 0;
 }
 
 /* 구매 버튼 영역 */
-.purchase-buttons {
+.post-purchase-buttons {
     display: flex;
     gap: 10px;
     margin-top: 30px;
 }
 
-.cart-btn, .buy-btn {
+.post-cart-btn, .post-buy-btn {
     flex: 1;
     padding: 15px;
     border: none;
@@ -112,23 +104,29 @@
     transition: background-color 0.3s;
 }
 
-.cart-btn {
+.post-cart-btn {
     background-color: #fff;
     border: 1px solid #ffcc00;
-    color: #ffcc00;
+    color: black;
+    font-weight: bold;
 }
 
-.cart-btn:hover {
-    background-color: #fff
+.post-cart-btn:hover {
+    background-color: #fff;
+    font-weight: bold;
+    color:black;
 }
 
-.buy-btn {
+.post-buy-btn {
     background-color:#fff6c2;
-    color: #fff;
+    color: black;
+    font-weight: bold;
 }
 
-.buy-btn:hover {
-    background-color: #e6b800;
+.post-buy-btn:hover {
+    background-color: #fdf2a2;
+    font-weight: bold;
+    color: black;
 }
 
 /* 탭 메뉴 스타일 */
