@@ -5,7 +5,11 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
-
+<%
+    java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+    String currentDate = sdf.format(new java.util.Date());
+    request.setAttribute("currentDate", currentDate);
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -30,6 +34,8 @@
     <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
     <!-- 7. 내부 style 태그 -->
     <style>
+    	*{border:1px solid pink}
+    	p{margin:0px;}
     </style>
 </head>
 <body>
@@ -46,14 +52,52 @@
         
 		<!-- 콘텐츠 영역 -->
 		<div id="view-main-content" class="main-content" >
-			<section class="row main-section">
+			<section class="row post-main-section">
 				<!-- 섹션 1 -->
-				
+				<div id="post-img-div">
+					<div id="post-img-bigSize">big</div>
+					<div id="post-img-minislide">mini</div>
+					<div id="post-mini-dashboard" style="display:flex;">
+						<div></div>
+					</div>
+				</div>
+				<div>
+					<div id="post-seller-nick">
+						<c:set var="memberNick" value="sellerNick"/>
+						${memberNick }
+					</div>
+					<div id="post-title">
+						<c:set var="postTitle" value="postTitle"/>
+						${postTitle }			
+					</div>
+					<div id="post-item-price">
+						<c:set var="stockCount" value="1"/> <!-- 재고가 0이 되면 판매 종료로 바뀜 -->
+						<%-- <c:set var="salePeriod" value="${'2025-01-25'}" /> --%> <!-- 판매기간이 지나면 판매 종료로 바귐 -->
+						<c:choose>
+							<c:when test="${stockCount > 0 || salePeriod >= currentDate}"> <!-- 판매 종료로 바뀌는 조건문, *** 서버에서 두 값은 초기화 후에 저장시켜야함. -->
+								<c:set var="isFree" value="0"/>
+								<c:if test="${isFree eq 0 }">
+									<c:set var="productPrice" value="30000"/>
+									<p><fmt:formatNumber value="${productPrice }" pattern="###,###,###"/>
+									원</p>
+								</c:if>
+								<c:if test="${isFree eq 1 }">
+									<p>무료나눔</p>
+								</c:if>
+							</c:when>
+							<c:otherwise>
+								<p>판매종료</p>
+							</c:otherwise>
+						</c:choose>
+					</div>
+					<c:set var="type" value="postTitle"/>
+					<c:if test=""></c:if>
+				</div>
 			</section>
-			<section class="row main-section">
+			<section class="row post-info-section">
 				<!-- 섹션 2 -->
 			</section>
-			<section class="row main-section">
+			<section class="row post-board-section">
 				<!-- 섹션 3 -->
 			</section>
 		</div>
