@@ -58,7 +58,7 @@
 				<div id="post-img-div">
 					<!-- 메인 이미지 -->
 					<div id="post-img-bigSize">
-						<img src="${path}/resources/images/default.jpg" alt="상품 메인 이미지" id="main-image">
+						<img src="${path}/resources/images/logo(NoBackGroun).png" alt="상품 메인 이미지" id="main-image">
 					</div>
 					<!-- 썸네일 슬라이드 -->
 					<div id="post-img-minislide">
@@ -127,11 +127,72 @@
 					</div>
 				</div>
 			</section>
+			
+			<!-- 섹션 2: 상품 상세 정보 -->
 			<section class="row post-info-section">
-				<!-- 섹션 2 -->
+				<div class="post-tabs">
+					<button class="tab-btn active" data-tab="detail">상세정보</button>
+					<button class="tab-btn" data-tab="qna">상품문의</button>
+					<button class="tab-btn" data-tab="review">상품후기</button>
+				</div>
+	
+				<!-- 상세정보 탭 -->
+				<div id="detail" class="tab-content active">
+					<div class="post-content">${postContent}</div>
+				</div>
 			</section>
+			
+			<!-- 섹션 3: 상품문의 탭 -->
 			<section class="row post-board-section">
-				<!-- 섹션 3 -->
+				<!-- 상품문의 탭 -->
+				<div id="qna" class="tab-content">
+					<div class="qna-list">
+						<c:forEach var="qna" items="${qnaList}">
+							<div class="qna-item">
+								<p class="q-title">${qna.qnaTitle}</p>
+								<p class="q-content">${qna.qnaContent}</p>
+								<c:if test="${not empty qna.answerContent}">
+									<div class="answer">
+										<p>↳ ${qna.answerContent}</p>
+										<p class="answer-date">
+											<fmt:formatDate value="${qna.answerDate}"
+												pattern="yyyy-MM-dd" />
+										</p>
+									</div>
+								</c:if>
+							</div>
+						</c:forEach>
+						<button class="write-qna-btn">문의하기</button>
+					</div>
+				</div>
+
+				<!-- 상품후기 탭 -->
+				<div id="review" class="tab-content">
+					<div class="review-list">
+						<c:forEach var="review" items="${reviewList}">
+							<div class="review-item">
+								<div class="review-header">
+									<span class="review-rating">★ ${review.rating}</span> <span
+										class="review-date"> <fmt:formatDate
+											value="${review.reviewDate}" pattern="yyyy-MM-dd" />
+									</span>
+								</div>
+								<p class="review-content">${review.reviewContent}</p>
+								<c:if test="${not empty review.reviewImg}">
+									<div class="review-images">
+										<img
+											src="${path}/resources/upload/review/${review.reviewImg}"
+											alt="리뷰 이미지">
+									</div>
+								</c:if>
+								<div class="review-footer">
+									<button class="like-btn" data-review-no="${review.reviewNo}">
+										♥ ${review.reviewLikeCount}</button>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+				</div>
 			</section>
 		</div>
 	</div>
@@ -146,5 +207,43 @@
 <!-- 9. API/Ajax 관련 JavaScript -->
 <!-- 10. 컴포넌트 JavaScript -->
 <!-- 11. 페이지별 JavaScript -->
+<script>
+	$(document).ready(function() {
+		// 썸네일 클릭 시 메인 이미지 변경
+		$('.thumbnail').click(function() {
+			const imgSrc = $(this).data('src');
+			$('#main-image').attr('src', imgSrc);
+		});
+
+		// 탭 전환
+		$('.tab-btn').click(function() {
+			const tab = $(this).data('tab');
+
+			// 버튼 활성화 상태 변경
+			$('.tab-btn').removeClass('active');
+			$(this).addClass('active');
+
+			// 컨텐츠 표시 변경
+			$('.tab-content').removeClass('active');
+			$(`#${tab}`).addClass('active');
+		});
+
+		// 장바구니 버튼 클릭
+		$('.cart-btn').click(function() {
+			// Ajax로 장바구니 추가 처리
+		});
+
+		// 구매 버튼 클릭
+		$('.buy-btn').click(function() {
+			// 구매 페이지로 이동
+		});
+
+		// 좋아요 버튼 클릭
+		$('.like-btn').click(function() {
+			const reviewNo = $(this).data('review-no');
+			// Ajax로 좋아요 처리
+		});
+	});
+</script>
 </body>
 </html>
