@@ -62,9 +62,12 @@
 					</div>
 					<!-- 썸네일 슬라이드 -->
 					<div id="post-img-minislide">
-					    <c:forEach var="img" items="${images}" varStatus="vs">
+					<script>
+				        console.log("이미지 목록:", ${images}); // 전체 이미지 배열 출력
+				    </script>			
+						<c:forEach var="img" items="${images}" varStatus="vs">
 					        <div class="thumbnail" data-src="${path}/resources/upload/images/${img.rename}">
-					            <img src="${path}/resources/upload/images/${img.rename}" alt="상품 이미지 ${vs.count}">
+					            <img src="${path}/resources/images/${img.rename}" alt="상품 이미지 ${vs.count}">
 					        </div>
 					    </c:forEach>
 					</div>
@@ -140,10 +143,7 @@
 				<div id="detail" class="tab-content active">
 					<div class="post-content">${postContent}</div>
 				</div>
-			</section>
-			
-			<!-- 섹션 3: 상품문의 탭 -->
-			<section class="row post-board-section">
+				
 				<!-- 상품문의 탭 -->
 				<div id="qna" class="tab-content">
 					<div class="qna-list">
@@ -155,8 +155,9 @@
 									<div class="answer">
 										<p>↳ ${qna.answerContent}</p>
 										<p class="answer-date">
-											<fmt:formatDate value="${qna.answerDate}"
-												pattern="yyyy-MM-dd" />
+											<fmt:parseDate value="${qna.answerDate}"
+												pattern="yyyy-MM-dd" var="parsedDate" />
+											<fmt:formatDate value="${parsedDate}" pattern="yyyy-MM-dd" />
 										</p>
 									</div>
 								</c:if>
@@ -173,8 +174,10 @@
 							<div class="review-item">
 								<div class="review-header">
 									<span class="review-rating">★ ${review.rating}</span> <span
-										class="review-date"> <fmt:formatDate
-											value="${review.reviewDate}" pattern="yyyy-MM-dd" />
+										class="review-date"> <fmt:parseDate
+											value="${review.reviewDate}" pattern="yyyy-MM-dd"
+											var="parsedDate" /> <fmt:formatDate value="${parsedDate}"
+											pattern="yyyy-MM-dd" />
 									</span>
 								</div>
 								<p class="review-content">${review.reviewContent}</p>
