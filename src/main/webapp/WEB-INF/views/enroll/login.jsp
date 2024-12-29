@@ -40,6 +40,9 @@
 		min-height: 90vh;
 		padding: 20px;
 	}
+	#login-container{
+		cursor: pointer;
+	}
 	.main-content {
 		margin-top:30px;
 		background: #fff;
@@ -92,7 +95,9 @@
 <!-- 메인 콘텐츠 -->
 <main class="main">
 	<div id="login-main-container">
-		<div><img src="${path}/resources/images/logo(NoBackGroun).png" style="width:150px; height:150px;"></div>
+		<div id="login-container">
+			<img src="${path}/resources/images/logo(NoBackGroun).png" style="width:150px; height:150px;">
+		</div>
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
 			<section class="row main-section">
@@ -119,5 +124,10 @@
 <!-- 9. API/Ajax 관련 JavaScript -->
 <!-- 10. 컴포넌트 JavaScript -->
 <!-- 11. 페이지별 JavaScript -->
+<script>
+	$("#login-container").click(function () {
+		location.assign("${path}");
+	})
+</script>
 </body>
 </html>

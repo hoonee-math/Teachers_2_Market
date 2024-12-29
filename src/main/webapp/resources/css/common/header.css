@@ -90,4 +90,6 @@ body {
 	background-color: white;
 	border: 1px solid #cccccc;
 	border-radius: 15px;
+	white-space:nowrap;
+	cursor:pointer;
 }
