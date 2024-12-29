@@ -42,9 +42,28 @@
 			</div>
 			<div class="side-btn-text">관리자<br>페이지</div>
 		</c:if>
-		<div class="side-button">
-			<img src="${path }/resources/images/file.png" alt="내 자료실" class="side-img-icon">
+		<div class="side-button" data-post="/board/list">
+			<img src="${path }/resources/images/file.png" alt="임시 게시판" class="side-img-icon">
 		</div>
 		<div class="side-btn-text">임시 게시판</div>
 	</div>
 </div>
+
+	<script>
+	    // HTML5 History API를 사용한 URL 변경
+		$('div.side-button').click(function() {
+		    var categoryNo = $(this).data('category');
+		    var post = $(this).data('post');
+		    var path = $(this).data('path');
+		    
+		    if(categoryNo>=0){
+			    // 페이지 이동
+			    location.href = "${path}/board/list?categoryNo=" + categoryNo;
+		    }
+		    else if(post){
+		    	location.href = "${path}" + post;
+		    } else if(path){
+		    	location.href = "${path}" + path;
+		    }
+		});
+	</script>
