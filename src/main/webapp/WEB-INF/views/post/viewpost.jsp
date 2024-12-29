@@ -236,7 +236,6 @@
 <script>
 	$(document).ready(function() {
 
-		// 기존 코드 삭제하고 새로운 함수로 대체
 		window.changeMainImage = function(element) {
 			const imgSrc = $(element).data('src');
 			$('#main-image').attr('src', imgSrc);
@@ -249,6 +248,33 @@
 		// 페이지 로드 시 첫 번째 썸네일을 선택된 상태로 표시
 		$('.thumbnail:first').addClass('selected');
 
+
+		// 자동 슬라이드를 위한 코드 추가
+		let currentIndex = 0;
+		const thumbnails = $('.thumbnail');
+		const totalImages = thumbnails.length;
+
+		// 1초마다 다음 이미지로 변경
+		setInterval(function() {
+			currentIndex = (currentIndex + 1) % totalImages; // 순환적으로 증가
+			const nextThumb = thumbnails.eq(currentIndex);
+			changeMainImage(nextThumb[0]); // 기존 changeMainImage 함수 사용
+		}, 1000); // 1000ms = 1초
+
+		// 마우스가 이미지 영역에 올라가면 자동 슬라이드 멈춤 (선택적)
+		$('#post-img-div').hover(
+			function() {
+				clearInterval(slideInterval);
+			},
+			function() {
+				slideInterval = setInterval(function() {
+					currentIndex = (currentIndex + 1) % totalImages;
+					const nextThumb = thumbnails.eq(currentIndex);
+					changeMainImage(nextThumb[0]);
+				}, 1000);
+			}
+		);
+		
 		//////////////////
 		/*   탭 전환 함수  */
 		/////////////////
@@ -307,7 +333,7 @@
 				}
 			}
 		);
-
+		
 		// 장바구니 버튼 클릭
 		$('.cart-btn').click(function() {
 			// Ajax로 장바구니 추가 처리
