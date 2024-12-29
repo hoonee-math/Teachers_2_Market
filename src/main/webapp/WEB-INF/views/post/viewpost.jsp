@@ -57,14 +57,17 @@
 				<!-- 상품 이미지 영역 -->
 				<div id="post-img-div">
 					<!-- 메인 이미지 -->
-					<div id="post-img-bigSize">
-						<img src="${path}/resources/images/logo(NoBackGroun).png" alt="상품 메인 이미지" id="main-image">
-					</div>
+			        <c:if test="${not empty images}">
+			            <!-- 첫 번째 이미지를 기본 메인 이미지로 설정 -->
+						<div id="post-img-bigSize">
+							<img src="${path}/resources/upload/${images[0].rename}" alt="상품 메인 이미지" id="main-image">
+						</div>
+					</c:if>
 					<!-- 썸네일 슬라이드 -->
 					<div id="post-img-minislide">
 						<c:forEach var="img" items="${images}" varStatus="vs">
-					        <div class="thumbnail" data-src="${path}/resources/upload/images/${img.rename}">
-					            <img src="${path}/resources/images/${img.rename}" alt="상품 이미지 ${vs.count}">
+					        <div class="thumbnail" onclick="changeMainImage(this)" data-src="${path}/resources/images/${img.rename}">
+					            <img src="${path}/resources/upload/${img.rename}" alt="상품 이미지 ${vs.count}">
 					        </div>
 					    </c:forEach>
 					</div>
@@ -209,11 +212,19 @@
 <!-- 11. 페이지별 JavaScript -->
 <script>
 	$(document).ready(function() {
-		// 썸네일 클릭 시 메인 이미지 변경
-		$('.thumbnail').click(function() {
-			const imgSrc = $(this).data('src');
+	    
+		// 기존 코드 삭제하고 새로운 함수로 대체
+		window.changeMainImage = function(element) {
+			const imgSrc = $(element).data('src');
 			$('#main-image').attr('src', imgSrc);
-		});
+
+			// 선택된 썸네일에 시각적 표시를 위한 클래스 추가
+			$('.thumbnail').removeClass('selected');
+			$(element).addClass('selected');
+		};
+
+		// 페이지 로드 시 첫 번째 썸네일을 선택된 상태로 표시
+		$('.thumbnail:first').addClass('selected');
 
 		// 탭 전환
 		$('.tab-btn').click(function() {

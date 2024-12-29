@@ -33,7 +33,7 @@
     display: flex;
     gap: 10px;
     overflow-x: auto;
-    padding: 10px 0;
+    padding: 10px;
 }
 
 .thumbnail {
@@ -44,8 +44,15 @@
     cursor: pointer;
 }
 
+/* 썸네일 선택 상태 표시 */
+.thumbnail.selected {
+    border: 2px solid #ffcc00;
+    transform: scale(1.05);
+}
+
 .thumbnail:hover {
     border-color: #ffcc00;
+    transform: scale(1.05);
 }
 
 .thumbnail img {

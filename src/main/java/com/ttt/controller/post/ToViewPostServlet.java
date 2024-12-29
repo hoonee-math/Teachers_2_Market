@@ -27,7 +27,7 @@ public class ToViewPostServlet extends HttpServlet {
             Map<String, String> img = new HashMap<>();
             img.put("imgNo", String.valueOf(i));
             img.put("oriname", "product" + i + ".jpg");
-            img.put("rename", "logo(NoBackGroun).png");
+            img.put("rename", "iqpuzzlelamp"+i+".png");
             images.add(img);
         }
         request.setAttribute("images", images);
