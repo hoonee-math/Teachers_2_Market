@@ -52,25 +52,41 @@
         
 		<!-- 콘텐츠 영역 -->
 		<div id="view-main-content" class="main-content" >
+			<!-- 섹션 1: 상품 기본 정보 -->
 			<section class="row post-main-section">
-				<!-- 섹션 1 -->
+				<!-- 상품 이미지 영역 -->
 				<div id="post-img-div">
-					<div id="post-img-bigSize">big</div>
-					<div id="post-img-minislide">mini</div>
+					<!-- 메인 이미지 -->
+					<div id="post-img-bigSize">
+						<img src="${path}/resources/images/default.jpg" alt="상품 메인 이미지" id="main-image">
+					</div>
+					<!-- 썸네일 슬라이드 -->
+					<div id="post-img-minislide">
+					    <c:forEach var="img" items="${images}" varStatus="vs">
+					        <div class="thumbnail" data-src="${path}/resources/upload/images/${img.rename}">
+					            <img src="${path}/resources/upload/images/${img.rename}" alt="상품 이미지 ${vs.count}">
+					        </div>
+					    </c:forEach>
+					</div>
 					<div id="post-mini-dashboard" style="display:flex;">
 						<div></div>
 					</div>
 				</div>
-				<div>
-					<div id="post-seller-nick">
+				
+				
+				<!-- 상품 정보 영역 -->
+				<div class="post-info">
+				    <!-- 판매자 정보 -->
+					<div class="post-seller-nick">
 						<c:set var="memberNick" value="sellerNick"/>
 						${memberNick }
 					</div>
-					<div id="post-title">
+					<div class="post-title">
 						<c:set var="postTitle" value="postTitle"/>
 						${postTitle }			
 					</div>
-					<div id="post-item-price">
+					<!-- 상품/파일 가격 -->
+					<div class="post-item-price">
 						<c:set var="stockCount" value="1"/> <!-- 재고가 0이 되면 판매 종료로 바뀜 -->
 						<%-- <c:set var="salePeriod" value="${'2025-01-25'}" /> --%> <!-- 판매기간이 지나면 판매 종료로 바귐 -->
 						<c:choose>
@@ -90,8 +106,19 @@
 							</c:otherwise>
 						</c:choose>
 					</div>
-					<c:set var="type" value="postTitle"/>
-					<c:if test=""></c:if>
+					<!-- 배송 정보 -->
+					<div class="delivery-info">
+						<c:set var="hasDeliveryFee" value="1"/>
+						<c:if test="${hasDeliveryFee eq 0}">
+							<p>무료배송</p>
+						</c:if>
+						<c:if test="${hasDeliveryFee eq 1}">
+							<p>
+								배송비: ₩
+								<fmt:formatNumber value="${deliveryFee}" pattern="#,###" />
+							</p>
+						</c:if>
+					</div>
 				</div>
 			</section>
 			<section class="row post-info-section">
