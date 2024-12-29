@@ -41,3 +41,11 @@
 		</c:if>
 	</div>
 </header>
+
+<script>
+
+	//로그인 버튼 연결 링크
+	$("#login-btn").click(function() {
+	    location.assign("${path}/member/login");
+	});
+</script>
