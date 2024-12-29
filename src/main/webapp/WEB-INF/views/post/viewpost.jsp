@@ -94,9 +94,9 @@
 						<%-- <c:set var="salePeriod" value="${'2025-01-25'}" /> --%> <!-- 판매기간이 지나면 판매 종료로 바귐 -->
 						<c:choose>
 							<c:when test="${stockCount > 0 || salePeriod >= currentDate}"> <!-- 판매 종료로 바뀌는 조건문, *** 서버에서 두 값은 초기화 후에 저장시켜야함. -->
-								<c:set var="isFree" value="0"/>
+								<c:set var="isFree" value="${Math.round(Math.random())}"/>
 								<c:if test="${isFree eq 0 }">
-									<c:set var="productPrice" value="30000"/>
+									<c:set var="productPrice" value="${Math.round(Math.random()*100000)}"/>
 									<p><fmt:formatNumber value="${productPrice }" pattern="###,###,###"/>
 									원</p>
 								</c:if>
@@ -111,14 +111,15 @@
 					</div>
 					<!-- 배송 정보 -->
 					<div class="post-delivery-info">
-						<c:set var="hasDeliveryFee" value="1"/>
+						<c:set var="hasDeliveryFee" value="${Math.round(Math.random())}"/>
 						<c:if test="${hasDeliveryFee eq 0}">
 							<p>무료배송</p>
 						</c:if>
 						<c:if test="${hasDeliveryFee eq 1}">
 							<p>
-								배송비: ₩
+								배송비: 
 								<fmt:formatNumber value="${deliveryFee}" pattern="#,###" />
+								원
 							</p>
 						</c:if>
 					</div>
