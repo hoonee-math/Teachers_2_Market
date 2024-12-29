@@ -62,9 +62,6 @@
 					</div>
 					<!-- 썸네일 슬라이드 -->
 					<div id="post-img-minislide">
-					<script>
-				        console.log("이미지 목록:", ${images}); // 전체 이미지 배열 출력
-				    </script>			
 						<c:forEach var="img" items="${images}" varStatus="vs">
 					        <div class="thumbnail" data-src="${path}/resources/upload/images/${img.rename}">
 					            <img src="${path}/resources/images/${img.rename}" alt="상품 이미지 ${vs.count}">
@@ -184,7 +181,7 @@
 								<c:if test="${not empty review.reviewImg}">
 									<div class="review-images">
 										<img
-											src="${path}/resources/upload/review/${review.reviewImg}"
+											src="${path}/resources/images/${review.reviewImg}"
 											alt="리뷰 이미지">
 									</div>
 								</c:if>
