@@ -66,7 +66,7 @@
 					<!-- 썸네일 슬라이드 -->
 					<div id="post-img-minislide">
 						<c:forEach var="img" items="${images}" varStatus="vs">
-					        <div class="thumbnail" onclick="changeMainImage(this)" data-src="${path}/resources/images/${img.rename}">
+					        <div class="thumbnail" onclick="changeMainImage(this)" data-src="${path}/resources/upload/${img.rename}">
 					            <img src="${path}/resources/upload/${img.rename}" alt="상품 이미지 ${vs.count}">
 					        </div>
 					    </c:forEach>
