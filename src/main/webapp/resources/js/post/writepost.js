@@ -45,8 +45,30 @@ function handleImageUpload(blob, callback) {
 
 // 썸네일 이미지 업로드 초기화
 function initializeImageUpload() {
-    var dropZone = $("#imagePreviewContainer");
-    var fileInput = $("#imageUpload");
+	// 요소 존재 여부 확인을 위한 로그
+	console.log('Elements found:', {
+	    dropZone: $("#imagePreviewContainer").length,
+	    fileInput: $("#imageUpload").length,
+	    uploadBox: $(".image-upload-box").length
+	});
+	
+	var dropZone = $("#imagePreviewContainer");
+	var fileInput = $("#imageUpload");
+	var uploadLabel = $(".upload-label");
+	
+	// label 클릭으로 처리
+	uploadLabel.on('click', function(e) {
+	    console.log('Upload label clicked');
+	    // label과 input이 연결되어 있으므로 추가 처리 필요 없음
+	});
+	
+	// 파일 선택 이벤트
+	fileInput.on('change', function(e) {
+	    console.log('File selected', e.target.files);
+	    if(e.target.files && e.target.files.length > 0) {
+	        handleThumbnailUpload(e.target.files);
+	    }
+	});
 
     // 드래그 앤 드롭 이벤트
     dropZone.on('dragover', function(e) {
@@ -62,15 +84,22 @@ function initializeImageUpload() {
         handleThumbnailUpload(files);
     });
 
-    // 파일 선택 이벤트
-    fileInput.on('change', function(e) {
-        handleThumbnailUpload(e.target.files);
-    });
-
     // 이미지 순서 변경 기능
     $("#imagePreviewContainer").sortable({
         items: '.image-preview',
         update: updateImageOrder
+    });
+
+    // 이미지 삭제 이벤트 추가
+    dropZone.on('click', '.remove-image', function(e) {
+        e.stopPropagation();  // 버블링 방지
+        var preview = $(this).closest('.image-preview');
+        var imgNo = preview.data('img-no');
+        uploadedImages = uploadedImages.filter(function(id) {
+            return id !== imgNo;
+        });
+        preview.remove();
+        updateImageOrder();
     });
 }
 

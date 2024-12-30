@@ -127,8 +127,11 @@
 					<div class="image-upload-container">
 						<div id="imagePreviewContainer" class="image-preview-container">
 							<div class="image-upload-box">
-								<input type="file" id="imageUpload" multiple accept="image/*">
-								<span>이미지 추가</span>
+								<!-- input을 label로 감싸서 처리 -->
+								<label for="imageUpload" class="upload-label">
+									<input type="file" id="imageUpload" multiple accept="image/*">
+									<span>이미지 추가</span>
+								</label>
 							</div>
 						</div>
 						<p class="help-text">* 첫 번째 이미지가 대표 이미지로 사용됩니다.</p>
