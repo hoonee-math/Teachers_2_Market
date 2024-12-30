@@ -76,6 +76,7 @@ body {
 	background-color: white;
 	border: 1px solid #cccccc;
 	border-radius: 15%;
+	white-space:nowrap; /* 자동줄바꿈 해제 속성 */
 }
 #personal-btn-cart {
 	background-color : white;
@@ -90,6 +91,6 @@ body {
 	background-color: white;
 	border: 1px solid #cccccc;
 	border-radius: 15px;
-	white-space:nowrap;
+	white-space:nowrap; /* 자동줄바꿈 해제 속성 */
 	cursor:pointer;
 }
