@@ -48,7 +48,10 @@
 		
 		<div class="side-button" data-path="/payment/shoppinglist"></div>
 		<div class="side-btn-text">임시 장바구니</div>
-		
+		<div class="side-button" data-path="/admin/menu">
+			<img src="${path }/resources/images/admin.png" alt="관리자 페이지" class="side-img-icon">
+		</div>
+		<div class="side-btn-text">임시 관리자메뉴</div>
 	</div>
 </div>
 
