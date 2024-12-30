@@ -47,6 +47,7 @@
         
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
+			<p>🛒 장바구니 </p>
 			<div id="main-box">
 			<section class="row main-section">
 				<!-- 섹션 1 -->

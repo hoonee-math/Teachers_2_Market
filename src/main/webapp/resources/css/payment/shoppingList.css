@@ -5,6 +5,11 @@
 	padding: 20px;
 	width: 1140px;
 }
+.main-content>p {
+	margin: 0 0 0 20px;
+	font-size: 20pt;
+	font-weight: bold;
+}
 .list-container {
 	display: flex;  /* Flexbox 사용 */
     align-items: start;  /* 세로 정렬 */
