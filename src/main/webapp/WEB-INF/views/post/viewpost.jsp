@@ -21,6 +21,7 @@
 	<!-- 2. 외부 CSS 파일들 -->
 	<!-- 2-1. Bootstrap CSS (다른 CSS보다 먼저) -->
 	<!-- 2-2. Bootstrap Icons (필요한 경우) -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<!-- 2-3. 직접 제작한 CSS 파일들 (Bootstrap CSS 보다 아래 위치시켜야 함) -->
 	<link rel="stylesheet" href="${path }/resources/css/common/layout.css">
 	<link rel="stylesheet" href="${path }/resources/css/common/header.css">
@@ -126,7 +127,10 @@
 
 					<!-- 구매 버튼 영역 -->
 					<div class="post-purchase-buttons">
-						<button class="post-cart-btn">장바구니</button>
+						<button class="post-cart-btn">
+							<i class="bi bi-cart3" style="font-size: 1.3rem; color: #6f6f6f; margin-right:10px"></i>
+							장바구니
+						</button>
 						<button class="post-buy-btn">바로구매</button>
 					</div>
 					
@@ -141,8 +145,12 @@
 							티꿀모아에 등록된 판매 물품과 내용은 개별 판매자가 등록한 것으로서, 티꿀모아는 등록을 위한 시스템만 제공하며 내용에 대하여 일체의 책임을 지지 않습니다.
 							</p>
 						</div>
-						<div>
-							
+						<div style="margin-top:20px;">
+							<p>
+								<i class="bi bi-megaphone-fill" style="margin-right:10px;"></i>
+								상품 정보에 문제가 있나요?
+								<span id="post-report-btn" style="cursor:pointer; font-weight:bold; color:red; margin:0 10px;" >신고하기 ></span>
+							</p>
 						</div>
 					</div>
 					
@@ -367,6 +375,10 @@
 			// Ajax로 좋아요 처리
 		});
 	});
+	
+	$("#post-report-btn").click(function() {
+		location.assign("${path}/post/viewpost");
+	})
 </script>
 </body>
 </html>
