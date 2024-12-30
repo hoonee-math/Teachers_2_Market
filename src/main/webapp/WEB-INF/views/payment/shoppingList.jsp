@@ -87,6 +87,9 @@
 	   		height: 50px;
 	   		width: 120px;
 	   	}
+	   	#purchase-btn:hover {
+	   		background-color: #fffadd;
+	   	}
     </style>
 </head>
 <body>
