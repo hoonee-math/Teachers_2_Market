@@ -260,45 +260,63 @@
 <!-- 11. 페이지별 JavaScript -->
 <script>
 	$(document).ready(function() {
+		let currentIndex = 0;
+		const thumbnails = $('.thumbnail');
+		const totalImages = thumbnails.length;
+		let isAnimating = false;
+		let slideInterval;
 
-		window.changeMainImage = function(element) {
+		// 이미지 변경 함수 수정
+		window.changeMainImage = function(element) {  // window.으로 전역 함수로 만듦
+			if (isAnimating) return;
+			isAnimating = true;
+			
 			const imgSrc = $(element).data('src');
-			$('#main-image').attr('src', imgSrc);
+			const $mainImage = $('#main-image');
+			
+			$mainImage.fadeOut(400, function() {
+				$(this).attr('src', imgSrc).fadeIn(400, function() {
+					isAnimating = false;
+				});
+			});
 
-			// 선택된 썸네일에 시각적 표시를 위한 클래스 추가
+			// 썸네일 선택 표시
 			$('.thumbnail').removeClass('selected');
 			$(element).addClass('selected');
 		};
 
-		// 페이지 로드 시 첫 번째 썸네일을 선택된 상태로 표시
-		$('.thumbnail:first').addClass('selected');
+		// 자동 슬라이드 시작 함수
+		function startSlideshow() {
+			slideInterval = setInterval(function() {
+				currentIndex = (currentIndex + 1) % totalImages;
+				const nextThumb = thumbnails.eq(currentIndex);
+				changeMainImage(nextThumb[0]);
+			}, 1000);
+		}
 
+		// 초기 슬라이드쇼 시작
+		startSlideshow();
 
-		// 자동 슬라이드를 위한 코드 추가
-		let currentIndex = 0;
-		const thumbnails = $('.thumbnail');
-		const totalImages = thumbnails.length;
+		// 썸네일 클릭 이벤트
+		$('.thumbnail').click(function() {
+			clearInterval(slideInterval);
+			changeMainImage(this);
+			currentIndex = $('.thumbnail').index(this);
+			startSlideshow();
+		});
 
-		// 1초마다 다음 이미지로 변경
-		setInterval(function() {
-			currentIndex = (currentIndex + 1) % totalImages; // 순환적으로 증가
-			const nextThumb = thumbnails.eq(currentIndex);
-			changeMainImage(nextThumb[0]); // 기존 changeMainImage 함수 사용
-		}, 1000); // 1000ms = 1초
-
-		// 마우스가 이미지 영역에 올라가면 자동 슬라이드 멈춤 (선택적)
+		// 마우스 호버 이벤트
 		$('#post-img-div').hover(
 			function() {
 				clearInterval(slideInterval);
 			},
 			function() {
-				slideInterval = setInterval(function() {
-					currentIndex = (currentIndex + 1) % totalImages;
-					const nextThumb = thumbnails.eq(currentIndex);
-					changeMainImage(nextThumb[0]);
-				}, 1000);
+				startSlideshow();
 			}
 		);
+
+		// 페이지 로드 시 첫 번째 썸네일 선택
+		$('.thumbnail:first').addClass('selected');
 		
 		//////////////////
 		/*   탭 전환 함수  */
@@ -377,8 +395,20 @@
 	});
 	
 	$("#post-report-btn").click(function() {
-		location.assign("${path}/post/viewpost");
-	})
+		// 로그인 체크
+		/* if(${empty sessionScope.loginMember}) {
+			alert("로그인이 필요한 서비스입니다.");
+			location.href = "${path}/member/login";
+			return;
+		} */
+		
+		window.open(
+			/* "${path}/report/form?postNo=${post.postNo}", */
+			"${path}/report/form",
+			"신고하기",
+			"width=800,height=600,left=500,top=200,location=no,status=no,scrollbars=yes"
+		);
+	});
 </script>
 </body>
 </html>
