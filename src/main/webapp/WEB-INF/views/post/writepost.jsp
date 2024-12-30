@@ -129,7 +129,7 @@
 							<div class="image-upload-box">
 								<!-- input을 label로 감싸서 처리 -->
 								<label for="imageUpload" class="upload-label">
-									<input type="file" id="imageUpload" multiple accept="image/*">
+									<input type="file" id="imageUpload" multiple accept="image/*" style="display: none;">
 									<span>이미지 추가</span>
 								</label>
 							</div>
@@ -138,7 +138,22 @@
 						<p class="help-text">* 드래그하여 이미지 순서를 변경할 수 있습니다.</p>
 					</div>
 				</div>
-				
+				<!-- 판매 파일 업로드 (파일 판매 시에만 표시) -->
+				<div class="section-container file-only" style="display: none;">
+				    <div class="file-header">
+				        <h3>판매할 파일</h3>
+				        <div class="file-upload-box">
+				            <label for="fileUpload" class="simple-upload-label">
+				                <input type="file" id="fileUpload" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.zip">
+				                <i class="bi bi-plus"></i> 파일추가
+				            </label>
+				        </div>
+				    </div>
+				    <div class="file-upload-wrapper">
+				        <div class="file-list"></div>
+				        <p class="help-text">* pdf, doc(x), ppt(x), xls(x), zip 파일 가능 / 파일당 최대 100MB</p>
+				    </div>
+				</div>
 				<!-- 상세 내용 -->
 				<div class="section-container">
 					<h3>상세 내용</h3>

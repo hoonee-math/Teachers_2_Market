@@ -159,6 +159,83 @@
     margin: 5px 0;
 }
 
+
+/* 파일 업로드 컨테이너 관련 */
+.file-upload-wrapper {
+    margin: 10px 0;
+}
+
+/* 파일 목록 관련 */
+.file-list {
+    margin-bottom: 10px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: 4px;
+    margin-bottom: 5px;
+}
+
+.file-info {
+    flex: 1;
+    font-size: 14px;
+}
+
+/* 헤더 부분 (새로 추가) */
+.file-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.file-header h3 {
+    margin: 0;
+}
+
+/* 업로드 버튼 관련 */
+.simple-upload-label {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #666;
+    transition: all 0.2s;
+}
+
+.simple-upload-label:hover {
+    background-color: #f8f9fa;
+}
+
+.simple-upload-label input[type="file"] {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
+/* 삭제 버튼 */
+.remove-file {
+    color: #dc3545;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px 8px;
+    font-size: 14px;
+}
+
 /* 버튼 스타일 */
 .button-container {
     display: flex;

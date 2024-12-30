@@ -158,11 +158,72 @@ function initializeTypeHandlers() {
         var type = $(this).val();
         if (type === 'product') {
             $('.product-only').show();
+			$('.file-only').hide();
         } else {
             $('.product-only').hide();
+			$('.file-only').show();
         }
     });
 
+	// 파일 선택 이벤트
+	$('#fileUpload').on('change', function(e) {
+		var files = e.target.files;
+	
+		for(var i = 0; i < files.length; i++) {
+		    var file = files[i];
+		    
+		    // 파일 크기 체크
+		    if (file.size > 100 * 1024 * 1024) {
+		        alert('파일 크기는 100MB를 초과할 수 없습니다.');
+		        continue;
+		    }
+	
+		    // 파일 정보 표시
+		    var fileSize = (file.size / (1024 * 1024)).toFixed(2);
+		    var fileId = 'file_' + new Date().getTime() + i;
+		    
+		    var fileHtml = `
+		        <div class="file-item" id="${fileId}">
+		            <div class="file-info">
+		                ${file.name} (${fileSize}MB)
+		            </div>
+		            <button type="button" class="remove-file" data-file-id="${fileId}">&times;</button>
+		        </div>
+		    `;
+		    
+		    $('.file-list').append(fileHtml);
+		}
+	
+		// input 초기화 (같은 파일 다시 선택 가능하도록)
+		this.value = '';
+	});
+
+	// 파일 삭제 버튼 클릭
+	$(document).on('click', '.remove-file', function() {
+		var fileId = $(this).data('file-id');
+		$('#' + fileId).remove();
+	});
+
+	// 선택된 파일들 정보 저장을 위한 배열
+	var selectedFiles = [];
+
+	// 파일 선택시 배열에 추가
+	$('#fileUpload').on('change', function(e) {
+	    var files = e.target.files;
+	    for(var i = 0; i < files.length; i++) {
+	        selectedFiles.push(files[i]);
+	    }
+	});
+
+	// 파일 삭제시 배열에서도 제거
+	$(document).on('click', '.remove-file', function() {
+	    var fileId = $(this).data('file-id');
+	    var index = selectedFiles.findIndex(f => f.id === fileId);
+	    if(index > -1) {
+	        selectedFiles.splice(index, 1);
+	    }
+	});
+	
     $('#isFree').on('change', function() {
         var isChecked = $(this).prop('checked');
         $('#price').prop('disabled', isChecked);
@@ -265,6 +326,12 @@ function validateForm() {
         alert('최소 1개의 상품 이미지를 등록해주세요.');
         return false;
     }
+	
+	// 파일 검사
+	if ($('input[name="type"]:checked').val() === 'file' && !$('#fileUpload').val()) {
+	    alert('판매할 파일을 선택해주세요.');
+	    return false;
+	}
 
     // 내용 검사
     if (editor.getHTML().trim() === '') {
