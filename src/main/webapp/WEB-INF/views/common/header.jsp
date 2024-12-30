@@ -28,7 +28,7 @@
 			</div>
 		</c:if>
 		<!-- 로그인한 회원 -->
-		<c:if test="${sessionScope.loginMember != null }">
+		<c:if test="${sessionScope.loginMember == null }"> <!-- 글쓰기 등록 페이지 링크 연결을 위해 잠시 전체 공개처리 -->
 			<div class="personal-container">
 				<input type="text" id="personal-name" value="OOO님">
 				<button id="personal-btn-write">글쓰기</button>
@@ -46,5 +46,9 @@
 	//로그인 버튼 연결 링크
 	$("#login-btn").click(function() {
 	    location.assign("${path}/member/login");
+	});
+	//글쓰기 버튼 연결 링크
+	$("#personal-btn-write").click(function() {
+	    location.assign("${path}/post/write/form");
 	});
 </script>
