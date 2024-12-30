@@ -147,7 +147,7 @@
 						</div>
 						<div style="margin-top:20px;">
 							<p>
-								<i class="bi bi-megaphone-fill" style="margin-right:10px;"></i>
+								<i class="bi bi-megaphone-fill" style="font-size: 1.2rem; margin-right:5px; color: #6f6f6f;"></i>
 								상품 정보에 문제가 있나요?
 								<span id="post-report-btn" style="cursor:pointer; font-weight:bold; color:red; margin:0 10px;" >신고하기 ></span>
 							</p>
