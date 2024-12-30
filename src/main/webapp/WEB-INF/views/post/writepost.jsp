@@ -92,14 +92,12 @@
 					</div>
 					
 					<div class="price-section">
-						<div class="input-group">
-							<input type="checkbox" id="isFree" name="isFree" value="1">
-							<label for="isFree">무료나눔</label>
-						</div>
-						
-						<div class="input-group" id="priceGroup">
-							<label for="price">가격</label>
-							<input type="number" id="price" name="productPrice" min="0">
+						<div class="input-group" dis>
+							<label for="isFree">가격 / 무료나눔<input type="checkbox" id="isFree" name="isFree" value="1"></label>
+							<div class="input-group" id="priceGroup">
+								<!-- <label for="price">가격</label> -->
+								<input type="number" id="price" name="productPrice" min="0">
+							</div>
 						</div>
 						
 						<div class="input-group product-only">
@@ -108,8 +106,7 @@
 						</div>
 						
 						<div class="input-group product-only">
-							<input type="checkbox" id="hasDeliveryFee" name="hasDeliveryFee" value="1">
-							<label for="hasDeliveryFee">배송비 포함</label>
+							<label for="hasDeliveryFee">배송비 포함<input type="checkbox" id="hasDeliveryFee" name="hasDeliveryFee" value="1"></label>
 							<input type="number" id="deliveryFee" name="deliveryFee" min="0" disabled>
 						</div>
 					</div>

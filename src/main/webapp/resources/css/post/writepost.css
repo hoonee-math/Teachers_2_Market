@@ -62,6 +62,8 @@
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 14px;
+    /* 이 설정은 width가 부모 요소의 padding과 충돌하지 않도록 보장합니다. */
+    box-sizing: border-box; /* 중요 */
 }
 
 /* 가격 섹션 */
