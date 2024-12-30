@@ -24,8 +24,7 @@
 	<link rel="stylesheet" href="${path }/resources/css/common/footer.css">
     <!-- 3. 컴포넌트 CSS (각 요소) -->
     <!-- 4. 페이지별 CSS -->
-    <link rel="stylesheet" href="${path }/resources/css/payment/shoppingList.css">
-    
+    <link rel="stylesheet" href="${path }/resources/css/payment/purchase.css">
     <!-- 5. 외부 라이브러리 ex: jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
@@ -47,7 +46,7 @@
         
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
-			<p><img width="20px" src="${path}/resources/images/payment/shoppingCart.png"> 장바구니 </p>
+			<p><img width="20px" src="${path}/resources/images/payment/dollar.png"> 결제하기</p>
 			<div id="main-box">
 			<section class="row main-section">
 				<!-- 섹션 1 -->
@@ -77,7 +76,7 @@
 				</div>
 			</section>
 			<section class="row main-section">
-				<!-- 섹션 3 -->
+				<!-- 섹션 3 -->				
 				<button id="purchase-btn">결제하기</button>
 			</section>
 			</div>
@@ -91,11 +90,6 @@
 </div>
 
 <!-- 8. 공통 JavaScript -->
-<script>
-	$('#purchase-btn').click(function() {
-		location.href="${path}/payment/purchase";
-	})
-</script>
 <!-- 9. API/Ajax 관련 JavaScript -->
 <!-- 10. 컴포넌트 JavaScript -->
 <!-- 11. 페이지별 JavaScript -->
