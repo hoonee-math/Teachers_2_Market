@@ -129,6 +129,23 @@
 						<button class="post-cart-btn">장바구니</button>
 						<button class="post-buy-btn">바로구매</button>
 					</div>
+					
+					<!-- 상품 신고 -->
+					<div class="post-report-container">
+						<div>
+							<p><p style="color:red; font-weight:800; margin-top:20px">직접결제 시 아래 사항에 유의해주세요.</p><br>
+							하단 상품문의나 판매자 전화번호를 이용해 연락하고 외부 메신저 이용 및 개인 정보 유출에 주의하세요.<br>
+							계좌이체 시 선입금을 유도할 경우 안전한 거래인지 다시 한번 확인하세요.<br>
+							불확실한 판매자(본인 미인증, 해외IP, 사기의심 전화번호)의 물건은 구매하지 말아주세요.<br>
+							<br/>
+							티꿀모아에 등록된 판매 물품과 내용은 개별 판매자가 등록한 것으로서, 티꿀모아는 등록을 위한 시스템만 제공하며 내용에 대하여 일체의 책임을 지지 않습니다.
+							</p>
+						</div>
+						<div>
+							
+						</div>
+					</div>
+					
 				</div>
 			</section>
 			
