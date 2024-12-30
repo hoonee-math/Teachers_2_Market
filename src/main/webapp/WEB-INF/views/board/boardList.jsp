@@ -33,13 +33,16 @@
 		#notice-div {
 			color: red;	
 			text-align: center;
+			width: 1140px;
 		}
     	ul {
     		list-style-type: none;
     		display: flex;
+    		align-items: center;
     		justify-content: center;
     		background-color: #fffadd;
     		padding: 10px;
+    		width: 1140px;
     	}
     	li {
     		margin: 0 10px;
@@ -49,10 +52,15 @@
     		padding: 10px;
     		text-decoration: none;
     		color: #6f6f6f;
-    		background-color: #fffadd
+    		background-color: #fffadd;
+    		width: 50px;
+			height: 50px;
     	}
     	li>a:hover {
     		background-color: white;
+    		border-radius: 50%;
+			font-size: larger;
+			font-weight: bold;
     	}
     </style>
 </head>
