@@ -82,23 +82,18 @@
 				<div class="post-info">
 					<!-- 판매자 정보 -->
 					<div class="post-seller-nick">
-						<c:set var="memberNick" value="sellerNick"/>
-						${memberNick }
+						${post.member_memberNick }
 					</div>
 					<div class="post-title">
-						<c:set var="postTitle" value="postTitle"/>
-						${postTitle }			
+						${post.postTitle }			
 					</div>
 					<!-- 상품/파일 가격 -->
 					<div class="post-item-price">
-						<c:set var="stockCount" value="1"/> <!-- 재고가 0이 되면 판매 종료로 바뀜 -->
 						<%-- <c:set var="salePeriod" value="${'2025-01-25'}" /> --%> <!-- 판매기간이 지나면 판매 종료로 바귐 -->
 						<c:choose>
-							<c:when test="${stockCount > 0 || salePeriod >= currentDate}"> <!-- 판매 종료로 바뀌는 조건문, *** 서버에서 두 값은 초기화 후에 저장시켜야함. -->
-								<c:set var="isFree" value="${Math.round(Math.random())}"/>
+							<c:when test="${post.stockCount > 0 || salePeriod >= currentDate}"> <!-- 판매 종료로 바뀌는 조건문, *** 서버에서 두 값은 초기화 후에 저장시켜야함. -->
 								<c:if test="${isFree eq 0 }">
-									<c:set var="productPrice" value="${Math.round(Math.random()*100000)}"/>
-									<p><fmt:formatNumber value="${productPrice }" pattern="###,###,###"/>
+									<p><fmt:formatNumber value="${post.productPrice }" pattern="###,###,###"/>
 									원</p>
 								</c:if>
 								<c:if test="${isFree eq 1 }">
@@ -112,11 +107,10 @@
 					</div>
 					<!-- 배송 정보 -->
 					<div class="post-delivery-info">
-						<c:set var="hasDeliveryFee" value="${Math.round(Math.random())}"/>
-						<c:if test="${hasDeliveryFee eq 0}">
+						<c:if test="${post.hasDeliveryFee eq 0}">
 							<p>무료배송</p>
 						</c:if>
-						<c:if test="${hasDeliveryFee eq 1}">
+						<c:if test="${post.hasDeliveryFee eq 1}">
 							<p>
 								배송비: 
 								<fmt:formatNumber value="${deliveryFee}" pattern="#,###" />
@@ -167,19 +161,18 @@
 
 				<!-- 상세정보 탭 -->
 				<div id="detail" class="tab-content active">
-					<div id="detail" class="tab-content">
-						<!-- 상품 이미지가 있는 경우 -->
-						<c:if test="${not empty detailImages}">
-							<div class="detail-images">
-								<c:forEach var="img" items="${detailImages}">
-									<img src="${path}/resources/upload/${img.rename}"
-										alt="상세 이미지">
-								</c:forEach>
-							</div>
-						</c:if>
-						<!-- 상세 정보 내용 -->
-						<div class="post-content">${postContent}</div>
-					</div>
+					<!-- 상품 이미지가 있는 경우 -->
+					<c:if test="${not empty detailImages}">
+						<div class="detail-images">
+							<c:forEach var="img" items="${detailImages}">
+								<img src="${path}/resources/upload/${img.rename}"
+									alt="상세 이미지">
+							</c:forEach>
+						</div>
+					</c:if>
+					<!-- 상세 정보 내용 -->
+					<div class="post-content">내용아 떠라! ${post.postContent}</div>
+				</div>
 			</section>
 			
 			<!-- 하단 탭 -->

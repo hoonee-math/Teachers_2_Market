@@ -180,10 +180,6 @@
     padding: 20px 0;
 }
 
-.tab-content.active {
-    display: block;
-}
-
 /* 상세정보 탭 */
 .post-info-section{
 	flex-direction: column;
