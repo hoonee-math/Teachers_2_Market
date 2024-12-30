@@ -79,21 +79,15 @@
 					
 					<div class="input-group">
 						<label for="category">카테고리</label>
-						<select id="category" name="categoryNo" required>
+						<select id="category" name="categoryNo" required> <!-- js객체 활용해서 categoryNo 전달 -->
 							<option value="">카테고리 선택</option>
-							<c:forEach var="category" items="${categories}">
-								<option value="${category.categoryNo}">${category.mainCategory}</option>
-							</c:forEach>
 						</select>
 					</div>
 					
 					<div class="input-group">
 						<label for="subject">과목</label>
-						<select id="subject" name="subjectNo" required>
+						<select id="subject" name="subjectNo" required> <!-- js객체 활용해서 subjectNo 전달 -->
 							<option value="">과목 선택</option>
-							<c:forEach var="subject" items="${subjects}">
-								<option value="${subject.subjectNo}">${subject.subjectName}</option>
-							</c:forEach>
 						</select>
 					</div>
 					

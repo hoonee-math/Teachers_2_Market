@@ -2,6 +2,22 @@
 var editor; // Toast UI Editor 인스턴스
 var uploadedImages = []; // 업로드된 이미지 배열
 var imageOrder = []; // 이미지 순서 배열
+const categoryData = { // 카테고리 데이터 객체
+    1: "미취학아동",
+    2: "초등",
+    3: "중등",
+    4: "고등",
+    5: "수험생"
+};
+const subjectData = { // 과목 데이터 객체
+    1: "국어",
+    2: "영어",
+    3: "수학",
+    4: "사회",
+    5: "과학",
+    6: "예체능",
+    7: "기타"
+};
 
 // 페이지 로드 시 초기화
 $(document).ready(function() {
@@ -9,6 +25,7 @@ $(document).ready(function() {
     initializeImageUpload();
     initializeFormHandlers();
     initializeTypeHandlers();
+	initializeSelectors();  // 카테고리 객체를 활용한 카테고리 선택 옵션
 });
 
 // Toast UI Editor 초기화
@@ -22,6 +39,25 @@ function initializeEditor() {
             addImageBlobHook: handleImageUpload
         }
     });
+}
+
+// select 옵션 초기화를 위한 함수
+function initializeSelectors() {
+    // 카테고리 select 옵션 생성
+    const categorySelect = $('#category');
+    categorySelect.empty().append('<option value="">카테고리 선택</option>');
+    
+    for(let key in categoryData) {
+        categorySelect.append(`<option value="${key}">${categoryData[key]}</option>`);
+    }
+
+    // 과목 select 옵션 생성
+    const subjectSelect = $('#subject');
+    subjectSelect.empty().append('<option value="">과목 선택</option>');
+    
+    for(let key in subjectData) {
+        subjectSelect.append(`<option value="${key}">${subjectData[key]}</option>`);
+    }
 }
 
 // 에디터 이미지 업로드 처리 (서버 구현 전 임시 버전)
