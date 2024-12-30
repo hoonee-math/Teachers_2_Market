@@ -67,14 +67,32 @@
 						<!-- <img width="150px" height="150px" src="${path }/resources/images/${item.image.renamed}"> -->
 					</div>
 					<div class="card-content">
-						<p>판매자명</p>
+						<p>판매자명 &nbsp; ${4*(i-1)+j }</p>
 						<!-- <p>${item.member.memberName}</p> -->
 							<!-- 판매물품 제목은 10글자까지, 
 								프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
 								ex) 하나둘셋넷다섯여섯...-->
-						<p><strong>판매물품 제목</strong></p>
+						<p><strong>판매물품 제목 &nbsp; ${4*(i-1)+j }</strong></p>
 						<!-- <p><strong>${item.postTitle}</strong></p> -->
-						<p>₩ 판매금액</p>
+						<c:set var="stockCount" value="${Math.round(Math.random())}"/> <!-- 재고가 0이 되면 판매 종료로 바뀜 -->
+						<%-- <c:set var="salePeriod" value="${'2025-01-25'}" /> --%> <!-- 판매기간이 지나면 판매 종료로 바귐 -->
+						<c:choose>
+							<c:when test="${stockCount > 0}"> <!-- 판매 종료로 바뀌는 조건문, *** 서버에서 두 값은 초기화 후에 저장시켜야함. -->
+								<c:set var="isFree" value="${Math.round(Math.random())}"/>
+								<c:if test="${isFree eq 0 }">
+									<c:set var="productPrice" value="${Math.round(Math.random()*100000)}"/>
+									<p><fmt:formatNumber value="${productPrice }" pattern="###,###,###"/>
+									원</p>
+								</c:if>
+								<c:if test="${isFree eq 1 }">
+									<p style="color: #2ecc71; font-weight:bold;">무료나눔</p>
+								</c:if>
+							</c:when>
+							<c:otherwise>
+								<p style="color: #e74c3c; font-weight:bold;">판매종료</p>
+							</c:otherwise>
+						</c:choose>
+						<!-- 무료나눔일 경우 처리해줘야함. -->
 						<!-- <p>₩ ${item.price}</p> -->
 					</div>
 				</div>
