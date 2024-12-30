@@ -32,7 +32,7 @@
     	#main-box {
     		box-shadow: 0 0 5px rgba(0,0,0,0.2);
     		padding: 20px;
-    		width: 860px;
+    		width: 1140px;
     	}
 	    .list-container {
 	    	display: flex;  /* Flexbox 사용 */
@@ -40,13 +40,15 @@
 	        gap: 10px;  /* 체크박스와 테이블 사이 간격 */
 	        margin: 15px;
 	        padding: 15px;
-	    	width: 800px;
+	    	width: 1100px;
 	    	background: #eeeeee;
 	    	box-shadow: 0 0 5px rgba(0,0,0,0.2);
 	    	border-radius: 15px;
 	    }
 	    .select-btn {
-	        margin-top: 15px;  /* 체크박스 위치 미세 조정 */
+	        width: 25px;
+	        height: 25px;
+	        accent-color: #6f6f6f;
 	    }
 	    .product-container {
 	        border-collapse: collapse;
@@ -80,7 +82,10 @@
 	   		background-color: white;
 	   		border: 1px solid #cccccc;
 	   		border-radius: 15px;
-	   		font-size: 12pt;
+	   		color: #6f6f6f;
+	   		font-size: larger;
+	   		height: 50px;
+	   		width: 120px;
 	   	}
     </style>
 </head>
