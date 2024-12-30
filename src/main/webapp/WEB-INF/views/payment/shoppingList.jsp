@@ -90,6 +90,11 @@
 </div>
 
 <!-- 8. 공통 JavaScript -->
+<script>
+	$('#purchase-btn').click(function() {
+		location.href="${path}/payment/purchase";
+	})
+</script>
 <!-- 9. API/Ajax 관련 JavaScript -->
 <!-- 10. 컴포넌트 JavaScript -->
 <!-- 11. 페이지별 JavaScript -->
