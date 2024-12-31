@@ -89,7 +89,7 @@
 								<p>내정보 페이지로 이동합니다.</p>
 							</div>
 							<div>
-								<a href="${path}/member/myinfo">개인정보 보러가기</a>
+								<a href="${path}/admin/myinfo">개인정보 보러가기</a>
 							</div>
 						</div>
 						<div class="mypage-card">
@@ -100,7 +100,7 @@
 								<p>글 관리 페이지로 이동합니다.</p>
 							</div>
 							<div>
-								<a href="${path}/member/mypost">전체 글 보러가기</a> <%-- ?id=${sessionScope.loginMember.email } --%>
+								<a href="${path}/admin/managePost">전체 글 보러가기</a>
 							</div>
 						</div>	
 						<div class="mypage-card">
@@ -111,7 +111,7 @@
 								<p>결제 정보 페이지로 이동합니다.</p>
 							</div>
 							<div>
-								<a href="${path}/member/mypost">결제 정보 보러가기</a> <%-- ?id=${sessionScope.loginMember.email } --%>
+								<a href="${path}/admin/managePayment">결제 정보 보러가기</a>
 							</div>
 						</div>
 						<div class="mypage-card">
@@ -122,7 +122,7 @@
 								<p>회원관리 페이지로 이동합니다.</p>
 							</div>
 							<div>
-								<a href="${path}/member/mypost">회원 목록 보러가기</a> <%-- ?id=${sessionScope.loginMember.email } --%>
+								<a href="${path}/admin/manageMember">회원 목록 보러가기</a>
 							</div>
 						</div>
 					</div>
