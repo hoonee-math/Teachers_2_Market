@@ -10,13 +10,13 @@
 <header class="header">
 	<div class="header-container">
 		<a href="${path }" id="home-btn">
-			<img src="${path }/resources/images/logo.jpeg" alt="home으로">
+			<img src="${path }/resources/images/common/logo.jpeg" alt="home으로">
 		</a>
 		<div class="search-container">		
 			<div id="search-bar">
 				<input type="text" placeholder="검색어를 입력해주세요.">
 				<button onclick="search();">
-					<img src="${path }/resources/images/search.png"
+					<img src="${path }/resources/images/common/search.png"
 						alt="검색" width="25px" height="100%">
 				</button>
 			</div>
@@ -35,7 +35,7 @@
 				<button id="personal-btn-logout">로그아웃</button>
 				<button id="personal-btn-cart">
 					<img width="30px" height="30px"
-						src="${path }/resources/images/cart.png" />
+						src="${path }/resources/images/common/cart.png" />
 				</button>
 			</div>
 		</c:if>
