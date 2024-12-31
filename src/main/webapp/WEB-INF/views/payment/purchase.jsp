@@ -155,7 +155,9 @@
 				</div>
 				<br>
 			</section>
-			<button id="purchase-btn">결제하기</button>
+			<div id="purchase">
+				<button id="purchase-btn">결제하기</button>
+			</div>
 			</div>
 		</div>
 	</div>

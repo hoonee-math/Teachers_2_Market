@@ -48,6 +48,11 @@
 .amount {
 	font-weight: bold;
 }
+#purchase {
+	margin: 0 30px 20px 0;
+	display: flex;
+	justify-content: flex-end;
+}
 #purchase-btn {
 	padding: 12px;
 	background-color: white;
@@ -63,5 +68,30 @@
 }
 
 #sample4_postcode {
-    width: 100px;  /* 우편번호는 짧게 */
+    width: 150px;  /* 우편번호는 짧게 */
+}
+
+#delivery-info>table {
+	margin: 0 0 0 40px;
+}
+#delivery-info th {
+	padding: 15px 50px 15px 15px;
+	font-size: large;
+	text-align: right;
+}
+#delivery-info input {
+	padding: 5px;
+	font-size: medium;
+}
+#memberId,
+#phone,
+#email,
+#sellerRequest {
+	width: 700px;
+}
+#delivery-info select {
+	background-color: white;
+	font-size: medium;
+	height: 32px;
+	width: 700px;
 }
