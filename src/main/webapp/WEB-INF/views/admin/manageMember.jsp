@@ -29,6 +29,11 @@
     <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
     <!-- 7. 내부 style 태그 -->
     <style>
+		table {
+			margin-top: 40px;
+			table-layout: fixed;
+			width: 100%;
+		}
     </style>
 </head>
 <body>
@@ -45,15 +50,69 @@
         
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
-			<section class="row main-section">
-				<!-- 섹션 1 -->
-				
-			</section>
-			<section class="row main-section">
-				<!-- 섹션 2 -->
-			</section>
-			<section class="row main-section">
-				<!-- 섹션 3 -->
+			<!-- 섹션 1: 회원 목록이 출력되는 section -->
+			<section class="main-section">
+				<div>
+					<div>
+						<h2>회원 목록</h2>
+						<hr style="border:2px solid #fff6c2;">
+						<p>회원을 조회, 경고, 정지 등 관리할 수 있는 페이지 입니다.</p>
+					</div>
+				</div>
+				<div id="board-container">
+					<table id="tbl-board">
+						<colgroup>
+							<col style="width: 50px;">
+							<col style="width: 100px;">
+							<col style="width: 100px;">
+							<col style="width: 100%;">
+							<col style="width: 50px;">
+							<col style="width: 100px;">
+							<col style="width: 100px;">
+						</colgroup>
+						<thead>
+							<tr>
+									<th>번호</th>
+									<th>아이디</th>
+									<th>닉네임</th>
+									<th>이메일</th>
+									<th>경고</th>
+									<th>가입일</th>
+									<th>관리</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:if test="${empty boards }">
+				            	<tr>
+				            		<td colspan="5" style="text-align: center;">
+				            			죄회된 결과가 없습니다.
+				            		</td>
+				            	</tr>
+				            </c:if>
+							<c:if test="${not empty boards }">
+								<c:forEach var="m" items="${members }">
+								<tr>
+									<td>${m.memberNo }</td>
+									<td>${m.memberId }</td>
+									<td>${m.memberNick }</td>
+									<td>${m.email}</td>
+									<td>${m.reportCount }</td> <!-- join table로 횟수 계산 필요 -->
+									<td>
+										<fmt:formatDate var="postDate" value="${p.createDate}" pattern="yyyyMMdd" />
+									</td>
+									<td>
+										<p id="manageTistMember">자세히 보기</p>
+									</td>
+								</tr>
+								</c:forEach>
+				            </c:if>
+						</tbody>
+					</table>
+			
+			        <div id="pageBar">
+			        	${pageBar }
+			        </div>
+			    </div>
 			</section>
 		</div>
 	</div>

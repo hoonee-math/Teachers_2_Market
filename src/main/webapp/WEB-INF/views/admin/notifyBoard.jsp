@@ -50,6 +50,7 @@
         
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
+			<!-- 섹션 1: 공지사항 게시판, 글 목록이 출력되는 section -->
 			<section class="main-section">
 				<div>
 					<div>
@@ -122,12 +123,6 @@
 			        	${pageBar }
 			        </div>
 			    </div>
-			</section>
-			<section class="row main-section">
-				<!-- 섹션 2 -->
-			</section>
-			<section class="row main-section">
-				<!-- 섹션 3 -->
 			</section>
 		</div>
 	</div>
