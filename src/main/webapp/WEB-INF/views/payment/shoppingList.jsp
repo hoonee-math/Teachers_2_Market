@@ -49,12 +49,13 @@
 		<div class="main-content">
 			<p><img width="20px" src="${path}/resources/images/payment/shoppingCart.png"> 장바구니 </p>
 			<div id="main-box">
-			<button onclick="checkAll();">전체선택</button>
-			
+			<button id="checkAll" onclick="checkAll();">전체선택</button>
+			<button id="checkDelete">선택삭제</button>
 			<!-- 상품 여러개 출력할 땐 section 전체를 추가해야함 -->
 			<section class="row main-section">
 				<!-- 섹션 1 -->
 				<div class="list-container">
+				<%-- <div class="list-container" data-post-no="${post.postNo }"> --%>
 					<input type="checkbox" class="select-btn">
 					<table class="product-container">
 						<tr>
@@ -116,18 +117,28 @@
 
 <!-- 8. 공통 JavaScript -->
 <script>
+	//구매하기 버튼 누르면 구매창으로 연결 -> 나중에 정보까지 넘겨주도록 수정해야함
 	$('#purchase-btn').click(function() {
 		location.href="${path}/payment/purchase";
 	})
 	
+	//전체 선택, 전체 취소
 	function checkAll() {
 		const checks = document.querySelectorAll(".list-container>[type='checkbox']")
-		for (let i=0; i<checks.length; i++) {
-			if(checks[i].checked==false) {
-				checks[i].checked=true;
-			}
-		}
+		//모든 체크박스가 선택되어있는지 확인
+		const allChecked = Array.from(checks).every(check => check.checked);
+		//allChecked== true -> 전체 취소 / false -> 전체 선택
+		checks.forEach(check => check.checked = !allChecked);
 	}
+	
+	//장바구니 리스트의 회색 박스 영역 클릭시, 해당 상품의 상세 페이지로 이동
+	$('.list-container').click(function(e) {
+		if (!$(e.target).is('.select-btn')) {
+			const postNo = $(this).data('post-no');
+			location.assign(`${path}/post/viewpost`);
+			//location.assign(`${path}/post/viewpost?postNo=`+postNo);
+		}	
+	})
 </script>
 <!-- 9. API/Ajax 관련 JavaScript -->
 <!-- 10. 컴포넌트 JavaScript -->

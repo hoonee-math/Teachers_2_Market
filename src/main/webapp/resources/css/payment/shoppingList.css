@@ -66,3 +66,13 @@
 #purchase-btn:hover {
 	background-color: #fffadd;
 }
+
+#checkAll,
+#checkDelete {
+	margin: 10px;
+	background-color: white;
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	color: #6f6f6f;
+	font-size: large;
+}
