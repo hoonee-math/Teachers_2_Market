@@ -51,4 +51,8 @@
 	$("#personal-btn-write").click(function() {
 	    location.assign("${path}/post/write/form");
 	});
+	//장바구니 버튼 연결 링크
+	$('#personal-btn-cart').click(function() {
+		location.assign("${path}/payment/shoppinglist");
+	})
 </script>
