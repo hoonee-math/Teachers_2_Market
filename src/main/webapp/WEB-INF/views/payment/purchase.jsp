@@ -62,9 +62,9 @@
 							</td>
 							<td class="list-content">
 								<div>
-									<input type="text" name="postTitle" value="구매 글 제목"><br>
-									<input type="text" name="salePrice" value="₩ 10,000원"><br>
-									<input type="text" name="deliveryFee" value="배송비 3,000원"><br>
+									<input type="text" name="postTitle" value="구매 글 제목" readOnly><br>
+									<input type="text" name="salePrice" value="₩ 10,000원" readOnly><br>
+									<input type="text" name="deliveryFee" value="배송비 3,000원" readOnly><br>
 								</div>
 							</td>
 						</tr>
