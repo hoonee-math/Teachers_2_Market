@@ -51,7 +51,6 @@
 			<section class="row main-section">
 				<!-- 섹션 1 -->
 				<div class="list-container">
-					<input type="checkbox" class="select-btn">
 					<table class="product-container">
 						<tr>
 							<td class="list-img">
