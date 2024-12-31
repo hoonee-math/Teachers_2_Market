@@ -78,18 +78,19 @@
 				<div>
 					<div>
 						<h2>관리자 페이지</h2>
+						<hr style="border:2px solid #fff6c2;">
 						<p>회원님의 개인정보 수정 및 나의 글에 대해 설정하실 수 있습니다:)</p>
 					</div>
 					<div class="row mypage-card-container">
 						<div class="mypage-card">
-							<h3>개인정보</h3>
+							<h3>내 정보</h3>
 							<div><i class="bi bi-person-vcard" style="font-size: 10rem; color: #ffcc00;"></i></div>
 							<div>
 								<p>개인정보를 수정할 수 있는<p>
-								<p>내정보 페이지로 이동합니다.</p>
+								<p>내 정보 페이지로 이동합니다.</p>
 							</div>
 							<div>
-								<a href="${path}/admin/myinfo">개인정보 보러가기</a>
+								<a href="${path}/admin/myinfo">내 정보 확인하기</a>
 							</div>
 						</div>
 						<div class="mypage-card">
@@ -127,6 +128,18 @@
 						</div>
 					</div>
 				</div>
+			</section>
+			<section>
+				<div>
+					<div>
+						<h2>공지사항 관리</h2>
+						<hr style="border:2px solid #fff6c2;">
+						<p>공지사항을 작성하거나 관리할 수 있습니다.</p>
+					</div>
+					<div class="row mypage-card-container">
+					</div>
+				</div>
+			
 			</section>
 		</div>
 	</div>

@@ -29,6 +29,11 @@
     <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
     <!-- 7. 내부 style 태그 -->
     <style>
+		table {
+			margin-top: 40px;
+			table-layout: fixed;
+			width: 100%;
+		}
     </style>
 </head>
 <body>
@@ -45,9 +50,78 @@
         
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
-			<section class="row main-section">
-				<!-- 섹션 1 -->
-				
+			<section class="main-section">
+				<div>
+					<div>
+						<h2>공지사항</h2>
+						<hr style="border:2px solid #fff6c2;">
+						<p>티꿀모아 이용관련 공지사항을 항상 확인해주세요.</p>
+					</div>
+				</div>
+				<div id="board-container">
+					<table id="tbl-board">
+						<colgroup>
+							<col style="width: 50px;">
+							<col style="width: 100%;">
+							<col style="width: 100px;">
+							<col style="width: 100px;">
+							<col style="width: 100px;">
+						</colgroup>
+						<thead>
+							<tr>
+									<th>번호</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>조회수</th>
+									<th>시간</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:if test="${empty boards }">
+				            	<tr>
+				            		<td colspan="5" style="text-align: center;">
+				            			죄회된 결과가 없습니다.
+				            		</td>
+				            	</tr>
+				            </c:if>
+							<c:if test="${not empty boards }">
+								<c:forEach var="p" items="${boards }">
+								<tr>
+									<td>${p.postNo }</td>
+									<td class="title">
+										<a href="${path }/post/viewpost?postNo=${p.postNo}">
+											${p.postTitle}
+											<c:if test="${p.status==1 && p.isPublic==0 }"><span style="color:red">[임시저장됨]</span></c:if>
+										</a>
+										<span class="highlight">2</span></td>
+									</td>
+									<td>${p.member.memberNick }</td>
+									<td class="view-count">${p.viewCount }</td>
+									<td class="time">
+										<jsp:useBean id="now" class="java.util.Date" />
+										<fmt:formatDate var="today" value="${now}" pattern="yyyyMMdd" />
+										<fmt:formatDate var="postDate" value="${p.createDate}" pattern="yyyyMMdd" />
+										
+										<!-- 오늘 작성한 글인 경우 시:분 으로 그 외의 경우에는 월/일 로 데이터 출력 -->
+										<c:choose>
+										    <c:when test="${today eq postDate}">
+										        <fmt:formatDate value="${p.createDate}" pattern="HH:mm"/>
+										    </c:when>
+										    <c:otherwise>
+										        <fmt:formatDate value="${p.createDate}" pattern="MM/dd"/>
+										    </c:otherwise>
+										</c:choose>
+									</td>
+								</tr>
+								</c:forEach>
+				            </c:if>
+						</tbody>
+					</table>
+			
+			        <div id="pageBar">
+			        	${pageBar }
+			        </div>
+			    </div>
 			</section>
 			<section class="row main-section">
 				<!-- 섹션 2 -->
