@@ -61,3 +61,7 @@
 #purchase-btn:hover {
 	background-color: #fffadd;
 }
+
+#sample4_postcode {
+    width: 100px;  /* 우편번호는 짧게 */
+}
