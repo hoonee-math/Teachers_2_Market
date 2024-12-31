@@ -49,6 +49,29 @@
 		<div class="main-content">
 			<p><img width="20px" src="${path}/resources/images/payment/shoppingCart.png"> 장바구니 </p>
 			<div id="main-box">
+			<button onclick="checkAll();">전체선택</button>
+			
+			<!-- 상품 여러개 출력할 땐 section 전체를 추가해야함 -->
+			<section class="row main-section">
+				<!-- 섹션 1 -->
+				<div class="list-container">
+					<input type="checkbox" class="select-btn">
+					<table class="product-container">
+						<tr>
+							<td class="list-img">
+								<img src="${path }/resources/images/ohaeone.jpg">
+							</td>
+							<td class="list-content">
+								<div>
+									<input type="text" value="구매 글 제목"><br>
+									<input type="text" value="₩ 10,000원"><br>
+									<input type="text" value="배송비 3,000원"><br>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</section>
 			<section class="row main-section">
 				<!-- 섹션 1 -->
 				<div class="list-container">
@@ -71,6 +94,7 @@
 			</section>
 			<section class="row main-section">
 				<!-- 섹션 2 -->
+				<br>
 				<div class="payment-info">
 					<p>상품 총 금액 <span class="amount" id="total-product-price">10,000</span>원 + 배송비 <span class="amount" id="total-delivery-price">3,000</span>원</p>
 					<p>= 총 <span class="amount" id="total-price">13,000</span>원</p>
@@ -95,6 +119,15 @@
 	$('#purchase-btn').click(function() {
 		location.href="${path}/payment/purchase";
 	})
+	
+	function checkAll() {
+		const checks = document.querySelectorAll(".list-container>[type='checkbox']")
+		for (let i=0; i<checks.length; i++) {
+			if(checks[i].checked==false) {
+				checks[i].checked=true;
+			}
+		}
+	}
 </script>
 <!-- 9. API/Ajax 관련 JavaScript -->
 <!-- 10. 컴포넌트 JavaScript -->
