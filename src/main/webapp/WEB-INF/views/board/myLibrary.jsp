@@ -52,7 +52,6 @@
 				<!-- 섹션 1 -->
 				<div class="list-container">
 				<%-- <div class="list-container" data-post-no="${post.postNo }"> --%>
-					<input type="checkbox" class="select-btn">
 					<table class="product-container">
 						<tr>
 							<td class="list-img">
