@@ -3,13 +3,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="path" value="${pageContext.request.contextPath}" />
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath }/resources/css/enroll/enrollMember.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/enroll/enrollHeader.css">
 
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/enroll/termsofservice.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/common/footer.css">
-
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="${path }/resources/images/favicon.jpeg">
+	<title>티꿀모아</title>
+	
+    <!-- 2. 외부 CSS 파일들 -->
+    <!-- 2-1. Bootstrap CSS (다른 CSS보다 먼저) -->
+    <!-- 2-2. Bootstrap Icons (필요한 경우) -->
+    <!-- 2-3. 직접 제작한 CSS 파일들 (Bootstrap CSS 보다 아래 위치시켜야 함) -->
+    <!-- 3. 컴포넌트 CSS (각 요소) -->
+    <!-- 4. 페이지별 CSS -->
+    <link rel="stylesheet" href="${path }/resources/css/enroll/enrollMember.css">
+	<link rel="stylesheet" href="${path }/resources/css/enroll/enrollHeader.css">
+	<link rel="stylesheet" href="${path }/resources/css/enroll/termsofservice.css">
+	<link rel="stylesheet" href="${path }/resources/css/common/footer.css">
+    <!-- 5. 외부 라이브러리 ex: jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
+    <!-- 7. 내부 style 태그 -->
+</head>
+<body>
 <header>
 	<div class="menu">
 		<div class="logo-container">
@@ -24,7 +42,7 @@
 	<div id="terms-header">
 		<h2>회원 가입 약관</h2>
 	</div>
-	<form action="${path}/member/check" method="post">
+	<form action="${path}/member/enroll/form" method="post">
 	<div class="row full-width">
 		<div id="agree-header">
 			<div id="termsofagree">이용약관 동의</div>
@@ -268,4 +286,5 @@
 </script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp" />
-
+</body>
+</html>
