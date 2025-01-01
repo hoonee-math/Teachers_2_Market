@@ -90,7 +90,7 @@
 								<p>내 정보 페이지로 이동합니다.</p>
 							</div>
 							<div>
-								<a href="${path}/admin/myinfo">내 정보 확인하기</a>
+								<a href="${path}/member/myinfo/detail">내 정보 확인하기</a>
 							</div>
 						</div>
 						<div class="mypage-card">
