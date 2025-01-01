@@ -66,7 +66,7 @@
 <body>
 <!-- 콘텐츠 영역 -->
 <div id="wrap">
-<!-- 헤더 include -->>
+<!-- 헤더 include -->
 <header>
 	<div class="menu">
 		<div class="logo-container">
@@ -88,57 +88,66 @@
 				onsubmit="return fn_invalidate();">
 				<table>
 					<tr>
+						<th>아이디 *</th>
+						<td>
+							<input type="text" name="memberId" id="memberId" style="width: 150px;" required>
+							<input type="button" value="ID 중복확인" id="idCheckBtn" onclick="checkId()">
+						</td>
+					</tr>
+					<tr>
 						<th>이메일 *</th>
-						<td><input type="text" name="emailId" id="emailId"
-							style="width: 150px;" required> @ <input type="text"
-							name="emailDomain" id="emailDomain" style="width: 150px;"
-							required> <select id="emailSelect"
-							onchange="handleEmailSelect()">
+						<td>
+							<input type="text" name="emailId" id="emailId" style="width: 150px;" required>
+							@ 
+							<input type="text" name="emailDomain" id="emailDomain" style="width: 150px;" required>
+							<select id="emailSelect">
 								<option value="">직접입력</option>
 								<option value="gmail.com">gmail.com</option>
 								<option value="naver.com">naver.com</option>
 								<option value="daum.net">daum.net</option>
 								<option value="hanmail.net">hanmail.net</option>
 								<option value="nate.com">nate.com</option>
-						</select> <input type="button" value="이메일 인증" id="emailCheckBtn"
-							onclick="checkEmail()"></td>
+							</select>
+							<input type="button" value="이메일 인증" id="emailCheckBtn">
+						</td>
 					</tr>
 					<tr>
 						<th>패스워드 *</th>
-						<td><input type="password" name="memberPw" id="password_"
-							placeholder="대소문자, 숫자, 특수문자 포함" required><br></td>
+						<td>
+							<input type="password" name="memberPw" id="password_" placeholder="대소문자, 숫자, 특수문자 포함" required><br>
+						</td>
 					</tr>
 					<tr>
 						<th>패스워드확인 *</th>
-						<td><input type="password" id="password_2" required><br>
-							<span id="checkResult"></span></td>
+						<td>
+							<input type="password" id="password_2" required><br>
+							<span id="checkResult"></span>
+						</td>
 					</tr>
 					<tr>
 						<th>이름 *</th>
-						<td><input type="text" name="memberName" id="userName"
-							required><br></td>
+						<td>
+							<input type="text" name="memberName" id="userName" required><br>
+						</td>
 					</tr>
 					<tr>
 						<th>닉네임</th>
-						<td><input type="text" name="memberNick" id="memberNick"
-							placeholder="다른 사용자에게 보여줄 닉네임을 입력하세요."><br></td>
+						<td>
+							<input type="text" name="memberNick" id="memberNick" placeholder="다른 사용자에게 보여줄 닉네임을 입력하세요."><br>
+						</td>
 					</tr>
 					<tr>
 						<th>주소</th>
 						<td>
 							<div style="margin-bottom: 10px">
-								<input type="text" id="sample4_postcode" name="addressNo"
-									placeholder="우편번호"> <input type="button"
-									id="postcodeFindBtn" onclick="sample4_execDaumPostcode()"
-									value="우편번호 찾기"><br>
+								<input type="text" id="sample4_postcode" name="addressNo" placeholder="우편번호">
+								<input type="button" id="postcodeFindBtn"  value="우편번호 찾기"><br>
 							</div>
 							<div>
-								<input type="text" id="sample4_roadAddress" name="addressRoad"
-									placeholder="도로명주소" style="width: 300px;">
+								<input type="text" id="sample4_roadAddress" name="addressRoad" placeholder="도로명주소" style="width: 300px;">
 								<!-- <input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="width: 300px;"> -->
-								<span id="guide" style="color: #999; display: none"></span> <input
-									type="text" id="sample4_detailAddress" name="addressDetail"
-									placeholder="상세주소" style="width: 200px;">
+								<span id="guide" style="color: #999; display: none"></span>
+								<input type="text" id="sample4_detailAddress" name="addressDetail" placeholder="상세주소" style="width: 200px;">
 								<!-- <input type="text" id="sample4_extraAddress" placeholder="참고항목" style="width: 150px;"> -->
 							</div>
 						</td>
@@ -147,11 +156,12 @@
 						<th>
 							<!-- 회원 구분 * -->
 						</th>
-						<td><input type="hidden" name="memberType" id="parents"
-							value="1" ${memberType == '1' ? 'checked' : ''}> <label
-							for="parents"></label> <input type="hidden" name="memberType"
-							id="teacher" value="2" ${memberType == '2' ? 'checked' : ''}>
-							<label for="teacher"></label></td>
+						<td>
+							<input type="hidden" name="memberType" id="student" value="1" ${memberType == '1' ? 'checked' : ''}>
+							<label for="student"></label>
+							<input type="hidden" name="memberType" id="teacher" value="2" ${memberType == '2' ? 'checked' : ''}>
+							<label for="teacher"></label>
+						</td>
 					</tr>
 				</table>
 				<div class="enrollsubmit">
@@ -173,5 +183,6 @@
 <!-- 9. API/Ajax 관련 JavaScript -->
 <!-- 10. 컴포넌트 JavaScript -->
 <!-- 11. 페이지별 JavaScript -->
+<script src="${path}/resources/js/enroll/enrollMember.js"></script>
 </body>
 </html>
