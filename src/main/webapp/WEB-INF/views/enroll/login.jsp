@@ -96,7 +96,7 @@
 <main class="main">
 	<div id="login-main-container">
 		<div id="login-container">
-			<img src="${path}/resources/images/logo(NoBackGroun).png" style="width:150px; height:150px;">
+			<img src="${path}/resources/images/logo(NoBackGround).png" style="width:150px; height:150px;">
 		</div>
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
@@ -108,7 +108,7 @@
 					<div><input type="password" id="login-pw" placeholder="비밀번호"></div>
 					<div><input type="submit" id="login-btn" value="로그인"></div>
 					<div><input type="submit" id="login-find" value="ID/PW찾기"></div>
-					<div><a href="" id="login-join">회원가입</a></div>
+					<div><a href="${path}/member/enroll/termsofservice" id="login-join">회원가입</a></div>
 				</div>
 			</section>
 		</div>

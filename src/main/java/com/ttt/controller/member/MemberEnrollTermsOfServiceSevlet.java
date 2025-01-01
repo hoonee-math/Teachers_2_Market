@@ -7,24 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/member/enroll")
-public class MemberEnrollServlet extends HttpServlet {
+@WebServlet("/member/enroll/termsofservice")
+public class MemberEnrollTermsOfServiceSevlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-
-    public MemberEnrollServlet() {
+    public MemberEnrollTermsOfServiceSevlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/enroll/enroll.jsp").forward(request, response);
-		
-		
-		
+		request.getRequestDispatcher("/WEB-INF/views/enroll/termsofservice.jsp").forward(request, response);
 	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
-	}
-
 }

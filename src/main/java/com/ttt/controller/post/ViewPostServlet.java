@@ -76,7 +76,7 @@ public class ViewPostServlet extends HttpServlet {
 			review.put("rating", String.valueOf(5.0 - (i * 0.5))); // 4.5, 4.0, 3.5
 			review.put("reviewDate", "2024-0" + i + "-10");
 			review.put("reviewContent", "정말 좋은 교재입니다! 추천합니다" + i);
-			review.put("reviewImg", "logo(NoBackGroun).png");
+			review.put("reviewImg", "logo(NoBackGround).png");
 			review.put("reviewLikeCount", String.valueOf(10 * i));
 			reviewList.add(review);
 		}

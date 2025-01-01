@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+#agree-header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin-top: 20px;
+}
+
+#termsofbtn {
+	margin-left: auto;
+}
+
+#agreecolor, #agreecolor2, #agreecolor3 {
+	color: red;
+}
+
+#terms-contentbox {
+	max-width: 550px;
+	max-height: 300px;
+	color: grey;
+	font-size: 12px;
+}
+
+#terms-content>pre {
+	overflow-y: scroll;
+}
+
+#terms-content {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+#agree-header2 {
+	margin-top: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+#termsofbtn2 {
+	margin-left: auto;
+}
+
+#termsofbtn2 {
+	margin-left: auto;
+}
+
+#terms-content2 {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+#terms-contentbox2 {
+	max-width: 525px;
+	max-height: 300px;
+	color: grey;
+	font-size: 12px;
+	white-space: pre-line;
+	overflow: auto;
+}
+
+#agree-button {
+	display: flex;
+	justify-content: center;
+	margin-top: 20px;
+	padding: 20px;
+	gap: 30px;
+}
+#agecheckcontainer {
+	margin-top : 40px;
+	display : flex;
+}
+#agecheck {
+	margin-left : auto;
+}
