@@ -43,7 +43,7 @@
 	.main-content {
 		margin-top:0px;
 		background: #fff;
-	    padding: 30px 30px;
+	    padding: 0px 30px;
 	    border-radius: 30px;
 	    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 	    width: 550px;
@@ -100,6 +100,7 @@
 		display:flex;
 		justify-content: center;
 		align-items:center;
+		gap:30px;
 	}
     </style>
 </head>
@@ -115,8 +116,9 @@
 				<!-- 섹션 1 -->
 				<div id="logincheck-inner-container">
 					<div id="logincheck-inner-header">
-						<img class="logo-container" src="${path}/resources/images/logo(NoBackGround).png" style="width:100px; height:100px;">
-						<p id="login-font">Join</p>
+						<img class="logo-container" src="${path}/resources/images/favicon.jpeg" style="width:60px; height:60px;">
+						<p id="login-font">회원 동의 약관</p>
+						<img class="logo-container" src="${path}/resources/images/favicon.jpeg" style="width:60px; height:60px;">
 					</div>
 					<div id=check-line>
 						<p>19세 이상 이신가요?</p><p class="login-mustcheck">(필수)</p>
