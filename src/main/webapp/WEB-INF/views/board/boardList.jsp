@@ -56,26 +56,23 @@
 			</section>
 			<p id="categoryTitle">${categoryTitle }</p>
 			
-				<!-- 나중에 ajax 통신할 때는 append 이용해서 진행해야함 -->
-				<%-- <c:forEach var="i" begin="1" end="4"> --%>
 				<c:forEach var="item" items="${posts }" varStatus="status">
 					<c:if test="${status.index % 4 ==0 }">
 						<section class="row card-section">
 					</c:if>
 					<div class="card-container">
-						<!-- 백엔드 작업할 때 사용하기 위한 부분은 주석처리해 둠 -->
 						<div class="card-img">
 							<img src="${path }/resources/common/images/logo.jpeg">
-							<%-- <img width="150px" height="150px" src="${path }/resources/board/images/${item.image2.renamed}"> --%>
+							<%-- <img width="150px" height="150px" src="${path }/resources/board/images/${item.postImg.renamed}"> --%>
 						</div>
 						<div class="card-content">
 							<%-- <p>판매자명</p> --%>
 							<c:choose>
-								<c:when test="${fn:length(item.member2.memberName) >10 }">
-									<p>${fn:substring(item.member2.memberName,0,9)}...</p>
+								<c:when test="${fn:length(item.member.memberName) >10 }">
+									<p>${fn:substring(item.member.memberName,0,9)}...</p>
 								</c:when>
 								<c:otherwise>
-									<p>${item.member2.memberName }</p>
+									<p>${item.member.memberName }</p>
 								</c:otherwise>
 							</c:choose>
 								<!-- 판매물품 제목은 10글자까지, 
