@@ -43,14 +43,15 @@
 	#login-container{
 		cursor: pointer;
 	}
-	.main-content {
+	#main-content {
 		margin-top:30px;
+		margin-left:0px;
 		background: #fff;
 	    padding: 45px 30px;
 	    border-radius: 30px;
 	    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 	    width: 550px;
-	    height : 400px;
+	    height:600px;
 	    text-align: center;
 	}
 	#login-inner-container {
@@ -100,7 +101,7 @@
 			<img src="${path}/resources/images/logo(NoBackGround).png" style="width:150px; height:150px;">
 		</div>
 		<!-- 콘텐츠 영역 -->
-		<div class="main-content">
+		<div id="main-content">
 			<section class="row main-section">
 				<!-- 섹션 1 -->
 				<div id="login-inner-container">
