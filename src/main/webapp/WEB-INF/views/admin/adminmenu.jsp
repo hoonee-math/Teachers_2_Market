@@ -90,7 +90,7 @@
 								<p>내 정보 페이지로 이동합니다.</p>
 							</div>
 							<div>
-								<a href="${path}/member/myinfo/detail">내 정보 확인하기</a>
+								<p style="margin-top:0px;border-bottom: 1px solid black;">내 정보 확인하기</p>
 							</div>
 						</div>
 						<div class="mypage-card">
@@ -101,6 +101,7 @@
 								<p>글 관리 페이지로 이동합니다.</p>
 							</div>
 							<div>
+								<p style="margin-top:0px;border-bottom: 1px solid black;">전체 글 확인하기</p>
 								<a href="${path}/admin/managePost">전체 글 보러가기</a>
 							</div>
 						</div>	
@@ -112,6 +113,7 @@
 								<p>결제 정보 페이지로 이동합니다.</p>
 							</div>
 							<div>
+								<p style="margin-top:0px;border-bottom: 1px solid black;">결제 정보 확인하기</p>
 								<a href="${path}/admin/managePayment">결제 정보 보러가기</a>
 							</div>
 						</div>
@@ -123,6 +125,7 @@
 								<p>회원관리 페이지로 이동합니다.</p>
 							</div>
 							<div>
+								<p style="margin-top:0px;border-bottom: 1px solid black;">회원 목록 확인가기</p>
 								<a href="${path}/admin/manageMember">회원 목록 보러가기</a>
 							</div>
 						</div>
@@ -154,5 +157,19 @@
 <!-- 9. API/Ajax 관련 JavaScript -->
 <!-- 10. 컴포넌트 JavaScript -->
 <!-- 11. 페이지별 JavaScript -->
+<script>
+	$(".row mypage-card-container.nth-child[0]").click(function(){
+		location.assign("${path}/member/myinfo/detail");
+	});
+	$(".row mypage-card-container.nth-child[1]").click(function(){
+		location.assign("${path}/admin/managePost");
+	});
+	$(".row mypage-card-container.nth-child[2]").click(function(){
+		location.assign("${path}/admin/managePayment");
+	});
+	$(".row mypage-card-container.nth-child[3]").click(function(){
+		location.assign("${path}/admin/manageMember");
+	});
+</script>
 </body>
 </html>

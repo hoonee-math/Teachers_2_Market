@@ -24,7 +24,7 @@
 	<link rel="stylesheet" href="${path }/resources/css/common/footer.css">
     <!-- 3. 컴포넌트 CSS (각 요소) -->
     <!-- 4. 페이지별 CSS -->
-    <link rel="stylesheet" href="${path }/resources/css/board/myLibrary.css">
+    <link rel="stylesheet" href="${path }/resources/css/board/purchaseHistory.css">
     <!-- 5. 외부 라이브러리 ex: jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
