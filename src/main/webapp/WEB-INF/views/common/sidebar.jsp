@@ -40,7 +40,7 @@
 		<div class="side-button" data-path="/board/purchasehistory">
 			<img src="${path }/resources/images/common/file.png" alt="내 자료실" class="side-img-icon">
 		</div>
-		<div class="side-btn-text">내 자료실</div>
+		<div class="side-btn-text">구매이력</div>
 		
 		<c:if test="${sessionScope.loginMember.memberId=='admin' }">
 			<div class="side-button">
