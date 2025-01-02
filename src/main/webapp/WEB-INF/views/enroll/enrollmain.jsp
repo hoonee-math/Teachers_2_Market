@@ -15,6 +15,7 @@
 <title>티꿀모아</title>
 
 <!-- CSS 파일 연결 -->
+<link rel="stylesheet" href="${path }/resources/css/common/layout.css">
 <link rel="stylesheet"
 	href="${path }/resources/css/enroll/enrollMember.css">
 <link rel="stylesheet"
@@ -281,7 +282,6 @@ input[type="radio"]:first-child {
 				</section>
 			</div>
 		</div>
-
 		<!-- 푸터 include -->
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 	</div>
