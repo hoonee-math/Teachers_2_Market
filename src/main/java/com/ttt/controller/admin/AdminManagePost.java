@@ -84,6 +84,8 @@ public class AdminManagePost extends HttpServlet {
 		request.setAttribute("pageEnd", pageEnd);
 		request.setAttribute("totalPage", totalPage);
 		request.setAttribute("cpage", cpage);
+		
+		request.getRequestDispatcher("/WEB-INF/views/admin/managePost.jsp").forward(request, response);
 
 	}
 

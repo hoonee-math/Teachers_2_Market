@@ -25,40 +25,98 @@
 	<link rel="stylesheet" href="${path }/resources/css/common/footer.css">
     <!-- 3. 컴포넌트 CSS (각 요소) -->
     <!-- 4. 페이지별 CSS -->
+    <link rel="stylesheet" href="${path}/resources/css/board/boardList.css">
+    <link rel="stylesheet" href="${path}/resources/css/admin/manageMember.css">
     <!-- 5. 외부 라이브러리 ex: jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
     <!-- 7. 내부 style 태그 -->
     <style>
-		.mypage-card-container{
-			margin-top: 40px;
-			gap: 20px;
-		}
-		.mypage-card {
-			width : 90%;
-			height : 400px;
-			padding : 20px;
-			box-shadow: 0 0 5px rgba(0,0,0,0.3);
-			border-radius: 15px;
-			display : flex;
-			flex-direction: column;
-			align-items : center;
-		}
-		.mypage-card {
-			width : 90%;
-			height : 400px;
-			padding : 20px;
-			box-shadow: 0 0 5px rgba(0,0,0,0.3);
-			border-radius: 15px;
-			display : flex;
-			flex-direction: column;
-			align-items : center;
-		}
-		.mypage-card:hover {
-    		transform: scale(1.015);
-    		cursor: pointer;
-    	}
+	.mypage-card-container{
+		margin-top: 40px;
+		gap: 20px;
+	}
+	.mypage-card {
+		width : 90%;
+		height : 400px;
+		padding : 20px;
+		box-shadow: 0 0 5px rgba(0,0,0,0.3);
+		border-radius: 15px;
+		display : flex;
+		flex-direction: column;
+		align-items : center;
+	}
+	.mypage-card {
+		width : 90%;
+		height : 400px;
+		padding : 20px;
+		box-shadow: 0 0 5px rgba(0,0,0,0.3);
+		border-radius: 15px;
+		display : flex;
+		flex-direction: column;
+		align-items : center;
+	}
+	.mypage-card:hover {
+   		transform: scale(1.015);
+   		cursor: pointer;
+   	}
     </style>
+    
+    <!-- 공지사항 게시판 관련 css -->
+	<style>
+	.admin-table {
+		width: 100%;
+		border-collapse: collapse;
+		margin-top: 20px;
+	}
+	
+	.admin-table th, .admin-table td {
+		padding: 12px;
+		border-bottom: 1px solid #ddd;
+		text-align: center;
+	}
+	
+	.admin-table th {
+		background-color: #fff6c2;
+		font-weight: bold;
+		border-top: 1px solid #ddd;
+	}
+	
+	.admin-table tr:hover {
+		background-color: #f5f5f5;
+	}
+	
+	.fix-toggle {
+		padding: 5px 10px;
+		border-radius: 4px;
+		cursor: pointer;
+		border: 1px solid #ddd;
+	}
+	
+	.fix-toggle.fixed {
+		background-color: #4CAF50;
+		color: white;
+		border: none;
+	}
+	
+	.fix-toggle:not(.fixed) {
+		background-color: #f1f1f1;
+	}
+	
+	/* 관리 버튼 스타일 */
+	.admin-table button {
+		margin: 0 2px;
+		padding: 5px 10px;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		background: white;
+		cursor: pointer;
+	}
+	
+	.admin-table button:hover {
+		background: #f0f0f0;
+	}
+</style>
 </head>
 <body>
 <!-- 콘텐츠 영역 -->
@@ -142,7 +200,62 @@
 					<div class="row mypage-card-container">
 					</div>
 				</div>
-			
+				<!-- 공지사항 목록 테이블 -->
+				<table id="tbl-board" class="admin-table">
+					<colgroup>
+						<col style="width: 60px;">  <!-- 번호 -->
+						<col style="width: 400px;"> <!-- 제목 -->
+						<col style="width: 100px;"> <!-- 작성자 -->
+						<col style="width: 120px;"> <!-- 작성일 -->
+						<col style="width: 80px;">  <!-- 조회수 -->
+						<col style="width: 100px;"> <!-- 상단고정 -->
+						<col style="width: 120px;"> <!-- 관리 -->
+					</colgroup>
+					<thead>
+						<tr>
+							<th>번호</th>
+							<th>제목</th>
+							<th>작성자</th>
+							<th>작성일</th>
+							<th>조회수</th>
+							<th>상단고정</th>
+							<th>관리</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:if test="${empty posts}">
+							<tr>
+								<td colspan="7" style="text-align: center;">등록된 공지사항이
+									없습니다.</td>
+							</tr>
+						</c:if>
+						<c:forEach var="post" items="${posts}">
+							<c:if test="${post.productType == 0}">
+								<tr>
+									<td>${post.id}</td>
+									<td style="text-align: left; padding-left: 20px;">${post.title}</td>
+									<td>${post.writer}</td>
+									<td><fmt:formatDate value="${post.regDate}"
+											pattern="yyyy-MM-dd" /></td>
+									<td>${post.viewCount}</td>
+									<td>
+										<button type="button"
+											class="fix-toggle ${post.isFix ? 'fixed' : ''}"
+											onclick="toggleFix(${post.id}, this)">
+											${post.isFix ? '고정' : '일반'}</button>
+									</td>
+									<td>
+										<button type="button" onclick="editNotice(${post.id})">수정</button>
+										<button type="button" onclick="deleteNotice(${post.id})">삭제</button>
+									</td>
+								</tr>
+							</c:if>
+						</c:forEach>
+					</tbody>
+				</table>
+		        <div id="pageBar">
+		        	${pageBar }
+		        </div>
 			</section>
 		</div>
 	</div>
@@ -182,6 +295,45 @@
 	$("#writePostNotify").click(function() {
 		location.assign("${path}/admin/notify/write");
 	});
+</script>
+
+
+<!-- 상단고정 토글을 위한 JavaScript -->
+<script>
+	function toggleFix(noticeId, btn) {
+		// AJAX 요청으로 상단고정 상태 토글
+		$.ajax({
+			url : 'toggleNoticeFix.do',
+			type : 'POST',
+			data : {
+				noticeId : noticeId
+			},
+			success : function(response) {
+				if (response.success) {
+					// 버튼 상태 및 텍스트 업데이트
+					$(btn).toggleClass('fixed');
+					$(btn).text($(btn).hasClass('fixed') ? '고정' : '일반');
+				} else {
+					alert('상태 변경에 실패했습니다.');
+				}
+			},
+			error : function() {
+				alert('서버와의 통신 중 오류가 발생했습니다.');
+			}
+		});
+	}
+
+	// 공지사항 수정 함수
+	function editNotice(noticeId) {
+		location.href = 'editNotice.do?id=' + noticeId;
+	}
+
+	// 공지사항 삭제 함수
+	function deleteNotice(noticeId) {
+		if (confirm('정말 삭제하시겠습니까?')) {
+			location.href = 'deleteNotice.do?id=' + noticeId;
+		}
+	}
 </script>
 </body>
 </html>
