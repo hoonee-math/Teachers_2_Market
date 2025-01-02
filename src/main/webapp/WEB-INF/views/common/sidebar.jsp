@@ -69,7 +69,7 @@
 		    
 		    if(categoryNo>=0){
 			    // 페이지 이동
-			    location.href = "${path}/board/list?categoryNo=" + categoryNo;
+			    location.href = "${path}/board/list?categoryNo=" + categoryNo + "&cPage=1";
 		    }
 		    else if(post){
 		    	location.href = "${path}" + post;
