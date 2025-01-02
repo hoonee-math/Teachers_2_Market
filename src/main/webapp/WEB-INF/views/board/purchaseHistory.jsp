@@ -45,8 +45,18 @@
 		<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
         
 		<div class="main-content">
-			<p><img width="20px" src="${path}/resources/images/board/folder.png"> 내 자료실 </p>
+			<p><img width="20px" src="${path}/resources/images/board/folder.png"> 구매 내역 </p>
 			<div id="main-box">
+			
+			<!-- 구매 유형 선택 -->
+			<section class="main-section">
+				<div class="type-selector">
+					<input type="radio" id="typeFile" name="type" value="file" checked>
+					<label for="typeFile">파일</label>
+					<input type="radio" id="typeProduct" name="type" value="product">
+					<label for="typeProduct">상품</label>
+				</div>
+			</section>
 			<!-- 상품 여러개 출력할 땐 section 전체를 추가해야함 -->
 			<section class="row main-section">
 				<!-- 섹션 1 -->
@@ -61,7 +71,6 @@
 								<div>
 									<input type="text" value="구매 글 제목" readOnly><br>
 									<input type="text" value="₩ 10,000원" readOnly><br>
-									<input type="text" value="배송비 3,000원" readOnly><br>
 								</div>
 							</td>
 						</tr>
@@ -70,6 +79,37 @@
 			</section>
 			<section class="row main-section">
 				<!-- 섹션 2 -->
+				<div class="list-container">
+				<%-- <div class="list-container" data-post-no="${post.postNo }"> --%>
+					<table class="product-container">
+						<tr>
+							<td class="list-img">
+								<img src="${path }/resources/images/ohaeone.jpg">
+							</td>
+							<td class="list-content">
+								<div>
+									<input type="text" value="구매 글 제목" readOnly><br>
+									<input type="text" value="₩ 10,000원" readOnly><br>
+									<!-- 상품 타입이 파일인 경우 -->
+									<%-- <c:if test="${post2.productType==2 }">
+										<!-- 파일 다운로드 기한 변수로 저장 -->
+										<c:set val="fileDownloadPeriod" value="${post2.payment2.paymentDate+7 }"/>
+										<!-- 파일 다운로드 기한이 오늘보다 크거나 같은 경우 -->
+										<c:if test="${fileDownloadPeriod>=today }">
+											<p>${fileDownloadPeriod }까지 파일 다운 가능</p>
+											<a id="fileDownload-btn" href="${path }/${post2.file2.renamed }" download>
+												<button>파일 다운로드</button>
+											</a>
+										</c:if>
+										<c:if test="${fileDownloadPeriod<today }">
+											<p style="color:red; font-weight:bold;">파일 다운 기한 만료</p>
+										</c:if>
+									</c:if> --%>
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
 			</section>
 			<section class="row main-section">
 				<!-- 섹션 3 -->

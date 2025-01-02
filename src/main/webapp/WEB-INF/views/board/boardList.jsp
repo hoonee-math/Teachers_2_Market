@@ -61,19 +61,65 @@
 					<div class="card-container">
 						<!-- 백엔드 작업할 때 사용하기 위한 부분은 주석처리해 둠 -->
 						<div class="card-img">
-							<img src="${path }/resources/images/logo.jpeg">
-							<!-- <img width="150px" height="150px" src="${path }/resources/images/${item.image.renamed}"> -->
+							<img src="${path }/resources/common/images/logo.jpeg">
+							<%-- <img width="150px" height="150px" src="${path }/resources/board/images/${item.image2.renamed}"> --%>
 						</div>
 						<div class="card-content">
 							<p>판매자명</p>
-							<!-- <p>${item.member.memberName}</p> -->
+							<%-- <p>${item.member2.memberName}</p> --%>
 								<!-- 판매물품 제목은 10글자까지, 
 									프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
 									ex) 하나둘셋넷다섯여섯...-->
 							<p><strong>판매물품 제목</strong></p>
-							<!-- <p><strong>${item.postTitle}</strong></p> -->
+							<%-- <p><strong>${item.postTitle}</strong></p> --%>
 							<p>₩ 판매금액</p>
-							<!-- <p>₩ ${item.price}</p> -->
+<%-- 							<!-- 상품 타입이 물품인 경우 -->
+							<c:if test="${item.productType==1 }">
+								<!-- stockCount 변수에 재고 넣음 -->
+								<c:set var="stockCount" value="${item.product2.stockCount }"/>
+								<c:choose>
+									<c:when test="${stockcount>0 }">
+										<!-- isFree 변수에 무료나눔 여부 -->
+										<c:set var="isFree" value="${item.product2.isFree }"/>
+										<!-- 무료나눔이 아닌 경우 -->
+										<c:if test="${isFree eq 0 }">
+											<p>₩ <fmt:formatNumber value=${item.product2.productPrice } pattern="###,###,###"/></p>
+										</c:if>
+										<!-- 무료나눔인 경우 -->
+										<c:if test="${isFree eq 1 }">
+											<p style="color:#2ecc71; font-weight:bold;">무료나눔</p>
+										</c:if>
+									</c:when>
+									<!-- 재고가 0인 경우 -->
+									<c:otherwise>
+										<p style="color:#e74c3c; font-weight:bold;">판매종료</p>
+									</c:otherwise>
+								</c:choose>
+							</c:if>
+							<!-- 상품 타입이 파일인 경우 -->
+							<c:if test="${item.productType==2 }">
+								<!-- salePeriod 변수에 판매기간 넣음 -->
+								<c:set var="salePeriod" value="${item.file2.salePeriod }"/>
+								<c:choose>
+									<!-- servlet에서 today를 넘겨받음 -->
+									<c:when test="${salePeriod>=today }">
+										<!-- isFree 변수에 무료나눔 여부 -->
+										<c:set var="isFree" value="${item.file2.isFree }"/>
+										<!-- 무료나눔이 아닌 경우 -->
+										<c:if test="${isFree eq 0 }">
+											<p>₩ <fmt:formatNumber value=${item.file2.filePrice } pattern="###,###,###"/></p>
+										</c:if>
+										<!-- 무료나눔인 경우 -->
+										<c:if test="${isFree eq 1 }">
+											<p style="color:#2ecc71; font-weight:bold;">무료나눔</p>
+										</c:if>
+									</c:when>
+									<!-- 판매기간이 오늘보다 작은 수인 경우 -->
+									<c:otherwise>
+										<p style="color:#e74c3c; font-weight:bold;">판매종료</p>
+									</c:otherwise>
+								</c:choose>
+							</c:if> --%>
 						</div>
 					</div>
 				</c:forEach>
@@ -83,11 +129,11 @@
 				<ul class="pagination">
 					<li class="page-item">
 						<a class="page-link" href="#">이전</a>
-						<!-- <a class="page-link" href="?cPage=&numPerPage=">이전</a> -->
+						<%-- <a class="page-link" href="?cPage=&numPerPage=">이전</a> --%>
 					</li>
 					<li class="page-item">
 						<a class="page-link" href="#">1</a>
-						<!-- <a class="page-link" href="?cPage=&numPerPage=&postNo="></a> -->
+						<%-- <a class="page-link" href="?cPage=&numPerPage=&postNo="></a> --%>
 					</li>
 					<li class="page-item">
 						<a class="page-link" href="#">2</a>
@@ -103,7 +149,7 @@
 					</li>
 					<li class="page-item">
 						<a class="page-link" href="#">다음</a>
-						<!-- <a class="page-link" href="?cPage=&numPerPage=&postNo=">다음</a> -->
+						<%-- <a class="page-link" href="?cPage=&numPerPage=&postNo=">다음</a> --%>
 					</li>
 				</ul>
 			</section>

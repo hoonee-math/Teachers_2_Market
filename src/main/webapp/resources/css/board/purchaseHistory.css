@@ -10,6 +10,28 @@
 	font-size: 20pt;
 	font-weight: bold;
 }
+
+/* 구매 유형 선택 */
+.type-selector {
+	display: flex;
+	gap: 20px;
+	padding: 20px;
+}
+.type-selector input[type="radio"] {
+	display: none;
+}
+.type-selector label {
+	padding: 10px 20px;
+	border: 1px solid #cccccc;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+.type-selector input[type="radio"]:checked + label {
+	background-color: #fff6c2;
+}
+
+
 .list-container {
 	display: flex;  /* Flexbox 사용 */
     align-items: start;  /* 세로 정렬 */

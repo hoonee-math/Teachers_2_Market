@@ -1,28 +1,22 @@
-package com.ttt.controller.board;
+package com.ttt.controller.admin;
 
 import java.io.IOException;
-import java.time.LocalDate;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/board/list")
-public class ToBoardListServlet extends HttpServlet {
+@WebServlet("/admin/manage/payment")
+public class AdminManagePaymentServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ToBoardListServlet() {
+    public AdminManagePaymentServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		LocalDate today = LocalDate.now();
-		request.setAttribute("today", today);
-
-		
-		request.getRequestDispatcher("/WEB-INF/views/board/boardList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/admin/managePayment.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
