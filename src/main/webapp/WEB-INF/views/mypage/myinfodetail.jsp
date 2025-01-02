@@ -43,30 +43,112 @@
 		<!-- sidebar include -->
 		<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
         
+<style>
+    button, input, select, textarea {
+	    margin: 0;
+	    padding: 0;
+	}
+	
+	/* 입력 필드 텍스트 스타일 */
+	button, input, select, td, textarea, th {
+	    font-size: 14px;
+	    line-height: 1.5;
+	    font-family: 'Malgun Gothic','맑은 고딕',sans-serif;
+	    color: #222;
+	}
+	
+	/* IE 브라우저 clear 버튼 숨김 */
+	input[type=text]::-ms-clear {
+	    display: none;
+	}
+	
+	/* 입력 필드 검색 취소 버튼 숨김 */
+	input[type=search]::-webkit-search-cancel-button {
+	    -webkit-appearance: none;
+	}
+	
+	/* 우편번호 입력 필드 */
+	#sample4_postcode {
+	    width: 100px;  /* 우편번호는 짧게 */
+	}
+    #enroll-main-container {
+		display : flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: auto;
+		min-height: 900px;
+		padding: 40px 20px;
+	}
+	.main-content {
+		margin-top:0px;
+		background: #fff;
+	    padding: 45px 30px;
+	    border-radius: 30px;
+	    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+	    width: 600px;
+	    height : auto;
+	    text-align: center;
+	}
+	#login-font {
+		font-family:Sans-serif;
+		font-style: italic;
+		font-size: 40px;
+		color : grey;
+	}
+	
+	.main-section {
+		display: flex;
+		flex-direction: column;
+	}
+	#agree-button {
+		display: flex;
+		justify-content: center;
+		margin-top: 20px;
+		padding: 20px;
+		gap: 30px;
+		margin-top:20px;
+	}
+	#enroll-inner-header {
+		display:flex;
+		justify-content: center;
+		align-items:center;
+	}
+    </style>
+</head>
+<body>
+<!-- 콘텐츠 영역 -->
+<div id="wrap">
+<!-- 메인 콘텐츠 -->
+	<div id="enroll-main-container">
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
-			
-		<section id=enroll-container>
-			<h2>내 정보</h2>
+			<section class="row main-section">
+				<!-- 섹션 1 -->
+					<div id="enroll-inner-header">
+						<img class="logo-container" src="${path}/resources/images/logo(NoBackGround).png" style="width:100px; height:100px;">
+						<p id="login-font">내정보</p>
+					</div>
 			<!-- onsubmit 발생했을 때 action 속성을 이용해 enrollmemberend.do 로 post 요청. onsubmit 속성을 통해 유효성검사 실시-->
 			<!-- onsubmit 값의 return 값이 true 일때 post 로 요청! -->
-			<form action="${path}/member/enrollend" method="post"
+			<form action="${path}/member/enroll" method="post"
 				onsubmit="return fn_invalidate();">
 				<table>
 					<tr>
 						<th>아이디 *</th>
 						<td>
-							<input type="text" name="memberId" id="memberId" style="width: 150px;" required>
+							<input type="text" name="memberId" id="memberId" style="width: 230px;" required>
 							<input type="button" value="ID 중복확인" id="idCheckBtn" onclick="checkId()">
 						</td>
 					</tr>
 					<tr>
 						<th>이메일 *</th>
 						<td>
-							<input type="text" name="emailId" id="emailId" style="width: 150px;" required>
+							<input type="text" name="emailId" id="emailId" style="width: 90px;" required>
 							@ 
-							<input type="text" name="emailDomain" id="emailDomain" style="width: 150px;" required>
-							<select id="emailSelect">
+							<input type="text" name="emailDomain" id="emailDomain" style="width:90px;" required>
+							<input type="button" value="이메일 인증" id="emailCheckBtn">
+							<select id="emailSelect" style="margin-left:32px;">
 								<option value="">직접입력</option>
 								<option value="gmail.com">gmail.com</option>
 								<option value="naver.com">naver.com</option>
@@ -74,7 +156,6 @@
 								<option value="hanmail.net">hanmail.net</option>
 								<option value="nate.com">nate.com</option>
 							</select>
-							<input type="button" value="이메일 인증" id="emailCheckBtn">
 						</td>
 					</tr>
 					<tr>
@@ -99,21 +180,21 @@
 					<tr>
 						<th>닉네임</th>
 						<td>
-							<input type="text" name="memberNick" id="memberNick" placeholder="다른 사용자에게 보여줄 닉네임을 입력하세요."><br>
+							<input type="text" name="memberNick" id="memberNick" style="width:320px;" placeholder="다른 사용자에게 보여줄 닉네임을 입력하세요."><br>
 						</td>
 					</tr>
 					<tr>
 						<th>주소</th>
 						<td>
 							<div style="margin-bottom: 10px">
-								<input type="text" id="sample4_postcode" name="addressNo" placeholder="우편번호">
+								<input type="text" id="sample4_postcode" name="addressNo" style="width:200px;" placeholder="우편번호">
 								<input type="button" id="postcodeFindBtn"  value="우편번호 찾기"><br>
 							</div>
 							<div>
-								<input type="text" id="sample4_roadAddress" name="addressRoad" placeholder="도로명주소" style="width: 300px;">
+								<input type="text" id="sample4_roadAddress" name="addressRoad" placeholder="도로명주소" style="width: 320px;">
 								<!-- <input type="text" id="sample4_jibunAddress" placeholder="지번주소" style="width: 300px;"> -->
 								<span id="guide" style="color: #999; display: none"></span>
-								<input type="text" id="sample4_detailAddress" name="addressDetail" placeholder="상세주소" style="width: 200px;">
+								<input type="text" id="sample4_detailAddress" name="addressDetail" placeholder="상세주소" style="width: 320px;">
 								<!-- <input type="text" id="sample4_extraAddress" placeholder="참고항목" style="width: 150px;"> -->
 							</div>
 						</td>
@@ -130,16 +211,34 @@
 						</td>
 					</tr>
 				</table>
-				<div class="enrollsubmit">
-					<input type="reset" value="취소"> <input type="submit"
-						value="가입">
+				<div id="agree-button">
+					<div id="canclediv">
+						<input type="reset" id="cancle" style="cursor: pointer; height:50px; border:none;" value="메인으로">
+					</div>
+					<div id="saveiv">
+						<input type="submit" style="cursor: pointer; height:50px; background-color:#fffadd; border:none;" value="저장">
+					</div>
 				</div>
 			</form>
 		</section>
+			</div>	
 		</div>
+		<!-- wrap 태그 종료 -->
 	</div>
-</main>
-
+<script>
+//서블릿에서 유효성 검사 후 알람 띄우기
+	<c:if test="${errorMessage != null}">
+		alert('${errorMessage}');
+	</c:if>
+	//메인으로 버튼 클릭시 메인페이지로 이동
+	$("#cancle").click(function() {
+		location.assign("${path}/home");
+	});
+	//로고 버튼 클릭시 메인페이지로 이동
+	$(".logo-container").click(function() {
+		location.assign("${path}");
+	});
+</script>
 <!-- 푸터 include -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 <!-- wrap 태그 종료 -->
