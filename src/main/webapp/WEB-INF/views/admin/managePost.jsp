@@ -30,6 +30,9 @@
     <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
     <!-- 7. 내부 style 태그 -->
 	<style>
+	.main-content{
+		gap:0px;
+	}
 	/* 게시글 관리 페이지 스타일 */
 	.mp-container {
 		background-color: white;
@@ -37,7 +40,6 @@
 	}
 	
 	.mp-header {
-		padding: 20px;
 	}
 	
 	.mp-control-bar {
@@ -132,7 +134,6 @@
 	<style>
 	/* 페이징 스타일 */
 	#pageBar {
-		margin-top: 20px;
 		display: flex;
 		justify-content: center;
 	}

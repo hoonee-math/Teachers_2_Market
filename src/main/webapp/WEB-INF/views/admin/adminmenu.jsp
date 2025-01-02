@@ -197,8 +197,6 @@
 						<hr style="border:2px solid #fff6c2;">
 						<p>공지사항을 작성하거나 관리할 수 있습니다.</p>
 					</div>
-					<div class="row mypage-card-container">
-					</div>
 				</div>
 				<!-- 공지사항 목록 테이블 -->
 				<table id="tbl-board" class="admin-table">
@@ -233,7 +231,7 @@
 							<tr>
 								<td>${post.postNo}</td>
 								<td style="text-align: left; padding-left: 20px;">${post.postTitle}</td>
-								<td>${post.memberId}</td>
+								<td>${post.member.memberName}</td>
 								<td><fmt:formatDate value="${post.postDate}"
 										pattern="yyyy-MM-dd" /></td>
 								<td>${post.viewCount}</td>

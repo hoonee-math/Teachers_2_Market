@@ -49,9 +49,13 @@
 	<div class="main-container">
 		<!-- sidebar include -->
 		<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-		
 		<!-- 콘텐츠 영역 -->
-		<div class="main-content">
+		<div style="width:1200px;">
+			<div style="display:flex; gap:5px; align-items:center;">
+				<img src="${path}/resources/images/common/write.png" style="height:40px; margin-left:50px; ">
+				<h2 style="margin-bottom: 20px; margin-left:5px;">상품/파일 등록</h2>
+			</div>
+			<div class="main-content">
 			<form id="writeForm" method="post" enctype="multipart/form-data">
 				<!-- Hidden Fields -->
 				<input type="hidden" name="memberNo" value="${loginMember.memberNo}">
@@ -62,9 +66,9 @@
 				<div class="section-container">
 					<h3>판매 유형</h3>
 					<div class="type-selector">
-						<input type="radio" id="typeProduct" name="productType" value="1" checked>
+						<input type="radio" id="typeProduct" name="type" value="product" checked>
 						<label for="typeProduct">상품</label>
-						<input type="radio" id="typeFile" name="ProductType" value="2">
+						<input type="radio" id="typeFile" name="type" value="file">
 						<label for="typeFile">파일</label>
 					</div>
 				</div>
@@ -158,6 +162,7 @@
 					<button type="button" id="cancelBtn">취소</button>
 				</div>
 			</form>
+		</div>
 		</div>
 	</div>
 </main>

@@ -48,11 +48,13 @@
 	<div class="main-container">
 		<!-- sidebar include -->
 		<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
-        
+        <div style="width:1200px;">
+			<div style="display:flex; gap:5px; align-items:center;">
+				<img src="${path}/resources/images/common/write.png" style="height:40px; margin-left:50px; ">
+				<h2 style="margin-bottom: 20px; margin-left:5px;">공지사항 등록</h2>
+			</div>
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
-
-			
 			<form id="writeForm" method="post" enctype="multipart/form-data">
 				<!-- Hidden Fields -->
 				<input type="hidden" name="memberNo" value="${loginMember.memberNo}">
@@ -100,7 +102,7 @@
 				</div>
 			</form>
 
-
+		</div>
 		</div>
 	</div>
 </main>

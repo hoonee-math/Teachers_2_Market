@@ -102,6 +102,34 @@
 		align-items:center;
 		gap:30px;
 	}
+	#join {
+	    cursor: pointer;
+	    height: 50px;
+	    background-color: #fffadd;
+	    border: none;
+	    padding: 10px 20px;
+	    font-size: 16px;
+	    color: #222;
+	    border-radius: 5px;
+	}
+	#cancle {
+		cursor: pointer;
+	    height: 50px;
+	    background-color: #grey;
+	    border: none;
+	    padding: 10px 20px;
+	    font-size: 16px;
+	    color: #cccccc;
+	    border-radius: 5px;
+	}
+	#cancle:hover {
+		background-color: #cccccc;
+		color: #6f6f6f;
+	}
+
+	#join:hover {
+	    background-color: #fff6c2;
+	}
     </style>
 </head>
 <body>
@@ -367,7 +395,7 @@
 					<input type="reset" id="cancle" style="cursor: pointer; height:50px; border:none;" value="메인으로">
 				</div>
 				<div id="joindiv">
-					<input type="submit" id="join" style="cursor: pointer; height:50px; background-color:#fffadd; border:none;" value="회원가입">
+					<input type="submit" id="join" value="회원가입">
 				</div>
 			</div>
 			</section>
