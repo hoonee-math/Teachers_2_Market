@@ -57,6 +57,7 @@
 		display: flex;
 		flex-direction: column;
 		gap:10px;
+		width: 100%;
 	}
 	#login-font {
 		font-family:Sans-serif;
