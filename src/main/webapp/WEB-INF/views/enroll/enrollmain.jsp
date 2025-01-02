@@ -237,7 +237,8 @@ input[type="radio"]:first-child {
 									</div>
 									<div>
 										<input type="text" id="sample4_roadAddress" name="addressRoad"
-											placeholder="도로명주소" style="width: 320px;"> <span
+											placeholder="도로명주소"
+											style="width: 320px; margin-bottom: 10px;"> <span
 											id="guide" style="color: #999; display: none"></span> <input
 											type="text" id="sample4_detailAddress" name="addressDetail"
 											placeholder="상세주소" style="width: 320px;">
@@ -253,16 +254,23 @@ input[type="radio"]:first-child {
 							</tr>
 							<tr class="school-name">
 								<th>학교/학원 이름 *</th>
-								<td><select name="region" id="region"
-									onchange="districtSearch(event);">
-										<option value="">지역 선택</option>
-										<!-- 지역 옵션은 데이터베이스에서 가져오기 -->
-								</select> <select name="district" id="district"
-									onchange="schoolSearch(event);">
-										<option value="">구/군 선택</option>
-								</select> <select name="schoolNo" id="school-name" required>
-										<option value="">학교명</option>
-								</select> <input type="button" value="확인" class="school-check-btn">
+								<td>
+									<!-- 학교 선택용 select 그룹 -->
+									<div id="school-select-group">
+										<select name="region" id="region"
+											onchange="districtSearch(event);">
+											<option value="">지역 선택</option>
+										</select> <select name="district" id="district"
+											onchange="schoolSearch(event);">
+											<option value="">구/군 선택</option>
+										</select> <select name="schoolNo" id="school-name" required>
+											<option value="">학교명</option>
+										</select> <input type="button" value="확인" class="school-check-btn">
+									</div> <!-- 학원명 입력용 input -->
+									<div id="academy-input-group" style="display: none;">
+										<input type="text" name="academyName" id="academyName"
+											style="width: 320px;" placeholder="학원명을 입력하세요">
+									</div>
 								</td>
 							</tr>
 						</table>
@@ -301,40 +309,23 @@ $("#cancle").click(function() {
 $(".logo-container").click(function() {
     location.assign("${path}");
 });
-//학원강사 클릭시 이벤튼 발동
 $('input[name="eduType"]').on('change', function() {
     const selectedType = $(this).val();
-    const regionSelect = $('#region');
-    const districtSelect = $('#district');
-    const schoolSelect = $('#school-name');
+    const schoolSelectGroup = $('#school-select-group');
+    const academyInputGroup = $('#academy-input-group');
     
     if(selectedType === '1') {  // 학교 선택 시
-        // 모든 select 박스 보이기
-        regionSelect.show();
-        districtSelect.show();
-        schoolSelect.html('<option value="">학교명</option>');
-        schoolSelect.show();
+        // 학교 선택 그룹 표시, 학원 입력 숨김
+        schoolSelectGroup.show();
+        academyInputGroup.hide();
+        // 학교 선택 필드 초기화
+        $('#school-name').html('<option value="">학교명</option>');
     } else {  // 학원 선택 시
-        // 지역, 구/군 select 숨기기
-        regionSelect.hide();
-        districtSelect.hide();
-        // 학원명 select만 보이기
-        schoolSelect.html('<option value="">학원명</option>');
-        schoolSelect.show();
-        
-        // 학원 목록을 바로 불러오는 ajax 호출
-        $.ajax({
-            url: `${path}/school/selectacademy`,
-            type: "GET",
-            success: function(data) {
-                data.forEach(academy => {
-                    const option = $("<option>")
-                        .val(academy.academyNo)
-                        .text(academy.academyName);
-                    schoolSelect.append(option);
-                });
-            }
-        });
+        // 학교 선택 그룹 숨김, 학원 입력 표시
+        schoolSelectGroup.hide();
+        academyInputGroup.show();
+        // 학원명 입력 필드 초기화
+        $('#academyName').val('');
     }
 });
 </script>
