@@ -86,7 +86,8 @@
 #memberId,
 #phone,
 #email,
-#sellerRequest {
+#sellerRequest,
+#customDeliveryRequest {
 	width: 700px;
 }
 #delivery-info select {
