@@ -24,6 +24,7 @@
 	<link rel="stylesheet" href="${path }/resources/css/common/footer.css">
     <!-- 3. 컴포넌트 CSS (각 요소) -->
     <!-- 4. 페이지별 CSS -->
+     <link rel="stylesheet" href="${path }/resources/css/board/purchaseHistory.css">
     <!-- 5. 외부 라이브러리 ex: jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
@@ -51,7 +52,7 @@
         justify-content: center;
         height: auto;
         min-height: 900px;
-        padding: 40px 20px;
+        padding: 0px;
     }
     
     /* 콘텐츠 영역 스타일 */
@@ -98,60 +99,60 @@
     width: 100%;
     border-spacing: 0;
     margin: 20px 0;
-}
-
-th, td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    width: 150px;
-    font-weight: normal;
-}
-
-/* input 관련 스타일 수정 */
-input[type="text"],
-input[type="password"] {
-    padding: 8px;
-    border: 2px solid rgb(192, 192, 192);
-    border-radius: 4px;
-    background-color: #F9F9F9;
-    width:250px;
-}
-
-/* select 스타일 추가 */
-select {
-    padding: 6px 12px 11px 12px;
-    border: 2px solid #ddd;
-    border-radius: 4px;
-    font-size: 14px;
-    margin-left: 5px;
-    cursor: pointer;
-    background-color: #F9F9F9;
-}
-input[type="radio"] {
-    margin-right: 5px;
-    margin-left: 15px;
-}
-input[type="radio"]:first-child {
-    margin-left: 0;
-}
-
-/* 학교/학원 선택 셀렉트 박스 스타일 */
-.school-name select {
-    margin-right: 10px;
-    width: 150px;
-}
-
-.school-check-btn {
-    padding: 6px 12px;
-    background-color: #F9F9F9;
-    border: 2px solid #ddd;
-    border-radius: 4px;
-    cursor: pointer;
-}
+	}
+	
+	th, td {
+	    padding: 15px;
+	    text-align: left;
+	    border-bottom: 1px solid #ddd;
+	}
+	
+	th {
+	    width: 150px;
+	    font-weight: normal;
+	}
+	
+	/* input 관련 스타일 수정 */
+	input[type="text"],
+	input[type="password"] {
+	    padding: 8px;
+	    border: 2px solid rgb(192, 192, 192);
+	    border-radius: 4px;
+	    background-color: #F9F9F9;
+	    width:250px;
+	}
+	
+	/* select 스타일 추가 */
+	select {
+	    padding: 6px 12px 11px 12px;
+	    border: 2px solid #ddd;
+	    border-radius: 4px;
+	    font-size: 14px;
+	    margin-left: 5px;
+	    cursor: pointer;
+	    background-color: #F9F9F9;
+	}
+	input[type="radio"] {
+	    margin-right: 5px;
+	    margin-left: 15px;
+	}
+	input[type="radio"]:first-child {
+	    margin-left: 0;
+	}
+	
+	/* 학교/학원 선택 셀렉트 박스 스타일 */
+	.school-name select {
+	    margin-right: 10px;
+	    width: 150px;
+	}
+	
+	.school-check-btn {
+	    padding: 6px 12px;
+	    background-color: #F9F9F9;
+	    border: 2px solid #ddd;
+	    border-radius: 4px;
+	    cursor: pointer;
+	}
     </style>
 </head>
 <body>
@@ -168,13 +169,9 @@ input[type="radio"]:first-child {
         
         <!-- 콘텐츠 영역 수정 -->
         <div id="enroll-main-container">
+        <p><img width="20px" src="${path}/resources/images/board/folder.png"> 내정보 수정</p>
             <div class="main-content">
                 <section class="row main-section">
-                    <!-- 로고와 Join 텍스트를 내정보로 변경 -->
-                    <div id="enroll-inner-header">
-                        <p id="login-font">내정보 수정</p>
-                    </div>
-                    
                     <!-- enrollmain.jsp와 동일한 form -->
                     <form action="${path}/member/update" method="post" onsubmit="return fn_invalidate2();">
                         <table>
