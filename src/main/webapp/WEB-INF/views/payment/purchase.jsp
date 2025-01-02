@@ -31,6 +31,7 @@
     <link rel="stylesheet" href="${path }/resources/css/payment/purchase.css">
     <!-- 5. 외부 라이브러리 ex: jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.portone.io/v2/browser-sdk.js"></script>
     <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
     <!-- 7. 내부 style 태그 -->
     <style>
@@ -62,9 +63,9 @@
 							</td>
 							<td class="list-content">
 								<div>
-									<input type="text" name="postTitle" value="구매 글 제목" readOnly><br>
-									<input type="text" name="salePrice" value="₩ 10,000원" readOnly><br>
-									<input type="text" name="deliveryFee" value="배송비 3,000원" readOnly><br>
+									<input type="text" id="postTitle" name="postTitle" value="구매 글 제목" readOnly><br>
+									<input type="text" id="salePrice" name="salePrice" value="₩ 10,000원" readOnly><br>
+									<input type="text" id="deliveryFee" name="deliveryFee" value="배송비 3,000원" readOnly><br>
 								</div>
 							</td>
 						</tr>
@@ -156,7 +157,7 @@
 				<br>
 			</section>
 			<div id="purchase">
-				<button id="purchase-btn">결제하기</button>
+				<button id="purchase-btn" onclick="requestPay()">결제하기</button>
 			</div>
 			</div>
 		</div>
@@ -210,6 +211,35 @@
 		}
 	}
 	
+	function requestPay() {
+	    // 사용자 입력값 가져오기
+	    const orderName = document.getElementById("orderName").value;
+	    const totalAmount = document.getElementById("totalAmount").value;
+
+	    // 필수 데이터 확인
+	    if (!orderName || !totalAmount) {
+	        alert("모든 값을 입력해주세요!");
+	        return;
+	    }
+	    
+	      PortOne.requestPayment({
+	        storeId: "store",
+	        paymentId: "test",
+	        orderName: $("#postTitle").val(),
+	        totalAmount: 1000,
+	        currency: "KRW",
+	        channelKey: "channel-key",
+	        payMethod: "CARD",
+	        card: {},
+	        customer: {
+	          customerId: "user_m5f69vse",
+	          fullName: "123",
+	          firstName: "123",
+	          phoneNumber: "010-1111-1111",
+	          email: "123@gmail.com",
+	        },
+	      });
+	    }
 </script>
 <!-- 9. API/Ajax 관련 JavaScript -->
 <!-- 10. 컴포넌트 JavaScript -->
