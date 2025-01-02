@@ -1,0 +1,83 @@
+@charset "UTF-8";
+
+/* 관리자 페이지 회원관리 스타일 */
+
+/* 컨테이너 */
+.mm-container {
+}
+
+/* 컨트롤 바 영역 */
+.mm-control-bar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+	background: #f8f9fa;
+	padding: 10px;
+	border-radius: 5px;
+}
+
+/* 회원 관리 액션 버튼 영역 */
+.mm-actions button {
+	margin-left: 10px;
+	padding: 5px 10px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	background: white;
+	cursor: pointer;
+}
+
+.mm-actions button:hover {
+	background: #f0f0f0;
+}
+
+/* 검색 및 정렬 영역 */
+.mm-search-sort {
+	display: flex;
+	gap: 10px;
+}
+
+.mm-search-sort select, .mm-search-sort input {
+	padding: 5px;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+}
+
+/* 회원 테이블 스타일 */
+.mm-container table {
+	border-collapse: collapse;
+	margin-top: 20px;
+}
+
+.mm-container table th, .mm-container table td {
+	padding: 12px;
+	text-align: left;
+	border-bottom: 1px solid #ddd;
+}
+
+.mm-container table th {
+	background-color: #fff6c2;
+	font-weight: bold;
+}
+
+.mm-container table tr:hover {
+	background-color: #f5f5f5;
+}
+
+/* 체크박스 열 */
+.mm-container .checkbox-cell {
+	text-align: center;
+}
+
+/* 경고 횟수 강조 */
+.mm-container .warning-count {
+	color: #dc3545;
+	font-weight: bold;
+}
+
+/* 페이지네이션 영역 */
+.mm-container .pagination-container {
+	margin-top: 20px;
+	display: flex;
+	justify-content: center;
+}
