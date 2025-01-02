@@ -169,5 +169,10 @@
 <!-- 9. API/Ajax 관련 JavaScript -->
 <!-- 10. 컴포넌트 JavaScript -->
 <!-- 11. 페이지별 JavaScript -->
+<script>
+	$('.card-container').click(function() {
+		location.assign("${path}/post/viewpost");
+	});
+</script>
 </body>
 </html>
