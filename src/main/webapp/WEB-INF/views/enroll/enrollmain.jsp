@@ -133,9 +133,9 @@
 					<tr>
 						<th>이메일 *</th>
 						<td>
-							<input type="text" name="emailId" id="emailId" style="width: 100px;" required>
+							<input type="text" name="emailId" id="emailId" style="width: 90px;" required>
 							@ 
-							<input type="text" name="emailDomain" id="emailDomain" style="width:100px;" required>
+							<input type="text" name="emailDomain" id="emailDomain" style="width:90px;" required>
 							<input type="button" value="이메일 인증" id="emailCheckBtn">
 							<select id="emailSelect" style="margin-left:32px;">
 								<option value="">직접입력</option>
@@ -212,6 +212,7 @@
 		</section>
 			</div>	
 		</div>
+		<!-- wrap 태그 종료 -->
 	</div>
 <script>
 //서블릿에서 유효성 검사 후 알람 띄우기
@@ -229,8 +230,6 @@
 </script>
 <!-- 푸터 include -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-<!-- wrap 태그 종료 -->
-</div>
 
 <!-- 8. 공통 JavaScript -->
 <!-- 9. API/Ajax 관련 JavaScript -->
