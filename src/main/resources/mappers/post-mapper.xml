@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="post2">
+	
+	<resultMap id="postMap" type="post2">
+		<id column="post_no" property="postNo"/>
+		<result column="post_date" property="postDate"/>
+		<result column="post_title" property="postTitle"/>
+		<result column="post_content" property="postContent"/>
+		<result column="category_no" property="categoryNo"/>
+		<result column="subject_no" property="subjectNo"/>
+		<result column="view_count" property="viewCount"/>
+		<result column="is_temp" property="isTemp"/>
+		<result column="is_deleted" property="isDeleted"/>
+		<result column="product_type" property="productType"/>
+		<result column="is_fix" property="isFix"/>
+		<association property="member" javaType="member2">
+			<id column="member_no" property="memberNo"/>
+			<result column="member_name" property="memberName"/>
+			<result column="member_id" property="memberId"/>
+			<result column="member_pw" property="memberPw"/>
+			<result column="email" property="email"/>
+			<result column="phone" property="phone"/>
+			<result column="address" property="address"/>
+			<result column="birthday" property="birthday"/>
+			<result column="edu_type" property="eduType"/>
+			<result column="subject_no" property="subjectNo"/>
+		</association>
+		<collection property="images" resultMap="image.imageMap"/>
+	</resultMap>
+</mapper>
