@@ -14,7 +14,7 @@
 		</a>
 		<div class="search-container">		
 			<div id="search-bar">
-				<input type="text" placeholder="검색어를 입력해주세요.">
+				<input type="text" placeholder="검색어를 입력해주세요." style="background-color:white;">
 				<button onclick="search();">
 					<img src="${path }/resources/images/common/search.png"
 						alt="검색" width="25px" height="100%">
@@ -30,7 +30,7 @@
 		<!-- 로그인한 회원 -->
 		<c:if test="${sessionScope.loginMember == null }"> <!-- 글쓰기 등록 페이지 링크 연결을 위해 잠시 전체 공개처리 -->
 			<div class="personal-container">
-				<input type="text" id="personal-name" value="OOO님">
+				<input type="text" id="personal-name" value="OOO님" style="background-color:white;">
 				<button id="personal-btn-write">글쓰기</button>
 				<button id="personal-btn-logout">로그아웃</button>
 				<button id="personal-btn-cart">
