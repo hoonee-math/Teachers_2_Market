@@ -25,43 +25,12 @@
     <!-- 3. 컴포넌트 CSS (각 요소) -->
     <link rel="stylesheet" href="${path }/resources/css/component/card.css">
     <!-- 4. 페이지별 CSS -->
+    <link rel="stylesheet" href="${path }/resources/css/board/boardList.css">
     <!-- 5. 외부 라이브러리 ex: jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
     <!-- 7. 내부 style 태그 -->
     <style>
-		#notice-div {
-			color: red;	
-			text-align: center;
-			width: 1140px;
-		}
-    	ul {
-    		list-style-type: none;
-    		display: flex;
-    		align-items: center;
-    		justify-content: center;
-    		background-color: #fffadd;
-    		padding: 10px;
-    		width: 1140px;
-    	}
-    	li {
-    		margin: 0 10px;
-    		font-size: 13pt;
-    	}
-    	li>a {
-    		padding: 10px;
-    		text-decoration: none;
-    		color: #6f6f6f;
-    		background-color: #fffadd;
-    		width: 50px;
-			height: 50px;
-    	}
-    	li>a:hover {
-    		background-color: white;
-    		border-radius: 50%;
-			font-size: larger;
-			font-weight: bold;
-    	}
     </style>
 </head>
 <body>
