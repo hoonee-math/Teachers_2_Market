@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="path" value="${pageContext.request.contextPath}" />
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    pageEncoding="UTF-8"%>
+<!-- 1. JSP/JSTL 태그 라이브러리 -->
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<c:set var="path" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -16,103 +18,172 @@
     <!-- 2-1. Bootstrap CSS (다른 CSS보다 먼저) -->
     <!-- 2-2. Bootstrap Icons (필요한 경우) -->
     <!-- 2-3. 직접 제작한 CSS 파일들 (Bootstrap CSS 보다 아래 위치시켜야 함) -->
+	<link rel="stylesheet" href="${path }/resources/css/common/layout.css">
+	<link rel="stylesheet" href="${path }/resources/css/common/footer.css">
     <!-- 3. 컴포넌트 CSS (각 요소) -->
     <!-- 4. 페이지별 CSS -->
-    <link rel="stylesheet" href="${path }/resources/css/enroll/enrollMember.css">
-	<link rel="stylesheet" href="${path }/resources/css/enroll/enrollHeader.css">
-	<link rel="stylesheet" href="${path }/resources/css/enroll/termsofservice.css">
-	<link rel="stylesheet" href="${path }/resources/css/common/footer.css">
     <!-- 5. 외부 라이브러리 ex: jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
     <!-- 7. 내부 style 태그 -->
+    <style>
+    body {
+    	background-color : #fffadd;
+    	background : linear-gradient(to right, #fffadd, #ffffff);
+    	margin: 0;
+    }
+    #logincheck-main-container {
+		display : flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 970px;
+		padding: 20px;
+	}
+	.main-content {
+		margin-top:0px;
+		background: #fff;
+	    padding: 30px 30px;
+	    border-radius: 30px;
+	    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
+	    width: 550px;
+	    height : 450px;
+	    text-align: center;
+	}
+	#login-font {
+		font-family:Sans-serif;
+		font-style: italic;
+		font-size: 40px;
+		color : grey;
+	}
+	#check-line, #check-line1, #check-line2, #check-line3  {
+		margin-top:10px;
+		display:flex;
+	}
+	#check-content, #check-content2, #check-content3 {
+		display:flex;
+		justify-content:center;
+	}
+	#check-contentbox, #check-contentbox2, #check-contentbox3 {
+		overflow:auto;
+		max-width: 500px;
+	    color: #6f6f6f;
+	    font-size: 12px;
+		max-height : 130px;
+		border : 1px solid grey;
+		white-space: pre-line;;
+		border-radius : 3px;
+	}
+	#login-next {
+		margin-top : 30px;
+		background-color : #fffadd;
+		color : #cccccc;
+		border:none;
+		padding:12px;
+		width: 90px;
+	}
+	.login-mustcheck {
+		color : red;
+	}
+	.main-section {
+		display: flex;
+		flex-direction: column;
+	}
+	#agree-button {
+		display: flex;
+		justify-content: center;
+		margin-top: 20px;
+		padding: 20px;
+		gap: 30px;
+	}
+	#logincheck-inner-header {
+		display:flex;
+		justify-content: center;
+		align-items:center;
+	}
+    </style>
 </head>
 <body>
-<header>
-	<div class="menu">
-		<div class="logo-container">
-			<img alt="logoimg" src="${path}/resources/images/favicon.jpeg" style="width:auto; height:40px;">
-			<span class="logo-text">티꿀모아</span>
-			<img alt="logoimg" src="${path}/resources/images/favicon.jpeg" style="width:auto; height:40px;">
-		</div>
-	</div>
-</header>
-
-<section id="enroll-container">
-	<div id="terms-header">
-		<h2>회원 가입 약관</h2>
-	</div>
-	<form action="${path}/member/enroll/form" method="post">
-	<div class="row full-width">
-		<div id="agree-header">
-			<div id="termsofagree">이용약관 동의</div>
-			<div id="agreecolor">(필수)</div>
-			<input type="checkbox" name="sign" id="termsofbtn" value="동의" >동의
-		</div>
-		<div id="terms-content">
-			<pre id=terms-contentbox>
-제1조 (목적)
-본 약관은 "맘스티쳐" 커뮤니티(이하 "사이트")가 제공하는 서비스(이하 "서비스")를 
-이용함에 있어 사이트와 이용자 간의 권리, 의무, 책임사항 및 절차를 규정함을 목적으로 합니다.
+<!-- 콘텐츠 영역 -->
+<div id="wrap">
+<!-- 메인 콘텐츠 -->
+<main class="main">
+	<div id="logincheck-main-container">
+		<!-- 콘텐츠 영역 -->
+		<div class="main-content">
+			<section class="row main-section">
+				<!-- 섹션 1 -->
+				<div id="logincheck-inner-container">
+					<div id="logincheck-inner-header">
+						<img class="logo-container" src="${path}/resources/images/logo(NoBackGround).png" style="width:100px; height:100px;">
+						<p id="login-font">Join</p>
+					</div>
+					<div id=check-line>
+						<p>19세 이상 이신가요?</p><p class="login-mustcheck">(필수)</p>
+						<input type="checkbox">
+					</div>
+					<div id="check-line1">
+						<p>이용약관 동의</p><p class="login-mustcheck">(필수)</p>
+						<input type="checkbox">
+					</div>
+					<div id="check-content">
+						<div id="check-contentbox">
+							<p>
+							티꿀모아 중고거래 사이트 이용약관
+							
+제1조 (용도)
+본 약관은 티꿀모아(이하 “회사”)가 제공하는 중고거래 서비스(이하 “서비스”)의 이용 조건 및 절차, 회원과 회사의 권리, 권리, 책임 및 기타 필요한 사항을 말합니다. 규정을 목적으로 합니다.
 
 제2조 (정의)
-회원: 본 약관에 동의하고 사이트에 가입한 자.
-비회원: 회원가입 없이 사이트가 제공하는 서비스를 이용하는 자.
-게시물: 회원이 서비스를 이용하며 사이트에 게시한 글, 이미지, 댓글 등을 의미합니다.
 
-제3조 (약관의 효력 및 변경)
-본 약관은 사이트에 게시함으로써 효력이 발생합니다.
-사이트는 필요 시 관련 법령을 위반하지 않는 범위 내에서 약관을 변경할 수 있으며, 
-변경된 약관은 사이트에 공지 후 적용됩니다.
+"서비스"란 회사가 임대 관련 서비스를 제공하는 웹사이트 및 모바일 거래를 말합니다.
+"회원"이란 본 약관에 따라 회사와 이용 계약을 보호하고 서비스를 이용하는 것을 말합니다.
+"콘텐츠"란 회원이 서비스에 등록한 글, 이미지, 동영상 등 모든 자료를 의미합니다.
+제3조 (약관의 고객 및 변경)
 
-제4조 (회원가입 및 서비스 이용)
-회원가입은 본 약관에 동의한 후 사이트가 정한 절차에 따라 이루어집니다.
-회원은 가입 시 제공한 정보가 허위임이 밝혀질 경우 서비스 이용 제한을 받을 수 있습니다.
+본 약관은 서비스를 이용하고자 하는 모든 회원에게 불만을 발생시킵니다.
+회사는 관련 활동을 위배하지 않는 범위에서 약관을 보호할 수 있는지 확인하고, 변경된 약관은 공지사항을 통해 회원에게 공지됩니다.
+제4조 (회원가입 및 독립)
 
-제5조 (회원의 의무)
-회원은 서비스 이용 시 공공질서와 미풍양속을 해치지 않아야 합니다.
-타인의 개인정보를 도용하거나 허위정보를 제공해서는 안 됩니다.
-사이트의 사전 승인 없이 상업적 목적으로 서비스를 이용하거나 게시물을 게시할 수 없습니다.
+회원가입은 서비스를 통해 제공되는 양식에 따라 정보를 입력하고 약관에 동의하도록 합니다.
+회원은 회원 가입 내 설정을 독립적으로 표시할 수 있으며, 회사는 신속히 처리합니다.
+제5조 (서비스 이용)
 
-제6조 (게시물 관리)
-회원이 게시한 게시물로 인해 발생하는 모든 책임은 회원 본인에게 있습니다.
-사이트는 다음과 같은 경우 게시물을 사전 통보 없이 삭제할 수 있습니다:
-불법적이거나 타인의 권리를 침해하는 내용
-외설적이거나 사회적 규범에 어긋나는 내용
-기타 사이트 운영에 방해가 되는 내용
+회원은 본 서비스를 통해 중고 물품 거래할 수 있는지 확인하고, 회사는 거래의 중개 및 관련 부가 서비스를 제공합니다.
+회원은 여전히 ​​정보를 제공해야 하며, 허위 정보 제공으로 사기 문제에 대한 책임은 회원 본인에게 있습니다.
+제6조 (회원의 허락)
 
-제7조 (서비스 제공 및 중단)
-사이트는 회원에게 안정적인 서비스를 제공하기 위해 최선을 다합니다.
-다음과 같은 경우 서비스 제공이 제한될 수 있습니다:
-시스템 점검, 유지보수, 또는 기술적 장애
-천재지변, 비상사태 등의 불가항력
+회원은 서비스 이용과 관련하여 다음 서비스를 이용하시기 바랍니다.
+허위 정보 등록
+교류의 권리를 존중하는 것
+홍보 및 공공질서에 대한 조치
+회원은 회사의 운영 정책 및 관련 홍보를 준수해야 합니다.
+제7조 (회사의 권리 및 증명장부)
 
-제8조 (책임의 제한)
-사이트는 회원이 서비스에 게재한 정보의 신뢰도, 정확성에 대해 책임지지 않습니다.
-사이트는 회원 간의 분쟁에 개입하지 않으며, 이로 인해 발생하는 손해에 대해 책임지지 않습니다.
+회사는 회원 간 거래 과정에서 손해 문제에 대해 책임을 지지합니다.
+회사는 혼성지변, 시스템 장애를 가능하게 하는 힘이 있는 영역으로 서비스를 제공할 수 없는 경우 책임을 면합니다.
+제8조(개인정보 보호)
+회사는 회원의 개인정보를 보호하기 위해 관련 보호 및 개인정보 처리방침을 준수합니다.
 
-제9조 (개인정보 보호)
-사이트는 회원의 개인정보를 관련 법령에 따라 보호합니다.
-자세한 내용은 "개인정보처리방침"에서 확인할 수 있습니다.
+제9조 (서비스 중단 및 종료)
 
-제10조 (약관 위반 시 조치)
-회원이 본 약관을 위반할 경우, 사이트는 사전 통보 없이 이용 계약을 해지하거나 
-서비스 이용을 제한할 수 있습니다.
-
-제11조 (관할법원)
-본 약관과 관련된 분쟁은 대한민국 법률에 따라 처리되며, 
-관할 법원은 사이트 본점 소재지를 기준으로 합니다.
+회사는 운영상 필요에 따라 서비스의 전체적으로 또는 일부를 중단하거나 종료할 수 있습니다.
+서비스 중단 시 회사는 사전에 이를 공지하며, 회원은 중단 시 발생하는 바다에 대해 보상받을 수 없습니다.
+제10조 (준거법 및 독립)
+본 약관과 관련 모든 당사자는 대한민국 절차에 따라 처리하며, 본인은 회사의 신뢰를 존중합니다.
 
 부칙
-본 약관은 2024년 12월 19일부터 적용됩니다.</pre>
-		</div>
-		<div id="agree-header2">
-			<div id="termsofagree2">개인정보 수집 및 동의</div>
-			<div id="agreecolor2">(필수)</div>
-			<input type="checkbox" name="sign2" id="termsofbtn2" value="동의" >동의
-		</div>
-		<div id="terms-content2">
-			<div id=terms-contentbox2>
+본 약관은 2024년 12월 27일부터 검색됩니다.
+							</p>
+						</div>
+					</div>	
+					<div id="check-line2">
+						<p>개인정보 처리방침 동의</p><p class="login-mustcheck">(필수)</p>
+						<input type="checkbox">
+					</div>
+					<div id="check-content2">
+						<div id="check-contentbox2">
+							<p>
 개인정보처리방침
 
 [차례]
@@ -248,30 +319,61 @@
 
 현 개인정보처리방침은 2017년 9월 22일에 제정되었으며, 정부 및 회사의 정책 또는 보안기술의 변경에 따라 내용의 추가, 삭제 및 수정이 있을 경우에는 개정 최소 7일 전부터 ‘공지사항’란을 통해 고지하며, 본 정책은 시행 일자에 시행됩니다.
 1) 공고일자 : 2018년 05월 01일
-2) 시행일자 : 2018년 05월 01일 </div>
-		</div>
-		<div id="agecheckcontainer">
-			<div id="askage">만 19세 이상인가요?</div>
-			<div id="agreecolor3">(필수)</div>
-			<input type="checkbox" name="sign3" id="agecheck" value="동의" >동의
-		</div>
-		<div class="row full-width">
-			<div id="agree-button">
+2) 시행일자 : 2018년 05월 01일
+							</p>
+						</div>
+					</div>	
+					<div id="check-line3">
+						<p>광고성 정보 수신 동의</p>
+						<input type="checkbox">
+					</div>
+					<div id="check-content3">
+						<div id="check-contentbox3">
+							<p>	
+[광고성 정보 수신 동의]
+
+제1조 (목적)
+본 약관은 티꿀모아(이하 "회사")가 제공하는 상품 및 서비스에 관한 광고성 정보를 전송하기 위한 수신 동의에 관한 사항을 규정함을 목적으로 합니다.
+
+제2조 (광고성 정보의 정의)
+"광고성 정보"란 상품/서비스에 관한 정보, 할인/이벤트 정보, 프로모션 안내 등 상업성 정보를 말합니다.
+
+제3조 (수신 동의의 범위)
+1. 회원은 이메일, SMS, 앱 푸시 알림을 통한 광고성 정보의 수신을 선택적으로 동의할 수 있습니다.
+2. 광고성 정보는 주 1~2회 정도 발송되며, 이벤트 기간에는 발송 빈도가 변경될 수 있습니다.
+
+제4조 (수신 동의의 철회)
+1. 회원은 언제든지 수신 동의를 철회할 수 있습니다.
+2. 수신 철회 방법:
+   - 마이페이지 → 설정 → 알림설정에서 직접 설정 변경
+   - 고객센터를 통한 수신거부 신청
+   - 수신거부 문자 회신
+   
+제5조 (개인정보 보호)
+회사는 광고성 정보 전송 목적으로 수집된 개인정보를 관련 법령에 따라 안전하게 보관하며, 수신 동의 철회 시 즉시 파기합니다.
+
+제6조 (비용)
+광고성 정보 수신에 대한 별도의 비용이 부과되지 않으나, 모바일 데이터 이용 시 통신사별 요금이 발생할 수 있습니다.
+
+본 약관에 동의하시는 경우, 위 내용에 대해 인지하고 수신에 동의하는 것으로 간주됩니다.	
+							</p>
+						</div>
+					</div>
+				</div>
+				<div id="agree-button">
 				<div id="canclediv">
-					<input type="reset" id="cancle" style="cursor: pointer; height:50px;" value="메인으로">
+					<input type="reset" id="cancle" style="cursor: pointer; height:50px; border:none;" value="메인으로">
 				</div>
 				<div id="joindiv">
-					<input type="submit" style="cursor: pointer; height:50px;" value="회원가입">
+					<input type="submit" id="join" style="cursor: pointer; height:50px; background-color:#fffadd; border:none;" value="회원가입">
 				</div>
 			</div>
+			</section>
 		</div>
 	</div>
-	</form>
-</section>
-
-
+</main>
 <script>
-	//서블릿에서 유효성 검사 후 알람 띄우기
+//서블릿에서 유효성 검사 후 알람 띄우기
 	<c:if test="${errorMessage != null}">
 		alert('${errorMessage}');
 	</c:if>
@@ -279,12 +381,23 @@
 	$("#cancle").click(function() {
 		location.assign("${path}/home");
 	});
-	//메인으로 버튼 클릭시 메인페이지로 이동
+	//로고 버튼 클릭시 메인페이지로 이동
 	$(".logo-container").click(function() {
 		location.assign("${path}");
 	});
+	//메인으로 버튼 클릭시 메인페이지로 이동
+	$("#join").click(function() {
+		location.assign("${path}/member/enrollmain");
+	});
 </script>
+<!-- 푸터 include -->
+<jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+<!-- wrap 태그 종료 -->
+</div>
 
-<jsp:include page="/WEB-INF/views/common/footer.jsp" />
+<!-- 8. 공통 JavaScript -->
+<!-- 9. API/Ajax 관련 JavaScript -->
+<!-- 10. 컴포넌트 JavaScript -->
+<!-- 11. 페이지별 JavaScript -->
 </body>
 </html>
