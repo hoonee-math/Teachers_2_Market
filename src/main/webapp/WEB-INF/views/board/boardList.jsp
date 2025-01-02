@@ -74,7 +74,7 @@
 							<%-- <p><strong>${item.postTitle}</strong></p> --%>
 							<p>₩ 판매금액</p>
 <%-- 							<!-- 상품 타입이 물품인 경우 -->
-							<c:if test="${item.productType==0 }">
+							<c:if test="${item.productType==1 }">
 								<!-- stockCount 변수에 재고 넣음 -->
 								<c:set var="stockCount" value="${item.product2.stockCount }"/>
 								<c:choose>
@@ -97,7 +97,7 @@
 								</c:choose>
 							</c:if>
 							<!-- 상품 타입이 파일인 경우 -->
-							<c:if test="${item.productType==1 }">
+							<c:if test="${item.productType==2 }">
 								<!-- salePeriod 변수에 판매기간 넣음 -->
 								<c:set var="salePeriod" value="${item.file2.salePeriod }"/>
 								<c:choose>
