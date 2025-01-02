@@ -55,10 +55,13 @@
 				</div>
 			</section>
 			<p id="categoryTitle">${categoryTitle }</p>
-			<section class="row card-section">
+			
 				<!-- 나중에 ajax 통신할 때는 append 이용해서 진행해야함 -->
-				<c:forEach var="i" begin="1" end="4">
-				<%-- <c:forEach var="item" items="${post }" varStatus="status"> --%>
+				<%-- <c:forEach var="i" begin="1" end="4"> --%>
+				<c:forEach var="item" items="${posts }" varStatus="status">
+					<c:if test="${status.index % 4 ==0 }">
+						<section class="row card-section">
+					</c:if>
 					<div class="card-container">
 						<!-- 백엔드 작업할 때 사용하기 위한 부분은 주석처리해 둠 -->
 						<div class="card-img">
@@ -66,18 +69,25 @@
 							<%-- <img width="150px" height="150px" src="${path }/resources/board/images/${item.image2.renamed}"> --%>
 						</div>
 						<div class="card-content">
-							<p>판매자명</p>
-							<%-- <p>${item.member2.memberName}</p> --%>
+							<%-- <p>판매자명</p> --%>
+							<c:choose>
+								<c:when test="${fn:length(item.member2.memberName) >10 }">
+									<p>${fn:substring(item.member2.memberName,0,9)}...</p>
+								</c:when>
+								<c:otherwise>
+									<p>${item.member2.memberName }</p>
+								</c:otherwise>
+							</c:choose>
 								<!-- 판매물품 제목은 10글자까지, 
 									프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
 									ex) 하나둘셋넷다섯여섯...-->
-							<p><strong>판매물품 제목</strong></p>
-							<%-- <p><strong>${item.postTitle}</strong></p> --%>
-							<p>₩ 판매금액</p>
-<%-- 							<!-- 상품 타입이 물품인 경우 -->
+							<%-- <p><strong>판매물품 제목</strong></p> --%>
+							<p><strong>${item.postTitle}</strong></p>
+							<%-- <p>₩ 판매금액</p> --%>
+							<!-- 상품 타입이 물품인 경우 -->
 							<c:if test="${item.productType==1 }">
 								<!-- stockCount 변수에 재고 넣음 -->
-								<c:set var="stockCount" value="${item.product2.stockCount }"/>
+								<%-- <c:set var="stockCount" value="${item.product2.stockCount }"/>
 								<c:choose>
 									<c:when test="${stockcount>0 }">
 										<!-- isFree 변수에 무료나눔 여부 -->
@@ -95,11 +105,12 @@
 									<c:otherwise>
 										<p style="color:#e74c3c; font-weight:bold;">판매종료</p>
 									</c:otherwise>
-								</c:choose>
+								</c:choose> --%>
+								<p>현재 재고 2개</p>
 							</c:if>
 							<!-- 상품 타입이 파일인 경우 -->
 							<c:if test="${item.productType==2 }">
-								<!-- salePeriod 변수에 판매기간 넣음 -->
+								<%-- <!-- salePeriod 변수에 판매기간 넣음 -->
 								<c:set var="salePeriod" value="${item.file2.salePeriod }"/>
 								<c:choose>
 									<!-- servlet에서 today를 넘겨받음 -->
@@ -119,40 +130,19 @@
 									<c:otherwise>
 										<p style="color:#e74c3c; font-weight:bold;">판매종료</p>
 									</c:otherwise>
-								</c:choose>
-							</c:if> --%>
+								</c:choose> --%>
+								<p>판매 종료까지 2일</p>
+							</c:if>
 						</div>
 					</div>
+					
+					<c:if test="${status.index % 4 == 3 || status.last }">
+						</section>
+					</c:if>
 				</c:forEach>
-			</section>
 			<section class="row main-section">
 				<!-- 섹션 2 -->
-				<ul class="pagination">
-					<li class="page-item">
-						<a class="page-link" href="#">이전</a>
-						<%-- <a class="page-link" href="?cPage=&numPerPage=">이전</a> --%>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">1</a>
-						<%-- <a class="page-link" href="?cPage=&numPerPage=&postNo="></a> --%>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">2</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">3</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">4</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">5</a>
-					</li>
-					<li class="page-item">
-						<a class="page-link" href="#">다음</a>
-						<%-- <a class="page-link" href="?cPage=&numPerPage=&postNo=">다음</a> --%>
-					</li>
-				</ul>
+				${pageBar }
 			</section>
 			<section class="row main-section">
 				<!-- 섹션 3 -->
