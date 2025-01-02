@@ -2,6 +2,8 @@ package com.ttt.controller.board;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +22,6 @@ public class ToBoardListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LocalDate today = LocalDate.now();
 		request.setAttribute("today", today);
-
 		
 		request.getRequestDispatcher("/WEB-INF/views/board/boardList.jsp").forward(request, response);
 	}

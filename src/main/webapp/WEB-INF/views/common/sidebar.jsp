@@ -7,32 +7,32 @@
 
 <div class="side-container" style="width:60px">
 	<div class="container">
-		<div class="side-button">
+		<div class="side-button" data-category="6">
 			<img src="${path }/resources/images/common/fire.png" alt="인기글" class="side-img-icon"/>
 		</div>
 		<div class="side-btn-text">인기글</div>
 		
-		<div class="side-button">
+		<div class="side-button" data-category="5">
 			<img src="${path }/resources/images/common/exam.png" alt="n수생" class="side-img-icon">
 		</div>
 		<div class="side-btn-text">n수생</div>
 		
-		<div class="side-button">
+		<div class="side-button" data-category="4">
 			<img src="${path }/resources/images/common/school.png" alt="고등" class="side-img-icon">
 		</div>
 		<div class="side-btn-text">고등</div>
 		
-		<div class="side-button">
+		<div class="side-button" data-category="3">
 			<img src="${path }/resources/images/common/school.png" alt="중등" class="side-img-icon">
 		</div>
 		<div class="side-btn-text">중등</div>
 		
-		<div class="side-button">
+		<div class="side-button" data-category="2">
 			<img src="${path }/resources/images/common/kid.png" alt="초등" class="side-img-icon">
 		</div>
 		<div class="side-btn-text">초등</div>
 		
-		<div class="side-button">
+		<div class="side-button" data-category="1">
 			<img src="${path }/resources/images/common/kid.png" alt="미취학" class="side-img-icon">
 		</div>
 		<div class="side-btn-text">미취학</div>
