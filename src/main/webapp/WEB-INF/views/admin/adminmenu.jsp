@@ -132,7 +132,10 @@
 			<section>
 				<div>
 					<div>
+						<div style="display:flex; justify-content: space-between; align-items: center; width: 100%;">
 						<h2>공지사항 관리</h2>
+						<p id="writePostNotify" style="cursor:pointer;">+ 글쓰기</p>
+						</div>
 						<hr style="border:2px solid #fff6c2;">
 						<p>공지사항을 작성하거나 관리할 수 있습니다.</p>
 					</div>
@@ -173,6 +176,11 @@
 	// 회원 관리 카드
 	$(".mypage-card-container .mypage-card:nth-child(4)").click(function() {
 		location.assign("${path}/admin/manage/member");
+	});
+	
+	// 공지사항 작성
+	$("#writePostNotify").click(function() {
+		location.assign("${path}/admin/notify/write");
 	});
 </script>
 </body>
