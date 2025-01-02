@@ -37,17 +37,17 @@ public class AdminMenu extends HttpServlet {
 		    member.put("memberName", "관리자");
 
 		    // 기본 데이터 설정 - ERD 컬럼명 규칙 적용
-		    post.put("post_no", i);                      // 게시글 번호
-		    post.put("post_title", "공지사항 테스트 제목 " + i);  // 게시글 제목
+		    post.put("postNo", i);                      // 게시글 번호
+		    post.put("postTitle", "공지사항 테스트 제목 " + i);  // 게시글 제목
 		    post.put("member", member);              // 작성자 객체
-		    post.put("reg_date", new Date());            // 등록일
-		    post.put("view_count", (int)(Math.random() * 100));  // 조회수
-		    post.put("is_fix", i <= 2);                  // 상단고정 여부
-		    post.put("product_type", 0);                 // 상품 타입(0:공지사항)
+		    post.put("post", new Date());            // 등록일
+		    post.put("viewCount", (int)(Math.random() * 100));  // 조회수
+		    post.put("isFix", i <= 2);                  // 상단고정 여부
+		    post.put("productType", 0);                 // 상품 타입(0:공지사항)
 		    
 		    // 제목 다양화 (2번째, 4번째 게시글)
 		    if(i % 2 == 0) {
-		        post.put("post_title", "[필독] 2024년 " + (i/2) + "티꿀모아 공지사항입니다.. 반드시 확인해주세요.");
+		        post.put("postTitle", "[필독] 2024년 " + (i/2) + "티꿀모아 공지사항입니다.. 반드시 확인해주세요.");
 		    }
 		    
 		    posts.add(post);

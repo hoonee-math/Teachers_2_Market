@@ -231,21 +231,21 @@
 						</c:if>
 						<c:forEach var="post" items="${posts}">
 							<tr>
-								<td>${post.post_no}</td>
-								<td style="text-align: left; padding-left: 20px;">${post.post_title}</td>
-								<td>${post.member_id}</td>
-								<td><fmt:formatDate value="${post.reg_date}"
+								<td>${post.postNo}</td>
+								<td style="text-align: left; padding-left: 20px;">${post.postTitle}</td>
+								<td>${post.memberId}</td>
+								<td><fmt:formatDate value="${post.postDate}"
 										pattern="yyyy-MM-dd" /></td>
-								<td>${post.view_count}</td>
+								<td>${post.viewCount}</td>
 								<td>
 									<button type="button"
-										class="fix-toggle ${post.is_fix ? 'fixed' : ''}"
-										onclick="toggleFix(${post.post_no}, this)">
-										${post.is_fix ? '고정' : '일반'}</button>
+										class="fix-toggle ${post.isFix ? 'fixed' : ''}"
+										onclick="toggleFix(${post.postNo}, this)">
+										${post.isFix ? '고정' : '일반'}</button>
 								</td>
 								<td>
-									<button type="button" onclick="editNotice(${post.post_no})">수정</button>
-									<button type="button" onclick="deleteNotice(${post.post_no})">삭제</button>
+									<button type="button" onclick="editNotice(${post.postNo})">수정</button>
+									<button type="button" onclick="deleteNotice(${post.postNo})">삭제</button>
 								</td>
 							</tr>
 						</c:forEach>
