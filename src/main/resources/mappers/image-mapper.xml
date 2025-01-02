@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="image2">
+	<resultMap id="imageMap" type="image2">
+		<id column="img_no" property="imgNo"/>
+		<result column="img_seq" property="imgSeq"/>
+		<result column="oriname" property="oriname"/>
+		<result column="renamed" property="renamed"/>
+		<result column="post_no" property="postNo"/>
+		<result column="review_no" property="reviewNo"/>
+	</resultMap>
+
+
+</mapper>

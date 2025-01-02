@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Image2 {
 	private int imgNo;
 	private int imgSeq;
-	private Post2 post;
+	private int postNo;
 	private Review2 review;
 	private String oriname;
 	private String renamed;

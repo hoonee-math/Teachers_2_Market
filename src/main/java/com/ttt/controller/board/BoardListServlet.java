@@ -27,11 +27,11 @@ public class BoardListServlet extends HttpServlet {
 		String categoryNo = request.getParameter("categoryNo");
 		if(categoryNo == null) categoryNo = "1";
 		
-		int cPage = 0;
+		int cPage = 1;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
 		} catch (NumberFormatException e) {
-			cPage = 0;
+			cPage = 1;
 			e.printStackTrace();
 		}
 		
@@ -63,7 +63,7 @@ public class BoardListServlet extends HttpServlet {
 					.append(request.getContextPath())
 					.append("/board/list?categoryNo=")
 					.append(categoryNo)
-					.append("$cPage=")
+					.append("&cPage=")
 					.append(pageStart - 1)
 					.append("\">이전</a></li>");
 		}
