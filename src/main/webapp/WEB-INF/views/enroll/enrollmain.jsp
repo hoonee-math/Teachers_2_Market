@@ -246,10 +246,9 @@ input[type="radio"]:first-child {
 							<tr>
 								<th>회원구분 *</th>
 								<td><input type="radio" name="eduType" id="school"
-									value="1" checked> <label for="school">학교 교사</label> 
-									<input type="radio" name="eduType" id="institute" value="2"> <label
-									for="institute">학원 강사</label>
-								</td>
+									value="1" checked> <label for="school">학교 교사</label> <input
+									type="radio" name="eduType" id="institute" value="2"> <label
+									for="institute">학원 강사</label></td>
 							</tr>
 							<tr class="school-name">
 								<th>학교/학원 이름 *</th>
@@ -302,6 +301,7 @@ $("#cancle").click(function() {
 $(".logo-container").click(function() {
     location.assign("${path}");
 });
+//학원강사 클릭시 이벤튼 발동
 $('input[name="eduType"]').on('change', function() {
     const selectedType = $(this).val();
     const regionSelect = $('#region');
