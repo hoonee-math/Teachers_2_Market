@@ -54,6 +54,7 @@
 					<p><strong>[공지] 이것은 두번째 공지사항입니다.</strong></p>
 				</div>
 			</section>
+			<p id="categoryTitle">${categoryTitle }</p>
 			<section class="row card-section">
 				<!-- 나중에 ajax 통신할 때는 append 이용해서 진행해야함 -->
 				<c:forEach var="i" begin="1" end="4">
