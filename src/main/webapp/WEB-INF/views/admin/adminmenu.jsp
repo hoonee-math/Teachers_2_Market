@@ -230,26 +230,24 @@
 							</tr>
 						</c:if>
 						<c:forEach var="post" items="${posts}">
-							<c:if test="${post.productType == 0}">
-								<tr>
-									<td>${post.id}</td>
-									<td style="text-align: left; padding-left: 20px;">${post.title}</td>
-									<td>${post.writer}</td>
-									<td><fmt:formatDate value="${post.regDate}"
-											pattern="yyyy-MM-dd" /></td>
-									<td>${post.viewCount}</td>
-									<td>
-										<button type="button"
-											class="fix-toggle ${post.isFix ? 'fixed' : ''}"
-											onclick="toggleFix(${post.id}, this)">
-											${post.isFix ? '고정' : '일반'}</button>
-									</td>
-									<td>
-										<button type="button" onclick="editNotice(${post.id})">수정</button>
-										<button type="button" onclick="deleteNotice(${post.id})">삭제</button>
-									</td>
-								</tr>
-							</c:if>
+							<tr>
+								<td>${post.post_no}</td>
+								<td style="text-align: left; padding-left: 20px;">${post.post_title}</td>
+								<td>${post.member_id}</td>
+								<td><fmt:formatDate value="${post.reg_date}"
+										pattern="yyyy-MM-dd" /></td>
+								<td>${post.view_count}</td>
+								<td>
+									<button type="button"
+										class="fix-toggle ${post.is_fix ? 'fixed' : ''}"
+										onclick="toggleFix(${post.post_no}, this)">
+										${post.is_fix ? '고정' : '일반'}</button>
+								</td>
+								<td>
+									<button type="button" onclick="editNotice(${post.post_no})">수정</button>
+									<button type="button" onclick="deleteNotice(${post.post_no})">삭제</button>
+								</td>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -300,13 +298,13 @@
 
 <!-- 상단고정 토글을 위한 JavaScript -->
 <script>
-	function toggleFix(noticeId, btn) {
+	function toggleFix(postNo, btn) {
 		// AJAX 요청으로 상단고정 상태 토글
 		$.ajax({
 			url : 'toggleNoticeFix.do',
 			type : 'POST',
 			data : {
-				noticeId : noticeId
+	            postNo: postNo
 			},
 			success : function(response) {
 				if (response.success) {
@@ -324,14 +322,14 @@
 	}
 
 	// 공지사항 수정 함수
-	function editNotice(noticeId) {
-		location.href = 'editNotice.do?id=' + noticeId;
+	function editNotice(postNo) {
+		location.href = 'editNotice.do?post_no=' + postNo;
 	}
 
 	// 공지사항 삭제 함수
-	function deleteNotice(noticeId) {
+	function deleteNotice(postNo) {
 		if (confirm('정말 삭제하시겠습니까?')) {
-			location.href = 'deleteNotice.do?id=' + noticeId;
+			location.href = 'deleteNotice.do?post_no=' + postNo;
 		}
 	}
 </script>
