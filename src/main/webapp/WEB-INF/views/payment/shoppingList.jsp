@@ -86,7 +86,7 @@
 								<div>
 									<input type="text" value="구매 글 제목" readOnly><br>
 									<input type="text" value="₩ 10,000원" readOnly><br>
-									<input type="text" value="배송비 3,000원" readOnly><br>
+									<input type="text" value="파일전송 상품" readOnly><br>
 								</div>
 							</td>
 						</tr>
