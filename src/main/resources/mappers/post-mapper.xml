@@ -28,4 +28,12 @@
 		</association>
 		<collection property="images" resultMap="image.imageMap"/>
 	</resultMap>
+	
+	<select id="selectPostByCategory" resultMap="postMap" parameterType="map">
+		SELECT *
+		FROM (SELECT ROWNUM AS RNUM, P.*
+			  FROM (SELECT * FROM POST2 WHERE CATEGORY_NO=#{categoryNo})P
+			 )
+		WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
 </mapper>

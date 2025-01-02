@@ -12,7 +12,7 @@ public class BoardDao {
 		int cPage = param.get("cPage");
 		int categoryNo = param.get("categoryNo");
 		
-		return session.selectList("board2.selectPostByCategory",
+		return session.selectList("post2.selectPostByCategory",
 				Map.of("categoryNo", categoryNo, "start", (cPage-1)*16+1, "end", cPage*16));
 	}
 
