@@ -104,7 +104,7 @@
 				<!-- 로그인 페이지로 이동 -->
 				<a href="${path}/member/login">로그인 페이지로 이동</a>
 				<a href="${path}/member/logincheck">약관동의 페이지로 이동</a>
-				<a href="${path}/member/enroll">회원가입 정보 입력 페이지로 이동</a>
+				<a href="${path}/member/enrollmain">회원가입 정보 입력 페이지로 이동</a>
 			</section>
 		</div>
 	</div>

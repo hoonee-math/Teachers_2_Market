@@ -37,7 +37,7 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		height: 900px;
+		height: 970px;
 		padding: 20px;
 	}
 	.main-content {
@@ -85,10 +85,21 @@
 	.login-mustcheck {
 		color : red;
 	}
-	#gomain {
-		text-decoration : none;
-		color : #cccccc;
-		margin-right: 30px;
+	.main-section {
+		display: flex;
+		flex-direction: column;
+	}
+	#agree-button {
+		display: flex;
+		justify-content: center;
+		margin-top: 20px;
+		padding: 20px;
+		gap: 30px;
+	}
+	#logincheck-inner-header {
+		display:flex;
+		justify-content: center;
+		align-items:center;
 	}
     </style>
 </head>
@@ -103,7 +114,8 @@
 			<section class="row main-section">
 				<!-- 섹션 1 -->
 				<div id="logincheck-inner-container">
-					<div>
+					<div id="logincheck-inner-header">
+						<img class="logo-container" src="${path}/resources/images/logo(NoBackGround).png" style="width:100px; height:100px;">
 						<p id="login-font">Join</p>
 					</div>
 					<div id=check-line>
@@ -348,15 +360,32 @@
 						</div>
 					</div>
 				</div>
-				<div id="login-check-btn">
-					<a href="" id="gomain">메인으로</a>
-					<button type="submit" id="login-next" style="cursor: pointer;">다음으로</button>
+				<div id="agree-button">
+				<div id="canclediv">
+					<input type="reset" id="cancle" style="cursor: pointer; height:50px; border:none;" value="메인으로">
 				</div>
+				<div id="joindiv">
+					<input type="submit" style="cursor: pointer; height:50px; background-color:#fffadd; border:none;" value="회원가입">
+				</div>
+			</div>
 			</section>
 		</div>
 	</div>
 </main>
-
+<script>
+//서블릿에서 유효성 검사 후 알람 띄우기
+	<c:if test="${errorMessage != null}">
+		alert('${errorMessage}');
+	</c:if>
+	//메인으로 버튼 클릭시 메인페이지로 이동
+	$("#cancle").click(function() {
+		location.assign("${path}/home");
+	});
+	//로고 버튼 클릭시 메인페이지로 이동
+	$(".logo-container").click(function() {
+		location.assign("${path}");
+	});
+</script>
 <!-- 푸터 include -->
 <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 <!-- wrap 태그 종료 -->
