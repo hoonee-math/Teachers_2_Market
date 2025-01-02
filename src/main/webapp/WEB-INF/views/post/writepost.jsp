@@ -62,9 +62,9 @@
 				<div class="section-container">
 					<h3>판매 유형</h3>
 					<div class="type-selector">
-						<input type="radio" id="typeProduct" name="type" value="product" checked>
+						<input type="radio" id="typeProduct" name="productType" value="1" checked>
 						<label for="typeProduct">상품</label>
-						<input type="radio" id="typeFile" name="type" value="file">
+						<input type="radio" id="typeFile" name="ProductType" value="2">
 						<label for="typeFile">파일</label>
 					</div>
 				</div>
