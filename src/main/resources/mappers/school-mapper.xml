@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="school">
+
+	<resultMap id="schoolMap" type="school12">
+		<id column="school_no" property="schoolNo"/>
+		<result column="region" property="region"/>
+		<result column="district" property="district"/>
+		<result column="school_name" property="schoolName"/>
+		<result column="school_type" property="schoolType"/>
+		<result column="region_code" property="regionCode"/>
+		<result column="standard_code" property="standardCode"/>
+	</resultMap>
+	
+</mapper>

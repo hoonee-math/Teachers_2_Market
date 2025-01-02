@@ -50,9 +50,6 @@
 		</c:if>
 		
 		<!-- 개발 과정 중 확인용 버튼들, 개발 완료 후 삭제 -->
-		<div class="side-button" data-path="/board/list"></div>
-		<div class="side-btn-text">임시 게시판</div>
-		
 		<div class="side-button" data-path="/payment/shoppinglist"></div>
 		<div class="side-btn-text">임시 장바구니</div>
 		
