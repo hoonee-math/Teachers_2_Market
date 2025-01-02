@@ -45,8 +45,18 @@
 		<jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
         
 		<div class="main-content">
-			<p><img width="20px" src="${path}/resources/images/board/folder.png"> 내 자료실 </p>
+			<p><img width="20px" src="${path}/resources/images/board/folder.png"> 구매 내역 </p>
 			<div id="main-box">
+			
+			<!-- 구매 유형 선택 -->
+			<section class="main-section">
+				<div class="type-selector">
+					<input type="radio" id="typeFile" name="type" value="file" checked>
+					<label for="typeFile">파일</label>
+					<input type="radio" id="typeProduct" name="type" value="product">
+					<label for="typeProduct">상품</label>
+				</div>
+			</section>
 			<!-- 상품 여러개 출력할 땐 section 전체를 추가해야함 -->
 			<section class="row main-section">
 				<!-- 섹션 1 -->
