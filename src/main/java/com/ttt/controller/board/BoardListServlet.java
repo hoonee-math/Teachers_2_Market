@@ -2,8 +2,6 @@ package com.ttt.controller.board;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +10,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.ttt.dto.Post2;
+import com.ttt.service.BoardService;
 
 @WebServlet("/board/list")
 public class BoardListServlet extends HttpServlet {
@@ -22,70 +23,40 @@ public class BoardListServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		//더미데이터 생성
-		List<Map<String, Object>> posts = new ArrayList<>();
-		
-		for (int i=0; i<100; i++) {
-			Map<String, Object> post = new HashMap<>();
-			Map<String, Object> member = new HashMap<>();
-			
-			member.put("memberNo", 0);
-			member.put("memberName", "나는 작성자!");
-			
-			post.put("postNo", i);
-			post.put("postTitle", "게시판 " + i + "번째 더미데이터");
-			post.put("postContent", i + "번째 더미데이터 글의 내용입니당");
-			post.put("member2", member);
-			post.put("viewCount", (int)(Math.random()*100));
-			post.put("productType", (int)(Math.random()*2)+1);
-			post.put("categoryNo", (int)(Math.random()*6)+1);
-			post.put("subjectNo", (int)(Math.random()*7)+1);
-			
-			posts.add(post);
-		}
-		
-		
-		
-		//페이징 처리를 위한 정보
+		//파라미터 처리 
 		String categoryNo = request.getParameter("categoryNo");
 		if(categoryNo == null) categoryNo = "1";
-
-		int cPage = 1;
+		
+		int cPage = 0;
 		try {
 			cPage = Integer.parseInt(request.getParameter("cPage"));
 		} catch (NumberFormatException e) {
+			cPage = 0;
 			e.printStackTrace();
-			cPage=1;
 		}
 		
-		final String categoryNoFinal = categoryNo;
-		List<Map<String, Object>> filteredPosts = posts.stream()
-			    .filter(post -> {
-			        Object category = post.get("categoryNo");
-			        return category != null && category.toString().equals(categoryNoFinal);
-			    })
-			    .toList();
-
 		int numPerPage = 16;
-		int totalData = filteredPosts.size();
-		int totalPage = (int)Math.ceil((double)totalData/numPerPage);
 		
-		int start = (cPage-1) * numPerPage;
-		int end = Math.min(start+numPerPage, totalData);
-		List<Map<String,Object>> currentPageData = filteredPosts.subList(start, end);
+		//게시글 조회 
+		Map<String, Integer> param = Map.of(
+				"cPage",cPage,
+				"categoryNo",Integer.parseInt(categoryNo));
 		
+		List<Post2> posts = new BoardService().selectPostByCategory(param);
+		
+		//페이징 처리
 		int pageBarSize = 5;
+		int totalData = posts.size();
+		int totalPage = (int)Math.ceil((double)totalData/numPerPage);
+
 		int pageStart = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
-		int pageEnd = pageStart + pageBarSize - 1;
-		if (pageEnd > totalPage) {
-		    pageEnd = totalPage;
-		}
+		int pageEnd = Math.min(pageStart + pageBarSize - 1, totalPage);
 		
+		//페이지바 생성
 		StringBuilder pageBar = new StringBuilder();
 		pageBar.append("<ul class=\"pagination\">");
 		
-		//이전 버튼 생성
+			//이전 버튼 생성
 		if(pageStart != 1) {
 			pageBar.append("<li class=\"page-item\">")
 					.append("<a class=\"page-link\" href=\"")
@@ -97,7 +68,7 @@ public class BoardListServlet extends HttpServlet {
 					.append("\">이전</a></li>");
 		}
 		
-		//페이지 번호 생성
+			//페이지 번호 생성
 		for (int i=pageStart; i<=pageEnd; i++) {
 			if(i==cPage) {
 				pageBar.append("<li class=\"page-item\">")
@@ -118,7 +89,7 @@ public class BoardListServlet extends HttpServlet {
 			}
 		}
 		
-		//다음 페이지
+			//다음 페이지
 		if(pageEnd != totalPage) {
 			pageBar.append("<li class=\"page-item\">")
 					.append("<a class=\"page-link\" href=\"")
@@ -131,7 +102,7 @@ public class BoardListServlet extends HttpServlet {
 		}
 		pageBar.append("</ul>");
 		
-		request.setAttribute("posts", currentPageData);
+		request.setAttribute("posts", posts);
 		request.setAttribute("pageBar", pageBar.toString());
 
 		

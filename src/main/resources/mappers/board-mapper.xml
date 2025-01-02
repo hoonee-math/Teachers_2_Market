@@ -2,4 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="board2">
 	
+	<select id="selectPostByCategory" resultMap="post2.postMap" parameterType="map">
+		SELECT *
+		FROM (SELECT ROWNUM AS RNUM, P.*
+			  FROM (SELECT * FROM POST2 WHERE CATEGORY_NO=#{categoryNo})P
+			 )
+		WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
 </mapper>
