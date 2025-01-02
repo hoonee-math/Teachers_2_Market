@@ -43,11 +43,11 @@
 	.main-content {
 		margin-top:0px;
 		background: #fff;
-	    padding: 45px 30px;
+	    padding: 30px 30px;
 	    border-radius: 30px;
 	    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.3);
 	    width: 550px;
-	    height : 400px;
+	    height : 450px;
 	    text-align: center;
 	}
 	#login-font {

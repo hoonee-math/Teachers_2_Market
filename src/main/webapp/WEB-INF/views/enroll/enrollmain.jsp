@@ -37,6 +37,7 @@
 	button, input, select, td, textarea, th {
 	    font-size: 14px;
 	    line-height: 1.5;
+	   	width:90px;
 	    font-family: 'Malgun Gothic','맑은 고딕',sans-serif;
 	    color: #222;
 	}
