@@ -17,6 +17,7 @@
 	<typeAliases>
 		<typeAlias type="com.ttt.dto.Member2" alias="member2"/>
 		<typeAlias type="com.ttt.dto.Post2" alias="post2"/>
+		<typeAlias type="com.ttt.dto.Board2" alias="board2"/>
 	</typeAliases>
 	
 	
@@ -37,6 +38,7 @@
 	<mappers>
 		<mapper resource="/mappers/member-mapper.xml"/>
 		<mapper resource="/mappers/post-mapper.xml"/>
+		<mapper resource="/mappers/board-mapper.xml"/>
 	</mappers>
 	
 </configuration>
