@@ -45,6 +45,7 @@
 		<collection property="postImg" resultMap="image2.imageMap"/>
 	</resultMap>
 	
+	<!-- boardList.jsp에서 사용할 정보들 -->
 	<select id="selectPostByCategory" resultMap="postMap" parameterType="map">
 	    SELECT P.*, M.*, PR.*, F.*, I.*
 	    FROM (SELECT ROWNUM AS RNUM, P.*
@@ -56,14 +57,27 @@
 	    LEFT JOIN IMAGE2 I ON P.POST_NO = I.POST_NO
 	    WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
-	
+	<!-- boardList.jsp에서 페이징바에 사용할 전체 게시글의 개수 -->
 	<select id="getTotalCount" parameterType="int" resultType="int">
 		SELECT COUNT(*)
 		FROM POST2
 		WHERE CATEGORY_NO = #{categoryNo}
 	</select>
-	
+	<!-- boardList.jsp에서 공지사항에 사용할 정보 -->
 	<select id="selectNotice" resultMap="postMap">
 		SELECT * FROM post2 WHERE PRODUCT_TYPE=0 AND IS_FIX=1
+	</select>
+	<!-- Post2 객체 불러오기 -->
+	<select id="selectPostJoinAll" parameterType="_int" resultMap="postMap">
+		SELECT P.*, M.*, PR.*, F.*, I.*
+	    FROM (SELECT * FROM POST2 WHERE post_no=#{postNo}) P
+	    LEFT JOIN MEMBER2 M ON P.MEMBER_NO = M.MEMBER_NO
+	    LEFT JOIN PRODUCT2 PR ON P.POST_NO = PR.POST_NO
+	    LEFT JOIN FILE2 F ON P.POST_NO = F.POST_NO
+	    LEFT JOIN IMAGE2 I ON P.POST_NO = I.POST_NO
+	</select>
+	<!-- viewPost.jsp에서 이미지 불러오기 -->
+	<select id="selectImageNo" parameterType="_int" resultMap="image2.imageMap">
+		SELECT * FROM IMAGE1 WHERE POST_NO=#{postNo}
 	</select>
 </mapper>

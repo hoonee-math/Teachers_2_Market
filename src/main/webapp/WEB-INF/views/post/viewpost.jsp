@@ -81,36 +81,56 @@
 				<!-- 상품 정보 영역 -->
 				<div class="post-info">
 					<!-- 판매자 정보 -->
-					<div class="post-seller-nick">
-						${post.member_memberNick }
+					<div class="post-seller-id">
+						${post.member.memberId }
 					</div>
 					<div class="post-title">
 						${post.postTitle }			
 					</div>
 					<!-- 상품/파일 가격 -->
 					<div class="post-item-price">
-						<%-- <c:set var="salePeriod" value="${'2025-01-25'}" /> --%> <!-- 판매기간이 지나면 판매 종료로 바귐 -->
-						<c:choose>
-							<c:when test="${post.stockCount > 0 || salePeriod >= currentDate}"> <!-- 판매 종료로 바뀌는 조건문, *** 서버에서 두 값은 초기화 후에 저장시켜야함. -->
-								<c:if test="${isFree eq 0 }">
-									<p><fmt:formatNumber value="${post.productPrice }" pattern="###,###,###"/>
-									원</p>
-								</c:if>
-								<c:if test="${isFree eq 1 }">
-									<p style="color: #2ecc71;">무료나눔</p>
-								</c:if>
-							</c:when>
-							<c:otherwise>
-								<p style="color: #e74c3c;">판매종료</p>
-							</c:otherwise>
-						</c:choose>
+						<c:if test="${post.productType==1 }">
+							<c:set var="stockCount" value="${post.product2.stockCount }"/>
+							<c:choose>
+									<c:when test="${stockCount>0 }">
+										<c:set var="price" value="${post.product2.productPrice }"/>
+										<c:if test="${price>0 }">
+											<p>₩ <fmt:formatNumber value="${price }" pattern="###,###,###"/></p>
+										</c:if>
+										<c:if test="${price==0 }">
+											<p style="color:#2ecc71; font-weight:bold;">무료나눔</p>
+										</c:if>
+									</c:when>
+									<c:otherwise>
+										<p style="color:#e74c3c; font-weight:bold;">판매종료</p>
+									</c:otherwise>
+								</c:choose>
+							</c:if>
+					
+							<c:if test="${post.productType==2 }">
+								<c:set var="salePeriod" value="${post.file2.salePeriod }"/>
+								<c:choose>
+									<c:when test="${salePeriod.compareTo(today) >= 0 }">
+										<c:set var="price" value="${post.file2.filePrice }"/>
+										<c:if test="${price>0 }">
+											<p>₩ <fmt:formatNumber value="${price }" pattern="###,###,###"/></p>
+										</c:if>
+										<c:if test="${price==0 }">
+											<p style="color:#2ecc71; font-weight:bold;">무료나눔</p>
+										</c:if>
+									</c:when>
+									<c:otherwise>
+										<p style="color:#e74c3c; font-weight:bold;">판매종료</p>
+									</c:otherwise>
+								</c:choose>
+							</c:if>
 					</div>
 					<!-- 배송 정보 -->
 					<div class="post-delivery-info">
-						<c:if test="${post.hasDeliveryFee eq 0}">
+						<c:if test="${post.product2.hasDeliveryFee eq 0}">
 							<p>무료배송</p>
 						</c:if>
-						<c:if test="${post.hasDeliveryFee eq 1}">
+						<c:if test="${post.product2.hasDeliveryFee eq 1}">
 							<p>
 								배송비: 
 								<fmt:formatNumber value="${deliveryFee}" pattern="#,###" />

@@ -95,8 +95,10 @@
 							<col style="width: 50px;">
 							<col style="width: 60px;">
 							<col style="width: 60px;">
-							<col style="width: 200px;">
-							<col style="width: 100px;">
+							<col style="width: 180px;">
+							<col style="width: 60px;">
+							<col style="width: 60px;">
+							<col style="width: 60px;">
 							<col style="width: 60px;">
 							<col style="width: 30px;">
 						</colgroup>
@@ -109,6 +111,8 @@
 									<th>아이디</th>
 									<th>이름</th>
 									<th>이메일</th>
+									<th>신고접수</th>
+									<th>유효신고</th>
 									<th>경고횟수</th>
 									<th>가입일</th>
 									<th>상태</th>
@@ -131,6 +135,8 @@
 									<td>${m.memberId}</td>
 									<td>${m.memberName}</td>
 									<td>${m.email}</td>
+									<td class="warning-count">${m.reportCheckCount}</td>
+									<td class="warning-count">${m.reportValidCount}</td>
 									<td class="warning-count">${m.warningCount}</td>
 									<td>
 										<fmt:formatDate value="${m.enrollDate}" pattern="yyyy-MM-dd" />
