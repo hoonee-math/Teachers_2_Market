@@ -37,15 +37,18 @@ public class BoardListServlet extends HttpServlet {
 		int numPerPage = 16;
 		
 		//게시글 조회 
+		BoardService service = new BoardService();
 		Map<String, Integer> param = Map.of(
 				"cPage",cPage,
 				"categoryNo",Integer.parseInt(categoryNo));
 		
-		List<Post2> posts = new BoardService().selectPostByCategory(param);
+		List<Post2> posts = service.selectPostByCategory(param);
+		
+		//전체 게시글 수 조회
+		int totalData = service.getTotalCount(Integer.parseInt(categoryNo));
 		
 		//페이징 처리
 		int pageBarSize = 5;
-		int totalData = posts.size();
 		int totalPage = (int)Math.ceil((double)totalData/numPerPage);
 
 		int pageStart = ((cPage - 1) / pageBarSize) * pageBarSize + 1;
@@ -71,9 +74,9 @@ public class BoardListServlet extends HttpServlet {
 		for (int i=pageStart; i<=pageEnd; i++) {
 			if(i==cPage) {
 				pageBar.append("<li class=\"page-item\">")
-						.append("<a class=\"page-link\">")
+						.append("<span class=\"page-link\">")
 						.append(i)
-						.append("</a></li>");
+						.append("</span></li>");
 			} else {
 				pageBar.append("<li class=\"page-item\">")
 						.append("<a class=\"page-link\" href=\"")
@@ -88,7 +91,7 @@ public class BoardListServlet extends HttpServlet {
 			}
 		}
 		
-			//다음 페이지
+			//다음 페이지 버튼
 		if(pageEnd != totalPage) {
 			pageBar.append("<li class=\"page-item\">")
 					.append("<a class=\"page-link\" href=\"")

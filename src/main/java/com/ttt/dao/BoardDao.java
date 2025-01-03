@@ -17,5 +17,9 @@ public class BoardDao {
 	    
 	    return result;
 	}
+	
+	public int getTotalCount(SqlSession session, int categoryNo) {
+		return session.selectOne("post2.getTotalCount", categoryNo);
+	}
 
 }
