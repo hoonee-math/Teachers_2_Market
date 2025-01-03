@@ -27,4 +27,12 @@ public class BoardService {
 		session.close();
 		return result;
 	}
+	
+	public List<Post2> selectNotice() {
+		SqlSession session = getSession();
+		List<Post2> notice = dao.selectNotice(session);
+		session.close();
+		
+		return notice;
+	}
 }

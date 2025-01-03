@@ -21,5 +21,9 @@ public class BoardDao {
 	public int getTotalCount(SqlSession session, int categoryNo) {
 		return session.selectOne("post2.getTotalCount", categoryNo);
 	}
+	
+	public List<Post2> selectNotice(SqlSession session) {
+		return session.selectList("post2.selectNotice");
+	}
 
 }

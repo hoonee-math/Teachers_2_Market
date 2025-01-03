@@ -14,11 +14,17 @@
 		<result column="birthday" property="birthday"/>
 		<result column="edu_type" property="eduType"/>
 		<result column="subject_no" property="subjectNo"/>
+		<result column="WARNING_COUNT" property="warningCount"/>
+		<result column="REPORT_CHECKE_COUNT" property="reportCheckCount"/>		
+		<result column="REPORT_VALID_COUNT" property="reportValidCount"/>		
 	</resultMap>
  
  	<select id="selectAllMember" resultMap="memberMap">
-		SELECT MEMBER_NO, MEMBER_NAME, MEMBER_ID, EMAIL, PHONE, ENROLL_DATE
-		FROM MEMBER2 LEFT JOIN WARNING2 USING (MEMBER_NO)
+		SELECT MEMBER_NO, MEMBER_ID, MEMBER_NAME, EMAIL, ENROLL_DATE,
+			(SELECT COUNT(*) FROM WARNING2 W WHERE M.MEMBER_NO=W.MEMBER_NO) AS WARNING_COUNT,
+			(SELECT COUNT(*) FROM REPORT2 R WHERE M.MEMBER_NO=R.AUTHOR_NO AND R.IS_CHECKED=0) AS REPORT_CHECKE_COUNT,
+			(SELECT COUNT(*) FROM REPORT2 R WHERE M.MEMBER_NO=R.AUTHOR_NO AND R.IS_CHECKED=1) AS REPORT_VALID_COUNT
+		FROM MEMBER2 M
  	</select>
 	
 </mapper>
