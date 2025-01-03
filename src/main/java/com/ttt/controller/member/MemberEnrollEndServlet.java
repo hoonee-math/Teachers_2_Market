@@ -43,7 +43,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 			birthday = Integer.parseInt(request.getParameter("birthday"));
 			subjectNo = Integer.parseInt(request.getParameter("subjectNo"));
 		}catch(Exception e) {
-			e.printStackTrace();
+			System.out.println("파싱오류");
 		};
 		
 		Member2 m = Member2.builder()
