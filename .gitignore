@@ -38,4 +38,5 @@ Servers/
 **/Servers/
 
 # 민감 정보 저장 위치
-driver.propertie
+driver.properties
+src/main/resources/driver.properties
