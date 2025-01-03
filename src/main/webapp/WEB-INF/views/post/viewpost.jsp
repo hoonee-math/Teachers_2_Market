@@ -394,28 +394,32 @@
 		
 		// 장바구니 버튼 클릭
 		$('.cart-btn').click(function() {
+			//로그인 체크
+			if (!$('#memberNo').val()) {
+				alert("로그인이 필요한 서비스입니다.");
+				location.href = "{path}/member/login";
+				return;
+			}
 			//현재 페이지에서 필요한 데이터 가져오기
 			const postNo = $('#postNo').val();
 			const memberNo = $('#memberNo').val();
 			
-			const url = '/post/toshoppinglist';
-			
-			const data = {
-				postNo: postNo,
-				memberNo: memberNo
-			};
-			
 			$.ajax({
-				url: url,
+				url: "${path}/post/toshoppinglist",
 				type: 'POST',
-				data: data,
+				data: {
+					postNo: postNo,
+					memberNo: memberNo
+				},
 				success: function(response) {
-					console.log('상품이 추가됨 : ', response);
-					alert('장바구니에 추가되었습니다!');
+					if (response.success) {
+						alert('장바구니에 추가되었습니다!');
+					} else {
+						alert(response.message || '장바구니 추가에 실패하였습니다.');
+					}
 				},
 				error: function(xhr, status, error) {
-					console.log("상품 추가 실패함 : ", error);
-					alert('장바구니 추가에 실패하였습니다.');
+					alert('장바구니 추가 중 오류가 발생하였습니다.');
 				}
 			});
 		});
