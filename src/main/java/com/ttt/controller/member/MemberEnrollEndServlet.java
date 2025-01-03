@@ -44,7 +44,15 @@ public class MemberEnrollEndServlet extends HttpServlet {
 				.eduType(eduType)
 				.build();
 		
+		//db에 저장하기!
+		String msg, loc="/";
 		
+		try {
+			int result = new Member2Service().
+		}catch {
+			
+			
+		}
 		
 		
 		
