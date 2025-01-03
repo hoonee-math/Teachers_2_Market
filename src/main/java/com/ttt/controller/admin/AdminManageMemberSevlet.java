@@ -40,35 +40,37 @@ public class AdminManageMemberSevlet extends HttpServlet {
 	        numPerPage = 5; // 기본값 5명씩 출력
 	    }
 	    
-	    // 더미데이터 생성 (30명)
-	    List<Map<String,Object>> members2 = new ArrayList<>();
-	    for(int i=1; i<=30; i++) {
-	        Map<String,Object> member = new HashMap<>();
-	        member.put("memberNo", i);
-	        member.put("memberId", "user" + i);
-	        member.put("memberName", "사용자" + i);
-	        member.put("email", "user" + i + "@example.com");
-	        member.put("warningCount", (int)(Math.random() * 3));  // 0~2 사이 랜덤 경고횟수
-	        member.put("enrollDate", new java.sql.Date(System.currentTimeMillis())); 
-	        member.put("isDeleted", 0);
-	        members2.add(member);
-	    }
+//	    // 더미데이터 생성 (30명)
+//	    List<Map<String,Object>> members2 = new ArrayList<>();
+//	    for(int i=1; i<=30; i++) {
+//	        Map<String,Object> member = new HashMap<>();
+//	        member.put("memberNo", i);
+//	        member.put("memberId", "user" + i);
+//	        member.put("memberName", "사용자" + i);
+//	        member.put("email", "user" + i + "@example.com");
+//	        member.put("warningCount", (int)(Math.random() * 3));  // 0~2 사이 랜덤 경고횟수
+//	        member.put("enrollDate", new java.sql.Date(System.currentTimeMillis())); 
+//	        member.put("isDeleted", 0);
+//	        members2.add(member);
+//	    }
 	    
-	    List<Member2> members= new AdminMemberService().selectAllMember();
+	    List<Member2> allMembers= new AdminMemberService().selectAllMember();
+	    System.out.println("DB 실행 완료 : 리스트 출력 -> "+allMembers.toString());
 	    
 	    // 페이징 처리
-	    int totalData = members.size();
+	    int totalData = allMembers.size();
 	    int totalPage = (int)Math.ceil((double)totalData/numPerPage);
 	    int pageBarSize = 5;
 	    int startPage = ((cPage-1)/pageBarSize) * pageBarSize + 1;
 	    int endPage = startPage + pageBarSize - 1;
 	    if(endPage > totalPage) endPage = totalPage;
-	    
-	    // 현재 페이지에 해당하는 데이터만 추출
+
+	    // 현재 페이지 데이터 범위 계산
 	    int start = (cPage-1) * numPerPage;
-	    int end = start + numPerPage;
-	    if(end > totalData) end = totalData;
-	    List<Map<String,Object>> currentPageMembers = members.subList(start, end);
+	    int end = Math.min(start + numPerPage, totalData);
+	    
+	    List<Member2> members = allMembers.subList(start, end);
+//		List<Map<String,Object>> currentPageMembers = members.subList(start, end);
 	    
 	    // 페이지바 HTML 생성
 	    StringBuilder pageBar = new StringBuilder();
@@ -96,7 +98,7 @@ public class AdminManageMemberSevlet extends HttpServlet {
 	    pageBar.append("</ul>");
 	    
 	    // request에 데이터 저장
-	    request.setAttribute("members", currentPageMembers);
+	    request.setAttribute("members", members); // 전체 리스트 전달
 	    request.setAttribute("pageBar", pageBar.toString());
 		
 		request.getRequestDispatcher("/WEB-INF/views/admin/manageMember.jsp").forward(request, response);
