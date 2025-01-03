@@ -14,5 +14,9 @@
 		<result column="edu_type" property="eduType"/>
 		<result column="subject_no" property="subjectNo"/>
 	</resultMap>
-  
+ 
+ 	<select id="selectAllMember" resultMap="memberMap">
+ 		SELECT * F
+ 	</select>
+	
 </mapper>
