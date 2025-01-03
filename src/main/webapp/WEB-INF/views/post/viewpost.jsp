@@ -82,7 +82,7 @@
 				<div class="post-info">
 					<!-- 판매자 정보 -->
 					<div class="post-seller-id">
-						${post.member_memberId }
+						${post.member.memberId }
 					</div>
 					<div class="post-title">
 						${post.postTitle }			
@@ -91,9 +91,9 @@
 					<div class="post-item-price">
 						<%-- <c:set var="salePeriod" value="${'2025-01-25'}" /> --%> <!-- 판매기간이 지나면 판매 종료로 바귐 -->
 						<c:choose>
-							<c:when test="${post.stockCount > 0 || salePeriod >= currentDate}"> <!-- 판매 종료로 바뀌는 조건문, *** 서버에서 두 값은 초기화 후에 저장시켜야함. -->
+							<c:when test="${post.product2.stockCount > 0 || salePeriod >= currentDate}"> <!-- 판매 종료로 바뀌는 조건문, *** 서버에서 두 값은 초기화 후에 저장시켜야함. -->
 								<c:if test="${isFree eq 0 }">
-									<p><fmt:formatNumber value="${post.productPrice }" pattern="###,###,###"/>
+									<p><fmt:formatNumber value="${post.product2.productPrice }" pattern="###,###,###"/>
 									원</p>
 								</c:if>
 								<c:if test="${isFree eq 1 }">
@@ -107,10 +107,10 @@
 					</div>
 					<!-- 배송 정보 -->
 					<div class="post-delivery-info">
-						<c:if test="${post.hasDeliveryFee eq 0}">
+						<c:if test="${post.product2.hasDeliveryFee eq 0}">
 							<p>무료배송</p>
 						</c:if>
-						<c:if test="${post.hasDeliveryFee eq 1}">
+						<c:if test="${post.product2.hasDeliveryFee eq 1}">
 							<p>
 								배송비: 
 								<fmt:formatNumber value="${deliveryFee}" pattern="#,###" />
