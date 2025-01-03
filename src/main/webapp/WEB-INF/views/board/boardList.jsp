@@ -64,7 +64,7 @@
 					<c:if test="${status.index % 4 ==0 }">
 						<section class="row card-section">
 					</c:if>
-					<div class="card-container">
+					<div class="card-container" data-post-no="${item.postNo}">
 						<div class="card-img">
 						    <c:choose>
 						        <c:when test="${not empty item.postImg}">
@@ -157,7 +157,8 @@
 <!-- 11. 페이지별 JavaScript -->
 <script>
 	$('.card-container').click(function() {
-		location.assign("${path}/post/viewpost");
+	    const postNo = $(this).data('post-no');
+	    location.assign(`${path}/post/viewpost?postNo=`+postNo);
 	});
 </script>
 </body>

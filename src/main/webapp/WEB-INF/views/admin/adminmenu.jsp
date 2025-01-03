@@ -231,7 +231,7 @@
 							<tr>
 								<td>${post.postNo}</td>
 								<td style="text-align: left; padding-left: 20px;">
-									<a href="${path }/post/viewpost?postNo=${post.postNo}">
+									<a href="${path }/post/notify?postNo=${post.postNo}">
 									${post.postTitle}
 									</a>
 								</td>
