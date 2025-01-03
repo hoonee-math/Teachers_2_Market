@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.sql.Date" %>
+<%@ page import="java.time.LocalDate" %>
 <!-- 1. JSP/JSTL 태그 라이브러리 -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath}"/>
+<c:set var="sqlToday" value="<%= Date.valueOf(((LocalDate)request.getAttribute(\"today\"))) %>"/>
 
 <!DOCTYPE html>
 <html lang="ko">
@@ -84,51 +87,40 @@
 							<!-- 상품 타입이 물품인 경우 -->
 							<c:if test="${item.productType==1 }">
 								<!-- stockCount 변수에 재고 넣음 -->
-								<%-- <c:set var="stockCount" value="${item.product2.stockCount }"/>
+								<c:set var="stockCount" value="${item.product2.stockCount }"/>
 								<c:choose>
-									<c:when test="${stockcount>0 }">
-										<!-- isFree 변수에 무료나눔 여부 -->
-										<c:set var="isFree" value="${item.product2.isFree }"/>
-										<!-- 무료나눔이 아닌 경우 -->
-										<c:if test="${isFree eq 0 }">
-											<p>₩ <fmt:formatNumber value=${item.product2.productPrice } pattern="###,###,###"/></p>
+									<c:when test="${stockCount>0 }">
+										<c:set var="price" value="${item.product2.productPrice }"/>
+										<c:if test="${price>0 }">
+											<p>₩ <fmt:formatNumber value="${price }" pattern="###,###,###"/></p>
 										</c:if>
-										<!-- 무료나눔인 경우 -->
-										<c:if test="${isFree eq 1 }">
+										<c:if test="${price==0 }">
 											<p style="color:#2ecc71; font-weight:bold;">무료나눔</p>
 										</c:if>
 									</c:when>
-									<!-- 재고가 0인 경우 -->
 									<c:otherwise>
 										<p style="color:#e74c3c; font-weight:bold;">판매종료</p>
 									</c:otherwise>
-								</c:choose> --%>
-								<p>현재 재고 2개</p>
+								</c:choose>
 							</c:if>
 							<!-- 상품 타입이 파일인 경우 -->
 							<c:if test="${item.productType==2 }">
-								<%-- <!-- salePeriod 변수에 판매기간 넣음 -->
+								<!-- salePeriod 변수에 판매기간 넣음 -->
 								<c:set var="salePeriod" value="${item.file2.salePeriod }"/>
 								<c:choose>
-									<!-- servlet에서 today를 넘겨받음 -->
-									<c:when test="${salePeriod>=today }">
-										<!-- isFree 변수에 무료나눔 여부 -->
-										<c:set var="isFree" value="${item.file2.isFree }"/>
-										<!-- 무료나눔이 아닌 경우 -->
-										<c:if test="${isFree eq 0 }">
-											<p>₩ <fmt:formatNumber value=${item.file2.filePrice } pattern="###,###,###"/></p>
+									<c:when test="${salePeriod.compareTo(today) >= 0 }">
+										<c:set var="price" value="${item.file2.filePrice }"/>
+										<c:if test="${price>0 }">
+											<p>₩ <fmt:formatNumber value="${price }" pattern="###,###,###"/></p>
 										</c:if>
-										<!-- 무료나눔인 경우 -->
-										<c:if test="${isFree eq 1 }">
+										<c:if test="${price==0 }">
 											<p style="color:#2ecc71; font-weight:bold;">무료나눔</p>
 										</c:if>
 									</c:when>
-									<!-- 판매기간이 오늘보다 작은 수인 경우 -->
 									<c:otherwise>
 										<p style="color:#e74c3c; font-weight:bold;">판매종료</p>
 									</c:otherwise>
-								</c:choose> --%>
-								<p>판매 종료까지 2일</p>
+								</c:choose>
 							</c:if>
 						</div>
 					</div>
