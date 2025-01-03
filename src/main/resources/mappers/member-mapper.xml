@@ -41,8 +41,9 @@
  			BIRTHDAY,
  			EDU_TYPE,
  			SUBJECT_NO,
+ 			ENROLL_DATE
  		) VALUES (
-			MEMBER_SEQ.NEXTVAL,
+			SEQ_MEMBER2_NO.NEXTVAL,
 			#{memberName},
 			#{memberId},
 			#{memberPw},
