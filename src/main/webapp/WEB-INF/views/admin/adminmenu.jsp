@@ -231,7 +231,7 @@
 							<tr>
 								<td>${post.postNo}</td>
 								<td style="text-align: left; padding-left: 20px;">
-									<a href="${path }/post/viewpost?postNo=${post.postNo}">
+									<a href="${path }/post/notify?postNo=${post.postNo}">
 									${post.postTitle}
 									</a>
 								</td>
@@ -241,9 +241,9 @@
 								<td>${post.viewCount}</td>
 								<td>
 									<button type="button"
-										class="fix-toggle ${post.isFix ? 'fixed' : ''}"
+										class="fix-toggle ${post.isFix  eq 1? 'fixed' : ''}"
 										onclick="toggleFix(${post.postNo}, this)">
-										${post.isFix ? '고정' : '일반'}</button>
+										${post.isFix  eq 1? '고정' : '일반'}</button>
 								</td>
 								<td>
 									<button type="button" onclick="editNotice(${post.postNo})">수정</button>
@@ -300,39 +300,43 @@
 
 <!-- 상단고정 토글을 위한 JavaScript -->
 <script>
+	const contextPath = "${path}";
+
 	function toggleFix(postNo, btn) {
 		// AJAX 요청으로 상단고정 상태 토글
 		$.ajax({
-			url : 'toggleNoticeFix.do',
-			type : 'POST',
-			data : {
-	            postNo: postNo
-			},
-			success : function(response) {
-				if (response.success) {
-					// 버튼 상태 및 텍스트 업데이트
-					$(btn).toggleClass('fixed');
-					$(btn).text($(btn).hasClass('fixed') ? '고정' : '일반');
-				} else {
-					alert('상태 변경에 실패했습니다.');
-				}
-			},
-			error : function() {
-				alert('서버와의 통신 중 오류가 발생했습니다.');
-			}
-		});
+	        url: contextPath + '/admin/notify/toggleFix',
+	        type: 'POST',
+	        data: { postNo: postNo },
+	        success: function(response) {
+	            if(response.success) {
+	                $(btn).toggleClass('fixed');
+	                $(btn).text($(btn).hasClass('fixed') ? '고정' : '일반');
+	            }
+	        }
+	    });
 	}
 
 	// 공지사항 수정 함수
 	function editNotice(postNo) {
-		location.href = 'editNotice.do?post_no=' + postNo;
+		<c:set var="path" value="${pageContext.request.contextPath}"/>
 	}
 
 	// 공지사항 삭제 함수
 	function deleteNotice(postNo) {
 		if (confirm('정말 삭제하시겠습니까?')) {
-			location.href = 'deleteNotice.do?post_no=' + postNo;
-		}
+	        $.ajax({
+	            url: contextPath + '/admin/notify/delete',
+	            type: 'POST',
+	            data: { postNo: postNo },
+	            success: function(response) {
+	                if(response.success) {
+	                    alert('삭제되었습니다.');
+	                    location.reload();
+	                }
+	            }
+	        });
+	    }
 	}
 </script>
 </body>

@@ -67,6 +67,17 @@
 	<select id="selectNotice" resultMap="postMap">
 		SELECT * FROM post2 WHERE PRODUCT_TYPE=0 AND IS_FIX=1
 	</select>
+	<!-- AdminMenu.jsp에서 공지사항에 사용할 정보 -->
+	<select id="selectAllNotify" resultMap="postMap">
+	    SELECT P.*, M.MEMBER_NO, M.MEMBER_NAME
+	    FROM (
+	        SELECT *
+	        FROM POST2
+	        WHERE PRODUCT_TYPE = 0
+	        ORDER BY IS_FIX DESC, POST_NO DESC
+	    ) P
+	    LEFT JOIN MEMBER2 M ON P.MEMBER_NO = M.MEMBER_NO
+	</select>
 	<!-- boardList.jsp에 띄울 이미지 -->
 	<select id="selectThumbnailByPost" resultMap="image2.imageMap">
 		SELECT * FROM IMAGE2 WHERE POST_NO=#{postNo} AND IMG_SEQ=1
@@ -83,5 +94,33 @@
 	<!-- viewPost.jsp에서 이미지 불러오기 -->
 	<select id="selectImageNo" parameterType="_int" resultMap="image2.imageMap">
 		SELECT * FROM IMAGE2 WHERE POST_NO=#{postNo}
+	</select>
+	
+	<!-- 메인 페이지에서 사용할 인기글 조회 로직 -->
+	<select id="selectPostByPopular" resultMap="postMap">
+		SELECT * 
+		FROM (SELECT * FROM post2 
+			WHERE PRODUCT_TYPE != 0
+			ORDER BY VIEW_COUNT DESC)
+			LEFT JOIN MEMBER2 USING (MEMBER_NO)
+		WHERE 8 >= ROWNUM
+	</select>
+	
+	<!-- adminmenu.jsp 공지사항 상단고정 상태 토글 -->
+	<select id="toggleNotifyFix" parameterType="_int" >
+		UPDATE POST2 
+		SET IS_FIX = CASE 
+		                WHEN IS_FIX = 1 THEN 0 
+		                ELSE 1 
+		             END 
+		WHERE POST_NO = #{postNo}
+	</select>
+	
+	<!-- adminmenu.jsp 게시글 번호로 상세 조회 (기존 쿼리가 있다면 사용) -->
+	<select id="selectPostByNoOnAdminMenu" parameterType="_int" resultMap="postMap">
+	    SELECT P.*, M.* 
+	    FROM POST2 P 
+	    LEFT JOIN MEMBER2 M ON P.MEMBER_NO = M.MEMBER_NO 
+	    WHERE P.POST_NO = #{postNo}
 	</select>
 </mapper>

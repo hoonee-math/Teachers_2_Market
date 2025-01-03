@@ -27,4 +27,26 @@ public class PostService {
 		session.close();
 		return img;
 	}
+	
+	public int toggleNotifyFix(int postNo) {
+		SqlSession session = getSession();
+	    int result = 0;
+	    try {
+	        result = dao.toggleNotifyFix(session, postNo);
+	        if(result > 0) session.commit();
+	        else session.rollback();
+	    } catch(Exception e) {
+	        session.rollback();
+	        throw e;
+	    } finally {
+	        session.close();
+	    }
+	    return result;
+	}
+	
+	//post2 객체불러오기
+	public Post2 selectPostByNoOnAdminMenu(int postNo) {
+		SqlSession session = getSession();
+		return dao.selectPostByNoOnAdminMenu(session, postNo);
+	}
 }

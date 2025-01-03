@@ -41,4 +41,13 @@ public class PostDao {
 	public List<Image2> selectImageNo(SqlSession session, int postNo) {
 		return session.selectList("post2.selectImageNo", postNo);
 	}
+
+	public int toggleNotifyFix(SqlSession session, int postNo) {
+		return session.update("post2.toggleNotifyFix",postNo);
+	}
+
+	public Post2 selectPostByNoOnAdminMenu(SqlSession session, int postNo) {
+		return session.selectOne("post2.selectPostByNoOnAdminMenu",postNo);
+	}
+	
 }

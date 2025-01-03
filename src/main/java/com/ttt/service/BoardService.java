@@ -38,10 +38,24 @@ public class BoardService {
 		return notice;
 	}
 	
+	public List<Post2> selectAllNotify() {
+		SqlSession session = getSession();
+		return dao.selectAllNotify(session);
+	}
+	
 	public Image2 selectThumbnailByPost(int postNo) {
 	    SqlSession session = getSession();
 	    Image2 thumbnail = dao.selectThumbnailByPost(session, postNo);
 	    session.close();
 	    return thumbnail;
+	}
+	
+	//메인 페이지에서 사용할 인기글 조회 로직
+	public List<Post2> selectPostByPopular() {
+		SqlSession session = getSession();
+		List<Post2> populars = dao.selectPostByPopular(session);
+		session.close();
+		
+		return populars;
 	}
 }
