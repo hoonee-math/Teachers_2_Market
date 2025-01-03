@@ -343,6 +343,5 @@ $('input[name="eduType"]').on('change', function() {
 });
 </script>
 <script src="${path}/resources/js/enroll/enrollMember.js"></script>
-<script src="${path}/resources/js/enroll/enrollendMember.js"></script>
 </body>
 </html>
