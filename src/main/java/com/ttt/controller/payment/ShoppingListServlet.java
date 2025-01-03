@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/payment/shoppinglist")
-public class ToShoppingListServlet extends HttpServlet {
+public class ShoppingListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ToShoppingListServlet() {
+    public ShoppingListServlet() {
         super();
     }
 

@@ -53,8 +53,9 @@
 			<section class="row main-section">
 				<!-- 섹션 1 -->
 				<div id="notice-div">
-					<p><strong>[공지] 이것은 공지사항입니다.</strong></p>
-					<p><strong>[공지] 이것은 두번째 공지사항입니다.</strong></p>
+					<c:forEach var="notice" items="${notice }">
+						<p><strong>${notice.postTitle }</strong></p>
+					</c:forEach>
 				</div>
 			</section>
 			<p id="categoryTitle">${categoryTitle }</p>
@@ -69,7 +70,6 @@
 							<%-- <img width="150px" height="150px" src="${path }/resources/board/images/${item.postImg.renamed}"> --%>
 						</div>
 						<div class="card-content">
-							<%-- <p>판매자명</p> --%>
 							<c:choose>
 								<c:when test="${fn:length(item.member.memberName) >10 }">
 									<p>${fn:substring(item.member.memberName,0,9)}...</p>

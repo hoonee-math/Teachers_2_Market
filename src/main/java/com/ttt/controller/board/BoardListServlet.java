@@ -36,8 +36,11 @@ public class BoardListServlet extends HttpServlet {
 		
 		int numPerPage = 16;
 		
-		//게시글 조회 
 		BoardService service = new BoardService();
+		//공지사항 조회
+		List<Post2> notice = service.selectNotice();
+		
+		//게시글 조회 
 		Map<String, Integer> param = Map.of(
 				"cPage",cPage,
 				"categoryNo",Integer.parseInt(categoryNo));
@@ -104,6 +107,7 @@ public class BoardListServlet extends HttpServlet {
 		}
 		pageBar.append("</ul>");
 		
+		request.setAttribute("notice", notice);
 		request.setAttribute("posts", posts);
 		request.setAttribute("pageBar", pageBar.toString());
 
