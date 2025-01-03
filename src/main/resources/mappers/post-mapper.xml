@@ -87,6 +87,10 @@
 	
 	<!-- 메인 페이지에서 사용할 인기글 조회 로직 -->
 	<select id="selectPostByPopular" resultMap="postMap">
-		
+		SELECT * 
+		FROM (SELECT * FROM post2 
+			WHERE PRODUCT_TYPE != 0
+			ORDER BY VIEW_COUNT DESC)
+		WHERE 8 >= ROWNUM
 	</select>
 </mapper>
