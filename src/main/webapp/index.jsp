@@ -55,8 +55,6 @@
 						alt="검색" width="100%">
 				</div>
 			</section>
-			
-			
 				<c:forEach var="item" items="${populars }" varStatus="status">
 					<c:if test="${status.index % 4 ==0 }">
 						<section class="row card-section">
@@ -132,66 +130,6 @@
 						</section>
 					</c:if>
 				</c:forEach>
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-<%-- 			<!-- 나중에 ajax 통신할 때는 append 이용해서 진행해야함 -->
-			<c:forEach var="i" begin="1" end="2">
-			<c:forEach var="item" items="${post }" varStatus="status">
-			<section class="row card-section">
-				<c:forEach var="j" begin="1" end="4">
-				<div class="card-container">
-					<!-- 백엔드 작업할 때 사용하기 위한 부분은 주석처리해 둠 -->
-					<div class="card-img">
-						<img src="${path }/resources/images/logo.jpeg">
-						<!-- <img width="150px" height="150px" src="${path }/resources/images/${item.image.renamed}"> -->
-					</div>
-					<div class="card-content">
-						<p>판매자명 &nbsp; ${4*(i-1)+j }</p>
-						<!-- <p>${item.member.memberName}</p> -->
-							<!-- 판매물품 제목은 10글자까지, 
-								프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
-								ex) 하나둘셋넷다섯여섯...-->
-						<p><strong>판매물품 제목 &nbsp; ${4*(i-1)+j }</strong></p>
-						<!-- <p><strong>${item.postTitle}</strong></p> -->
-						<c:set var="stockCount" value="${Math.round(Math.random())}"/> <!-- 재고가 0이 되면 판매 종료로 바뀜 -->
-						<c:set var="salePeriod" value="${'2025-01-25'}" /> <!-- 판매기간이 지나면 판매 종료로 바귐 -->
-						<c:choose>
-							<c:when test="${stockCount > 0}"> <!-- 판매 종료로 바뀌는 조건문, *** 서버에서 두 값은 초기화 후에 저장시켜야함. -->
-								<c:set var="isFree" value="${Math.round(Math.random())}"/>
-								<c:if test="${isFree eq 0 }">
-									<c:set var="productPrice" value="${Math.round(Math.random()*100000)}"/>
-									<p><fmt:formatNumber value="${productPrice }" pattern="###,###,###"/>
-									원</p>
-								</c:if>
-								<c:if test="${isFree eq 1 }">
-									<p style="color: #2ecc71; font-weight:bold;">무료나눔</p>
-								</c:if>
-							</c:when>
-							<c:otherwise>
-								<p style="color: #e74c3c; font-weight:bold;">판매종료</p>
-							</c:otherwise>
-						</c:choose>
-						<!-- 무료나눔일 경우 처리해줘야함. -->
-						<!-- <p>₩ ${item.price}</p> -->
-					</div>
-				</div>
-				</c:forEach>
-			</section>
-			</c:forEach> --%>
 			<!-- 섹션 4 -->
 			<section class="row main-section">
 				<!-- 로그인 페이지로 이동 -->
@@ -215,7 +153,8 @@
 <!-- 11. 페이지별 JavaScript -->
 <script>
 	$('.card-container').click(function() {
-		location.assign("${path}/post/viewpost");
+	    const postNo = $(this).data('post-no');
+	    location.assign(`${path}/post/viewpost?postNo=`+postNo);
 	});
 </script>
 </body>
