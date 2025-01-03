@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ttt.dto.Cart2;
+
 @WebServlet("/post/toshoppinglist")
 public class ViewPostToShoppingListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -20,6 +22,8 @@ public class ViewPostToShoppingListServlet extends HttpServlet {
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		
 		
+		Cart2 c = Cart2.builder()
+				.build();
 		
 		
 		//장바구니로 이동하시겠습니까? alert창 띄우고
