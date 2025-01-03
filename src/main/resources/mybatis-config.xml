@@ -20,6 +20,7 @@
 		<typeAlias type="com.ttt.dto.Image2" alias="image2"/>
 		<typeAlias type="com.ttt.dto.Product2" alias="product2"/>
 		<typeAlias type="com.ttt.dto.File2" alias="file2"/>
+		<typeAlias type="com.ttt.dto.Cart2" alias="cart2"/>
 	</typeAliases>
 	
 	
@@ -41,6 +42,7 @@
 		<mapper resource="/mappers/member-mapper.xml"/>
 		<mapper resource="/mappers/post-mapper.xml"/>
 		<mapper resource="/mappers/image-mapper.xml"/>
+		<mapper resource="/mappers/cart-mapper.xml"/>
 	</mappers>
 	
 </configuration>
