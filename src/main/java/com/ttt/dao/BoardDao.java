@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.ttt.dto.Image2;
 import com.ttt.dto.Post2;
 
 public class BoardDao {
@@ -25,5 +26,8 @@ public class BoardDao {
 	public List<Post2> selectNotice(SqlSession session) {
 		return session.selectList("post2.selectNotice");
 	}
-
+	
+	public Image2 selectThumbnailByPost(SqlSession session, int postNo) {
+		return session.selectOne("post2.selectThumbnailByPost", postNo);
+	}
 }

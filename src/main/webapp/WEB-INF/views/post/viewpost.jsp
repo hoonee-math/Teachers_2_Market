@@ -61,14 +61,14 @@
 					<c:if test="${not empty images}">
 						<!-- 첫 번째 이미지를 기본 메인 이미지로 설정 -->
 						<div id="post-img-bigSize">
-							<img src="${path}/resources/upload/${images[0].rename}" alt="상품 메인 이미지" id="main-image">
+							<img src="${path}/resources/images/upload/${images[0].renamed}" alt="상품 메인 이미지" id="main-image">
 						</div>
 					</c:if>
 					<!-- 썸네일 슬라이드 -->
 					<div id="post-img-minislide">
 						<c:forEach var="img" items="${images}" varStatus="vs">
-							<div class="thumbnail" onclick="changeMainImage(this)" data-src="${path}/resources/upload/${img.rename}">
-								<img src="${path}/resources/upload/${img.rename}" alt="상품 이미지 ${vs.count}">
+							<div class="thumbnail" onclick="changeMainImage(this)" data-src="${path}/resources/images/upload/${img.renamed}">
+								<img src="${path}/resources/images/upload/${img.renamed}" alt="상품 이미지 ${vs.count}">
 							</div>
 						</c:forEach>
 					</div>
@@ -185,7 +185,7 @@
 					<c:if test="${not empty detailImages}">
 						<div class="detail-images">
 							<c:forEach var="img" items="${detailImages}">
-								<img src="${path}/resources/upload/${img.rename}"
+								<img src="${path}/resources/images/upload/${img.renamed}"
 									alt="상세 이미지">
 							</c:forEach>
 						</div>
@@ -304,7 +304,7 @@
 				currentIndex = (currentIndex + 1) % totalImages;
 				const nextThumb = thumbnails.eq(currentIndex);
 				changeMainImage(nextThumb[0]);
-			}, 1000);
+			}, 3000);
 		}
 
 		// 초기 슬라이드쇼 시작

@@ -1,12 +1,14 @@
 package com.ttt.service;
 
 import static com.ttt.common.SqlSessionTemplate.getSession;
+
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.ttt.dao.BoardDao;
+import com.ttt.dto.Image2;
 import com.ttt.dto.Post2;
 
 public class BoardService {
@@ -34,5 +36,12 @@ public class BoardService {
 		session.close();
 		
 		return notice;
+	}
+	
+	public Image2 selectThumbnailByPost(int postNo) {
+	    SqlSession session = getSession();
+	    Image2 thumbnail = dao.selectThumbnailByPost(session, postNo);
+	    session.close();
+	    return thumbnail;
 	}
 }
