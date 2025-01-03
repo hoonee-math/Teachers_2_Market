@@ -26,7 +26,6 @@
 			<result column="edu_type" property="eduType"/>
 			<result column="subject_no" property="subjectNo"/>
 		</association>
-		<collection property="postImg" resultMap="image2.imageMap"/>
 		<association property="product2" javaType="product2">
 	        <id column="product_no" property="productNo"/>
 	        <result column="is_free" property="isFree"/>
@@ -43,6 +42,7 @@
 	        <result column="oriname" property="oriname"/>
 	        <result column="renamed" property="renamed"/>
 	    </association>
+		<collection property="postImg" resultMap="image2.imageMap"/>
 	</resultMap>
 	
 	<select id="selectPostByCategory" resultMap="postMap" parameterType="map">

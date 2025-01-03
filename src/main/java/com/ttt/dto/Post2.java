@@ -26,6 +26,6 @@ public class Post2 {
 	private int isDeleted;
 	private int productType;
 	private int isFix;
-	private Product2 product;
-	private File2 file;
+	private Product2 product2;
+	private File2 file2;
 }

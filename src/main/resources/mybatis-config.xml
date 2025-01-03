@@ -18,6 +18,8 @@
 		<typeAlias type="com.ttt.dto.Member2" alias="member2"/>
 		<typeAlias type="com.ttt.dto.Post2" alias="post2"/>
 		<typeAlias type="com.ttt.dto.Image2" alias="image2"/>
+		<typeAlias type="com.ttt.dto.Product2" alias="product2"/>
+		<typeAlias type="com.ttt.dto.File2" alias="file2"/>
 	</typeAliases>
 	
 	

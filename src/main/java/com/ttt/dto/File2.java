@@ -1,6 +1,6 @@
 package com.ttt.dto;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +16,7 @@ public class File2 {
 	private Post2 post;
 	private int isFree;
 	private int filePrice;
-	private Date salePeriod;
+	private LocalDate salePeriod;
 	private String oriname;
 	private String renamed;
 }
