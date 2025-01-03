@@ -62,4 +62,8 @@
 		FROM POST2
 		WHERE CATEGORY_NO = #{categoryNo}
 	</select>
+	
+	<select id="selectNotice" resultType="post2">
+		SELECT * FROM post2 WHERE PRODUCT_TYPE=0 AND IS_FIX=1
+	</select>
 </mapper>
