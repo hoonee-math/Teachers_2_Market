@@ -27,13 +27,33 @@
 			<result column="subject_no" property="subjectNo"/>
 		</association>
 		<collection property="postImg" resultMap="image2.imageMap"/>
+		<association property="product2" javaType="product2">
+	        <id column="product_no" property="productNo"/>
+	        <result column="is_free" property="isFree"/>
+	        <result column="product_price" property="productPrice"/>
+	        <result column="has_delivery_fee" property="hasDeliveryFee"/>
+	        <result column="delivery_fee" property="deliveryFee"/>
+	        <result column="stock_count" property="stockCount"/>
+	    </association>
+	    <association property="file2" javaType="file2">
+	        <id column="file_no" property="fileNo"/>
+	        <result column="is_free" property="isFree"/>
+	        <result column="file_price" property="filePrice"/>
+	        <result column="sale_period" property="salePeriod"/>
+	        <result column="oriname" property="oriname"/>
+	        <result column="renamed" property="renamed"/>
+	    </association>
 	</resultMap>
 	
 	<select id="selectPostByCategory" resultMap="postMap" parameterType="map">
-		SELECT *
-		FROM (SELECT ROWNUM AS RNUM, P.*
-			  FROM (SELECT * FROM POST2 WHERE CATEGORY_NO=#{categoryNo})P
-			 )
-		WHERE RNUM BETWEEN #{start} AND #{end}
+	    SELECT P.*, M.*, PR.*, F.*, I.*
+	    FROM (SELECT ROWNUM AS RNUM, P.*
+	          FROM (SELECT * FROM POST2 WHERE CATEGORY_NO=#{categoryNo})P
+	         ) P
+	    LEFT JOIN MEMBER2 M ON P.MEMBER_NO = M.MEMBER_NO
+	    LEFT JOIN PRODUCT2 PR ON P.POST_NO = PR.POST_NO
+	    LEFT JOIN FILE2 F ON P.POST_NO = F.POST_NO
+	    LEFT JOIN IMAGE2 I ON P.POST_NO = I.POST_NO
+	    WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
 </mapper>
