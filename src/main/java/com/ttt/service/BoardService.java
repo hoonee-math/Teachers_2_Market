@@ -38,6 +38,11 @@ public class BoardService {
 		return notice;
 	}
 	
+	public List<Post2> selectAllNotify() {
+		SqlSession session = getSession();
+		return dao.selectAllNotify(session);
+	}
+	
 	public Image2 selectThumbnailByPost(int postNo) {
 	    SqlSession session = getSession();
 	    Image2 thumbnail = dao.selectThumbnailByPost(session, postNo);

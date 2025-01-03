@@ -27,6 +27,9 @@ public class BoardDao {
 		return session.selectList("post2.selectNotice");
 	}
 	
+	public List<Post2> selectAllNotify(SqlSession session) {
+		return session.selectList("post2.selectAllNotify");
+	}
 	public Image2 selectThumbnailByPost(SqlSession session, int postNo) {
 		return session.selectOne("post2.selectThumbnailByPost", postNo);
 	}
