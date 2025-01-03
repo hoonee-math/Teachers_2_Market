@@ -27,4 +27,8 @@ public class MemberDao {
 	public List<Member2> updateAllMember(SqlSession session, int updateType){
 		return session.selectList("member2.selectAllMember");
 	}
+	// 사용자 메뉴 : 회원 정보 등록
+	public int insertMember(SqlSession session, Member2 m) {
+		return session.insert("member2.insertMember",m);
+	}
 }
