@@ -9,10 +9,16 @@
 		<result column="member_pw" property="memberPw"/>
 		<result column="email" property="email"/>
 		<result column="phone" property="phone"/>
+		<result column="is_deleted" property="isDeleted"/>
 		<result column="address" property="address"/>
 		<result column="birthday" property="birthday"/>
 		<result column="edu_type" property="eduType"/>
 		<result column="subject_no" property="subjectNo"/>
 	</resultMap>
-  
+ 
+ 	<select id="selectAllMember" resultMap="memberMap">
+		SELECT MEMBER_NO, MEMBER_NAME, MEMBER_ID, EMAIL, PHONE, ENROLL_DATE
+		FROM MEMBER2 LEFT JOIN WARNING2 USING (MEMBER_NO)
+ 	</select>
+	
 </mapper>
