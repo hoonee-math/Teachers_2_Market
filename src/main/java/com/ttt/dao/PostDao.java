@@ -1,7 +1,10 @@
 package com.ttt.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
+import com.ttt.dto.Image2;
 import com.ttt.dto.Post2;
 
 public class PostDao {
@@ -30,4 +33,12 @@ public class PostDao {
 		return session.update("post.deletePost",p);
 	}
 	
+	//post2 객체불러오기
+	public Post2 selectPostByNo(SqlSession session, int postNo) {
+		return session.selectOne("post2.selectPostByNo", postNo);
+	}
+	//viewpost.jsp에 이미지 불러오기
+	public List<Image2> selectImageNo(SqlSession session, int postNo) {
+		return session.selectList("post2.selectImageNo", postNo);
+	}
 }
