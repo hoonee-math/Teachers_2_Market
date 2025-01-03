@@ -12,6 +12,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ttt.dto.Member2;
+import com.ttt.service.AdminMemberService;
+
 @WebServlet("/admin/manage/member")
 public class AdminManageMemberSevlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -38,7 +41,7 @@ public class AdminManageMemberSevlet extends HttpServlet {
 	    }
 	    
 	    // 더미데이터 생성 (30명)
-	    List<Map<String,Object>> members = new ArrayList<>();
+	    List<Map<String,Object>> members2 = new ArrayList<>();
 	    for(int i=1; i<=30; i++) {
 	        Map<String,Object> member = new HashMap<>();
 	        member.put("memberNo", i);
@@ -48,8 +51,10 @@ public class AdminManageMemberSevlet extends HttpServlet {
 	        member.put("warningCount", (int)(Math.random() * 3));  // 0~2 사이 랜덤 경고횟수
 	        member.put("enrollDate", new java.sql.Date(System.currentTimeMillis())); 
 	        member.put("isDeleted", 0);
-	        members.add(member);
+	        members2.add(member);
 	    }
+	    
+	    List<Member2> members= new AdminMemberService().selectAllMember();
 	    
 	    // 페이징 처리
 	    int totalData = members.size();
