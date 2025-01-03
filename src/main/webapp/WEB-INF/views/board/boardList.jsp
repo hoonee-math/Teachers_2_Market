@@ -53,8 +53,8 @@
 			<section class="row main-section">
 				<!-- 섹션 1 -->
 				<div id="notice-div">
-					<c:forEach var="notice" items="${notice }">
-						<p><strong>${notice.postTitle }</strong></p>
+					<c:forEach var="notice" items="${notices }">
+						<p><strong>[공지] ${notice.postTitle }</strong></p>
 					</c:forEach>
 				</div>
 			</section>
