@@ -81,8 +81,8 @@
 				<!-- 상품 정보 영역 -->
 				<div class="post-info">
 					<!-- 판매자 정보 -->
-					<div class="post-seller-nick">
-						${post.member_memberNick }
+					<div class="post-seller-id">
+						${post.member_memberId }
 					</div>
 					<div class="post-title">
 						${post.postTitle }			
