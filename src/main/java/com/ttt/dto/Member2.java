@@ -1,5 +1,7 @@
 package com.ttt.dto;
 
+import java.util.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +23,7 @@ public class Member2 {
 	private int birthday;
 	private int eduType;
 	private int subjectNo;
+	private Date enrollDate;
 	
 	/* 계산해서 받아올 값 */
 	private int warningCount; // 신고5,10,15 에 의해 발생한 경고 횟수

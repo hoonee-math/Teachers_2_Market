@@ -23,7 +23,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		String memberName = request.getParameter("memberName");
 		String memberId = request.getParameter("memberId");
 		
-		String emailId = request.getParameter("emailId");`
+		String emailId = request.getParameter("emailId");
 		String emailDomain = request.getParameter("emailDomain");
 		String email = emailId + "@" + emailDomain;
 		
