@@ -2,6 +2,7 @@ package com.ttt.controller.board;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -11,8 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ttt.dto.Image2;
 import com.ttt.dto.Post2;
 import com.ttt.service.BoardService;
+import com.ttt.service.PostService;
 
 @WebServlet("/board/list")
 public class BoardListServlet extends HttpServlet {
@@ -47,6 +50,18 @@ public class BoardListServlet extends HttpServlet {
 				"categoryNo",Integer.parseInt(categoryNo));
 		
 		List<Post2> posts = service.selectPostByCategory(param);
+		
+		// 각 게시글별 대표 이미지 조회
+		
+	    for(Post2 post : posts) {
+	        Image2 thumbnail = service.selectThumbnailByPost(post.getPostNo());
+	        // Post2 객체에 이미지 설정
+	        if(thumbnail != null) {
+	            List<Image2> images = new ArrayList<>();
+	            images.add(thumbnail);
+	            post.setPostImg(images);
+	        }
+	    }
 		
 		//전체 게시글 수 조회
 		int totalData = service.getTotalCount(Integer.parseInt(categoryNo));

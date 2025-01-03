@@ -67,6 +67,10 @@
 	<select id="selectNotice" resultMap="postMap">
 		SELECT * FROM post2 WHERE PRODUCT_TYPE=0 AND IS_FIX=1
 	</select>
+	<!-- boardList.jsp에 띄울 이미지 -->
+	<select id="selectThumbnailByPost" resultMap="image2.imageMap">
+		SELECT * FROM IMAGE2 WHERE POST_NO=#{postNo} AND IMG_SEQ=1
+	</select>
 	<!-- Post2 객체 불러오기 -->
 	<select id="selectPostJoinAll" parameterType="_int" resultMap="postMap">
 		SELECT P.*, M.*, PR.*, F.*, I.*
