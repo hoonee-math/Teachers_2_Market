@@ -78,6 +78,6 @@
 	</select>
 	<!-- viewPost.jsp에서 이미지 불러오기 -->
 	<select id="selectImageNo" parameterType="_int" resultMap="image2.imageMap">
-		SELECT * FROM IMAGE1 WHERE POST_NO=#{postNo}
+		SELECT * FROM IMAGE2 WHERE POST_NO=#{postNo}
 	</select>
 </mapper>
