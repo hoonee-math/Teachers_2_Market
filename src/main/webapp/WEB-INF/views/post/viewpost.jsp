@@ -141,6 +141,8 @@
 
 					<!-- 구매 버튼 영역 -->
 					<div class="post-purchase-buttons">
+						<input type="hidden" id="postNo" value="${post.postNo}">
+						<input type="hidden" id="memberNo" value="${sessionScope.loginMember.memberNo}">	
 						<button class="post-cart-btn">
 							<i class="bi bi-cart3" style="font-size: 1.3rem; color: #6f6f6f; margin-right:10px"></i>
 							장바구니
@@ -392,7 +394,30 @@
 		
 		// 장바구니 버튼 클릭
 		$('.cart-btn').click(function() {
-			// Ajax로 장바구니 추가 처리
+			//현재 페이지에서 필요한 데이터 가져오기
+			const postNo = $('#postNo').val();
+			const memberNo = $('#memberNo').val();
+			
+			const url = '/post/toshoppinglist';
+			
+			const data = {
+				postNo: postNo,
+				memberNo: memberNo
+			};
+			
+			$.ajax({
+				url: url,
+				type: 'POST',
+				data: data,
+				success: function(response) {
+					console.log('상품이 추가됨 : ', response);
+					alert('장바구니에 추가되었습니다!');
+				},
+				error: function(xhr, status, error) {
+					console.log("상품 추가 실패함 : ", error);
+					alert('장바구니 추가에 실패하였습니다.');
+				}
+			});
 		});
 
 		// 구매 버튼 클릭
