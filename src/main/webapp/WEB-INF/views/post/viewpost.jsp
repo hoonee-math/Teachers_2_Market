@@ -89,21 +89,41 @@
 					</div>
 					<!-- 상품/파일 가격 -->
 					<div class="post-item-price">
-						<%-- <c:set var="salePeriod" value="${'2025-01-25'}" /> --%> <!-- 판매기간이 지나면 판매 종료로 바귐 -->
-						<c:choose>
-							<c:when test="${post.product2.stockCount > 0 || salePeriod >= currentDate}"> <!-- 판매 종료로 바뀌는 조건문, *** 서버에서 두 값은 초기화 후에 저장시켜야함. -->
-								<c:if test="${isFree eq 0 }">
-									<p><fmt:formatNumber value="${post.product2.productPrice }" pattern="###,###,###"/>
-									원</p>
-								</c:if>
-								<c:if test="${isFree eq 1 }">
-									<p style="color: #2ecc71;">무료나눔</p>
-								</c:if>
-							</c:when>
-							<c:otherwise>
-								<p style="color: #e74c3c;">판매종료</p>
-							</c:otherwise>
-						</c:choose>
+						<c:if test="${post.productType==1 }">
+							<c:set var="stockCount" value="${post.product2.stockCount }"/>
+							<c:choose>
+									<c:when test="${stockCount>0 }">
+										<c:set var="price" value="${post.product2.productPrice }"/>
+										<c:if test="${price>0 }">
+											<p>₩ <fmt:formatNumber value="${price }" pattern="###,###,###"/></p>
+										</c:if>
+										<c:if test="${price==0 }">
+											<p style="color:#2ecc71; font-weight:bold;">무료나눔</p>
+										</c:if>
+									</c:when>
+									<c:otherwise>
+										<p style="color:#e74c3c; font-weight:bold;">판매종료</p>
+									</c:otherwise>
+								</c:choose>
+							</c:if>
+					
+							<c:if test="${post.productType==2 }">
+								<c:set var="salePeriod" value="${post.file2.salePeriod }"/>
+								<c:choose>
+									<c:when test="${salePeriod.compareTo(today) >= 0 }">
+										<c:set var="price" value="${post.file2.filePrice }"/>
+										<c:if test="${price>0 }">
+											<p>₩ <fmt:formatNumber value="${price }" pattern="###,###,###"/></p>
+										</c:if>
+										<c:if test="${price==0 }">
+											<p style="color:#2ecc71; font-weight:bold;">무료나눔</p>
+										</c:if>
+									</c:when>
+									<c:otherwise>
+										<p style="color:#e74c3c; font-weight:bold;">판매종료</p>
+									</c:otherwise>
+								</c:choose>
+							</c:if>
 					</div>
 					<!-- 배송 정보 -->
 					<div class="post-delivery-info">

@@ -1,12 +1,12 @@
 package com.ttt.controller.post;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,6 +36,10 @@ public class ViewPostServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		//file 판매기한 끝나면 "판매종료" 띄우기 위한 오늘 날짜 받아옴
+		LocalDate today = LocalDate.now();
+		request.setAttribute("today", today);
 		
 		request.setAttribute("post", p);
 		request.setAttribute("images", images);
