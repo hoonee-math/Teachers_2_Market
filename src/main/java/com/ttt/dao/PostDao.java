@@ -34,8 +34,8 @@ public class PostDao {
 	}
 	
 	//post2 객체불러오기
-	public Post2 selectPostByNo(SqlSession session, int postNo) {
-		return session.selectOne("post2.selectPostByNo", postNo);
+	public Post2 selectPostJoinAll(SqlSession session, int postNo) {
+		return session.selectOne("post2.selectPostJoinAll", postNo);
 	}
 	//viewpost.jsp에 이미지 불러오기
 	public List<Image2> selectImageNo(SqlSession session, int postNo) {

@@ -16,7 +16,7 @@ public class PostService {
 	//post2 객체불러오기
 	public Post2 selectPostByNo(int postNo) {
 		SqlSession session = getSession();
-		Post2 p = dao.selectPostByNo(session, postNo);
+		Post2 p = dao.selectPostJoinAll(session, postNo);
 		session.close();
 		return p;
 	}
