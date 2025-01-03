@@ -230,7 +230,11 @@
 						<c:forEach var="post" items="${posts}">
 							<tr>
 								<td>${post.postNo}</td>
-								<td style="text-align: left; padding-left: 20px;">${post.postTitle}</td>
+								<td style="text-align: left; padding-left: 20px;">
+									<a href="${path }/post/viewpost?postNo=${post.postNo}">
+									${post.postTitle}
+									</a>
+								</td>
 								<td>${post.member.memberName}</td>
 								<td><fmt:formatDate value="${post.postDate}"
 										pattern="yyyy-MM-dd" /></td>
