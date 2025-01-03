@@ -56,4 +56,10 @@
 	    LEFT JOIN IMAGE2 I ON P.POST_NO = I.POST_NO
 	    WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>
+	
+	<select id="getTotalCount" parameterType="int" resultType="int">
+		SELECT COUNT(*)
+		FROM POST2
+		WHERE CATEGORY_NO = #{categoryNo}
+	</select>
 </mapper>
