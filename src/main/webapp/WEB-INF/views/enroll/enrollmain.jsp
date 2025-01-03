@@ -24,6 +24,7 @@
 <!-- 스크립트 연결 -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="${path}/resources/js/enroll/enrollMember.js"></script>
+<script src="${path}/resources/js/enroll/enrollendMember.js"></script>
 <style>
 /* 입력 필드 스타일 추가 */
 button, input, select, textarea {
@@ -180,9 +181,10 @@ input[type="radio"]:first-child {
 					</div>
 
 					<!-- 회원가입 폼 -->
-					<form action="${path}/member/enroll" method="post"
+					<form action="${path}/member/enrollend" method="post"
 						onsubmit="return fn_invalidate();">
-						<!-- form 태그 내부의 table 부분을 다음과 같이 완성합니다 -->
+						<input type="hidden" name="idCheckYN" value="N">
+   						<input type="hidden" name="emailVerified" value="N">
 						<table>
 							<tr>
 								<th>이름 입력 *</th>

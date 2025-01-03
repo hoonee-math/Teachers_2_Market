@@ -92,7 +92,7 @@ function validatePasswordMatch(e) {
 
 // 아이디 중복 확인
 function checkDuplicate() {
-    const inputId = $("#userId_").val();
+    const inputId = $("#memberId_").val();
     window.open(
         `${contextPath}/member/idduplicate.do?id=${inputId}`,
         "_blank",
