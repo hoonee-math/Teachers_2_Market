@@ -84,4 +84,9 @@
 	<select id="selectImageNo" parameterType="_int" resultMap="image2.imageMap">
 		SELECT * FROM IMAGE2 WHERE POST_NO=#{postNo}
 	</select>
+	
+	<!-- 메인 페이지에서 사용할 인기글 조회 로직 -->
+	<select id="selectPostByPopular" resultMap="postMap">
+		
+	</select>
 </mapper>

@@ -30,4 +30,9 @@ public class BoardDao {
 	public Image2 selectThumbnailByPost(SqlSession session, int postNo) {
 		return session.selectOne("post2.selectThumbnailByPost", postNo);
 	}
+	
+	//메인 페이지에서 사용할 인기글 조회 로직
+	public List<Post2> selectPostByPopular(SqlSession session) {
+		return session.selectList("post2.selectPostByPopular");
+	}
 }
