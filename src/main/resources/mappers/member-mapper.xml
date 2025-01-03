@@ -53,7 +53,7 @@
 			#{address},
 			#{birthday},
 			#{eduType},
-			#{subjectNo}
+			#{subjectNo},
 			SYSDATE 		
  		)
  	</insert>

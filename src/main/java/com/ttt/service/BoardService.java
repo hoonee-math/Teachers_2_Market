@@ -44,4 +44,13 @@ public class BoardService {
 	    session.close();
 	    return thumbnail;
 	}
+	
+	//메인 페이지에서 사용할 인기글 조회 로직
+	public List<Post2> selectPostByPopular() {
+		SqlSession session = getSession();
+		List<Post2> populars = dao.selectPostByPopular(session);
+		session.close();
+		
+		return populars;
+	}
 }

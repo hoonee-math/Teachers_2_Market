@@ -55,6 +55,23 @@
 						alt="검색" width="100%">
 				</div>
 			</section>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			<!-- 나중에 ajax 통신할 때는 append 이용해서 진행해야함 -->
 			<c:forEach var="i" begin="1" end="2">
 			<%-- <c:forEach var="item" items="${post }" varStatus="status"> --%>
