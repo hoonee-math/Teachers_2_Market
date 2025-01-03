@@ -16,6 +16,32 @@ function initializeEventListeners() {
     $("#emailCheckBtn").click(checkEmail);
     $("#postcodeFindBtn").click(sample4_execDaumPostcode);
 }
+// 이벤트 리스너 추가
+$(document).ready(function() {
+    // 기존의 initializeEventListeners 함수가 실행된 후
+    
+    // ID 중복확인 버튼 이벤트
+    $("#idCheckBtn").click(checkId);
+    
+    // 비밀번호 확인 이벤트
+    $("#password_2").keyup(validatePasswordMatch);
+    
+    // 폼 제출 이벤트
+    $("form").submit(function(e) {
+        if(!validateEnrollForm()) {
+            e.preventDefault();
+            return false;
+        }
+    });
+    
+    // 폼 초기화 시 상태 리셋
+    $("input[type='reset']").click(function() {
+        $("#memberId").prop("readonly", false);
+        $("#idCheckBtn").prop("disabled", false);
+        $("input[name='idCheckYN']").val("N");
+        $("#checkResult").text("");
+    });
+});
 
 // 이메일 도메인 선택 처리
 function handleEmailSelect() {
@@ -73,25 +99,49 @@ function fn_invalidate2() {
     return true;
 	
 }
-// 비밀번호 일치 확인
+//비밀번호 일치 확인 로직 보완
 function validatePasswordMatch(e) {
     const password = $("#password_").val();
-    const passwordcheck = $(e.target).val();
+    const passwordCheck = $(e.target).val();
     const $span = $("#checkResult");
     
-    if(password.length >= 4 && passwordcheck.length >= 4) {
-        if(password === passwordcheck) {
-            $span.text("비밀번호가 일치합니다.").css("color", "green");
-            $("input[value='가입']").prop("disabled", false);
+    if(password.length >= 4 && passwordCheck.length >= 4) {
+        if(password === passwordCheck) {
+            $span.text("비밀번호가 일치합니다.").css({
+                "color": "green",
+                "font-weight": "bold"
+            });
+            // 비밀번호 일치 시 가입 버튼 활성화
+            $("input[value='회원가입']").prop("disabled", false);
         } else {
-            $span.text("비밀번호가 일치하지 않습니다.").css("color", "red");
-            $("input[value='가입']").prop("disabled", true);
+            $span.text("비밀번호가 일치하지 않습니다.").css({
+                "color": "red",
+                "font-weight": "bold"
+            });
+            // 비밀번호 불일치 시 가입 버튼 비활성화
+            $("input[value='회원가입']").prop("disabled", true);
         }
     }
 }
+// 비밀번호 일치 확인
+//function validatePasswordMatch(e) {
+//    const password = $("#password_").val();
+//    const passwordcheck = $(e.target).val();
+//    const $span = $("#checkResult");
+    
+//    if(password.length >= 4 && passwordcheck.length >= 4) {
+//        if(password === passwordcheck) {
+//            $span.text("비밀번호가 일치합니다.").css("color", "green");
+//            $("input[value='가입']").prop("disabled", false);
+//       } else {
+//            $span.text("비밀번호가 일치하지 않습니다.").css("color", "red");
+//            $("input[value='가입']").prop("disabled", true);
+//        }
+//	}
+//}
 
 // 아이디 중복 확인
-function checkDuplicate() {
+function checkId() {
     const inputId = $("#memberId_").val();
     window.open(
         `${contextPath}/member/idduplicate.do?id=${inputId}`,
@@ -99,6 +149,12 @@ function checkDuplicate() {
         "width=300,height=200"
     );
 }
+
+// ID 중복확인 여부 검사
+    if($("input[name='idCheckYN']").val() !== "Y") {
+        alert("아이디 중복확인이 필요합니다.");
+        return false;
+    }
 
 // 이메일 유효성 검사
 function validateEmail(email) {
@@ -121,6 +177,15 @@ function checkEmail() {
         alert("유효한 이메일 형식이 아닙니다.");
         return;
     }
+	
+	// 이메일 인증 여부 검사
+	    if($("input[name='emailVerified']").val() !== "Y") {
+	        alert("이메일 인증이 필요합니다.");
+	        return false;
+	    }
+
+	    return true;
+	}
 
 	// 이메일 중복 체크
 	$.ajax({
@@ -140,7 +205,7 @@ function checkEmail() {
 	        alert("이미 사용중인 이메일 입니다.");
 	    }
 	});
-}
+
 
 // 인증 이메일 발송 함수 분리
 function sendVerificationEmail(email) {
