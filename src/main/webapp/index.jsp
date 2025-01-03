@@ -57,6 +57,81 @@
 			</section>
 			
 			
+				<c:forEach var="item" items="${populars }" varStatus="status">
+					<c:if test="${status.index % 4 ==0 }">
+						<section class="row card-section">
+					</c:if>
+					<div class="card-container" data-post-no="${item.postNo}">
+						<div class="card-img">
+						    <c:choose>
+						        <c:when test="${not empty item.postImg}">
+						            <img width="150px" height="150px" src="${path}/resources/images/upload/${item.postImg[0].renamed}">
+						        </c:when>
+						        <c:otherwise>
+						            <img src="${path}/resources/common/images/logo.jpeg">
+						        </c:otherwise>
+						    </c:choose>
+						</div>
+						<div class="card-content">
+							<c:choose>
+								<c:when test="${fn:length(item.member.memberName) >10 }">
+									<p>${fn:substring(item.member.memberName,0,9)}...</p>
+								</c:when>
+								<c:otherwise>
+									<p>${item.member.memberName }</p>
+								</c:otherwise>
+							</c:choose>
+								<!-- 판매물품 제목은 10글자까지, 
+									프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
+									ex) 하나둘셋넷다섯여섯...-->
+							<%-- <p><strong>판매물품 제목</strong></p> --%>
+							<p><strong>${item.postTitle}</strong></p>
+							<%-- <p>₩ 판매금액</p> --%>
+							<!-- 상품 타입이 물품인 경우 -->
+							<c:if test="${item.productType==1 }">
+								<!-- stockCount 변수에 재고 넣음 -->
+								<c:set var="stockCount" value="${item.product2.stockCount }"/>
+								<c:choose>
+									<c:when test="${stockCount>0 }">
+										<c:set var="price" value="${item.product2.productPrice }"/>
+										<c:if test="${price>0 }">
+											<p>₩ <fmt:formatNumber value="${price }" pattern="###,###,###"/></p>
+										</c:if>
+										<c:if test="${price==0 }">
+											<p style="color:#2ecc71; font-weight:bold;">무료나눔</p>
+										</c:if>
+									</c:when>
+									<c:otherwise>
+										<p style="color:#e74c3c; font-weight:bold;">판매종료</p>
+									</c:otherwise>
+								</c:choose>
+							</c:if>
+							<!-- 상품 타입이 파일인 경우 -->
+							<c:if test="${item.productType==2 }">
+								<!-- salePeriod 변수에 판매기간 넣음 -->
+								<c:set var="salePeriod" value="${item.file2.salePeriod }"/>
+								<c:choose>
+									<c:when test="${salePeriod.compareTo(today) >= 0 }">
+										<c:set var="price" value="${item.file2.filePrice }"/>
+										<c:if test="${price>0 }">
+											<p>₩ <fmt:formatNumber value="${price }" pattern="###,###,###"/></p>
+										</c:if>
+										<c:if test="${price==0 }">
+											<p style="color:#2ecc71; font-weight:bold;">무료나눔</p>
+										</c:if>
+									</c:when>
+									<c:otherwise>
+										<p style="color:#e74c3c; font-weight:bold;">판매종료</p>
+									</c:otherwise>
+								</c:choose>
+							</c:if>
+						</div>
+					</div>
+					
+					<c:if test="${status.index % 4 == 3 || status.last }">
+						</section>
+					</c:if>
+				</c:forEach>
 			
 			
 			
@@ -72,9 +147,10 @@
 			
 			
 			
-			<!-- 나중에 ajax 통신할 때는 append 이용해서 진행해야함 -->
+			
+<%-- 			<!-- 나중에 ajax 통신할 때는 append 이용해서 진행해야함 -->
 			<c:forEach var="i" begin="1" end="2">
-			<%-- <c:forEach var="item" items="${post }" varStatus="status"> --%>
+			<c:forEach var="item" items="${post }" varStatus="status">
 			<section class="row card-section">
 				<c:forEach var="j" begin="1" end="4">
 				<div class="card-container">
@@ -92,7 +168,7 @@
 						<p><strong>판매물품 제목 &nbsp; ${4*(i-1)+j }</strong></p>
 						<!-- <p><strong>${item.postTitle}</strong></p> -->
 						<c:set var="stockCount" value="${Math.round(Math.random())}"/> <!-- 재고가 0이 되면 판매 종료로 바뀜 -->
-						<%-- <c:set var="salePeriod" value="${'2025-01-25'}" /> --%> <!-- 판매기간이 지나면 판매 종료로 바귐 -->
+						<c:set var="salePeriod" value="${'2025-01-25'}" /> <!-- 판매기간이 지나면 판매 종료로 바귐 -->
 						<c:choose>
 							<c:when test="${stockCount > 0}"> <!-- 판매 종료로 바뀌는 조건문, *** 서버에서 두 값은 초기화 후에 저장시켜야함. -->
 								<c:set var="isFree" value="${Math.round(Math.random())}"/>
@@ -115,7 +191,7 @@
 				</div>
 				</c:forEach>
 			</section>
-			</c:forEach>
+			</c:forEach> --%>
 			<!-- 섹션 4 -->
 			<section class="row main-section">
 				<!-- 로그인 페이지로 이동 -->
