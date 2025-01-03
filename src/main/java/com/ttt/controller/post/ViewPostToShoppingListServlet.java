@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 import com.ttt.dto.Cart2;
 import com.ttt.dto.Member2;
 import com.ttt.dto.Post2;
+import com.ttt.service.PaymentService;
 
 @WebServlet("/post/toshoppinglist")
 public class ViewPostToShoppingListServlet extends HttpServlet {
@@ -29,38 +30,39 @@ public class ViewPostToShoppingListServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         JSONObject jsonResponse = new JSONObject();
         
-        try {
-            // 파라미터 검증
-            if(request.getParameter("postNo") == null || request.getParameter("memberNo") == null) {
-                throw new IllegalArgumentException("필수 파라미터가 누락되었습니다.");
-            }
-            
-            int postNo = Integer.parseInt(request.getParameter("postNo"));
-            int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-            
-            Post2 post = Post2.builder().postNo(postNo).build();
-            Member2 member = Member2.builder().memberNo(memberNo).build();
-            
-            Cart2 cart = Cart2.builder()
-                    .post(post)
-                    .member(member)
-                    .isPayment(0)  // 초기값 설정
-                    .build();
-            
-            // DB 저장 로직 필요
-            int result = cartService.insertCart(cart);
-            
-            jsonResponse.put("success", result > 0);
-            jsonResponse.put("message", result > 0 ? "장바구니에 추가되었습니다." : "장바구니 추가에 실패했습니다.");
-            
-        } catch(Exception e) {
-            jsonResponse.put("success", false);
-            jsonResponse.put("message", "오류가 발생했습니다: " + e.getMessage());
+        // 파라미터 검증
+        if(request.getParameter("postNo") == null || request.getParameter("memberNo") == null) {
+            throw new IllegalArgumentException("필수 파라미터가 누락되었습니다.");
         }
         
-        out.print(jsonResponse.toString());
-        out.flush();
+        int postNo = Integer.parseInt(request.getParameter("postNo"));
+        int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+        
+        Post2 post = Post2.builder().postNo(postNo).build();
+        Member2 member = Member2.builder().memberNo(memberNo).build();
+        
+        Cart2 cart = Cart2.builder()
+                .post(post)
+                .member(member)
+                .build();
+        
+        String msg, loc = "/";
+        // DB 저장 로직
+        try {
+        	int result = new PaymentService().insertCart(cart);
+        	msg="장바구니 등록 성공!";
+        	loc="/payment/shoppinglist";
+        } catch (RuntimeException e) {
+        	msg="장바구니 등록 실패";
+        	loc="/post/viewpost";
+        }
+        
+        request.setAttribute("msg", msg);
+        request.setAttribute("loc", loc);
+        
+        request.getRequestDispatcher("WEB-INF/views/common/msg.jsp").forward(request, response);
+       
     }
-	}
+	
 
 }
