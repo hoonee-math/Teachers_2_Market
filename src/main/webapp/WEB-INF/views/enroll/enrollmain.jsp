@@ -23,8 +23,6 @@
 <link rel="stylesheet" href="${path }/resources/css/common/footer.css">
 <!-- 스크립트 연결 -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="${path}/resources/js/enroll/enrollMember.js"></script>
-<script src="${path}/resources/js/enroll/enrollendMember.js"></script>
 <style>
 /* 입력 필드 스타일 추가 */
 button, input, select, textarea {
@@ -189,20 +187,20 @@ input[type="radio"]:first-child {
 							<tr>
 								<th>이름 입력 *</th>
 								<td><input type="text" id="memberName" name="memberName"
-									style="width: 230px;" required></td>
+									style="width: 230px;" ></td>
 							</tr>
 							<tr>
 								<th>아이디 *</th>
 								<td><input type="text" name="memberId" id="memberId"
-									style="width: 230px;" required> <input type="button"
+									style="width: 230px;"> <input type="button"
 									value="ID 중복확인" id="idCheckBtn" onclick="checkId()"></td>
 							</tr>
 							<tr>
 								<th>이메일 *</th>
 								<td><input type="text" name="emailId" id="emailId"
-									style="width: 90px;" required> @ <input type="text"
+									style="width: 90px;" > @ <input type="text"
 									name="emailDomain" id="emailDomain" style="width: 90px;"
-									required> <input type="button" value="이메일 인증"
+									> <input type="button" value="이메일 인증"
 									id="emailCheckBtn"> <!-- margin-left 값을 32px에서 더 늘려서 조정 -->
 									<select id="emailSelect" style="margin-left: 130px;">
 										<option value="">직접입력</option>
@@ -216,17 +214,17 @@ input[type="radio"]:first-child {
 							<tr>
 								<th>패스워드 *</th>
 								<td><input type="password" name="memberPw" id="password_"
-									placeholder="대소문자, 숫자, 특수문자 포함" required><br></td>
+									placeholder="대소문자, 숫자, 특수문자 포함"><br></td>
 							</tr>
 							<tr>
 								<th>패스워드확인 *</th>
-								<td><input type="password" id="password_2" required><br>
+								<td><input type="password" id="password_2"><br>
 									<span id="checkResult"></span></td>
 							</tr>
 							<tr>
-								<th>닉네임</th>
-								<td><input type="text" name="memberNick" id="memberNick"
-									style="width: 320px;" placeholder="다른 사용자에게 보여줄 닉네임을 입력하세요."><br>
+								<th>생년월일</th>
+								<td><input type="text" name="birthday" id="birthday"
+									style="width: 270px;"><br>
 								</td>
 							</tr>
 							<tr>
@@ -254,6 +252,19 @@ input[type="radio"]:first-child {
 									type="radio" name="eduType" id="institute" value="2"> <label
 									for="institute">학원 강사</label></td>
 							</tr>
+							<tr>
+								<th>과목</th>
+								<td>
+								<input type="radio" name="subjectNo" id="kor" value="1"><label for="kor">국어</label> 
+								<input type="radio" name="subjectNo" id="eng" value="2"><label for="eng">영어</label>
+								<input type="radio" name="subjectNo" id="math" value="3"><label for="math">수학</label>
+								<input type="radio" name="subjectNo" id="soc" value="4"><label for="soc">사회</label>
+								<input type="radio" name="subjectNo" id="sci" value="5"><label for="sci">과학</label>
+								<br>
+								<input type="radio" name="subjectNo" id="art" value="6" style="margin-left:0px;"><label for="art">예체능</label>
+								<input type="radio" name="subjectNo" id="another" value="7" style="margin-left:3px;"><label for="another">기타</label>
+								</td>
+							</tr>
 							<tr class="school-name">
 								<th>학교/학원 이름 *</th>
 								<td>
@@ -265,7 +276,7 @@ input[type="radio"]:first-child {
 										</select> <select name="district" id="district"
 											onchange="schoolSearch(event);">
 											<option value="">구/군 선택</option>
-										</select> <select name="schoolNo" id="school-name" required>
+										</select> <select name="schoolNo" id="school-name">
 											<option value="">학교명</option>
 										</select> <input type="button" value="확인" class="school-check-btn">
 									</div> <!-- 학원명 입력용 input -->
@@ -331,5 +342,7 @@ $('input[name="eduType"]').on('change', function() {
     }
 });
 </script>
+<script src="${path}/resources/js/enroll/enrollMember.js"></script>
+<script src="${path}/resources/js/enroll/enrollendMember.js"></script>
 </body>
 </html>
