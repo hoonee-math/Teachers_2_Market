@@ -63,7 +63,8 @@ public class AdminMenu extends HttpServlet {
 //		}
 	    
 	    List<Post2> allNotify = new BoardService().selectAllNotify();
-
+	    System.out.println(allNotify);
+	    
 	    // 전체 데이터 수
 	    int totalData = allNotify.size();
 	    // 전체 페이지 수 계산

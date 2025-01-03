@@ -67,6 +67,13 @@
 	<select id="selectNotice" resultMap="postMap">
 		SELECT * FROM post2 WHERE PRODUCT_TYPE=0 AND IS_FIX=1
 	</select>
+	<!-- AdminMenu.jsp에서 공지사항에 사용할 정보 -->
+	<select id="selectAllNotify" resultMap="postMap">
+		SELECT * 
+		FROM POST2 
+		WHERE PRODUCT_TYPE = 0 
+		ORDER BY IS_FIX DESC, POST_NO DESC
+	</select>
 	<!-- boardList.jsp에 띄울 이미지 -->
 	<select id="selectThumbnailByPost" resultMap="image2.imageMap">
 		SELECT * FROM IMAGE2 WHERE POST_NO=#{postNo} AND IMG_SEQ=1
@@ -93,4 +100,5 @@
 			ORDER BY VIEW_COUNT DESC)
 		WHERE 8 >= ROWNUM
 	</select>
+	
 </mapper>
