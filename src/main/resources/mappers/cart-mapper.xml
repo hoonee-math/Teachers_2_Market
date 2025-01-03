@@ -4,9 +4,15 @@
 	<resultMap id="cartMap" type="cart2">
 		<id column="cart_no" property="cartNo"/>
 		<result column="is_payment" property="isPayment"/>
-		<result column="post_no" property="post"/>
-		<result column="payment_no" property="payment"/>
-		<result column="member_no" property="member"/>
+		<association property="post" javaType="post2">
+            <id column="post_no" property="postNo"/>
+        </association>		
+		<association property="payment" javaType="payment2">
+            <id column="payment_no" property="paymentNo"/>
+        </association>		
+        <association property="member" javaType="member2">
+            <id column="member_no" property="memberNo"/>
+        </association>
 	</resultMap>
 	
 	<insert id="insertCart" parameterType="cart2">
