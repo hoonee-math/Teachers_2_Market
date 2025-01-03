@@ -28,7 +28,7 @@ public class AdminMenu extends HttpServlet {
 	    try {
 	        cpage = Integer.parseInt(request.getParameter("cpage"));
 	    } catch (NumberFormatException e) {
-	    	e.printStackTrace();
+	    	System.out.println("현재 페이지에서는 페이지에 표시할 데이터 수를 처리하는 값을 받아오고 있지 않습니다.");
 	    }
 
 	    // 페이지당 게시물 수

@@ -66,8 +66,14 @@
 					</c:if>
 					<div class="card-container">
 						<div class="card-img">
-							<img src="${path }/resources/common/images/logo.jpeg">
-							<%-- <img width="150px" height="150px" src="${path }/resources/board/images/${item.postImg.renamed}"> --%>
+						    <c:choose>
+						        <c:when test="${not empty item.postImg}">
+						            <img width="150px" height="150px" src="${path}/resources/images/upload/${item.postImg[0].renamed}">
+						        </c:when>
+						        <c:otherwise>
+						            <img src="${path}/resources/common/images/logo.jpeg">
+						        </c:otherwise>
+						    </c:choose>
 						</div>
 						<div class="card-content">
 							<c:choose>
