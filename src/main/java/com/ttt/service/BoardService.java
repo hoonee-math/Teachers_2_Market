@@ -20,4 +20,11 @@ public class BoardService {
 		
 		return posts;
 	}
+	
+	public int getTotalCount(int categoryNo) {
+		SqlSession session = getSession();
+		int result = dao.getTotalCount(session, categoryNo);
+		session.close();
+		return result;
+	}
 }
