@@ -21,10 +21,10 @@ public class MemberDao {
 
 	// 관리자 메뉴 : 전체 멤버 리스트 출력
 	public List<Member2> selectAllMember(SqlSession session){
-		return session.selectList("member.selectAllMember");
+		return session.selectList("member2.selectAllMember");
 	}
 	// 관리자 메뉴 : 전체 멤버 업데이트
 	public List<Member2> updateAllMember(SqlSession session, int updateType){
-		return session.selectList("member.selectAllMember");
+		return session.selectList("member2.selectAllMember");
 	}
 }
