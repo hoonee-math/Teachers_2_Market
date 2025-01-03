@@ -20,6 +20,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("서블릿도착");
 		String memberName = request.getParameter("memberName");
 		String memberId = request.getParameter("memberId");
 		
@@ -28,14 +29,22 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		String email = emailId + "@" + emailDomain;
 		
 		String memberPw = request.getParameter("memberPw");
-		String memberNick = request.getParameter("memberNick");
 		
 		String addressNo = request.getParameter("addressNo");
 		String addressRoad = request.getParameter("addressRoad");
 		String addressDetail = request.getParameter("addressDetail");
 		String address = "("+addressNo+") "+addressRoad+" "+addressDetail;
 		
-		int eduType = Integer.parseInt(request.getParameter("eduType"));
+		int eduType = 0;
+		int birthday = 0;
+		int subjectNo = 0;
+		try {
+			eduType = Integer.parseInt(request.getParameter("eduType"));
+			birthday = Integer.parseInt(request.getParameter("birthday"));
+			subjectNo = Integer.parseInt(request.getParameter("subjectNo"));
+		}catch(Exception e) {
+			e.printStackTrace();
+		};
 		
 		Member2 m = Member2.builder()
 				.memberName(memberName)
@@ -44,19 +53,22 @@ public class MemberEnrollEndServlet extends HttpServlet {
 				.email(email)
 				.address(address)
 				.eduType(eduType)
+				.birthday(birthday)
+				.subjectNo(subjectNo)
 				.build();
 		
 		//db에 저장하기!
 		String msg, loc="/";
 		
 		try {
+			System.out.println("디비저장시작");
 			int result = new MemberService().insertMember(m);
 			msg="회원가입에 성공했습니다!";
 			loc="/member/login";
 		}catch(Exception e) {
 			e.printStackTrace();
 			msg="회원가입에 실패하셨습니다. 다시 시도해주세요.";
-			loc="/member/enroll";
+			loc="/member/enrollmain";
 		}
 		
 		request.setAttribute("msg",msg);
