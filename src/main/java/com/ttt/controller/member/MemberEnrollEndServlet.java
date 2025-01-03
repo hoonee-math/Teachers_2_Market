@@ -1,6 +1,7 @@
 package com.ttt.controller.member;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ttt.dto.Member2;
+import com.ttt.service.MemberService;
 
 @WebServlet("/member/enrollend")
 public class MemberEnrollEndServlet extends HttpServlet {
@@ -21,7 +23,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		String memberName = request.getParameter("memberName");
 		String memberId = request.getParameter("memberId");
 		
-		String emailId = request.getParameter("emailId");
+		String emailId = request.getParameter("emailId");`
 		String emailDomain = request.getParameter("emailDomain");
 		String email = emailId + "@" + emailDomain;
 		
@@ -48,11 +50,20 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		String msg, loc="/";
 		
 		try {
-			int result = new Member2Service().
-		}catch {
-			
-			
+			int result = new MemberService().insertMember(m);
+			msg="회원가입에 성공했습니다!";
+			loc="/member/login";
+		}catch(Exception e) {
+			e.printStackTrace();
+			msg="회원가입에 실패하셨습니다. 다시 시도해주세요.";
+			loc="/member/enroll";
 		}
+		
+		request.setAttribute("msg",msg);
+		request.setAttribute("loc",loc);
+		
+		request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);
+		
 		
 		
 		

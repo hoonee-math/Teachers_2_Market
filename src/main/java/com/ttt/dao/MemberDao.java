@@ -29,4 +29,8 @@ public class MemberDao {
 		System.out.println("DAO - 전체 멤버 업데이트");
 		return session.selectList("member2.selectAllMember");
 	}
+	// 사용자 메뉴 : 회원 정보 등록
+	public int insertMember(SqlSession session, Member2 m) {
+		return session.insert("member2.insertMember",m);
+	}
 }

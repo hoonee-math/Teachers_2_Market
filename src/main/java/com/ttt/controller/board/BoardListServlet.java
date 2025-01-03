@@ -39,6 +39,7 @@ public class BoardListServlet extends HttpServlet {
 		BoardService service = new BoardService();
 		//공지사항 조회
 		List<Post2> notice = service.selectNotice();
+		request.setAttribute("notices", notice);
 		
 		//게시글 조회 
 		Map<String, Integer> param = Map.of(
@@ -107,7 +108,6 @@ public class BoardListServlet extends HttpServlet {
 		}
 		pageBar.append("</ul>");
 		
-		request.setAttribute("notice", notice);
 		request.setAttribute("posts", posts);
 		request.setAttribute("pageBar", pageBar.toString());
 
