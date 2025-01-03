@@ -241,9 +241,9 @@
 								<td>${post.viewCount}</td>
 								<td>
 									<button type="button"
-										class="fix-toggle ${post.isFix ? 'fixed' : ''}"
+										class="fix-toggle ${post.isFix  eq 1? 'fixed' : ''}"
 										onclick="toggleFix(${post.postNo}, this)">
-										${post.isFix ? '고정' : '일반'}</button>
+										${post.isFix  eq 1? '고정' : '일반'}</button>
 								</td>
 								<td>
 									<button type="button" onclick="editNotice(${post.postNo})">수정</button>
