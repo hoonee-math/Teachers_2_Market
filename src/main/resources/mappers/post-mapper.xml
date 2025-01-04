@@ -195,7 +195,6 @@
 	
 	<select id="selectLastPostNo" resultType="_int">
 		SELECT SEQ_POST2_NO.CURRVAL FROM DUAL
-		<!-- SELECT MAX(POST_NO) FROM POST2 -->
 	</select>
 	
 	<select id="insertProduct" parameterType="post2">

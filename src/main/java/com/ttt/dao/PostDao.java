@@ -31,7 +31,7 @@ public class PostDao {
 		return session.insert("post2.insertPost",p);
 	}
 	public int selectLastPostNo(SqlSession session) {
-		return session.insert("post2.selectLastPostNo");
+		return session.selectOne("post2.selectLastPostNo");
 	}
 	public int insertProduct(SqlSession session, Post2 product) {
 		return session.insert("post2.insertProduct", product);
