@@ -70,6 +70,12 @@
 						<label for="title"><h3>제목</h3></label>
 						<input type="text" id="title" name="postTitle" required>
 					</div>
+					<div class="input-group" style="margin-top: 10px;">
+						<label for="isFix"> 
+							<input type="checkbox" id="isFix" name="isFix" value="1"> 
+							상단 고정
+						</label>
+					</div>
 				</div>
 				
 				<!-- 판매 파일 업로드 (파일 판매 시에만 표시) -->
