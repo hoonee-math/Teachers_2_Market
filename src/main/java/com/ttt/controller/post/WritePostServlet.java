@@ -1,6 +1,5 @@
 package com.ttt.controller.post;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
@@ -25,6 +24,7 @@ import com.ttt.dto.Member2;
 import com.ttt.dto.Post2;
 import com.ttt.dto.Product2;
 import com.ttt.service.PostService;
+import com.ttt.util.post.FileUploadUtil;
 
 @WebServlet("/post/write/*")
 public class WritePostServlet extends HttpServlet {
@@ -70,18 +70,21 @@ public class WritePostServlet extends HttpServlet {
     	        // 1. 로그인 체크 (확인)
     	        Member2 loginMember = (Member2)request.getSession().getAttribute("loginMember");
     	        if(loginMember == null) {
-    	            throw new RuntimeException("회원만 접근 가능합니다.");
+    	            throw new RuntimeException("로그인이 필요한 서비스입니다.");
     	        }
 
 				// 2. 파일 저장 경로 설정
-				String savePath = getServletContext().getRealPath("/resources/upload/post");
-				File dir = new File(savePath);
-				if (!dir.exists())
-					dir.mkdirs();
+    	        String webAppPath = request.getServletContext().getRealPath("/");
 
 				// 3. MultipartRequest 생성
-				MultipartRequest mr = new MultipartRequest(request, savePath, 1024 * 1024 * 100, // 100MB
-						"UTF-8", new DefaultFileRenamePolicy());
+    	        String uploadPath = FileUploadUtil.getUploadDirectory(webAppPath, FileUploadUtil.TEMP_DIR);
+    	        MultipartRequest mr = new MultipartRequest(
+    	            request,
+    	            uploadPath,
+    	            1024 * 1024 * 100,  // 100MB
+    	            "UTF-8",
+    	            new DefaultFileRenamePolicy()
+    	        );
 
 				// 4. Post2 객체 생성
 				Post2 post = Post2.builder()
@@ -138,15 +141,36 @@ public class WritePostServlet extends HttpServlet {
 								.build();
 						post.setFile2(file);
 					}
+
+					// 상품 이미지 파일 처리
+					List<Image2> images = new ArrayList<>();
+					Enumeration<String> files = mr.getFileNames();
+					while (files.hasMoreElements()) {
+						String fileName = files.nextElement();
+						if (fileName.startsWith("upfile")) { // 상품 이미지 파일
+							oriname = mr.getOriginalFileName(fileName);
+							renamed = mr.getFilesystemName(fileName);
+							if (oriname != null) {
+								Image2 img = Image2.builder()
+										.oriname(oriname)
+										.renamed(renamed)
+										.imgSeq(images.size() + 1) // 순차적으로 번호 부여
+										.build();
+								images.add(img);
+							}
+						}
+					}
+					post.setPostImg(images);
 				}
 
 				// 트랜잭션 처리
 				PostService service = new PostService();
-				int result = service.insertPost(post);
+				int result = service.insertPost(post, mr, webAppPath);
 
 				if (result > 0) {
 					responseData.put("success", true);
 					responseData.put("message", "게시글이 등록되었습니다.");
+		            responseData.put("postNo", post.getPostNo());
 				} else {
 					throw new RuntimeException("게시글 등록에 실패했습니다.");
 				}

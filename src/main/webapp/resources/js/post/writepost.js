@@ -344,11 +344,18 @@ function submitForm() {
 		formData.append('filePrice', $('#price').val() || 0);
 		formData.append('salePeriod', $('#salePeriod').val());
 
+		// 상품 이미지 파일들 추가
+		const imageFiles = $('#imageUpload')[0].files;
+		for (let i = 0; i < imageFiles.length; i++) {
+			formData.append('upfile' + i, imageFiles[i]);
+		}
+		
 		// 판매할 파일들 추가
 		const uploadFiles = $('#fileUpload')[0].files;
 		for (let i = 0; i < uploadFiles.length; i++) {
 			formData.append('uploadFile' + i, uploadFiles[i]);
 		}
+
 	}
 
 	// 임시저장 여부
