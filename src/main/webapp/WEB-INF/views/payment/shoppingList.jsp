@@ -49,8 +49,9 @@
 		<div class="main-content">
 			<p><img width="20px" src="${path}/resources/images/payment/shoppingCart.png"> 장바구니 </p>
 			<div id="main-box">
-			<button id="checkAll" onclick="checkAll();">전체선택</button>
-			<button id="checkDelete">선택삭제</button>
+			<form action="${path }/payment/deletecart" method="POST" id="cartForm">
+				<button type="button" id="checkAll" onclick="checkAll();">전체선택</button>
+				<button type="submit" id="checkDelete">선택삭제</button>
 			
 			<c:forEach var="item" items="${carts }" varStatus="status">
 				<section class="row main-section">
@@ -59,8 +60,9 @@
 						 data-product-type="${item.post.productType }"
 						 data-product-price="${item.product2.productPrice }"
 						 data-delivery-fee="${item.product2.deliveryFee }"
-						 data-file-price="${item.file2.filePrice }">
-						<input type="checkbox" class="select-btn">
+						 data-file-price="${item.file2.filePrice }"
+						 data-cart-no="${item.cartNo }">
+						<input type="checkbox" class="select-btn" name="cartNo" value="${item.cartNo }">
 						<table class="product-container">
 							<tr>
 								<td class="list-img">
@@ -130,6 +132,7 @@
 					</div>
 				</section>
 			</c:forEach>
+			</form> 
 			
 			
 			
@@ -176,7 +179,22 @@
 		calculateTotalPrice();
 	}
 	
-	//장바구니 리스트의 회색 박스 영역 클릭시, 해당 상품의 상세 페이지로 이동
+	//선택 삭제 버튼 클릭 시,
+	document.getElementById('cartForm').addEventListener('submit', function(e) {
+		e.preventDefault(); //기본 제출 동작 중지
+		
+		const checked = document.querySelectorAll('input[name="cartNo"]:checked');
+		
+		if(checked.length === 0) {
+			alert('삭제할 상품을 선택해주세요.');
+			return;
+		}
+		if(confirm('선택한 상품을 삭제하시겠습니까?')) {
+			this.submit();
+		}
+	});
+	
+	//장바구니 리스트의 회색 박스 영역 클릭 시, 해당 상품의 상세 페이지로 이동
 	$('.list-container').click(function(e) {
 		if (!$(e.target).is('.select-btn')) {
 			const postNo = $(this).data('post-no');
@@ -217,7 +235,7 @@
 	//체크박스 변경 시, 가격 다시 계산
 	$(document).on('change', '.select-btn', calculateTotalPrice);
 	
-	//페이지 로드시, 초기 계산
+	//페이지 로드 시, 초기 계산
 	$(document).ready(function() {
 		calculateTotalPrice();
 	});
