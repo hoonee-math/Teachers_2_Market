@@ -79,6 +79,7 @@
 				
 				
 				<c:set var="stockCount" value="${post.product2.stockCount }"/>
+				<c:set var="salePeriod" value="${post.file2.salePeriod }"/>
 				<!-- 상품 정보 영역 -->
 				<div class="post-info">
 					<!-- 판매자 정보 -->
@@ -108,7 +109,6 @@
 							</c:if>
 					
 							<c:if test="${post.productType==2 }">
-								<c:set var="salePeriod" value="${post.file2.salePeriod }"/>
 								<c:choose>
 									<c:when test="${salePeriod.compareTo(today) >= 0 }">
 										<c:set var="price" value="${post.file2.filePrice }"/>
@@ -149,6 +149,9 @@
 						</button>
 						<c:choose>
 						<c:when test="${stockCount>0 }">
+							<button class="post-buy-btn">바로구매</button>
+						</c:when>
+						<c:when test="${salePeriod.compareTo(today) >= 0 }">
 							<button class="post-buy-btn">바로구매</button>
 						</c:when>
 						<c:otherwise>
