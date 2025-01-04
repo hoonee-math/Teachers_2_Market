@@ -16,13 +16,11 @@ import com.ttt.dto.File2;
 import com.ttt.dto.Image2;
 
 public class FileUploadUtil {
-    // 파일 저장 기본 디렉토리
-    private static final String BASE_UPLOAD_DIR = "resources/upload";
     
     // 파일 종류별 서브 디렉토리
-    private static final String FILE_DIR = "files";
-    private static final String IMAGE_DIR = "images";
-    private static final String TEMP_DIR = "temp";
+    private static final String FILE_DIR = "WEB-INF/secure-files";
+    private static final String IMAGE_DIR = "resources/upload/images";
+    //private static final String TEMP_DIR = "resources/upload/temp";
     
     // 파일 크기 제한 (단위: byte)
     private static final long MAX_FILE_SIZE = 100 * 1024 * 1024;    // 100MB
@@ -38,7 +36,7 @@ public class FileUploadUtil {
      * 전체 업로드 경로 가져오기
      */
     public static String getUploadDirectory(String webAppPath, String subDir) {
-        return Paths.get(webAppPath, BASE_UPLOAD_DIR, subDir).toString();
+        return Paths.get(webAppPath, subDir).toString();
     }
 
     /**
