@@ -58,4 +58,7 @@
  		)
  	</insert>
 	
+	<select id="selectMemberById" parameterType="string" resultMap="memberMap">
+		SELECT * FROM MEMBER2 WHERE MEMBER_ID=#{memberId}
+	</select>
 </mapper>

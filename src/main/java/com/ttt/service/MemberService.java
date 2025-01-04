@@ -29,4 +29,9 @@ public class MemberService {
 			session.close();
 		} return result;
 	}
+	
+	public Member2 selectMemberById(String memberId) {
+		SqlSession session = getSession();
+		return dao.selectMemberById(session, memberId);
+	}
 }
