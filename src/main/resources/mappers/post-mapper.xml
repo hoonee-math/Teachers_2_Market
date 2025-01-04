@@ -163,7 +163,7 @@
 	</select>
 	
 	<!-- 게시글 등록 -->
-	<insert id="insertPost" parameterType="post2">
+	<insert id="insertPost" parameterType="post2" >
 	INSERT INTO POST2 (
 		POST_NO,
 		POST_DATE,
@@ -195,6 +195,7 @@
 	
 	<select id="selectLastPostNo" resultType="_int">
 		SELECT SEQ_POST2_NO.CURRVAL FROM DUAL
+		<!-- SELECT MAX(POST_NO) FROM POST2 -->
 	</select>
 	
 	<select id="insertProduct" parameterType="post2">

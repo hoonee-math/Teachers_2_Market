@@ -68,6 +68,7 @@ public class PostService {
 			// 2. 생성된 postNo 조회
 			int postNo = dao.selectLastPostNo(session);
 			post.setPostNo(postNo);
+			System.out.println("postNo 조회: "+ postNo);
 
 			String memberId = post.getMember().getMemberId();
 
