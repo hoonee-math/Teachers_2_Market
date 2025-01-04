@@ -314,49 +314,65 @@ function submitForm() {
     * 4. 임시저장/등록 완료 후 적절한 페이지로 리다이렉트
     */
 
-	// 기본 게시글 데이터
-	const data = {
-		postTitle: $('#title').val(),
-		postContent: editor.getHTML(),
-		categoryNo: $('#category').val(),
-		subjectNo: $('#subject').val(),
-		productType: $('input[name="type"]:checked').val() === 'product' ? 1 : 2,
-	};
 
-	// 상품/파일 추가 데이터
-	if (data.productType === 1) {
-		data.product = {
-			isFree: $('#isFree').is(':checked') ? 1 : 0,
-			productPrice: $('#price').val(),
-			hasDeliveryFee: $('#hasDeliveryFee').is(':checked') ? 1 : 0,
-			deliveryFee: $('#deliveryFee').val(),
-			stockCount: $('#stock').val()
-		};
+	// FormData 객체 생성
+	const formData = new FormData();
+
+	// 기본 게시글 데이터
+	formData.append('postTitle', $('#title').val());
+	formData.append('postContent', editor.getHTML());
+	formData.append('categoryNo', $('#category').val());
+	formData.append('subjectNo', $('#subject').val());
+	formData.append('productType', $('input[name="type"]:checked').val() === 'product' ? 1 : 2);
+	formData.append('isTemp', $('input[name="isTemp"]').val());
+
+	// 상품/파일 타입별 추가 데이터
+	if ($('input[name="type"]:checked').val() === 'product') {
+		formData.append('isFree', $('#isFree').is(':checked') ? 1 : 0);
+		formData.append('productPrice', $('#price').val() || 0);
+		formData.append('hasDeliveryFee', $('#hasDeliveryFee').is(':checked') ? 1 : 0);
+		formData.append('deliveryFee', $('#deliveryFee').val() || 0);
+		formData.append('stockCount', $('#stock').val() || 1);
+
+		// 상품 이미지 파일들 추가
+		const imageFiles = $('#imageUpload')[0].files;
+		for (let i = 0; i < imageFiles.length; i++) {
+			formData.append('upfile' + i, imageFiles[i]);
+		}
 	} else {
-		data.file = {
-			isFree: $('#isFree').is(':checked') ? 1 : 0,
-			filePrice: $('#price').val(),
-			salePeriod: $('#salePeriod').val()
-		};
+		formData.append('isFree', $('#isFree').is(':checked') ? 1 : 0);
+		formData.append('filePrice', $('#price').val() || 0);
+		formData.append('salePeriod', $('#salePeriod').val());
+
+		// 판매할 파일들 추가
+		const uploadFiles = $('#fileUpload')[0].files;
+		for (let i = 0; i < uploadFiles.length; i++) {
+			formData.append('uploadFile' + i, uploadFiles[i]);
+		}
 	}
+
+	// 임시저장 여부
+	const isTemp = $('input[name="isTemp"]').val() === '1';
 
 	$.ajax({
 		url: contextPath + '/post/write/submit',
 		type: 'POST',
-		contentType: 'application/json;charset=UTF-8',
+		data: formData,
+		processData: false,  // FormData 처리 방지
+		contentType: false,  // Content-Type 자동 설정
 		data: JSON.stringify(data),
 		success: function(response) {
 			if (response.success) {
 				alert(isTemp ? '임시저장되었습니다.' : '공지사항이 등록되었습니다.');
 				// 성공 시 공지사항 목록 페이지로 이동
-				location.href = contextPath + '/admin/menu';
+				location.href = contextPath + '/board/listu';
 			} else {
 				alert(response.message || '등록에 실패했습니다.');
 			}
 		},
 		error: function(xhr, status, error) {
-		console.error('Error:', error);
-		alert('서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+			console.error('Error:', error);
+			alert('서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
 		}
 	});
 }
