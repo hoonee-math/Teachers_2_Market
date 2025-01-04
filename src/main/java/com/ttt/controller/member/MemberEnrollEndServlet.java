@@ -29,6 +29,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		String email = emailId + "@" + emailDomain;
 		
 		String memberPw = request.getParameter("memberPw");
+		String phone = request.getParameter("phone");
 		
 		String addressNo = request.getParameter("addressNo");
 		String addressRoad = request.getParameter("addressRoad");
@@ -50,6 +51,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 				.memberName(memberName)
 				.memberId(memberId)
 				.memberPw(memberPw)
+				.phone(phone)
 				.email(email)
 				.address(address)
 				.eduType(eduType)
