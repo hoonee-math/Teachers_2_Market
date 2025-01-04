@@ -78,12 +78,14 @@ public class PostService {
 
 			// 방금 입력된 post_no 조회
 			int postNo = dao.selectLastPostNo(session);
+			post.setPostNo(postNo);
 
 			// 3. 상품/파일 정보 저장
 			if (post.getProductType() == 1) { // 상품
 				JsonObject productData = jsonData.getAsJsonObject("product");
 				Product2 product = Product2.builder()
-						.postNo(postNo).isFree(productData.get("isFree").getAsInt())
+						.post(post)
+						.isFree(productData.get("isFree").getAsInt())
 						.productPrice(productData.get("productPrice").getAsInt())
 						.hasDeliveryFee(productData.get("hasDeliveryFee").getAsInt())
 						.deliveryFee(productData.get("deliveryFee").getAsInt())
@@ -97,7 +99,8 @@ public class PostService {
 			} else { // 파일
 				JsonObject fileData = jsonData.getAsJsonObject("file");
 				File2 file = File2.builder()
-						.postNo(postNo).isFree(fileData.get("isFree").getAsInt())
+						.post(post)
+						.isFree(fileData.get("isFree").getAsInt())
 						.filePrice(fileData.get("filePrice").getAsInt())
 						.salePeriod(LocalDate.parse(fileData.get("salePeriod").getAsString()))
 						.build();
@@ -112,8 +115,11 @@ public class PostService {
 				JsonArray images = jsonData.getAsJsonArray("images");
 				for (JsonElement img : images) {
 					JsonObject imgObj = img.getAsJsonObject();
-					Image2 image = Image2.builder().postNo(postNo).imgSeq(imgObj.get("imgSeq").getAsInt())
-							.oriname(imgObj.get("oriname").getAsString()).renamed(imgObj.get("renamed").getAsString())
+					Image2 image = Image2.builder()
+							.postNo(postNo)
+							.imgSeq(imgObj.get("imgSeq").getAsInt())
+							.oriname(imgObj.get("oriname").getAsString())
+							.renamed(imgObj.get("renamed").getAsString())
 							.build();
 
 					result = dao.insertImage(session, image);

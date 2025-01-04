@@ -4,13 +4,19 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import com.ttt.dto.File2;
 import com.ttt.dto.Image2;
 import com.ttt.dto.Post2;
+import com.ttt.dto.Product2;
 
 public class PostDao {
 	
 	/* 사용자 메뉴
-	 * uploadPost : 글 등록 
+	 * insertPost : 글 등록 
+	 * selectLastPostNo : 마지막 post_no 조회 - 트랜잭션 안에서 사용 가능
+	 * insertProduct : 상품 정보 저장
+	 * insertFile : 파일 정보 저장
+	 * insertImage : 이미지 정보 저장
 	 * */
 	
 	/* 관리자 메뉴
@@ -21,9 +27,22 @@ public class PostDao {
 	/* 사용자 메뉴        */
 	/////////////////////
 	
-	public int uploadPost(SqlSession session, Post2 p) {
+	public int insertPost(SqlSession session, Post2 p) {
 		return session.insert("post.insertPost",p);
 	}
+	public int selectLastPostNo(SqlSession session) {
+		return session.insert("post.selectLastPostNo");
+	}
+	public int insertProduct(SqlSession session, Product2 product) {
+		return session.insert("post.insertProduct", product);
+	}
+	public int insertFile(SqlSession session, File2 file) {
+		return session.insert("post.insertFile",file);
+	}
+	public int insertImage(SqlSession session, Image2 image) {
+		return session.insert("post.insertImage",image);
+	}
+
 
 	/////////////////////
 	/* 관리자 메뉴        */

@@ -15,6 +15,6 @@ public class Product2 {
 	private int isFree;
 	private int productPrice;
 	private int hasDeliveryFee;
-	private int DeliveryFee;
+	private int deliveryFee;
 	private int stockCount;
 }
