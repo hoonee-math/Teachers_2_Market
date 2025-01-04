@@ -43,6 +43,7 @@ public class FileUploadUtil {
      * 새로운 파일명 생성
      */
     public static String generateFileName(String memberId, int postNo, int sequence, String extension) {
+    	// 예: user123_15_20240104_1.jpg
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         String dateStr = sdf.format(new Date());
         return String.format("%s_%d_%s_%d.%s", memberId, postNo, dateStr, sequence, extension);
@@ -86,18 +87,23 @@ public class FileUploadUtil {
      * 판매용 파일 저장
      */
     public static File2 saveFile(MultipartRequest mr, String webAppPath, String memberId, int postNo) throws IOException {
+    	// 1. 업로드 디렉토리 준비
         String uploadDir = getUploadDirectory(webAppPath, FILE_DIR);
         ensureDirectory(uploadDir);
 
+        // 2. 원본 파일명 가져오기
         String originalFileName = mr.getOriginalFileName("uploadFile0");
         if (originalFileName == null) return null;
 
         String extension = getFileExtension(originalFileName);
+
+        // 3. 파일 유효성 검사
         validateFile(originalFileName, mr.getFile("uploadFile0").length(), false);
-        
+
+        // 4. 새 파일명 생성
         String renamedFileName = generateFileName(memberId, postNo, 1, extension);
         
-        // 파일 저장
+        // 5. 파일 저장
         File originalFile = mr.getFile("uploadFile0");
         File renamedFile = new File(uploadDir, renamedFileName);
         
@@ -117,11 +123,15 @@ public class FileUploadUtil {
      */
     public static List<Image2> saveImages(MultipartRequest mr, String webAppPath, String memberId, int postNo) throws IOException {
         List<Image2> images = new ArrayList<>();
+        
+        // 1. 업로드 디렉토리 준비
         String uploadDir = getUploadDirectory(webAppPath, IMAGE_DIR);
         ensureDirectory(uploadDir);
         
         // 파일 입력 필드명 가져오기 (upfile0, upfile1, ...)
         int sequence = 1;
+        
+        // 2. 각 이미지 파일 처리
         for (String fileParam : getFileParameters(mr)) {
             String originalFileName = mr.getOriginalFileName(fileParam);
             if (originalFileName == null) continue;
@@ -129,6 +139,7 @@ public class FileUploadUtil {
             String extension = getFileExtension(originalFileName);
             validateFile(originalFileName, mr.getFile(fileParam).length(), true);
             
+            // 3. 새 파일명 생성 및 저장ㄴ
             String renamedFileName = generateFileName(memberId, postNo, sequence++, extension);
             
             // 파일 저장
@@ -140,6 +151,7 @@ public class FileUploadUtil {
                 originalFile.delete();
             }
             
+            // 4. Image2 객체 생성 및 추가
             images.add(Image2.builder()
                     .oriname(originalFileName)
                     .renamed(renamedFileName)
