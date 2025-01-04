@@ -7,7 +7,6 @@
 		<result column="oriname" property="oriname"/>
 		<result column="renamed" property="renamed"/>
 		<result column="post_no" property="postNo"/>
-		<result column="review_no" property="reviewNo"/>
 	</resultMap>
 	<!-- 이미지 추가 등록 -->
 	<insert id="insertImageByPostNo" parameterType="image2">
@@ -16,9 +15,9 @@
 		img_seq,
 		oriname,
 		renamed,
-		post_no,
+		post_no
 	) VALUES (
-		SEQ_IMAGE2_NO,
+		SEQ_IMAGE2_NO.NEXTVAL,
 		#{imgSeq},
 		#{oriname},
 		#{renamed},

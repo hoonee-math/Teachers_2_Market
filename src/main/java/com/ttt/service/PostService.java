@@ -82,7 +82,10 @@ public class PostService {
 
 				// 3-2. 상품 이미지 저장
 				List<Image2> images = FileUploadUtil.saveImages(mr, webAppPath, memberId, postNo);
+				System.out.println("이미지 확인 : "+ images);
+				
 				for (Image2 img : images) {
+					System.out.println("이미지 확인 :"+ img);
 					img.setPostNo(postNo);
 					result = dao.insertImageByPostNo(session, img);
 					if (result <= 0)
