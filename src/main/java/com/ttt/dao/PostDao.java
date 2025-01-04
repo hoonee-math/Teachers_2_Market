@@ -50,4 +50,8 @@ public class PostDao {
 		return session.selectOne("post2.selectPostByNoOnAdminMenu",postNo);
 	}
 	
+	public int insertNotify(SqlSession session, Post2 p) {
+		return session.insert("post2.insertNotify",p);
+	}
+	
 }
