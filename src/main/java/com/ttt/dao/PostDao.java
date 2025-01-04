@@ -33,7 +33,7 @@ public class PostDao {
 	public int selectLastPostNo(SqlSession session) {
 		return session.insert("post.selectLastPostNo");
 	}
-	public int insertProduct(SqlSession session, Product2 product) {
+	public int insertProduct(SqlSession session, Post2 product) {
 		return session.insert("post.insertProduct", product);
 	}
 	public int insertFile(SqlSession session, File2 file) {
