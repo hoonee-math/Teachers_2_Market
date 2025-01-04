@@ -178,14 +178,14 @@
         SUBJECT_NO,
         CATEGORY_NO
 	) VALUES (
-		SEQ_POST2_NO.NEXTVAL,
-		SYSDATE,
+		SEQ_POST2_NO.NEXTVAL, 	<!-- POST_NO -->
+		SYSDATE,				<!-- POST_DATE -->
 		#{postTitle},
 		#{postContent},
-		DEFAULT,
+		DEFAULT,				<!-- VIEW_COUNT -->
 		#{isTemp},
 		#{member.memberNo},
-		DEFAULT,
+		DEFAULT,				<!-- IS_DELETED -->
 		#{productType},
 		#{isFix},
         #{subjectNo},

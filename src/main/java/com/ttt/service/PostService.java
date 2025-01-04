@@ -59,6 +59,7 @@ public class PostService {
 		int result = 0;
 
 		try {
+			System.out.println("PostService.java 에 post 객체 전달 값: "+post.toString());
 			// 1. POST2 테이블 insert
 			result = dao.insertPost(session, post);
 			if (result <= 0)

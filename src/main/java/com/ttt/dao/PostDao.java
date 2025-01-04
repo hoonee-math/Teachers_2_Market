@@ -28,16 +28,16 @@ public class PostDao {
 	/////////////////////
 	
 	public int insertPost(SqlSession session, Post2 p) {
-		return session.insert("post.insertPost",p);
+		return session.insert("post2.insertPost",p);
 	}
 	public int selectLastPostNo(SqlSession session) {
-		return session.insert("post.selectLastPostNo");
+		return session.insert("post2.selectLastPostNo");
 	}
 	public int insertProduct(SqlSession session, Post2 product) {
-		return session.insert("post.insertProduct", product);
+		return session.insert("post2.insertProduct", product);
 	}
 	public int insertFile(SqlSession session, File2 file) {
-		return session.insert("post.insertFile",file);
+		return session.insert("post2.insertFile",file);
 	}
 	public int insertImageByPostNo(SqlSession session, Image2 image) {
 		return session.insert("image2.insertImageByPostNo",image);
@@ -49,7 +49,7 @@ public class PostDao {
 	/////////////////////
 	
 	public int deletePost(SqlSession session, Post2 p) {
-		return session.update("post.deletePost",p);
+		return session.update("post2.deletePost",p);
 	}
 	
 	//post2 객체불러오기
