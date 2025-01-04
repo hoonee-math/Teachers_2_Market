@@ -126,21 +126,33 @@
 	
 	<!-- 공지사항 등록 -->
 	<insert id="insertNotify" parameterType="post2">
-		INSERT INTO POST2 (
-			POST_NO,
-			POST_TITLE,
-			POST_CONTENT,
-			MEMBER_NO,
-			PRODUCT_TYPE,
-			IS_FIX,
-		) VALUES (
-			SEQ_POST2_NO.NEXTVAL,
-			#{postTitle},
-			#{postContent},
-			0, <!--#{member.memberNo} 관리자가 등록하도록 설정해줘야함. test 를 위해 0으로 변경 -->
-			0,
-			0,
-		)
+	INSERT INTO POST2 (
+		POST_NO,
+		POST_DATE,
+		POST_TITLE,
+		POST_CONTENT,
+		VIEW_COUNT,
+		IS_TEMP,
+		MEMBER_NO,
+		IS_DELETED,
+		PRODUCT_TYPE,
+		IS_FIX,
+        SUBJECT_NO,
+        CATEGORY_NO
+	) VALUES (
+		SEQ_POST2_NO.NEXTVAL,
+		SYSDATE,
+		#{postTitle},
+		#{postContent},
+		DEFAULT,
+		DEFAULT,
+		#{member.memberNo},
+		DEFAULT,
+		0,
+		#{isFix},
+        1,
+        1
+	)
 	</insert>
 	
 	<!-- 최근 등록된 공지사항 번호 조회 -->
