@@ -33,4 +33,8 @@ public class MemberDao {
 	public int insertMember(SqlSession session, Member2 m) {
 		return session.insert("member2.insertMember",m);
 	}
+	// 사용자 메뉴 : 로그인
+	public Member2 selectMemberById(SqlSession session, String memberId) {
+		return session.selectOne("member2.selectMemberById", memberId);
+	}
 }

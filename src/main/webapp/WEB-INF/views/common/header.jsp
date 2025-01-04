@@ -28,9 +28,9 @@
 			</div>
 		</c:if>
 		<!-- 로그인한 회원 -->
-		<c:if test="${sessionScope.loginMember == null }"> <!-- 글쓰기 등록 페이지 링크 연결을 위해 잠시 전체 공개처리 -->
+		<c:if test="${sessionScope.loginMember != null }">
 			<div class="personal-container">
-				<input type="text" id="personal-name" value="OOO님" style="background-color:white;">
+				<input type="text" id="personal-name" value="${sessionScope.loginMember.memberId }" style="background-color:white;">
 				<button id="personal-btn-write">글쓰기</button>
 				<button id="personal-btn-logout">로그아웃</button>
 				<button id="personal-btn-cart">

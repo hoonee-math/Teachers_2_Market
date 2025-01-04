@@ -106,10 +106,10 @@
 				<!-- 섹션 1 -->
 				<div id="login-inner-container">
 					<div><p id="login-font">Login</p></div>
-					<div><input type="text" id="login-id" placeholder="아이디"></div>
-					<div><input type="password" id="login-pw" placeholder="비밀번호"></div>
-					<div><input type="submit" id="login-btn" value="로그인"></div>
-					<div><input type="submit" id="login-find" value="ID/PW찾기"></div>
+					<div><input type="text" id="login-id" name="memberId" placeholder="아이디"></div>
+					<div><input type="password" id="login-pw" name="memberPw" placeholder="비밀번호"></div>
+					<div><input type="button" id="login-btn" value="로그인"></div>
+					<div><input type="button" id="login-find" value="ID/PW찾기"></div>
 					<div><a href="${path}/member/enroll/termsofservice" id="login-join">회원가입</a></div>
 				</div>
 			</section>
@@ -129,7 +129,40 @@
 <script>
 	$("#login-container").click(function () {
 		location.assign("${path}");
-	})
+	});
+	
+    // 로그인 버튼 클릭 시
+    $("#login-btn").click(function() {
+        // 입력값 가져오기
+        const memberId = $("#login-id").val();
+        const memberPw = $("#login-pw").val();
+        
+        // 폼 동적 생성 및 전송
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '${path}/member/login.do';
+        
+        const idField = document.createElement('input');
+        idField.type = 'hidden';
+        idField.name = 'memberId';
+        idField.value = memberId;
+        
+        const pwField = document.createElement('input');
+        pwField.type = 'hidden';
+        pwField.name = 'memberPw';
+        pwField.value = memberPw;
+        
+        form.appendChild(idField);
+        form.appendChild(pwField);
+        document.body.appendChild(form);
+        form.submit();
+    });
+
+    // ID/PW 찾기 버튼 클릭 시
+    $("#login-find").click(function() {
+        // ID/PW 찾기 페이지로 이동
+        location.assign("${path}/member/findIdPw");  // 실제 경로로 수정 필요
+    });
 </script>
 </body>
 </html>
