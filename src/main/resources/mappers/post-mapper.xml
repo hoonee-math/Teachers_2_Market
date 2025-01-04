@@ -209,11 +209,11 @@
 	) VALUES (
 		SEQ_PRODUCT2_NO.NEXTVAL,
 		#{postNo},
-		#{isFree},
-		#{productPrice},
-		#{hasDeliveryFee},
-		#{deliveryFee},
-		#{stockCount}
+		#{product2.isFree},
+		#{product2.productPrice},
+		#{product2.hasDeliveryFee},
+		#{product2.deliveryFee},
+		#{product2.stockCount}
 	)
 	</select>
 	
@@ -229,11 +229,11 @@
 	) VALUES (
 		SEQ_FILE2_NO.NEXTVAL,
 		#{postNo},
-		#{isFree},
-		#{filePrice},
-		#{salePeriod},
-		#{oriname},
-		#{renamed}
+		#{file2.isFree},
+		#{file2.filePrice},
+		#{file2.salePeriod},
+		#{file2.oriname},
+		#{file2.renamed}
 	)
 	</select>
 </mapper>
