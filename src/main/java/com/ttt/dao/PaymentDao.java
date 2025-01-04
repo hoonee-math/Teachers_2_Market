@@ -17,4 +17,8 @@ public class PaymentDao {
 	public List<Cart2> selectShoppingList(SqlSession session, int memberNo) {
 		return session.selectList("cart2.selectShoppingList", memberNo);
 	}
+	
+	public int deleteSelectedCarts(SqlSession session, List<Integer> cartNos) {
+		return session.delete("cart2.deleteSelectedCarts", cartNos);
+	}
 }

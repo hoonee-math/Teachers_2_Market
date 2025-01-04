@@ -59,4 +59,12 @@
 	        LEFT JOIN IMAGE2 I ON P.POST_NO = I.POST_NO
 	    WHERE C.MEMBER_NO = #{memberNo}
 	</select>
+	
+	<delete id="deleteSelectedCarts" parameterType="java.util.List">
+		DELETE FROM CART2
+		WHERE CART_NO IN
+		<foreach collection="list" item="cartNo" open="(" separator="," close=")">
+			#{cartNo}
+		</foreach>
+	</delete>
 </mapper>

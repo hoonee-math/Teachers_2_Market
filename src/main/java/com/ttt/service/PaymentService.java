@@ -42,4 +42,13 @@ public class PaymentService {
 		
 		return posts;
 	}
+	
+	//장바구니 : 선택 상품 삭제 
+	public int deleteSelectedCarts(List<Integer> cartNos) {
+		SqlSession session = getSession();
+		int result = dao.deleteSelectedCarts(session, cartNos);
+		session.close();
+		
+		return result;
+	}
 }
