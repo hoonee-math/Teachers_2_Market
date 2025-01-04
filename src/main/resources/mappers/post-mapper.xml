@@ -161,4 +161,63 @@
 		FROM POST2
 		WHERE PRODUCT_TYPE = 0
 	</select>
+	
+	<!-- 게시글 등록 -->
+	<insert id="insertPost" parameterType="post2">
+	INSERT INTO POST2 (
+		POST_NO,
+		POST_DATE,
+		POST_TITLE,
+		POST_CONTENT,
+		VIEW_COUNT,
+		IS_TEMP,
+		MEMBER_NO,
+		IS_DELETED,
+		PRODUCT_TYPE,
+		IS_FIX,
+        SUBJECT_NO,
+        CATEGORY_NO
+	) VALUES (
+		SEQ_POST2_NO.NEXTVAL,
+		SYSDATE,
+		#{postTitle},
+		#{postContent},
+		DEFAULT,
+		#{isTemp},
+		#{member.memberNo},
+		DEFAULT,
+		#{productType},
+		#{isFix},
+        #{subjectNo},
+        #{categoryNo}
+	)
+	</insert>
+	
+	<select id="selectLastPostNo" resultType="_int">
+		SELECT SEQ_POST2_NO.CURRVAL FROM DUAL
+	</select>
+	
+	<select id="insertProduct" parameterType="post2">
+		INSERT INTO PRODUCT2 VALUES (
+			SEQ_PRODUCT2_NO.NEXTVAL,
+			#{postNo},
+			#{isFree},
+			#{productPrice},
+			#{hasDeliveryFee},
+			#{deliveryFee},
+			#{stockCount}
+		)
+	</select>
+	
+	<select id="insertFile" parameterType="post2">
+		INSERT INTO FILE2 VALUES (
+			SEQ_FILE2_NO.NEXTVAL,
+			#{postNo},
+			#{isFree},
+			#{filePrice},
+			#{salePeriod},
+			#{oriname},
+			#{renamed}
+		)
+	</select>
 </mapper>

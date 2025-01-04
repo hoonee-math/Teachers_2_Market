@@ -66,6 +66,7 @@ public class PostService {
 			Post2 post = Post2.builder()
 					.postTitle(jsonData.get("postTitle").getAsString())
 					.postContent(jsonData.get("postContent").getAsString())
+					.isTemp(jsonData.get("isTemp").getAsInt())
 					.categoryNo(jsonData.get("categoryNo").getAsInt())
 					.subjectNo(jsonData.get("subjectNo").getAsInt())
 					.productType(jsonData.get("productType").getAsInt())
@@ -115,6 +116,7 @@ public class PostService {
 				JsonArray images = jsonData.getAsJsonArray("images");
 				for (JsonElement img : images) {
 					JsonObject imgObj = img.getAsJsonObject();
+					// postNo 값을 담아서 전달
 					Image2 image = Image2.builder()
 							.postNo(postNo)
 							.imgSeq(imgObj.get("imgSeq").getAsInt())
@@ -122,7 +124,7 @@ public class PostService {
 							.renamed(imgObj.get("renamed").getAsString())
 							.build();
 
-					result = dao.insertImage(session, image);
+					result = dao.insertImageByPostNo(session, image);
 					if (result <= 0)
 						throw new Exception("이미지 정보 등록 실패");
 				}

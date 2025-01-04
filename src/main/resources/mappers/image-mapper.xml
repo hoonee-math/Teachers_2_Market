@@ -9,6 +9,21 @@
 		<result column="post_no" property="postNo"/>
 		<result column="review_no" property="reviewNo"/>
 	</resultMap>
-
+	<!-- 이미지 추가 등록 -->
+	<insert id="insertImageByPostNo" parameterType="post2">
+	INSERT INTO POST2 (
+		img_no,
+		img_seq,
+		oriname,
+		renamed,
+		post_no,
+	) VALUES (
+		SEQ_IMAGE2_NO,
+		#{imgSeq},
+		#{oriname},
+		#{renamed},
+		#{postNo}
+	)
+	</insert>
 
 </mapper>

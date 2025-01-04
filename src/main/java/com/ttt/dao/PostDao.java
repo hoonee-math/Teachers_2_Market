@@ -13,10 +13,10 @@ public class PostDao {
 	
 	/* 사용자 메뉴
 	 * insertPost : 글 등록 
-	 * selectLastPostNo : 마지막 post_no 조회 - 트랜잭션 안에서 사용 가능
+	 * selectLastPostNo : 마지막 post_no 조회 - 트랜잭션 안에서만 사용 가능
 	 * insertProduct : 상품 정보 저장
 	 * insertFile : 파일 정보 저장
-	 * insertImage : 이미지 정보 저장
+	 * insertImageByPostNo : 이미지 정보 저장
 	 * */
 	
 	/* 관리자 메뉴
@@ -39,8 +39,8 @@ public class PostDao {
 	public int insertFile(SqlSession session, File2 file) {
 		return session.insert("post.insertFile",file);
 	}
-	public int insertImage(SqlSession session, Image2 image) {
-		return session.insert("post.insertImage",image);
+	public int insertImageByPostNo(SqlSession session, Image2 image) {
+		return session.insert("image2.insertImageByPostNo",image);
 	}
 
 
