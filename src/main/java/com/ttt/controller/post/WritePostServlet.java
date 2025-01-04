@@ -141,6 +141,26 @@ public class WritePostServlet extends HttpServlet {
 								.build();
 						post.setFile2(file);
 					}
+
+					// 상품 이미지 파일 처리
+					List<Image2> images = new ArrayList<>();
+					Enumeration<String> files = mr.getFileNames();
+					while (files.hasMoreElements()) {
+						String fileName = files.nextElement();
+						if (fileName.startsWith("upfile")) { // 상품 이미지 파일
+							oriname = mr.getOriginalFileName(fileName);
+							renamed = mr.getFilesystemName(fileName);
+							if (oriname != null) {
+								Image2 img = Image2.builder()
+										.oriname(oriname)
+										.renamed(renamed)
+										.imgSeq(images.size() + 1) // 순차적으로 번호 부여
+										.build();
+								images.add(img);
+							}
+						}
+					}
+					post.setPostImg(images);
 				}
 
 				// 트랜잭션 처리
