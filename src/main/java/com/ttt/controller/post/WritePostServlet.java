@@ -56,6 +56,10 @@ public class WritePostServlet extends HttpServlet {
 				String webAppPath5 = Thread.currentThread().getContextClassLoader().getResource("").getPath()
 			               .replace("target/classes/", "src/main/webapp/");
     	        System.out.println("webAppPath5: "+webAppPath5);
+
+				String webAppPath = new File(Thread.currentThread().getContextClassLoader().getResource("").getPath()
+						.replace("target/classes/", "src/main/webapp/")).getAbsolutePath();
+				System.out.println("webAppPath: "+ webAppPath);
 				break;
 			default: request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
         }
@@ -96,10 +100,11 @@ public class WritePostServlet extends HttpServlet {
     	        System.out.println("webAppPath3: "+webAppPath3);
 
 				String webAppPath4 = System.getProperty("user.dir") + "/src/main/webapp/";
-    	        System.out.println("webAppPath3: "+webAppPath4);
+    	        System.out.println("webAppPath4: "+webAppPath4);
 				// 방법 2: ClassLoader 사용 -- 임시방편
-				String webAppPath = Thread.currentThread().getContextClassLoader().getResource("").getPath()
-			               .replace("target/classes/", "src/main/webapp/");
+				String webAppPath = new File(Thread.currentThread().getContextClassLoader().getResource("").getPath()
+						.replace("target/classes/", "src/main/webapp/")).getAbsolutePath();
+				System.out.println("webAppPath: "+ webAppPath);
     	        
     	        String uploadPath = FileUploadUtil.getUploadDirectory(webAppPath, FileUploadUtil.TEMP_DIR);
     	        System.out.println("uploadPath: "+uploadPath);

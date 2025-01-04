@@ -19,7 +19,7 @@ public class FileUploadUtil {
     
     // 파일 종류별 서브 디렉토리
     private static final String FILE_DIR = "WEB-INF/secure-files";
-    private static final String IMAGE_DIR = "resources/upload/images";
+    private static final String IMAGE_DIR = "resources/images/upload";
     public static final String TEMP_DIR = "resources/upload/temp"; // 전역 변수(상수)로 서블릿에서 사용됨
     
     // 파일 크기 제한 (단위: byte)
