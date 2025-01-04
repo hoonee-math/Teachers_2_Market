@@ -223,6 +223,12 @@ input[type="radio"]:first-child {
 									<span id="checkResult"></span></td>
 							</tr>
 							<tr>
+								<th>전화번호 </th>
+								<td><input type="text" name="phone" id="phone"
+									style="width: 270px;"><br>
+								</td>
+							</tr>
+							<tr>
 								<th>생년월일</th>
 								<td><input type="text" name="birthday" id="birthday"
 									style="width: 270px;"><br>
