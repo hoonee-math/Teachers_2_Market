@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="${path }/resources/css/common/footer.css">
 <!-- 스크립트 연결 -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 /* 입력 필드 스타일 추가 */
 button, input, select, textarea {
@@ -187,7 +188,7 @@ input[type="radio"]:first-child {
 							<tr>
 								<th>이름 입력 *</th>
 								<td><input type="text" id="memberName" name="memberName"
-									style="width: 230px;" ></td>
+									style="width: 230px;" required></td>
 							</tr>
 							<tr>
 								<th>아이디 *</th>
@@ -324,6 +325,9 @@ $("#cancle").click(function() {
 $(".logo-container").click(function() {
     location.assign("${path}");
 });
+
+
+
 $('input[name="eduType"]').on('change', function() {
     const selectedType = $(this).val();
     const schoolSelectGroup = $('#school-select-group');
