@@ -123,4 +123,30 @@
 	    LEFT JOIN MEMBER2 M ON P.MEMBER_NO = M.MEMBER_NO 
 	    WHERE P.POST_NO = #{postNo}
 	</select>
+	
+	<!-- 공지사항 등록 -->
+	<insert id="insertNotify" parameterType="post2">
+		INSERT INTO POST2 (
+			POST_NO,
+			POST_TITLE,
+			POST_CONTENT,
+			MEMBER_NO,
+			PRODUCT_TYPE,
+			IS_FIX,
+		) VALUES (
+			SEQ_POST2_NO.NEXTVAL,
+			#{postTitle},
+			#{postContent},
+			0, <!--#{member.memberNo} 관리자가 등록하도록 설정해줘야함. test 를 위해 0으로 변경 -->
+			0,
+			0,
+		)
+	</insert>
+	
+	<!-- 최근 등록된 공지사항 번호 조회 -->
+	<select id="selectLastNotifyNo" resultType="_int">
+		SELECT MAX(POST_NO)
+		FROM POST2
+		WHERE PRODUCT_TYPE = 0
+	</select>
 </mapper>

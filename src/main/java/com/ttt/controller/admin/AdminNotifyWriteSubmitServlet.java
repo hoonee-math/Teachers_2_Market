@@ -37,6 +37,10 @@ public class AdminNotifyWriteSubmitServlet extends HttpServlet {
 	        if(loginMember == null || loginMember.getEduType() != 0) {
 	        	// test를 위해 주석처리
 	            // throw new RuntimeException("관리자만 접근 가능합니다.");
+	        	
+	        	// test를 위해 loginMember에 관리자 정보저장
+	        	System.out.println("Test를 위해 session에 관리자 정보가 담겼습니다.");
+	        	loginMember.setMemberNo(0);
 	        }
 	        
 	        // 2. 파라미터 받기

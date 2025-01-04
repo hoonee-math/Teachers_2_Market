@@ -50,8 +50,13 @@ public class PostDao {
 		return session.selectOne("post2.selectPostByNoOnAdminMenu",postNo);
 	}
 	
+	// notifyWrite.jsp 공지사항 등록을 위한 메서드
 	public int insertNotify(SqlSession session, Post2 p) {
 		return session.insert("post2.insertNotify",p);
+	}
+	// insertNotify 로 등록한 공지사항의 번호를 조회하는 메서드
+	public int selectLastNotifyNo(SqlSession session) {
+		return session.selectOne("post2.selectLastNotifyNo");
 	}
 	
 }
