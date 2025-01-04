@@ -38,6 +38,9 @@ public class FileUploadUtil {
     public static String getUploadDirectory(String webAppPath, String subDir) {
         return Paths.get(webAppPath, subDir).toString();
     }
+    public static String getUploadImageDirectory(String webAppPath) {
+    	return Paths.get(webAppPath).toString();
+    }
 
     /**
      * 새로운 파일명 생성

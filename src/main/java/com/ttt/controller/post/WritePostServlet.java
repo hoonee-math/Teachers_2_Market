@@ -75,8 +75,14 @@ public class WritePostServlet extends HttpServlet {
     	        }
 
 				// 2. 파일 저장 경로 설정
-    	        String webAppPath = request.getServletContext().getRealPath("/");
+    	        String webAppPath1 = new File("src/main/webapp").getAbsolutePath();
+    	        System.out.println("webAppPath1: "+webAppPath1);
+    	        String webAppPath2 = request.getServletContext().getRealPath("/");
+    	        System.out.println("webAppPath2: "+webAppPath2);
+    	        String webAppPath = getServletContext().getRealPath("../../../src/main/webapp/");;
+    	        System.out.println("webAppPath3: "+webAppPath);
     	        String uploadPath = FileUploadUtil.getUploadDirectory(webAppPath, FileUploadUtil.TEMP_DIR);
+    	        System.out.println("uploadPath: "+uploadPath);
     	        
 				// 2. 디렉토리 존재 여부 확인 및 생성
 				File directory = new File(uploadPath);
