@@ -320,18 +320,21 @@ function submitForm() {
 
 	// 에디터의 내용을 가져옴
 	const content = editor.getHTML();
-
+	console.log("content: "+content);
+	
 	// FormData 생성
 	const formData = new FormData();
 	formData.append('postTitle', $('#title').val());
 	formData.append('postContent', content);
 	formData.append('isFix', $('#isFix').is(':checked') ? 1 : 0);
+	console.log("formData: "+formData);
 
 	// 임시저장 여부
 	const isTemp = $('input[name="isTemp"]').val() === '1';
+	console.log("isTemp: "+isTemp);
 
 	$.ajax({
-		url: contextPath + '/admin/notify/write',
+		url: contextPath + '/admin/notify/submit',
 		type: 'POST',
 		data: formData,
 		processData: false,
@@ -361,46 +364,6 @@ function validateForm() {
         $('#title').focus();
         return false;
     }
-
-    // 카테고리 검사
-    if (!$('#category').val()) {
-        alert('카테고리를 선택해주세요.');
-        $('#category').focus();
-        return false;
-    }
-
-    // 과목 검사
-    if (!$('#subject').val()) {
-        alert('과목을 선택해주세요.');
-        $('#subject').focus();
-        return false;
-    }
-
-    // 가격 검사
-    if (!$('#isFree').prop('checked') && (!$('#price').val() || $('#price').val() < 0)) {
-        alert('올바른 가격을 입력해주세요.');
-        $('#price').focus();
-        return false;
-    }
-
-    // 배송비 검사
-    if ($('#hasDeliveryFee').prop('checked') && (!$('#deliveryFee').val() || $('#deliveryFee').val() < 0)) {
-        alert('올바른 배송비를 입력해주세요.');
-        $('#deliveryFee').focus();
-        return false;
-    }
-
-    // 상품 이미지 검사
-    if (uploadedImages.length === 0) {
-        alert('최소 1개의 상품 이미지를 등록해주세요.');
-        return false;
-    }
-	
-	// 파일 검사
-	if ($('input[name="type"]:checked').val() === 'file' && !$('#fileUpload').val()) {
-	    alert('판매할 파일을 선택해주세요.');
-	    return false;
-	}
 
     // 내용 검사
     if (editor.getHTML().trim() === '') {

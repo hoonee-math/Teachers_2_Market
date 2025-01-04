@@ -122,6 +122,9 @@
 <!-- 9. API/Ajax 관련 JavaScript -->
 <!-- 10. 컴포넌트 JavaScript -->
 <!-- 11. 페이지별 JavaScript -->
-<script src="${path}/resources/js/post/writepost.js"></script>
+<script>
+    const contextPath = "${pageContext.request.contextPath}";
+</script>
+<script src="${path}/resources/js/post/writeNotify.js"></script>
 </body>
 </html>
