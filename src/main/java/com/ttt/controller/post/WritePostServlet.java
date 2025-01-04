@@ -1,6 +1,5 @@
 package com.ttt.controller.post;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -15,8 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.ttt.dto.Member2;
-import com.ttt.dto.Post2;
-import com.ttt.service.AdminPostService;
+import com.ttt.service.PostService;
 
 @WebServlet("/post/write/*")
 public class WritePostServlet extends HttpServlet {
@@ -50,7 +48,7 @@ public class WritePostServlet extends HttpServlet {
         } else {
         	/* 요청 주소 path 값이 /post/write/submit 가 맞는 경우 */
         	
-        	
+        	request.setCharacterEncoding("UTF-8");
     	    // 응답 설정
     	    response.setContentType("application/json;charset=utf-8");
     	    PrintWriter out = response.getWriter();
@@ -62,49 +60,20 @@ public class WritePostServlet extends HttpServlet {
     	        if(loginMember == null) {
     	            throw new RuntimeException("회원만 접근 가능합니다.");
     	        }
-    	        
+
     	        // 2. 파라미터 받기
-    	        // 요청 본문을 읽어옴
-    	        StringBuilder buffer = new StringBuilder();
-    	        BufferedReader reader = request.getReader();
-    	        String line;
-    	        while ((line = reader.readLine()) != null) {
-    	            buffer.append(line);
-    	        }
-    	        
-    	        // JSON 파싱
-    	        JsonObject jsonObject = new Gson().fromJson(buffer.toString(), JsonObject.class);
-    	        
-    	        // 데이터 추출
-    	        String postTitle = jsonObject.get("postTitle").getAsString();
-    	        String postContent = jsonObject.get("postContent").getAsString();
-    	        int isFix = jsonObject.get("isFix").getAsInt();
-    	        
-    	        // 3. 유효성 검사
-    	        if(postTitle == null || postTitle.trim().isEmpty() ||
-    	           postContent == null || postContent.trim().isEmpty()) {
-    	            throw new RuntimeException("필수 입력값이 누락되었습니다.");
-    	        }
-    	        
-    	        // 4. Post2 객체 생성
-    	        Post2 post = Post2.builder()
-    	            .postTitle(postTitle)
-    	            .postContent(postContent)
-    	            .member(loginMember)
-    	            .productType(0) // 공지사항
-    	            .isFix(isFix)
-    	            .build();
-    	        
-    	        // 5. 서비스 호출
-    	        int result = new AdminPostService().insertNotify(post);
-    	        
+                // JSON 데이터 파싱
+                JsonObject jsonObject = new Gson().fromJson(request.getReader(), JsonObject.class);
+                
+                // 트랜잭션 처리
+                PostService service = new PostService();
+                int result = service.insertPost(jsonObject);
+                
     	        if(result > 0) {
     	            responseData.put("success", true);
-    	            responseData.put("message", "공지사항이 등록되었습니다.");
-    	            // 새로 생성된 공지사항 번호도 함께 전달
-    	            responseData.put("postNo", post.getPostNo());
+    	            responseData.put("message", "게시글이 등록되었습니다.");
     	        } else {
-    	            throw new RuntimeException("공지사항 등록에 실패했습니다.");
+    	            throw new RuntimeException("게시글 등록에 실패했습니다.");
     	        }
     	        
     	    } catch(Exception e) {

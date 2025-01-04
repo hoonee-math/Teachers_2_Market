@@ -314,9 +314,51 @@ function submitForm() {
     * 4. 임시저장/등록 완료 후 적절한 페이지로 리다이렉트
     */
 
-    // 임시: alert으로 동작 확인
-    alert($('input[name="isTemp"]').val() === '1' ? '임시저장되었습니다.' : '게시글이 등록되었습니다.');
-    // location.href = '/board/list'; // 실제 구현 시 활성화
+	// 기본 게시글 데이터
+	const data = {
+		postTitle: $('#title').val(),
+		postContent: editor.getHTML(),
+		categoryNo: $('#category').val(),
+		subjectNo: $('#subject').val(),
+		productType: $('input[name="type"]:checked').val() === 'product' ? 1 : 2,
+	};
+
+	// 상품/파일 추가 데이터
+	if (data.productType === 1) {
+		data.product = {
+			isFree: $('#isFree').is(':checked') ? 1 : 0,
+			productPrice: $('#price').val(),
+			hasDeliveryFee: $('#hasDeliveryFee').is(':checked') ? 1 : 0,
+			deliveryFee: $('#deliveryFee').val(),
+			stockCount: $('#stock').val()
+		};
+	} else {
+		data.file = {
+			isFree: $('#isFree').is(':checked') ? 1 : 0,
+			filePrice: $('#price').val(),
+			salePeriod: $('#salePeriod').val()
+		};
+	}
+
+	$.ajax({
+		url: contextPath + '/post/write/submit',
+		type: 'POST',
+		contentType: 'application/json;charset=UTF-8',
+		data: JSON.stringify(data),
+		success: function(response) {
+			if (response.success) {
+				alert(isTemp ? '임시저장되었습니다.' : '공지사항이 등록되었습니다.');
+				// 성공 시 공지사항 목록 페이지로 이동
+				location.href = contextPath + '/admin/menu';
+			} else {
+				alert(response.message || '등록에 실패했습니다.');
+			}
+		},
+		error: function(xhr, status, error) {
+		console.error('Error:', error);
+		alert('서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+		}
+	});
 }
 
 // 폼 유효성 검사
