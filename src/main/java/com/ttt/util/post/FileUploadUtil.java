@@ -139,7 +139,7 @@ public class FileUploadUtil {
             String extension = getFileExtension(originalFileName);
             validateFile(originalFileName, mr.getFile(fileParam).length(), true);
             
-            // 3. 새 파일명 생성 및 저장ㄴ
+            // 3. 새 파일명 생성 및 저장
             String renamedFileName = generateFileName(memberId, postNo, sequence++, extension);
             
             // 파일 저장
