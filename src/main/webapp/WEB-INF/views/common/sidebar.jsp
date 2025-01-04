@@ -54,6 +54,13 @@
 			<img src="${path }/resources/images/common/admin.png" alt="관리자 페이지" class="side-img-icon">
 		</div>
 		<div class="side-btn-text">임시 관리자메뉴</div>
+		
+		
+		<div class="side-button" data-path="/post/write/form">
+			<img src="${path }/resources/images/common/file.png" alt="내 자료실" class="side-img-icon">
+		</div>
+		<div class="side-btn-text">글쓰기 temp</div>
+		
 	</div>
 </div>
 

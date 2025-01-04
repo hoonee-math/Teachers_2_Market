@@ -43,6 +43,19 @@ public class WritePostServlet extends HttpServlet {
         switch(path) {
             case "/post/write/form":
 				request.getRequestDispatcher("/WEB-INF/views/post/writepost.jsp").forward(request, response);
+    	        String webAppPath1 = new File("src/main/webapp").getAbsolutePath();
+    	        System.out.println("webAppPath1: "+webAppPath1);
+    	        String webAppPath2 = request.getServletContext().getRealPath("/");
+    	        System.out.println("webAppPath2: "+webAppPath2);
+    	        String webAppPath3 = getServletContext().getRealPath("../../../src/main/webapp/");;
+    	        System.out.println("webAppPath3: "+webAppPath3);
+
+				String webAppPath4 = System.getProperty("user.dir") + "/src/main/webapp/";
+    	        System.out.println("webAppPath4: "+webAppPath4);
+				// 방법 2: ClassLoader 사용
+				String webAppPath5 = Thread.currentThread().getContextClassLoader().getResource("").getPath()
+			               .replace("target/classes/", "src/main/webapp/");
+    	        System.out.println("webAppPath5: "+webAppPath5);
 				break;
 			default: request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
         }
@@ -79,8 +92,15 @@ public class WritePostServlet extends HttpServlet {
     	        System.out.println("webAppPath1: "+webAppPath1);
     	        String webAppPath2 = request.getServletContext().getRealPath("/");
     	        System.out.println("webAppPath2: "+webAppPath2);
-    	        String webAppPath = getServletContext().getRealPath("../../../src/main/webapp/");;
-    	        System.out.println("webAppPath3: "+webAppPath);
+    	        String webAppPath3 = getServletContext().getRealPath("../../../src/main/webapp/");;
+    	        System.out.println("webAppPath3: "+webAppPath3);
+
+				String webAppPath4 = System.getProperty("user.dir") + "/src/main/webapp/";
+    	        System.out.println("webAppPath3: "+webAppPath4);
+				// 방법 2: ClassLoader 사용 -- 임시방편
+				String webAppPath = Thread.currentThread().getContextClassLoader().getResource("").getPath()
+			               .replace("target/classes/", "src/main/webapp/");
+    	        
     	        String uploadPath = FileUploadUtil.getUploadDirectory(webAppPath, FileUploadUtil.TEMP_DIR);
     	        System.out.println("uploadPath: "+uploadPath);
     	        
