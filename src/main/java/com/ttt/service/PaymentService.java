@@ -2,10 +2,14 @@ package com.ttt.service;
 
 import static com.ttt.common.SqlSessionTemplate.getSession;
 
+import java.sql.Connection;
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import com.ttt.dao.PaymentDao;
 import com.ttt.dto.Cart2;
+import com.ttt.dto.Post2;
 
 public class PaymentService {
 	private PaymentDao dao = new PaymentDao();
@@ -28,5 +32,14 @@ public class PaymentService {
 			session.close();
 		}
 		return result;
+	}
+	
+	// 장바구니 : 리스트 출력
+	public List<Cart2> selectShoppingList(int memberNo) {
+		SqlSession session = getSession();
+		List<Cart2> posts = dao.selectShoppingList(session, memberNo);
+		session.close();
+		
+		return posts;
 	}
 }

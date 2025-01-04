@@ -36,3 +36,19 @@ INSERT INTO CART2 (
 SELECT * FROM CART2;
 
 ALTER TABLE CART2 MODIFY PAYMENT_NO NULL;
+
+-- post_no, member_no가 겹치는 데이터 삭제 
+DELETE FROM CART2
+WHERE CART_NO IN (
+    WITH RankedData AS (
+        SELECT 
+            CART_NO,
+            POST_NO,
+            MEMBER_NO,
+            ROW_NUMBER() OVER (PARTITION BY POST_NO, MEMBER_NO ORDER BY CART_NO) AS RN
+        FROM CART2
+    )
+    SELECT CART_NO
+    FROM RankedData
+    WHERE RN > 1
+);

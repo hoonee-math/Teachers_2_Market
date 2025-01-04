@@ -2,21 +2,67 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cart2">
 	<resultMap id="cartMap" type="cart2">
-		<id column="cart_no" property="cartNo"/>
-		<result column="is_payment" property="isPayment"/>
-		<association property="post" javaType="post2">
-            <id column="post_no" property="postNo"/>
-        </association>		
-		<association property="payment" javaType="payment2">
-            <id column="payment_no" property="paymentNo"/>
-        </association>		
-        <association property="member" javaType="member2">
-            <id column="member_no" property="memberNo"/>
-        </association>
+	    <id column="cart_no" property="cartNo"/>
+	    <result column="is_payment" property="isPayment"/>
+	    
+	    <association property="post" javaType="post2">
+	        <id column="post_no" property="postNo"/>
+	        <result column="post_title" property="postTitle"/>
+	        <result column="product_type" property="productType"/>
+	    </association>        
+	    
+	    <association property="payment" javaType="payment2">
+	        <id column="payment_no" property="paymentNo"/>
+	    </association>        
+	    
+	    <association property="member" javaType="member2">
+	        <id column="member_no" property="memberNo"/>
+	    </association>
+	    
+	    <association property="product2" javaType="product2">
+	        <id column="product_no" property="productNo"/>
+	        <result column="is_free" property="isFree"/>
+	        <result column="product_price" property="productPrice"/>
+	        <result column="has_delivery_fee" property="hasDeliveryFee"/>
+	        <result column="delivery_fee" property="deliveryFee"/>
+	        <result column="stock_count" property="stockCount"/>
+	    </association>
+	    
+	    <association property="file2" javaType="file2">
+	        <id column="file_no" property="fileNo"/>
+	        <result column="is_free" property="isFree"/>
+	        <result column="file_price" property="filePrice"/>
+	        <result column="sale_period" property="salePeriod"/>
+	        <result column="oriname" property="oriname"/>
+	        <result column="renamed" property="renamed"/>
+	    </association>
+	    
+	    <!-- postImg 컬렉션 매핑 수정 -->
+	    <collection property="postImg" ofType="image2" javaType="java.util.ArrayList">
+	        <id column="img_no" property="imgNo"/>
+	        <result column="image_renamed" property="renamed"/>
+	    </collection>
 	</resultMap>
 	
 	<insert id="insertCart" parameterType="cart2">
 		INSERT INTO CART2 (CART_NO, POST_NO, MEMBER_NO)
 			VALUES (SEQ_CART_NO.NEXTVAL, #{post.postNo}, #{member.memberNo})
 	</insert>
+	
+	<select id="selectShoppingList" parameterType="_int" resultMap="cartMap">
+	    SELECT 
+	        C.CART_NO, C.IS_PAYMENT,
+	        P.POST_NO, P.POST_TITLE, P.PRODUCT_TYPE,
+	        PR.PRODUCT_NO, PR.IS_FREE, PR.PRODUCT_PRICE, 
+	        PR.HAS_DELIVERY_FEE, PR.DELIVERY_FEE, PR.STOCK_COUNT,
+	        F.FILE_NO, F.IS_FREE, F.FILE_PRICE, F.SALE_PERIOD, 
+	        F.ORINAME, F.RENAMED,
+	        I.IMG_NO, I.RENAMED AS IMAGE_RENAMED
+	    FROM CART2 C 
+	        LEFT JOIN POST2 P ON C.POST_NO = P.POST_NO
+	        LEFT JOIN PRODUCT2 PR ON P.POST_NO = PR.POST_NO
+	        LEFT JOIN FILE2 F ON P.POST_NO = F.POST_NO
+	        LEFT JOIN IMAGE2 I ON P.POST_NO = I.POST_NO
+	    WHERE C.MEMBER_NO = #{memberNo}
+	</select>
 </mapper>
