@@ -1,5 +1,6 @@
 package com.ttt.controller.admin;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.ttt.dto.Member2;
 import com.ttt.dto.Post2;
 import com.ttt.service.AdminPostService;
@@ -44,9 +46,21 @@ public class AdminNotifyWriteSubmitServlet extends HttpServlet {
 	        }
 	        
 	        // 2. 파라미터 받기
-	        String postTitle = request.getParameter("postTitle");
-	        String postContent = request.getParameter("postContent");
-	        int isFix = Integer.parseInt(request.getParameter("isFix")); // 상단고정 여부
+	        // 요청 본문을 읽어옴
+	        StringBuilder buffer = new StringBuilder();
+	        BufferedReader reader = request.getReader();
+	        String line;
+	        while ((line = reader.readLine()) != null) {
+	            buffer.append(line);
+	        }
+	        
+	        // JSON 파싱
+	        JsonObject jsonObject = new Gson().fromJson(buffer.toString(), JsonObject.class);
+	        
+	        // 데이터 추출
+	        String postTitle = jsonObject.get("postTitle").getAsString();
+	        String postContent = jsonObject.get("postContent").getAsString();
+	        int isFix = jsonObject.get("isFix").getAsInt();
 	        
 	        // 3. 유효성 검사
 	        if(postTitle == null || postTitle.trim().isEmpty() ||

@@ -322,12 +322,12 @@ function submitForm() {
 	const content = editor.getHTML();
 	console.log("content: "+content);
 	
-	// FormData 생성
-	const formData = new FormData();
-	formData.append('postTitle', $('#title').val());
-	formData.append('postContent', content);
-	formData.append('isFix', $('#isFix').is(':checked') ? 1 : 0);
-	console.log("formData: "+formData);
+	// 전송할 데이터 객체 생성
+	const data = {
+	    postTitle: $('#title').val(),
+	    postContent: content,
+	    isFix: $('#isFix').is(':checked') ? 1 : 0
+	};
 
 	// 임시저장 여부
 	const isTemp = $('input[name="isTemp"]').val() === '1';
@@ -336,9 +336,8 @@ function submitForm() {
 	$.ajax({
 		url: contextPath + '/admin/notify/submit',
 		type: 'POST',
-		data: formData,
-		processData: false,
-		contentType: false,
+		data: JSON.stringify(data),  // JSON 문자열로 변환
+		contentType: 'application/json', // Content-Type 헤더 설정
 		success: function(response) {
 			if (response.success) {
 				alert(isTemp ? '임시저장되었습니다.' : '공지사항이 등록되었습니다.');
