@@ -415,7 +415,7 @@
 	$(".logo-container").click(function() {
 		location.assign("${path}");
 	});
-	//메인으로 버튼 클릭시 메인페이지로 이동
+	//회원가입 버튼 클릭시 회원정보입력페이지로 이동
 	$("#join").click(function() {
 		location.assign("${path}/member/enrollmain");
 	});

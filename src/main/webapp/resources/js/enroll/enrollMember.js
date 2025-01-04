@@ -22,12 +22,7 @@ function initializeEventListeners() {
     
     // 주소 검색 이벤트
     $("#postcodeFindBtn").click(sample4_execDaumPostcode);
-    
-    // 교육기관 유형 변경 이벤트
-    $('input[name="eduType"]').change(handleEduTypeChange);
-    
-    // 이메일 입력값 변경시 인증상태 초기화
-    $("#emailId, #emailDomain, #emailSelect").on("change", resetEmailVerification);
+   
 }
 
 /**
@@ -218,7 +213,6 @@ function resetForm() {
  * 전체 폼 유효성 검사 업데이트
  */
 function validateForm() {
-    // [기존 검사 항목들...]
     
     // ID 중복확인 검사
     if($("input[name='idCheckYN']").val() !== "Y") {
