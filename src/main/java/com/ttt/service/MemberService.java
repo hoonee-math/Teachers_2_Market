@@ -34,4 +34,8 @@ public class MemberService {
 		SqlSession session = getSession();
 		return dao.selectMemberById(session, memberId);
 	}
+	public Member2 memberCheckId(String memberId) {
+		SqlSession session = getSession();
+		return dao.checkMemberById(session, memberId);
+	}
 }

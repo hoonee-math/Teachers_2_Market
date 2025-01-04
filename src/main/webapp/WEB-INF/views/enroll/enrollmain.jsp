@@ -192,7 +192,7 @@ input[type="radio"]:first-child {
 							<tr>
 								<th>아이디 *</th>
 								<td><input type="text" name="memberId" id="memberId"
-									style="width: 230px;"> <input type="button"
+									style="width: 230px;" required> <input type="button"
 									value="ID 중복확인" id="idCheckBtn" onclick="checkId()"></td>
 							</tr>
 							<tr>
@@ -308,6 +308,8 @@ input[type="radio"]:first-child {
 	</div>
 
 	<script>
+//변수에 경로 설정
+const path = "${path}";
 //서블릿에서 유효성 검사 후 알람 띄우기
 <c:if test="${errorMessage != null}">
     alert('${errorMessage}');
