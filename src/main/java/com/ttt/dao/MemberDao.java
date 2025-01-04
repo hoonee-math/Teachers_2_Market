@@ -37,4 +37,8 @@ public class MemberDao {
 	public Member2 selectMemberById(SqlSession session, String memberId) {
 		return session.selectOne("member2.selectMemberById", memberId);
 	}
+	// 사용자 메뉴 : 아이디 중복 검사
+	public Member2 checkMemberById(SqlSession session, String memberId) {
+		return session.selectOne("member2.selectMemberById", memberId);
+	}
 }

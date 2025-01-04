@@ -1,7 +1,6 @@
 /**
  * enrollmain.jsp 회원가입 페이지의 유효성 검사 및 이벤트 처리를 위한 스크립트
  */
-
 // DOM이(페이지가) 로드되면 이벤트 리스너 초기화
 $(document).ready(function() {
     initializeEventListeners();
@@ -15,21 +14,15 @@ function initializeEventListeners() {
     // 로고 클릭시 메인으로 이동
     $(".logo-container").click(() => location.assign(contextPath));
     
-    // 이메일 관련 이벤트
-    $("#emailSelect").change(handleEmailSelect);
-    $("#emailCheckBtn").click(checkEmail);
-    
     // ID 중복 확인 이벤트
     $("#idCheckBtn").click(checkId);
+	
+	// 비밀번호 일치여부 확인 이벤트
+	$("#password_2").keyup(validatePasswordMatch);
     
     // 주소 검색 이벤트
     $("#postcodeFindBtn").click(sample4_execDaumPostcode);
-    
-    // 교육기관 유형 변경 이벤트
-    $('input[name="eduType"]').change(handleEduTypeChange);
-    
-    // 이메일 입력값 변경시 인증상태 초기화
-    $("#emailId, #emailDomain, #emailSelect").on("change", resetEmailVerification);
+   
 }
 
 /**
@@ -51,37 +44,65 @@ function initializeFormValidation() {
     $("input[type='reset']").click(resetForm);
 }
 
-/**
- * 아이디 중복 확인
- */
+
+// 아이디 중복검사를 실행하는 함수
 function checkId() {
-    const memberId = $("#memberId").val();
-    if(!memberId || memberId.length < 4) {
-        alert("아이디는 4글자 이상 입력해주세요.");
+    const memberId = $('#memberId').val();
+
+    if (!memberId) {
+        alert('아이디를 입력해주세요.');
         return;
     }
-    
+
     $.ajax({
-        url: `${contextPath}/member/idcheck`,
-        type: "POST",
+        url: path + '/member/checkid', 
+        type: "GET",
         data: { memberId: memberId },
-        success: function(result) {
-            if(result.available) {
-                alert("사용 가능한 아이디입니다.");
-                $("#memberId").prop("readonly", true);
-                $("#idCheckBtn").prop("disabled", true);
-                $("input[name='idCheckYN']").val("Y");
+        dataType: "json",
+        success: function(response) {
+            console.log('서버 응답:', response);
+            if(response.exists) {
+                alert('이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.');
             } else {
-                alert("이미 사용중인 아이디입니다.");
-                $("#memberId").val("").focus();
+                alert('사용 가능한 아이디입니다.');
+                $("input[name='idCheckYN']").val("Y");
             }
         },
-        error: function() {
-            alert("아이디 중복 확인 중 오류가 발생했습니다.");
+        error: function(xhr, status, error) {
+            console.log('에러 상태:', status);
+            console.log('에러 내용:', error);
+            alert('아이디 확인 중 오류가 발생했습니다. 다시 시도해주세요.');
         }
     });
 }
 
+//비밀번호 일치 확인
+function validatePasswordMatch(e) {
+    const password = $("#password_").val();
+    const passwordcheck = $(e.target).val();
+    const $span = $("#checkResult");
+    
+    if(password.length >= 4 && passwordcheck.length >= 4) {
+        if(password === passwordcheck) {
+            $span.text("비밀번호가 일치합니다.").css("color", "green");
+            $("input[value='가입']").prop("disabled", false);
+        } else {
+            $span.text("비밀번호가 일치하지 않습니다.").css("color", "red");
+            $("input[value='가입']").prop("disabled", true);
+        }
+    }
+}
+
+//이메일 도메인 선택시 입력창에 표시
+$("#emailSelect").change(function() {
+        const selectedValue = $(this).val(); // 선택된 값 가져오기
+
+        if (selectedValue === "직접입력") {
+            $("#emailDomain").prop("readonly", false).val(""); // 직접 입력 가능하게 설정
+        } else{
+            $("#emailDomain").prop("readonly", true).val(selectedValue); // 선택된 도메인 설정
+        }
+    });
 /**
  * 이메일 인증 처리
  */
@@ -144,14 +165,34 @@ function validateEmail(email) {
     return emailPattern.test(email);
 }
 
-/**
- * 이메일 인증상태 초기화
- */
-function resetEmailVerification() {
-    $("input[name='emailVerified']").val("N");
-    $("#emailId, #emailDomain").prop("readonly", false);
-    $("#emailSelect").prop("disabled", false);
-    $("#emailCheckBtn").prop("disabled", false);
+// 우편번호 검색
+function sample4_execDaumPostcode() {
+    new daum.Postcode({
+        oncomplete: function(data) {
+            const roadAddr = data.roadAddress;
+            let extraRoadAddr = '';
+
+            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                extraRoadAddr += data.bname;
+            }
+            if(data.buildingName !== '' && data.apartment === 'Y') {
+                extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+            }
+            
+            // 우편번호와 주소 정보 입력
+            $("#sample4_postcode").val(data.zonecode);
+            $("#sample4_roadAddress").val(roadAddr);
+            $("#sample4_detailAddress").val('');
+
+            // 안내 텍스트 처리
+            const $guide = $("#guide");
+            if(data.autoRoadAddress) {
+                $guide.html('(예상 도로명 주소 : ' + data.autoRoadAddress + extraRoadAddr + ')').show();
+            } else {
+                $guide.html('').hide();
+            }
+        }
+    }).open();
 }
 
 /**
@@ -161,7 +202,6 @@ function resetForm() {
     $("#memberId").prop("readonly", false);
     $("#idCheckBtn").prop("disabled", false);
     $("input[name='idCheckYN']").val("N");
-    $("input[name='emailVerified']").val("N");
     $("#checkResult").text("");
 }
 
@@ -173,7 +213,6 @@ function resetForm() {
  * 전체 폼 유효성 검사 업데이트
  */
 function validateForm() {
-    // [기존 검사 항목들...]
     
     // ID 중복확인 검사
     if($("input[name='idCheckYN']").val() !== "Y") {
@@ -181,11 +220,6 @@ function validateForm() {
         return false;
     }
     
-    // 이메일 인증 여부 검사
-    if($("input[name='emailVerified']").val() !== "Y") {
-        alert("이메일 인증이 필요합니다.");
-        return false;
-    }
     
     return true;
 }

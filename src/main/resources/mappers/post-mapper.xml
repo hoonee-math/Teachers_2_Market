@@ -198,26 +198,42 @@
 	</select>
 	
 	<select id="insertProduct" parameterType="post2">
-		INSERT INTO PRODUCT2 VALUES (
-			SEQ_PRODUCT2_NO.NEXTVAL,
-			#{postNo},
-			#{isFree},
-			#{productPrice},
-			#{hasDeliveryFee},
-			#{deliveryFee},
-			#{stockCount}
-		)
+	INSERT INTO PRODUCT2 (
+		PRODUCT_NO,
+		POST_NO,
+		IS_FREE,
+		PRODUCT_PRICE,
+		HAS_DELIVERY_FEE,
+		DELIVERY_FEE,
+		STOCK_COUNT
+	) VALUES (
+		SEQ_PRODUCT2_NO.NEXTVAL,
+		#{postNo},
+		#{isFree},
+		#{productPrice},
+		#{hasDeliveryFee},
+		#{deliveryFee},
+		#{stockCount}
+	)
 	</select>
 	
 	<select id="insertFile" parameterType="post2">
-		INSERT INTO FILE2 VALUES (
-			SEQ_FILE2_NO.NEXTVAL,
-			#{postNo},
-			#{isFree},
-			#{filePrice},
-			#{salePeriod},
-			#{oriname},
-			#{renamed}
-		)
+	INSERT INTO FILE2 (
+		FILE_NO,
+		POST_NO,
+		IS_FREE,
+		FILE_PRICE,
+		SALE_PERIOD,
+		ORINAME,
+		RENAMED
+	) VALUES (
+		SEQ_FILE2_NO.NEXTVAL,
+		#{postNo},
+		#{isFree},
+		#{filePrice},
+		#{salePeriod},
+		#{oriname},
+		#{renamed}
+	)
 	</select>
 </mapper>

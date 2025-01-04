@@ -23,6 +23,7 @@
 <link rel="stylesheet" href="${path }/resources/css/common/footer.css">
 <!-- 스크립트 연결 -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
 /* 입력 필드 스타일 추가 */
 button, input, select, textarea {
@@ -187,12 +188,12 @@ input[type="radio"]:first-child {
 							<tr>
 								<th>이름 입력 *</th>
 								<td><input type="text" id="memberName" name="memberName"
-									style="width: 230px;" ></td>
+									style="width: 230px;" required></td>
 							</tr>
 							<tr>
 								<th>아이디 *</th>
 								<td><input type="text" name="memberId" id="memberId"
-									style="width: 230px;"> <input type="button"
+									style="width: 230px;" required> <input type="button"
 									value="ID 중복확인" id="idCheckBtn" onclick="checkId()"></td>
 							</tr>
 							<tr>
@@ -308,6 +309,8 @@ input[type="radio"]:first-child {
 	</div>
 
 	<script>
+//변수에 경로 설정
+const path = "${path}";
 //서블릿에서 유효성 검사 후 알람 띄우기
 <c:if test="${errorMessage != null}">
     alert('${errorMessage}');
@@ -322,6 +325,9 @@ $("#cancle").click(function() {
 $(".logo-container").click(function() {
     location.assign("${path}");
 });
+
+
+
 $('input[name="eduType"]').on('change', function() {
     const selectedType = $(this).val();
     const schoolSelectGroup = $('#school-select-group');
