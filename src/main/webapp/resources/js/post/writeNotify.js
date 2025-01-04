@@ -1,30 +1,11 @@
 // 전역 변수 선언
 var editor; // Toast UI Editor 인스턴스
 var uploadedImages = []; // 업로드된 이미지 배열
-var imageOrder = []; // 이미지 순서 배열
-const categoryData = { // 카테고리 데이터 객체
-    1: "미취학아동",
-    2: "초등",
-    3: "중등",
-    4: "고등",
-    5: "수험생"
-};
-const subjectData = { // 과목 데이터 객체
-    1: "국어",
-    2: "영어",
-    3: "수학",
-    4: "사회",
-    5: "과학",
-    6: "예체능",
-    7: "기타"
-};
 
 // 페이지 로드 시 초기화
 $(document).ready(function() {
     initializeEditor();
-    initializeImageUpload();
     initializeFormHandlers();
-    initializeTypeHandlers();
 	initializeSelectors();  // 카테고리 객체를 활용한 카테고리 선택 옵션
 });
 
@@ -39,25 +20,6 @@ function initializeEditor() {
             addImageBlobHook: handleImageUpload
         }
     });
-}
-
-// select 옵션 초기화를 위한 함수
-function initializeSelectors() {
-    // 카테고리 select 옵션 생성
-    const categorySelect = $('#category');
-    categorySelect.empty().append('<option value="">카테고리 선택</option>');
-    
-    for(let key in categoryData) {
-        categorySelect.append(`<option value="${key}">${categoryData[key]}</option>`);
-    }
-
-    // 과목 select 옵션 생성
-    const subjectSelect = $('#subject');
-    subjectSelect.empty().append('<option value="">과목 선택</option>');
-    
-    for(let key in subjectData) {
-        subjectSelect.append(`<option value="${key}">${subjectData[key]}</option>`);
-    }
 }
 
 // 에디터 이미지 업로드 처리 (서버 구현 전 임시 버전)
@@ -79,96 +41,6 @@ function handleImageUpload(blob, callback) {
     }
 }
 
-// 썸네일 이미지 업로드 초기화
-function initializeImageUpload() {
-	// 요소 존재 여부 확인을 위한 로그
-	console.log('Elements found:', {
-	    dropZone: $("#imagePreviewContainer").length,
-	    fileInput: $("#imageUpload").length,
-	    uploadBox: $(".image-upload-box").length
-	});
-	
-	var dropZone = $("#imagePreviewContainer");
-	var fileInput = $("#imageUpload");
-	var uploadLabel = $(".upload-label");
-	
-	// label 클릭으로 처리
-	uploadLabel.on('click', function(e) {
-	    console.log('Upload label clicked');
-	    // label과 input이 연결되어 있으므로 추가 처리 필요 없음
-	});
-	
-	// 파일 선택 이벤트
-	fileInput.on('change', function(e) {
-	    console.log('File selected', e.target.files);
-	    if(e.target.files && e.target.files.length > 0) {
-	        handleThumbnailUpload(e.target.files);
-	    }
-	});
-
-    // 드래그 앤 드롭 이벤트
-    dropZone.on('dragover', function(e) {
-        e.preventDefault();
-        dropZone.addClass('dragover');
-    }).on('dragleave', function() {
-        dropZone.removeClass('dragover');
-    }).on('drop', function(e) {
-        e.preventDefault();
-        dropZone.removeClass('dragover');
-        
-        var files = e.originalEvent.dataTransfer.files;
-        handleThumbnailUpload(files);
-    });
-
-    // 이미지 순서 변경 기능
-    $("#imagePreviewContainer").sortable({
-        items: '.image-preview',
-        update: updateImageOrder
-    });
-
-    // 이미지 삭제 이벤트 추가
-    dropZone.on('click', '.remove-image', function(e) {
-        e.stopPropagation();  // 버블링 방지
-        var preview = $(this).closest('.image-preview');
-        var imgNo = preview.data('img-no');
-        uploadedImages = uploadedImages.filter(function(id) {
-            return id !== imgNo;
-        });
-        preview.remove();
-        updateImageOrder();
-    });
-}
-
-// 썸네일 이미지 업로드 처리 (서버 구현 전 임시 버전)
-function handleThumbnailUpload(files) {
-    if (uploadedImages.length + files.length > 10) {
-        alert('최대 10개의 이미지만 업로드 가능합니다.');
-        return;
-    }
-
-    /* 
-    * 추후 구현 사항:
-    * 1. 이미지 서버 업로드
-    * 2. DB에 이미지 정보 저장 (IMAGE 테이블)
-    * 3. using_type=1로 설정하여 썸네일 이미지임을 표시
-    * 4. 실제 업로드된 이미지 정보로 미리보기 생성
-    */
-
-    // 임시: 파일을 URL로 변환하여 미리보기 생성
-    for (var i = 0; i < files.length; i++) {
-        var file = files[i];
-        if (!file.type.startsWith('image/')) {
-            alert('이미지 파일만 업로드 가능합니다.');
-            continue;
-        }
-
-        var imgUrl = URL.createObjectURL(file);
-        var tempImgNo = 'temp_' + new Date().getTime() + i; // 임시 ID 생성
-        addImagePreview(imgUrl, tempImgNo);
-        uploadedImages.push(tempImgNo);
-        updateImageOrder();
-    }
-}
 
 // 이미지 미리보기 추가
 function addImagePreview(url, imgNo) {
@@ -181,101 +53,6 @@ function addImagePreview(url, imgNo) {
     $('.image-upload-box').before(previewHtml);
 }
 
-// 이미지 순서 업데이트
-function updateImageOrder() {
-    imageOrder = $('.image-preview').map(function() {
-        return $(this).data('img-no');
-    }).get();
-}
-
-// 판매 유형에 따른 UI 변경
-function initializeTypeHandlers() {
-    $('input[name="type"]').on('change', function() {
-        var type = $(this).val();
-        if (type === 'product') {
-            $('.product-only').show();
-			$('.file-only').hide();
-        } else {
-            $('.product-only').hide();
-			$('.file-only').show();
-        }
-    });
-
-	// 파일 선택 이벤트
-	$('#fileUpload').on('change', function(e) {
-		var files = e.target.files;
-	
-		for(var i = 0; i < files.length; i++) {
-		    var file = files[i];
-		    
-		    // 파일 크기 체크
-		    if (file.size > 100 * 1024 * 1024) {
-		        alert('파일 크기는 100MB를 초과할 수 없습니다.');
-		        continue;
-		    }
-	
-		    // 파일 정보 표시
-		    var fileSize = (file.size / (1024 * 1024)).toFixed(2);
-		    var fileId = 'file_' + new Date().getTime() + i;
-		    
-		    var fileHtml = `
-		        <div class="file-item" id="${fileId}">
-		            <div class="file-info">
-		                ${file.name} (${fileSize}MB)
-		            </div>
-		            <button type="button" class="remove-file" data-file-id="${fileId}">&times;</button>
-		        </div>
-		    `;
-		    
-		    $('.file-list').append(fileHtml);
-		}
-	
-		// input 초기화 (같은 파일 다시 선택 가능하도록)
-		this.value = '';
-	});
-
-	// 파일 삭제 버튼 클릭
-	$(document).on('click', '.remove-file', function() {
-		var fileId = $(this).data('file-id');
-		$('#' + fileId).remove();
-	});
-
-	// 선택된 파일들 정보 저장을 위한 배열
-	var selectedFiles = [];
-
-	// 파일 선택시 배열에 추가
-	$('#fileUpload').on('change', function(e) {
-	    var files = e.target.files;
-	    for(var i = 0; i < files.length; i++) {
-	        selectedFiles.push(files[i]);
-	    }
-	});
-
-	// 파일 삭제시 배열에서도 제거
-	$(document).on('click', '.remove-file', function() {
-	    var fileId = $(this).data('file-id');
-	    var index = selectedFiles.findIndex(f => f.id === fileId);
-	    if(index > -1) {
-	        selectedFiles.splice(index, 1);
-	    }
-	});
-	
-    $('#isFree').on('change', function() {
-        var isChecked = $(this).prop('checked');
-        $('#price').prop('disabled', isChecked);
-        if (isChecked) {
-            $('#price').val('0');
-        }
-    });
-
-    $('#hasDeliveryFee').on('change', function() {
-        var isChecked = $(this).prop('checked');
-        $('#deliveryFee').prop('disabled', !isChecked);
-        if (!isChecked) {
-            $('#deliveryFee').val('0');
-        }
-    });
-}
 
 // 폼 제출 및 임시저장 처리
 function initializeFormHandlers() {
@@ -337,7 +114,7 @@ function submitForm() {
 		url: contextPath + '/admin/notify/submit',
 		type: 'POST',
 		data: JSON.stringify(data),  // JSON 문자열로 변환
-		contentType: 'application/json', // Content-Type 헤더 설정
+		contentType: 'application/json;charset=UTF-8', // Content-Type 헤더 설정
 		success: function(response) {
 			if (response.success) {
 				alert(isTemp ? '임시저장되었습니다.' : '공지사항이 등록되었습니다.');
