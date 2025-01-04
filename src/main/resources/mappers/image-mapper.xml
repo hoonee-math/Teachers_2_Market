@@ -10,8 +10,8 @@
 		<result column="review_no" property="reviewNo"/>
 	</resultMap>
 	<!-- 이미지 추가 등록 -->
-	<insert id="insertImageByPostNo" parameterType="post2">
-	INSERT INTO POST2 (
+	<insert id="insertImageByPostNo" parameterType="image2">
+	INSERT INTO IMAGE2 (
 		img_no,
 		img_seq,
 		oriname,

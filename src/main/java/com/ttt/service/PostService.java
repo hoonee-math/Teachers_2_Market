@@ -57,16 +57,18 @@ public class PostService {
 	public int insertPost(Post2 post, MultipartRequest mr, String webAppPath) throws Exception {
 		SqlSession session = getSession();
 		int result = 0;
-
+		
 		try {
+			System.out.println("PostService.java 에 post 객체 전달 값: "+post.toString());
 			// 1. POST2 테이블 insert
 			result = dao.insertPost(session, post);
 			if (result <= 0)
 				throw new Exception("게시글 등록 실패");
-
+			System.out.println(post.getPostNo());
 			// 2. 생성된 postNo 조회
 			int postNo = dao.selectLastPostNo(session);
 			post.setPostNo(postNo);
+			System.out.println("postNo 조회: "+ postNo); //현재 여기서 계속 -1 만 출력되고 있음. selectLastPostNo 이게 실패한 것 같음
 
 			String memberId = post.getMember().getMemberId();
 

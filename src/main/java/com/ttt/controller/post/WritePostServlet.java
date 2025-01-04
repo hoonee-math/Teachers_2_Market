@@ -1,5 +1,6 @@
 package com.ttt.controller.post;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
@@ -75,9 +76,19 @@ public class WritePostServlet extends HttpServlet {
 
 				// 2. 파일 저장 경로 설정
     	        String webAppPath = request.getServletContext().getRealPath("/");
-
-				// 3. MultipartRequest 생성
     	        String uploadPath = FileUploadUtil.getUploadDirectory(webAppPath, FileUploadUtil.TEMP_DIR);
+    	        
+				// 2. 디렉토리 존재 여부 확인 및 생성
+				File directory = new File(uploadPath);
+				if (!directory.exists()) {
+					boolean created = directory.mkdirs();
+					if (!created) {
+						// 디렉토리 생성 실패 시 로그 출력 또는 예외 처리
+						System.out.println("디렉토리 생성 실패: " + uploadPath);
+					}
+				}
+    	        
+    	        // 3. MultipartRequest 생성
     	        MultipartRequest mr = new MultipartRequest(
     	            request,
     	            uploadPath,

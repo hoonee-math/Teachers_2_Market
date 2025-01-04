@@ -367,7 +367,6 @@ function submitForm() {
 		data: formData,
 		processData: false,  // FormData 처리 방지
 		contentType: false,  // Content-Type 자동 설정
-		data: JSON.stringify(data),
 		success: function(response) {
 			if (response.success) {
 				alert(isTemp ? '임시저장되었습니다.' : '공지사항이 등록되었습니다.');

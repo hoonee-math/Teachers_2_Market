@@ -163,7 +163,7 @@
 	</select>
 	
 	<!-- 게시글 등록 -->
-	<insert id="insertPost" parameterType="post2">
+	<insert id="insertPost" parameterType="post2" >
 	INSERT INTO POST2 (
 		POST_NO,
 		POST_DATE,
@@ -178,14 +178,14 @@
         SUBJECT_NO,
         CATEGORY_NO
 	) VALUES (
-		SEQ_POST2_NO.NEXTVAL,
-		SYSDATE,
+		SEQ_POST2_NO.NEXTVAL, 	<!-- POST_NO -->
+		SYSDATE,				<!-- POST_DATE -->
 		#{postTitle},
 		#{postContent},
-		DEFAULT,
+		DEFAULT,				<!-- VIEW_COUNT -->
 		#{isTemp},
 		#{member.memberNo},
-		DEFAULT,
+		DEFAULT,				<!-- IS_DELETED -->
 		#{productType},
 		#{isFix},
         #{subjectNo},
@@ -209,11 +209,11 @@
 	) VALUES (
 		SEQ_PRODUCT2_NO.NEXTVAL,
 		#{postNo},
-		#{isFree},
-		#{productPrice},
-		#{hasDeliveryFee},
-		#{deliveryFee},
-		#{stockCount}
+		#{product2.isFree},
+		#{product2.productPrice},
+		#{product2.hasDeliveryFee},
+		#{product2.deliveryFee},
+		#{product2.stockCount}
 	)
 	</select>
 	
@@ -229,11 +229,11 @@
 	) VALUES (
 		SEQ_FILE2_NO.NEXTVAL,
 		#{postNo},
-		#{isFree},
-		#{filePrice},
-		#{salePeriod},
-		#{oriname},
-		#{renamed}
+		#{file2.isFree},
+		#{file2.filePrice},
+		#{file2.salePeriod},
+		#{file2.oriname},
+		#{file2.renamed}
 	)
 	</select>
 </mapper>
