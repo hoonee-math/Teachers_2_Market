@@ -1,7 +1,6 @@
 /**
  * enrollmain.jsp 회원가입 페이지의 유효성 검사 및 이벤트 처리를 위한 스크립트
  */
-
 // DOM이(페이지가) 로드되면 이벤트 리스너 초기화
 $(document).ready(function() {
     initializeEventListeners();
@@ -51,36 +50,38 @@ function initializeFormValidation() {
     $("input[type='reset']").click(resetForm);
 }
 
-/**
- * 아이디 중복 확인
- */
+
+// 아이디 중복검사를 실행하는 함수
 function checkId() {
-    const memberId = $("#memberId").val();
-    if(!memberId || memberId.length < 4) {
-        alert("아이디는 4글자 이상 입력해주세요.");
+    const memberId = $('#memberId').val();
+
+    if (!memberId) {
+        alert('아이디를 입력해주세요.');
         return;
     }
-    
+
     $.ajax({
-        url: `${contextPath}/member/idcheck`,
-        type: "POST",
+        url: path + '/member/checkid', 
+        type: "GET",
         data: { memberId: memberId },
-        success: function(result) {
-            if(result.available) {
-                alert("사용 가능한 아이디입니다.");
-                $("#memberId").prop("readonly", true);
-                $("#idCheckBtn").prop("disabled", true);
-                $("input[name='idCheckYN']").val("Y");
+        dataType: "json",
+        success: function(response) {
+            console.log('서버 응답:', response);
+            if(response.exists) {
+                alert('이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.');
             } else {
-                alert("이미 사용중인 아이디입니다.");
-                $("#memberId").val("").focus();
+                alert('사용 가능한 아이디입니다.');
+                $("input[name='idCheckYN']").val("Y");
             }
         },
-        error: function() {
-            alert("아이디 중복 확인 중 오류가 발생했습니다.");
+        error: function(xhr, status, error) {
+            console.log('에러 상태:', status);
+            console.log('에러 내용:', error);
+            alert('아이디 확인 중 오류가 발생했습니다. 다시 시도해주세요.');
         }
     });
 }
+
 
 /**
  * 이메일 인증 처리
