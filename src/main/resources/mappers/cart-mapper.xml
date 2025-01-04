@@ -21,7 +21,6 @@
 	    
 	    <association property="product2" javaType="product2">
 	        <id column="product_no" property="productNo"/>
-	        <result column="is_free" property="isFree"/>
 	        <result column="product_price" property="productPrice"/>
 	        <result column="has_delivery_fee" property="hasDeliveryFee"/>
 	        <result column="delivery_fee" property="deliveryFee"/>
@@ -30,7 +29,6 @@
 	    
 	    <association property="file2" javaType="file2">
 	        <id column="file_no" property="fileNo"/>
-	        <result column="is_free" property="isFree"/>
 	        <result column="file_price" property="filePrice"/>
 	        <result column="sale_period" property="salePeriod"/>
 	        <result column="oriname" property="oriname"/>
@@ -53,11 +51,7 @@
 	    SELECT 
 	        C.CART_NO, C.IS_PAYMENT,
 	        P.POST_NO, P.POST_TITLE, P.PRODUCT_TYPE,
-	        PR.PRODUCT_NO, PR.IS_FREE, PR.PRODUCT_PRICE, 
-	        PR.HAS_DELIVERY_FEE, PR.DELIVERY_FEE, PR.STOCK_COUNT,
-	        F.FILE_NO, F.IS_FREE, F.FILE_PRICE, F.SALE_PERIOD, 
-	        F.ORINAME, F.RENAMED,
-	        I.IMG_NO, I.RENAMED AS IMAGE_RENAMED
+	        PR.*, F.*, I.*
 	    FROM CART2 C 
 	        LEFT JOIN POST2 P ON C.POST_NO = P.POST_NO
 	        LEFT JOIN PRODUCT2 PR ON P.POST_NO = PR.POST_NO

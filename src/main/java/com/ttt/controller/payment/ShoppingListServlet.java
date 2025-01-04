@@ -1,6 +1,7 @@
 package com.ttt.controller.payment;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +51,9 @@ public class ShoppingListServlet extends HttpServlet {
 			request.setAttribute("carts", carts);
 		}
 		
+		//file 판매기한 끝나면 "판매종료" 띄우기 위한 오늘 날짜 받아옴
+		LocalDate today = LocalDate.now();
+		request.setAttribute("today", today);
 		
 		request.getRequestDispatcher("/WEB-INF/views/payment/shoppingList.jsp").forward(request, response);
 	}
