@@ -369,9 +369,9 @@ function submitForm() {
 		contentType: false,  // Content-Type 자동 설정
 		success: function(response) {
 			if (response.success) {
-				alert(isTemp ? '임시저장되었습니다.' : '공지사항이 등록되었습니다.');
+				alert(isTemp ? '임시저장되었습니다.' : '상품이 등록되었습니다.');
 				// 성공 시 공지사항 목록 페이지로 이동
-				location.href = contextPath + '/board/listu';
+				location.href = contextPath + '/board/list?categoryNo='+$('#category').val()+"&cPage=1";
 			} else {
 				alert(response.message || '등록에 실패했습니다.');
 			}
