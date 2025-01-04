@@ -57,7 +57,7 @@ public class PostService {
 	}
 
 	// 상품/파일 등록 게시글을 작성한 경우 하나의 트랜잭션에서 처리하는 insert 서비스
-	public int insertPost(JsonObject jsonData) throws Exception {
+	public int insertPost(Post2 post) throws Exception {
 		SqlSession session = getSession();
 		int result = 0;
 

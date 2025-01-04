@@ -357,20 +357,22 @@ function submitForm() {
 	$.ajax({
 		url: contextPath + '/post/write/submit',
 		type: 'POST',
-		contentType: 'application/json;charset=UTF-8',
+		data: formData,
+		processData: false,  // FormData 처리 방지
+		contentType: false,  // Content-Type 자동 설정
 		data: JSON.stringify(data),
 		success: function(response) {
 			if (response.success) {
 				alert(isTemp ? '임시저장되었습니다.' : '공지사항이 등록되었습니다.');
 				// 성공 시 공지사항 목록 페이지로 이동
-				location.href = contextPath + '/admin/menu';
+				location.href = contextPath + '/board/listu';
 			} else {
 				alert(response.message || '등록에 실패했습니다.');
 			}
 		},
 		error: function(xhr, status, error) {
-		console.error('Error:', error);
-		alert('서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+			console.error('Error:', error);
+			alert('서버 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
 		}
 	});
 }
