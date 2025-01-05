@@ -135,7 +135,7 @@
 			</form> 
 			
 			
-			
+			<form action="${path }/payment/purchase" method="POST" id="purchaseForm">
 			<section class="row main-section">
 				<!-- 섹션 2 -->
 				<br>
@@ -148,8 +148,9 @@
 				섹션 3
 			</section> -->
 			<div id="purchase">
-				<button id="purchase-btn">결제하기</button>
+				<button type="button" id="purchase-btn">구매하기</button>
 			</div>
+			</form>
 			</div>
 		</div>
 	</div>
@@ -162,11 +163,6 @@
 
 <!-- 8. 공통 JavaScript -->
 <script>
-	//구매하기 버튼 누르면 구매창으로 연결 -> 나중에 정보까지 넘겨주도록 수정해야함
-	$('#purchase-btn').click(function() {
-		location.href="${path}/payment/purchase";
-	})
-	
 	//전체 선택, 전체 취소
 	function toggleCheckAll() {
 		//모든 체크박스가 체크되어있는지 확인
@@ -238,6 +234,47 @@
 	$(document).ready(function() {
 		calculateTotalPrice();
 	});
+	
+	//구매하기 버튼 누르면 구매창으로 연결
+	$('#purchase-btn').click(function() {
+		//선택된 체크박스 확인
+		const checkedItems = $('.select-btn:checked');
+		
+		//선택된 상품이 없는 경우
+		if(checkedItems.length === 0) {
+			alert('구매할 상품을 선택해주세요.');
+			return;
+		}
+		
+		//purchaseForm 비우기
+		$('#purchaseForm').empty();
+		
+		//선택된 각 상품의 정보를 폼에 추가
+		checkedItems.each(function() {
+			const container = $(this).closest('.list-container');
+			const cartNo = container.data('cart-no');
+			const postNo = container.data('post-no');
+			const productType = container.data('product-type');
+			const productPrice = container.data('product-price') || 0;
+			const deliveryFee = container.data('delivery-fee') || 0;
+			const filePrice = container.data('file-price') || 0;
+			
+			//hidden input 추가
+			$('#purchaseForm').append(`
+					<input type="hidden" name="cartNo" value="${cartNo}">
+					<input type="hidden" name="postNo" value="${postNo}">
+					<input type="hidden" name="productType" value="${productType}">
+					<input type="hidden" name="productPrice" value="${productPrice}">
+					<input type="hidden" name="deliveryFee" value="${deliveryFee}">
+					<input type="hidden" name="filePrice" value="${filePrice}">
+				`);
+		});
+		
+		//폼 제출
+		$('#purchaseForm').submit();
+	});
+	
+	
 </script>
 <!-- 9. API/Ajax 관련 JavaScript -->
 <!-- 10. 컴포넌트 JavaScript -->
