@@ -221,10 +221,17 @@
 			}
 		})
 		
+		console.log(totalPrice);
+		console.log(totalDeliveryFee);
+		
 		//천 단위 콤마 포맷팅
 		$('#total-product-price').text(totalPrice.toLocaleString());
 		$('#total-delivery-fee').text(totalDeliveryFee.toLocaleString());
 		$('#total-price').text((totalPrice + totalDeliveryFee).toLocaleString());
+		
+		$('#purchaseForm').append('<input type="hidden" name="totalProductPrice" value=' + totalPrice + '>');
+		$('#purchaseForm').append('<input type="hidden" name="totalDeliveryFee" value=' + totalDeliveryFee + '>');
+		$('#purchaseForm').append('<input type="hidden" name="totalPrice" value=' + (totalPrice+totalDeliveryFee) + '>');
 	}
 	
 	//체크박스 변경 시, 가격 다시 계산
@@ -237,6 +244,7 @@
 	
 	//구매하기 버튼 누르면 구매창으로 연결
 	$('#purchase-btn').click(function() {
+	    
 		//선택된 체크박스 확인
 		const checkedItems = $('.select-btn:checked');
 		
@@ -248,16 +256,28 @@
 		
 		//purchaseForm 비우기
 		$('#purchaseForm').empty();
-		
+	    
 		//선택된 각 상품의 정보를 폼에 추가
 		checkedItems.each(function() {
 			const cartNo = $(this).val();
 			$('#purchaseForm').append('<input type="hidden" name="cartNo" value="' + cartNo + '">');
 		});
 		
+	    //폼 제출 직전 최종 확인
+	    console.log('최종 폼 내용:');
+	    console.log($('#purchaseForm').html());
+	    
+	    
+	    // 잠시 대기 후 폼 제출 (로그를 확인할 수 있도록)
+	    setTimeout(function() {
+	        $('#purchaseForm').submit();
+	    }, 1000);  // 1초 대기
+	    
 		//폼 제출
-		$('#purchaseForm').submit();
+		//$('#purchaseForm').submit();
 	});
+	
+	
 	
 	
 </script>

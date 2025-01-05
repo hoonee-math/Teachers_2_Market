@@ -128,8 +128,14 @@
 			<section class="row main-section">
 				<!-- 섹션 2 -->
 				<div class="payment-info">
-					<p>상품 총 금액 <span class="amount" id="total-product-price">0</span>원 + 배송비 <span class="amount" id="total-delivery-fee">0</span>원</p>
-					<p>= 총 <span class="amount" id="total-price">0</span>원</p>
+				    <p>상품 총 금액 <span class="amount" id="total-product-price">
+				        <fmt:formatNumber value="${totalProductPrice}" pattern="#,###" />
+				    </span>원 + 배송비 <span class="amount" id="total-delivery-fee">
+				        <fmt:formatNumber value="${totalDeliveryFee}" pattern="#,###" />
+				    </span>원</p>
+				    <p>= 총 <span class="amount" id="total-price">
+				        <fmt:formatNumber value="${totalPrice}" pattern="#,###" />
+				    </span>원</p>
 				</div>
 			</section>
 			<section class="row main-section">

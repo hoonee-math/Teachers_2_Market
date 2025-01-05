@@ -25,9 +25,6 @@ public class PaymentDao {
 	
 	//장바구니 -> 구매하기 정보 넘기기 
 	public List<Cart2> selectCartsByCartNo(SqlSession session, List<Integer> cartNos) {
-		System.out.println("===== PaymentDao =====");
-	    System.out.println("전달받은 cartNos: " + cartNos);
-	    List<Cart2> result = session.selectList("cart2.selectCartsByCartNo", cartNos);
-	    System.out.println("조회 결과: " + result);
-	    return result;	}
+		return session.selectList("cart2.selectCartsByCartNo", cartNos);
+	}
 }
