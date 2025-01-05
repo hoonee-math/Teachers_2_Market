@@ -67,4 +67,21 @@
 			#{cartNo}
 		</foreach>
 	</delete>
+	
+	<!-- 장바구니에서 선택한 정보 구매하기 창으로 보내기 -->
+	<select id="selectCartsByCartNo" parameterType="java.util.List" resultMap="cartMap">
+		SELECT 
+	        C.CART_NO, C.IS_PAYMENT,
+	        P.POST_NO, P.POST_TITLE, P.PRODUCT_TYPE,
+	        PR.*, F.*, I.*
+	    FROM CART2 C 
+	        LEFT JOIN POST2 P ON C.POST_NO = P.POST_NO
+	        LEFT JOIN PRODUCT2 PR ON P.POST_NO = PR.POST_NO
+	        LEFT JOIN FILE2 F ON P.POST_NO = F.POST_NO
+	        LEFT JOIN IMAGE2 I ON P.POST_NO = I.POST_NO
+	    WHERE C.CART_NO IN
+	    	<foreach collection="list" item="cartNo" open="(" separator="," close=")">
+	    		#{cartNo}
+	    	</foreach>
+	</select>
 </mapper>

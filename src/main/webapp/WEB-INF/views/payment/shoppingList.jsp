@@ -251,23 +251,8 @@
 		
 		//선택된 각 상품의 정보를 폼에 추가
 		checkedItems.each(function() {
-			const container = $(this).closest('.list-container');
-			const cartNo = container.data('cart-no');
-			const postNo = container.data('post-no');
-			const productType = container.data('product-type');
-			const productPrice = container.data('product-price') || 0;
-			const deliveryFee = container.data('delivery-fee') || 0;
-			const filePrice = container.data('file-price') || 0;
-			
-			//hidden input 추가
-			$('#purchaseForm').append(`
-					<input type="hidden" name="cartNo" value="${cartNo}">
-					<input type="hidden" name="postNo" value="${postNo}">
-					<input type="hidden" name="productType" value="${productType}">
-					<input type="hidden" name="productPrice" value="${productPrice}">
-					<input type="hidden" name="deliveryFee" value="${deliveryFee}">
-					<input type="hidden" name="filePrice" value="${filePrice}">
-				`);
+			const cartNo = $(this).val();
+			$('#purchaseForm').append('<input type="hidden" name="cartNo" value="' + cartNo + '">');
 		});
 		
 		//폼 제출

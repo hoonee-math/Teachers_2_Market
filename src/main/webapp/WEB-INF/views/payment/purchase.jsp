@@ -53,30 +53,83 @@
 		<div class="main-content">
 			<p><img width="20px" src="${path}/resources/images/payment/dollar.png"> 결제하기</p>
 			<div id="main-box">
-			<section class="row main-section">
-				<!-- 섹션 1 -->
-				<div class="list-container">
-					<table class="product-container">
-						<tr>
-							<td class="list-img">
-								<img src="${path }/resources/images/ohaeone.jpg">
-							</td>
-							<td class="list-content">
-								<div>
-									<input type="text" id="postTitle" name="postTitle" value="구매 글 제목" readOnly><br>
-									<input type="text" id="salePrice" name="salePrice" value="₩ 10,000원" readOnly><br>
-									<input type="text" id="deliveryFee" name="deliveryFee" value="배송비 3,000원" readOnly><br>
-								</div>
-							</td>
-						</tr>
-					</table>
-				</div>
-			</section>
+			<c:forEach var="item" items="${carts }" varStatus="status">
+				<section class="row main-section">
+					<div class="list-container" >
+						<table class="product-container">
+							<tr>
+								<td class="list-img">
+									<img src="${path}/resources/images/upload/${item.postImg[0].renamed}">
+								</td>
+								<td class="list-content">
+									<div>
+										<!-- 판매 상품 제목 -->
+										<p><strong>${item.post.postTitle}</strong></p><br>
+										
+										<!-- 판매 상품 금액 -->
+										<c:if test="${item.post.productType==1 }">
+										<!-- stockCount 변수에 재고 넣음 -->
+										<c:set var="stockCount" value="${item.product2.stockCount }"/>
+										<c:choose>
+											<c:when test="${stockCount>0 }">
+												<c:set var="price" value="${item.product2.productPrice }"/>
+												<c:if test="${price>0 }">
+													<p><strong>₩ <fmt:formatNumber value="${price }" pattern="###,###,###"/></strong></p>
+												</c:if>
+												<c:if test="${price==0 }">
+													<p style="color:#2ecc71; font-weight:bold;">무료나눔</p>
+												</c:if>
+												
+												<!-- 상품 배송비 -->
+												<c:if test="${item.product2.hasDeliveryFee == 1}">
+													<p><strong>무료배송</strong></p>
+												</c:if>
+												<c:if test="${item.product2.hasDeliveryFee == 0}">
+													<p><strong>
+														배송비: 
+														<fmt:formatNumber value="${item.product2.deliveryFee}" pattern="#,###" />
+														원
+													</strong></p>
+												</c:if>
+											</c:when>
+											<c:otherwise>
+												<p style="color:#e74c3c; font-weight:bold;">판매종료</p>
+											</c:otherwise>
+										</c:choose>
+									</c:if>
+									<!-- 상품 타입이 파일인 경우 -->
+									<c:if test="${item.post.productType==2 }">
+										<!-- salePeriod 변수에 판매기간 넣음 -->
+										<c:set var="salePeriod" value="${item.file2.salePeriod }"/>
+										<c:choose>
+											<c:when test="${salePeriod.compareTo(today) >= 0 }">
+												<c:set var="price" value="${item.file2.filePrice }"/>
+												<c:if test="${price>0 }">
+													<p><strong>₩ <fmt:formatNumber value="${price }" pattern="###,###,###"/></strong></p>
+												</c:if>
+												<c:if test="${price==0 }">
+													<p style="color:#2ecc71; font-weight:bold;">무료나눔</p>
+												</c:if>
+											</c:when>
+											<c:otherwise>
+												<p style="color:#e74c3c; font-weight:bold;">판매종료</p>
+											</c:otherwise>
+										</c:choose>
+									</c:if><br>
+									
+										<br>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</section>
+			</c:forEach>
 			<section class="row main-section">
 				<!-- 섹션 2 -->
 				<div class="payment-info">
-					<p>상품 총 금액 <span class="amount" id="total-product-price">10,000</span>원 + 배송비 <span class="amount" id="total-delivery-price">3,000</span>원</p>
-					<p>= 총 <span class="amount" id="total-price">13,000</span>원</p>
+					<p>상품 총 금액 <span class="amount" id="total-product-price">0</span>원 + 배송비 <span class="amount" id="total-delivery-fee">0</span>원</p>
+					<p>= 총 <span class="amount" id="total-price">0</span>원</p>
 				</div>
 			</section>
 			<section class="row main-section">
