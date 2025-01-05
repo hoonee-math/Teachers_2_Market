@@ -30,85 +30,93 @@ import com.ttt.util.post.FileUploadUtil;
 @WebServlet("/post/write/*")
 public class WritePostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public WritePostServlet() {
-        super();
-    }
 
-    // "/post/report/form"으로 들어오는 요청에 대해 게시글 등록 페이지 열어주기
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public WritePostServlet() {
+		super();
+	}
+
+	// "/post/report/form"으로 들어오는 요청에 대해 게시글 등록 페이지 열어주기
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String uri = request.getRequestURI();
-        String path = uri.substring(request.getContextPath().length());
+		String path = uri.substring(request.getContextPath().length());
 
-        switch(path) {
-            case "/post/write/form":
-				request.getRequestDispatcher("/WEB-INF/views/post/writepost.jsp").forward(request, response);
-    	        String webAppPath1 = new File("src/main/webapp").getAbsolutePath();
-    	        System.out.println("webAppPath1: "+webAppPath1);
-    	        String webAppPath2 = request.getServletContext().getRealPath("/");
-    	        System.out.println("webAppPath2: "+webAppPath2);
-    	        String webAppPath3 = getServletContext().getRealPath("../../../src/main/webapp/");;
-    	        System.out.println("webAppPath3: "+webAppPath3);
+		switch (path) {
+		case "/post/write/form":
+			request.getRequestDispatcher("/WEB-INF/views/post/writepost.jsp").forward(request, response);
 
-				String webAppPath4 = System.getProperty("user.dir") + "/src/main/webapp/";
-    	        System.out.println("webAppPath4: "+webAppPath4);
-				// 방법 2: ClassLoader 사용
-				String webAppPath5 = Thread.currentThread().getContextClassLoader().getResource("").getPath()
-			               .replace("target/classes/", "src/main/webapp/");
-    	        System.out.println("webAppPath5: "+webAppPath5);
+			// 파일 저장 경로 확인 test
+			String webAppPath1 = new File("src/main/webapp").getAbsolutePath();
+			System.out.println("webAppPath1: " + webAppPath1);
+			// -> webAppPath1: C:\Windows\System32\src\main\webapp
+			String webAppPath2 = request.getServletContext().getRealPath("/");
+			System.out.println("webAppPath2: " + webAppPath2);
+			// -> webAppPath2: C:\GitHub\EduTech_Full_Stack\Teachers_Project\Teachers_2_Market\Teachers_2_Market\target\m2e-wtp\web-resources\
+			String webAppPath3 = getServletContext().getRealPath("../../../src/main/webapp/");
+			System.out.println("webAppPath3: " + webAppPath3);
+			// -> webAppPath3: null
+			String webAppPath4 = System.getProperty("user.dir") + "/src/main/webapp/";
+			System.out.println("webAppPath4: " + webAppPath4);
+			// -> webAppPath4: C:\Windows\System32/src/main/webapp/
 
-				String webAppPath = new File(Thread.currentThread().getContextClassLoader().getResource("").getPath()
-						.replace("target/classes/", "src/main/webapp/")).getAbsolutePath();
-				System.out.println("webAppPath: "+ webAppPath);
-				break;
-			default: request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
-        }
+			// 방법 2: ClassLoader 사용
+			String webAppPath5 = new File(Thread.currentThread().getContextClassLoader().getResource("").getPath()
+					.replace("target/classes/", "src/main/webapp/")).getAbsolutePath();
+			System.out.println("webAppPath5: " + webAppPath5);
+			// -> webAppPath5: C:\GitHub\EduTech_Full_Stack\Teachers_Project\Teachers_2_Market\Teachers_2_Market\src\main\webapp
+			
+			break;
+		default:
+			request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+		}
 	}
 
 	// "/post/report/submit"으로 들어오는 요청에 게시글 등록 로직 실행시키기
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		String uri = request.getRequestURI();
-        String path = uri.substring(request.getContextPath().length());
-        
-        if(!path.equals("/post/write/submit")) {
-        	/* 잘못된 접근인 경우 */
-        	request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
-        } else {
-        	/* 요청 주소 path 값이 /post/write/submit 가 맞는 경우 */
-        	
-        	request.setCharacterEncoding("UTF-8");
-    	    // 응답 설정
-    	    response.setContentType("application/json;charset=utf-8");
-    	    PrintWriter out = response.getWriter();
+		String path = uri.substring(request.getContextPath().length());
 
-    	    // 결과 데이터를 담을 Map
-    	    Map<String, Object> responseData = new HashMap<>();
-    	    
-    	    try {
-    	        // 1. 로그인 체크 (확인)
-    	        Member2 loginMember = (Member2)request.getSession().getAttribute("loginMember");
-    	        if(loginMember == null) {
-    	            throw new RuntimeException("로그인이 필요한 서비스입니다.");
-    	        }
+		if (!path.equals("/post/write/submit")) {
+			/* 잘못된 접근인 경우 */
+			request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+		} else {
+			/* 요청 주소 path 값이 /post/write/submit 가 맞는 경우 */
+
+			request.setCharacterEncoding("UTF-8");
+			// 응답 설정
+			response.setContentType("application/json;charset=utf-8");
+			PrintWriter out = response.getWriter();
+
+			// 결과 데이터를 담을 Map
+			Map<String, Object> responseData = new HashMap<>();
+
+			try {
+				// 1. 로그인 체크 (확인)
+				Member2 loginMember = (Member2) request.getSession().getAttribute("loginMember");
+				if (loginMember == null) {
+					throw new RuntimeException("로그인이 필요한 서비스입니다.");
+				}
 
 				// 2. 파일 저장 경로 설정
-    	        String webAppPath1 = new File("src/main/webapp").getAbsolutePath();
-    	        System.out.println("webAppPath1: "+webAppPath1);
-    	        String webAppPath2 = request.getServletContext().getRealPath("/");
-    	        System.out.println("webAppPath2: "+webAppPath2);
-    	        String webAppPath3 = getServletContext().getRealPath("../../../src/main/webapp/");;
-    	        System.out.println("webAppPath3: "+webAppPath3);
-
+				String webAppPath1 = new File("src/main/webapp").getAbsolutePath();
+				System.out.println("webAppPath1: " + webAppPath1);
+				String webAppPath2 = request.getServletContext().getRealPath("/");
+				System.out.println("webAppPath2: " + webAppPath2);
+				String webAppPath3 = getServletContext().getRealPath("../../../src/main/webapp/");
+				;
+				System.out.println("webAppPath3: " + webAppPath3);
 				String webAppPath4 = System.getProperty("user.dir") + "/src/main/webapp/";
-    	        System.out.println("webAppPath4: "+webAppPath4);
+				System.out.println("webAppPath4: " + webAppPath4);
+
 				// 방법 2: ClassLoader 사용 -- 임시방편
 				String webAppPath = new File(Thread.currentThread().getContextClassLoader().getResource("").getPath()
 						.replace("target/classes/", "src/main/webapp/")).getAbsolutePath();
-				System.out.println("webAppPath: "+ webAppPath);
-    	        
-    	        String uploadPath = FileUploadUtil.getUploadDirectory(webAppPath, FileUploadUtil.TEMP_DIR);
-    	        System.out.println("uploadPath: "+uploadPath);
-    	        
+				System.out.println("webAppPath: " + webAppPath);
+
+				String uploadPath = FileUploadUtil.getUploadDirectory(webAppPath, FileUploadUtil.TEMP_DIR);
+				System.out.println("uploadPath: " + uploadPath);
+
 				// 2. 디렉토리 존재 여부 확인 및 생성
 				File directory = new File(uploadPath);
 				if (!directory.exists()) {
@@ -118,36 +126,30 @@ public class WritePostServlet extends HttpServlet {
 						System.out.println("디렉토리 생성 실패: " + uploadPath);
 					}
 				}
-    	        
-    	        // 3. MultipartRequest 생성
-    	        MultipartRequest mr = new MultipartRequest(
-    	            request,
-    	            uploadPath,
-    	            1024 * 1024 * 100,  // 100MB
-    	            "UTF-8",
-    	            new DefaultFileRenamePolicy()
-    	        );
+
+				// 3. MultipartRequest 생성
+				MultipartRequest mr = new MultipartRequest(request, uploadPath, 1024 * 1024 * 100, // 100MB
+						"UTF-8", new DefaultFileRenamePolicy());
 
 				// 4. Post2 객체 생성
-				Post2 post = Post2.builder()
-						.postTitle(mr.getParameter("postTitle"))
-						.postContent(mr.getParameter("postContent"))
-						.categoryNo(Integer.parseInt(mr.getParameter("categoryNo")))
-						.subjectNo(Integer.parseInt(mr.getParameter("subjectNo")))
-						.productType(Integer.parseInt(mr.getParameter("productType")))
-						.isTemp(Integer.parseInt(mr.getParameter("isTemp")))
-						.member(loginMember)
-						.build();
+				Post2 post = Post2.builder().postTitle(mr.getParameter("postTitle"))
+					.postContent(mr.getParameter("postContent"))
+					.categoryNo(Integer.parseInt(mr.getParameter("categoryNo")))
+					.subjectNo(Integer.parseInt(mr.getParameter("subjectNo")))
+					.productType(Integer.parseInt(mr.getParameter("productType")))
+					.isTemp(Integer.parseInt(mr.getParameter("isTemp")))
+					.member(loginMember)
+					.build();
 
 				// 5. 상품/파일 정보 생성
 				if ("1".equals(mr.getParameter("productType"))) { // 상품
 					Product2 product = Product2.builder()
-							.isFree(Integer.parseInt(mr.getParameter("isFree")))
-							.productPrice(Integer.parseInt(mr.getParameter("productPrice")))
-							.hasDeliveryFee(Integer.parseInt(mr.getParameter("hasDeliveryFee")))
-							.deliveryFee(Integer.parseInt(mr.getParameter("deliveryFee")))
-							.stockCount(Integer.parseInt(mr.getParameter("stockCount")))
-							.build();
+						.isFree(Integer.parseInt(mr.getParameter("isFree")))
+						.productPrice(Integer.parseInt(mr.getParameter("productPrice")))
+						.hasDeliveryFee(Integer.parseInt(mr.getParameter("hasDeliveryFee")))
+						.deliveryFee(Integer.parseInt(mr.getParameter("deliveryFee")))
+						.stockCount(Integer.parseInt(mr.getParameter("stockCount")))
+						.build();
 					post.setProduct2(product);
 
 					// 상품 이미지 파일 처리
@@ -160,10 +162,10 @@ public class WritePostServlet extends HttpServlet {
 							String renamed = mr.getFilesystemName(fileName);
 							if (oriname != null) {
 								Image2 img = Image2.builder()
-										.oriname(oriname)
-										.renamed(renamed)
-										.imgSeq(images.size() + 1) // 순차적으로 번호 부여
-										.build();
+									.oriname(oriname)
+									.renamed(renamed)
+									.imgSeq(images.size() + 1) // 순차적으로 번호 부여
+									.build();
 								images.add(img);
 							}
 						}
@@ -175,12 +177,13 @@ public class WritePostServlet extends HttpServlet {
 					String renamed = mr.getFilesystemName("uploadFile0");
 
 					if (oriname != null) {
-						File2 file = File2.builder().isFree(Integer.parseInt(mr.getParameter("isFree")))
-								.filePrice(Integer.parseInt(mr.getParameter("filePrice")))
-								.salePeriod(LocalDate.parse(mr.getParameter("salePeriod")))
-								.oriname(oriname)
-								.renamed(renamed)
-								.build();
+						File2 file = File2.builder()
+							.isFree(Integer.parseInt(mr.getParameter("isFree")))
+							.filePrice(Integer.parseInt(mr.getParameter("filePrice")))
+							.salePeriod(LocalDate.parse(mr.getParameter("salePeriod")))
+							.oriname(oriname)
+							.renamed(renamed)
+							.build();
 						post.setFile2(file);
 					}
 
@@ -194,10 +197,10 @@ public class WritePostServlet extends HttpServlet {
 							renamed = mr.getFilesystemName(fileName);
 							if (oriname != null) {
 								Image2 img = Image2.builder()
-										.oriname(oriname)
-										.renamed(renamed)
-										.imgSeq(images.size() + 1) // 순차적으로 번호 부여
-										.build();
+									.oriname(oriname)
+									.renamed(renamed)
+									.imgSeq(images.size() + 1) // 순차적으로 번호 부여
+									.build();
 								images.add(img);
 							}
 						}
@@ -212,22 +215,21 @@ public class WritePostServlet extends HttpServlet {
 				if (result > 0) {
 					responseData.put("success", true);
 					responseData.put("message", "게시글이 등록되었습니다.");
-		            responseData.put("postNo", post.getPostNo());
+					responseData.put("postNo", post.getPostNo());
 				} else {
 					throw new RuntimeException("게시글 등록에 실패했습니다.");
 				}
-    	        
-    	    } catch(Exception e) {
-    	        e.printStackTrace();
-    	        responseData.put("success", false);
-    	        responseData.put("message", e.getMessage());
-    	    }
-    	    
-    	    // JSON 응답 전송
-    	    new Gson().toJson(responseData, out);
-        	
-        	
-        }
+
+			} catch (Exception e) {
+				e.printStackTrace();
+				responseData.put("success", false);
+				responseData.put("message", e.getMessage());
+			}
+
+			// JSON 응답 전송
+			new Gson().toJson(responseData, out);
+
+		}
 	}
 
 }
