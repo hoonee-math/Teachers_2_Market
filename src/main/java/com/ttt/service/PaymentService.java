@@ -46,9 +46,20 @@ public class PaymentService {
 	//장바구니 : 선택 상품 삭제 
 	public int deleteSelectedCarts(List<Integer> cartNos) {
 		SqlSession session = getSession();
-		int result = dao.deleteSelectedCarts(session, cartNos);
-		session.close();
-		
+		int result = 0;
+		try {
+			result = dao.deleteSelectedCarts(session, cartNos);
+			if(result > 0) {
+				session.commit();
+			} else {
+				session.rollback();
+			}
+		} catch (Exception e) {
+			session.rollback();
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
 		return result;
 	}
 }
