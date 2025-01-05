@@ -50,7 +50,7 @@
 			<p><img width="20px" src="${path}/resources/images/payment/shoppingCart.png"> 장바구니 </p>
 			<div id="main-box">
 			<form action="${path }/payment/deletecart" method="POST" id="cartForm">
-				<button type="button" id="checkAll" onclick="checkAll();">전체선택</button>
+				<button type="button" id="checkAll" onclick="toggleCheckAll();">전체선택</button>
 				<button type="submit" id="checkDelete">선택삭제</button>
 			
 			<c:forEach var="item" items="${carts }" varStatus="status">
@@ -168,12 +168,11 @@
 	})
 	
 	//전체 선택, 전체 취소
-	function checkAll() {
-		const checks = document.querySelectorAll(".list-container>[type='checkbox']")
-		//모든 체크박스가 선택되어있는지 확인
-		const allChecked = Array.from(checks).every(check => check.checked);
-		//allChecked== true -> 전체 취소 / false -> 전체 선택
-		checks.forEach(check => check.checked = !allChecked);
+	function toggleCheckAll() {
+		//모든 체크박스가 체크되어있는지 확인
+		const isAllChecked = $('.select-btn:checked').length === $('.select-btn').length;
+		//전체 체크박스 상태 변경
+		$('.select-btn').prop('checked', !isAllChecked);
 		
 		//체크 상태 변경 후, 전체 금액 계산 실행
 		calculateTotalPrice();
