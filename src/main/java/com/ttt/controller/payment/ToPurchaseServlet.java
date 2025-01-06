@@ -37,10 +37,6 @@ public class ToPurchaseServlet extends HttpServlet {
 		request.setAttribute("totalDeliveryFee", totalDeliveryFee);
 		String totalPrice = request.getParameter("totalPrice");
 		request.setAttribute("totalPrice", totalPrice);
-		
-		System.out.println("상품 가격 : " + totalProductPrice
-					+ "\n배달비 : " + totalDeliveryFee
-					+ "\n전체 가격 : " + totalPrice);
 			
 			List<Integer> cartNoList = Arrays.stream(cartNos)
 											.filter(cartNo -> {

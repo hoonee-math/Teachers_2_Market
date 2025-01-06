@@ -47,7 +47,6 @@ public class ShoppingListServlet extends HttpServlet {
 		            cart.setPostImg(images);
 		        }
 		    }
-			System.out.println(carts);
 			request.setAttribute("carts", carts);
 		}
 		

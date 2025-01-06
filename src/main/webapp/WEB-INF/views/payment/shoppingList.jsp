@@ -202,6 +202,8 @@
 		let totalPrice = 0;
 		let totalDeliveryFee = 0;
 		
+		$("#purchase").parent().find("input").remove();
+		
 		//체크된 상품들만 계산
 		$('.select-btn:checked').each(function() {
 			const container = $(this).closest('.list-container');
@@ -253,28 +255,19 @@
 			alert('구매할 상품을 선택해주세요.');
 			return;
 		}
-		
-		//purchaseForm 비우기
-		$('#purchaseForm').empty();
 	    
 		//선택된 각 상품의 정보를 폼에 추가
 		checkedItems.each(function() {
 			const cartNo = $(this).val();
 			$('#purchaseForm').append('<input type="hidden" name="cartNo" value="' + cartNo + '">');
 		});
-		
-	    //폼 제출 직전 최종 확인
+	    
+		//폼 제출 직전 최종 확인
 	    console.log('최종 폼 내용:');
 	    console.log($('#purchaseForm').html());
 	    
-	    
-	    // 잠시 대기 후 폼 제출 (로그를 확인할 수 있도록)
-	    setTimeout(function() {
-	        $('#purchaseForm').submit();
-	    }, 1000);  // 1초 대기
-	    
 		//폼 제출
-		//$('#purchaseForm').submit();
+		$('#purchaseForm').submit();
 	});
 	
 	
