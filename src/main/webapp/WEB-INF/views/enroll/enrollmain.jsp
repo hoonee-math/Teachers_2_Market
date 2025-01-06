@@ -77,7 +77,6 @@ body {
 
 #login-font {
 	font-family: Sans-serif;
-	font-style: italic;
 	font-size: 40px;
 	color: grey;
 }
@@ -172,11 +171,11 @@ input[type="radio"]:first-child {
 					<div id="enroll-inner-header">
 						<img class="logo-container"
 							src="${path}/resources/images/favicon.jpeg"
-							style="width: 60px; height: 60px;">
+							style="width: 60px; height: 60px; border-radius:10px;">
 						<p id="login-font">회원 정보 입력</p>
 						<img class="logo-container"
 							src="${path}/resources/images/favicon.jpeg"
-							style="width: 60px; height: 60px;">
+							style="width: 60px; height: 60px; border-radius:10px;">
 					</div>
 
 					<!-- 회원가입 폼 -->
@@ -297,12 +296,12 @@ input[type="radio"]:first-child {
 						<div id="agree-button">
 							<div id="canclediv">
 								<input type="reset" id="cancle"
-									style="cursor: pointer; height: 50px; border: none;"
+									style="cursor: pointer; height: 50px; border: none; color:black;"
 									value="메인으로">
 							</div>
 							<div id="joindiv">
 								<input type="submit"
-									style="cursor: pointer; height: 50px; background-color: #fffadd; border: none;"
+									style="cursor: pointer; height: 50px; background-color: #fffadd; color:black; border: none;"
 									value="회원가입">
 							</div>
 						</div>
