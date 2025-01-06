@@ -1,6 +1,7 @@
 package com.ttt.controller.member;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,6 +17,22 @@ public class ToMemberEnrollServlet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+//		동의 체크 여부를 판단하는 로직
+		String[] values = {
+	            request.getParameter("sign"),
+	            request.getParameter("sign2"),
+	            //request.getParameter("sign3")
+	        };
+		// 하나라도 null이면 동의하지 않은 것으로 처리
+		for (String value : values) {
+            if (value == null) {
+                request.setAttribute("errorMessage", "필수 항목에 동의해야 합니다.");
+                request.getRequestDispatcher("/WEB-INF/views/enroll/termsofservice.jsp").forward(request, response);
+                return;
+            }
+        }
+		
 		request.getRequestDispatcher("/WEB-INF/views/enroll/enrollmain.jsp").forward(request, response);
 	}
 

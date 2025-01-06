@@ -148,13 +148,14 @@
 						<p id="login-font">회원 동의 약관</p>
 						<img class="logo-container" src="${path}/resources/images/favicon.jpeg" style="width:60px; height:60px;">
 					</div>
+					<form id="logincheck-frm" action="${path}/member/enrollmain" method="post">
 					<div id=check-line>
 						<p>19세 이상 이신가요?</p><p class="login-mustcheck">(필수)</p>
-						<input type="checkbox">
+						<input type="checkbox" name="sign" required>
 					</div>
 					<div id="check-line1">
 						<p>이용약관 동의</p><p class="login-mustcheck">(필수)</p>
-						<input type="checkbox">
+						<input type="checkbox" name="sign2" required>
 					</div>
 					<div id="check-content">
 						<div id="check-contentbox">
@@ -209,7 +210,7 @@
 					</div>	
 					<div id="check-line2">
 						<p>개인정보 처리방침 동의</p><p class="login-mustcheck">(필수)</p>
-						<input type="checkbox">
+						<input type="checkbox" name="sign3" required>
 					</div>
 					<div id="check-content2">
 						<div id="check-contentbox2">
@@ -357,6 +358,7 @@
 						<p>광고성 정보 수신 동의</p>
 						<input type="checkbox">
 					</div>
+					</form>
 					<div id="check-content3">
 						<div id="check-contentbox3">
 							<p>	
@@ -395,7 +397,7 @@
 					<input type="reset" id="cancle" style="cursor: pointer; height:50px; border:none;" value="메인으로">
 				</div>
 				<div id="joindiv">
-					<input type="submit" id="join" value="회원가입">
+					<input type="button" id="join" value="회원가입">
 				</div>
 			</div>
 			</section>
@@ -417,7 +419,8 @@
 	});
 	//회원가입 버튼 클릭시 회원정보입력페이지로 이동
 	$("#join").click(function() {
-		location.assign("${path}/member/enrollmain");
+		//location.assign("${path}/member/enrollmain");
+		$("#logincheck-frm").submit();
 	});
 </script>
 <!-- 푸터 include -->
