@@ -77,6 +77,7 @@
         cursor: pointer;
         font-size: 14px;
         background-color: #f9f9f9;
+        color: #6f6f6f;
     }
     #find-id {
 	    background-color: #fffadd;
