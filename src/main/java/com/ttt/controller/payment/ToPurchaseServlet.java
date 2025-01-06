@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import src.main.java.com.ttt.dto.Cart2;
-import src.main.java.com.ttt.dto.Image2;
-import src.main.java.com.ttt.service.BoardService;
-import src.main.java.com.ttt.service.PaymentService;
+import com.ttt.dto.Cart2;
+import com.ttt.dto.Image2;
+import com.ttt.service.BoardService;
+import com.ttt.service.PaymentService;
 
 @WebServlet("/payment/purchase")
 public class ToPurchaseServlet extends HttpServlet {
