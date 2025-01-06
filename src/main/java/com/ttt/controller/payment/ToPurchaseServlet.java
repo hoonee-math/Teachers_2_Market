@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ttt.dto.Cart2;
-import com.ttt.dto.Image2;
-import com.ttt.service.BoardService;
-import com.ttt.service.PaymentService;
+import src.main.java.com.ttt.dto.Cart2;
+import src.main.java.com.ttt.dto.Image2;
+import src.main.java.com.ttt.service.BoardService;
+import src.main.java.com.ttt.service.PaymentService;
 
 @WebServlet("/payment/purchase")
 public class ToPurchaseServlet extends HttpServlet {
@@ -37,10 +37,6 @@ public class ToPurchaseServlet extends HttpServlet {
 		request.setAttribute("totalDeliveryFee", totalDeliveryFee);
 		String totalPrice = request.getParameter("totalPrice");
 		request.setAttribute("totalPrice", totalPrice);
-		
-		System.out.println("상품 가격 : " + totalProductPrice
-					+ "\n배달비 : " + totalDeliveryFee
-					+ "\n전체 가격 : " + totalPrice);
 			
 			List<Integer> cartNoList = Arrays.stream(cartNos)
 											.filter(cartNo -> {
