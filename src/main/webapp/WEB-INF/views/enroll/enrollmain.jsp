@@ -214,7 +214,7 @@ input[type="radio"]:first-child {
 							<tr>
 								<th>패스워드 *</th>
 								<td><input type="password" name="memberPw" id="password_"
-									placeholder="대소문자, 숫자, 특수문자 포함"><br></td>
+									placeholder="8글자 이상, 대소문자, 숫자, 특수문자 포함"><br></td>
 							</tr>
 							<tr>
 								<th>패스워드확인 *</th>
@@ -229,7 +229,7 @@ input[type="radio"]:first-child {
 							</tr>
 							<tr>
 								<th>생년월일</th>
-								<td><input type="text" name="birthday" id="birthday"
+								<td><input type="text" name="birthday" id="birthday" placeholder="예) 990209"
 									style="width: 270px;"><br>
 								</td>
 							</tr>
