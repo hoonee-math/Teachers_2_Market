@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.ttt.dto.Member2;
 import com.ttt.service.MemberService;
 
-@WebServlet("/member/enrollend")
+@WebServlet(name="memberEnroll", urlPatterns="/member/enrollend")
 public class MemberEnrollEndServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

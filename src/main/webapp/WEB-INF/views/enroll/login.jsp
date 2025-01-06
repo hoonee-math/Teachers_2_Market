@@ -109,7 +109,8 @@
 					<div><input type="text" id="login-id" name="memberId" placeholder="아이디"></div>
 					<div><input type="password" id="login-pw" name="memberPw" placeholder="비밀번호"></div>
 					<div><input type="button" id="login-btn" value="로그인"></div>
-					<div><input type="button" id="login-find" value="ID/PW찾기"></div>
+					<div><a href="${path}/member/findid"/>
+					<input type="button" id="login-find" value="ID/PW찾기"></div>
 					<div><a href="${path}/member/enroll/termsofservice" id="login-join">회원가입</a></div>
 				</div>
 			</section>
