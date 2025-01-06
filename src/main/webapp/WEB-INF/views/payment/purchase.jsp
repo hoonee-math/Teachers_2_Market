@@ -151,13 +151,13 @@
 						<tr>
 							<th>핸드폰 번호</th>
 							<td>
-								<input type="text" name="phone" id="phone" value="핸드폰 번호">
+								<input type="text" name="phone" id="phone" value="${sessionScope.loginMember.phone }">
 							</td>
 						</tr>
 						<tr>
 							<th>이메일 주소</th>
 							<td>
-								<input type="text" name="email" id="email" value="이메일 주소">
+								<input type="text" name="email" id="email" value="${sessionScope.loginMember.email }">
 							</td>
 						</tr>
 						<tr>

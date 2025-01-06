@@ -44,6 +44,7 @@
 		<mapper resource="/mappers/post-mapper.xml"/>
 		<mapper resource="/mappers/image-mapper.xml"/>
 		<mapper resource="/mappers/cart-mapper.xml"/>
+		<mapper resource="/mappers/purchase-mapper.xml"/>
 	</mappers>
 	
 </configuration>
