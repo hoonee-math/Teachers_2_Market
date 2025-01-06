@@ -8,10 +8,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/member/findid")
-public class FindIdServlet extends HttpServlet {
+public class ToFindIdServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public FindIdServlet() {
+    public ToFindIdServlet() {
         super();
     }
 
