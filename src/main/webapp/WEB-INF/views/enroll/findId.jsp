@@ -153,6 +153,10 @@
 	$("#find-container").click(function () {
 		location.assign("${path}");
 	});
+	
+	$("#find-pw").click(function () {
+		location.assign("${path}/member/findpw");
+	})
 </script>
 </body>
 </html>
