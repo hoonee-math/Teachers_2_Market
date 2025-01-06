@@ -48,7 +48,7 @@
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
 			<p><img width="20px" src="${path}/resources/images/payment/shoppingCart.png"> 장바구니 </p>
-			<div id="main-box">
+			<div id="main-box" style="width:1100px;">
 			<form action="${path }/payment/deletecart" method="POST" id="cartForm">
 				<button type="button" id="checkAll" onclick="toggleCheckAll();">전체선택</button>
 				<button type="submit" id="checkDelete">선택삭제</button>

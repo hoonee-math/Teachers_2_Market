@@ -52,7 +52,7 @@
 		<!-- 콘텐츠 영역 -->
 		<div class="main-content">
 			<p><img width="20px" src="${path}/resources/images/payment/dollar.png"> 결제하기</p>
-			<div id="main-box">
+			<div id="main-box" style="width:1100px;">
 			<c:forEach var="item" items="${carts }" varStatus="status">
 				<section class="row main-section">
 					<div class="list-container" >
