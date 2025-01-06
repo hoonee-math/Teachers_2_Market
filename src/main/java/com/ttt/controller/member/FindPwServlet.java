@@ -34,12 +34,11 @@ public class FindPwServlet extends HttpServlet {
 		
 		System.out.println(searchType + "," + email + ","+ memberId);
 		
-		Member2 m= new Member2();
+		Member2 m = new Member2();
 		switch(searchType) {
 		case "emailDuplicate" : m.setEmail(email); System.out.println(m); break;
 		case "searchPassword" : m.setEmail(email); m.setMemberId(memberId);; System.out.println(m); break;
 		}
-		
 		
 		Member2 result=new MemberService().selectMemberByIdAndEmail(m);
 		System.out.println("Query result: " + result);

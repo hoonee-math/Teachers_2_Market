@@ -61,4 +61,11 @@ public class MemberService {
 	    }
 	    return result;
 	}
+	
+	//아이디 찾기
+	public String selectMemberIdByNameAndEmail(Member2 m) {
+		SqlSession session = getSession();
+		String memberId = dao.selectMemberIdByNameAndEmail(session, m);
+		return memberId;
+	}
 }

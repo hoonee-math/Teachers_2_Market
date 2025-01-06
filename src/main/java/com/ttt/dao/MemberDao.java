@@ -51,4 +51,8 @@ public class MemberDao {
 		return session.update("member2.updatePassword", m);
 	}
 	
+	//아이디 찾기
+	public String selectMemberIdByNameAndEmail(SqlSession session, Member2 m) {
+		return session.selectOne("member2.selectMemberIdByNameAndEmail", m);
+	}
 }

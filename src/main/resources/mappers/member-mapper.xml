@@ -62,14 +62,20 @@
 		SELECT * FROM MEMBER2 WHERE MEMBER_ID=#{memberId}
 	</select>
 	
+	<!-- 비밀번호 찾기 -->
 	<select id="selectMemberByIdAndEmail" parameterType="member2" resultMap="memberMap">
 		SELECT * FROM MEMBER2 WHERE EMAIL=#{email} AND MEMBER_ID=#{memberId}
 	</select>
 	
-		<update id="updatePassword" parameterType="member2">
+	<update id="updatePassword" parameterType="member2">
 		UPDATE MEMBER2 SET 
 			member_pw=#{memberPw}
 			WHERE email=#{email}
 	
 	</update>
+	
+	<!-- 아이디 찾기  -->
+	<select id="selectMemberIdByNameAndEmail" parameterType="member2" resultType="string">
+		SELECT MEMBER_ID FROM MEMBER2 WHERE MEMBER_NAME=#{memberName} AND EMAIL=#{email}
+	</select>
 </mapper>
