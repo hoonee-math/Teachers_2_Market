@@ -97,6 +97,13 @@
         height: 300px;
         margin-top: 100px;
     }
+    #input-email {
+        width: 300px;
+    	border: 1px solid #cccccc;
+    	border-radius: 5px;
+    	padding: 10px;
+    	margin-bottom: 20px;
+    }
     #email-check {
         margin-top: 20px;
         padding: 10px 20px;
@@ -124,6 +131,7 @@
 		</div>
 		<!-- 콘텐츠 영역 -->
 		<div id="main-content">
+			<form id="find-form">
 			<section class="row main-section">
 				<!-- 섹션 1 -->
 				<div id="find-content">
@@ -133,10 +141,13 @@
 					</div>
 					<div id="input-info">
 						<h3>아이디를 찾으려면 본인인증을 진행해주세요</h3>
-						<button id="email-check">이메일 인증</button>
+						<input type="text" id="input-email" placeholder="이메일을 입력하세요.">
+						<br>
+						<button type="submit" id="email-check">이메일 인증</button>
 					</div>
 				</div>
 			</section>
+			</form>
 		</div>
 	</div>
 </main>
@@ -157,7 +168,68 @@
 	
 	$("#find-pw").click(function () {
 		location.assign("${path}/member/findpw");
-	})
+	});
+	
+	document.getElementById('find-form').addEventListener('submit',
+			function(e) {
+	       		console.log("Form submit event fired");
+		        e.preventDefault(); // 폼 기본 제출 동작 방지
+		        
+		        const email = $("#input-email").val();
+
+		        if(!email) {
+		            alert("이메일을 입력해주세요.");
+		            return;
+		        }
+		        // 회원 존재 여부 확인
+		        $.ajax({
+		            url: `${pageContext.request.contextPath }/member/findid`,
+		            type: "POST",
+		            data: {
+		                email: email,
+		                searchType: 'searchId'
+		            },
+		            success: function(response) {
+		                if(response.exists) {
+		                    // 회원이 존재하면 이메일 인증 프로세스 시작
+		                    const form = document.createElement('form');
+		                    form.method = 'POST';
+		                    form.action = `${pageContext.request.contextPath }/auth/sendEmail`;
+		                    form.target = 'emailVerify';
+		                    
+		                    const emailInput = document.createElement('input');
+		                    emailInput.type = 'hidden';
+		                    emailInput.name = 'email';
+		                    emailInput.value = email;
+		                    
+		                    const typeInput = document.createElement('input');
+		                    typeInput.type = 'hidden';
+		                    typeInput.name = 'authType';
+		                    typeInput.value = 'reset';
+		                    
+		                    form.appendChild(emailInput);
+		                    form.appendChild(typeInput);
+		                    
+		                    window.open(
+	                            '',
+		                        "emailVerify",
+		                        "width=400,height=300,left=500,top=200"
+		                    );
+		                    
+		                    document.body.appendChild(form);
+		                    form.submit();
+		                    document.body.removeChild(form);
+		                } else {
+		                    alert("일치하는 회원 정보가 없습니다.");
+		                }
+		            },
+		            error: function(xhr, status, error) {
+		                alert("서버 통신 중 오류가 발생했습니다.");
+		                console.error("Error:", error);
+		            }
+		        });
+	       	}
+		);
 </script>
 </body>
 </html>
