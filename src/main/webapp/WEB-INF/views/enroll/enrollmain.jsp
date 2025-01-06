@@ -229,7 +229,7 @@ input[type="radio"]:first-child {
 							</tr>
 							<tr>
 								<th>생년월일</th>
-								<td><input type="text" name="birthday" id="birthday"
+								<td><input type="text" name="birthday" id="birthday" placeholder="예) 990209"
 									style="width: 270px;"><br>
 								</td>
 							</tr>
