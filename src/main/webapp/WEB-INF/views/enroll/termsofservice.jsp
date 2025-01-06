@@ -148,6 +148,7 @@
 						<p id="login-font">회원 동의 약관</p>
 						<img class="logo-container" src="${path}/resources/images/favicon.jpeg" style="width:60px; height:60px;">
 					</div>
+					<form action="${path}/"
 					<div id=check-line>
 						<p>19세 이상 이신가요?</p><p class="login-mustcheck">(필수)</p>
 						<input type="checkbox">
