@@ -30,7 +30,7 @@
 		<!-- 로그인한 회원 -->
 		<c:if test="${sessionScope.loginMember != null }">
 			<div class="personal-container">
-				<input type="text" id="personal-name" value="${sessionScope.loginMember.memberId }" style="background-color:white; readonly;">
+				<input type="text" id="personal-name" value="${sessionScope.loginMember.memberId }" style="background-color:white;" readOnly>
 				<button id="personal-btn-write">글쓰기</button>
 				<button id="personal-btn-logout">로그아웃</button>
 				<button id="personal-btn-cart">
