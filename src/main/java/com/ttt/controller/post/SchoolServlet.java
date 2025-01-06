@@ -30,11 +30,11 @@ public class SchoolServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String district = request.getParameter("district");
-		String schoolName = request.getParameter("schoolName");
+		String schoolType = request.getParameter("schoolType");
 		
 		Map<String, String> params = new HashMap<>();
 		params.put("district", district);
-		params.put("schoolName", schoolName);
+		params.put("schoolType", schoolType);
 		
 		List<String> schools = new ArrayList<>();
 		

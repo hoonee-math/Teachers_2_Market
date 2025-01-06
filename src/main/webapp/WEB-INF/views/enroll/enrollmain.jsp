@@ -160,6 +160,10 @@ input[type="radio"]:first-child {
 	border-radius: 4px;
 	cursor: pointer;
 }
+
+.hidden {
+	display: none;
+}
 </style>
 </head>
 <body>
@@ -191,17 +195,17 @@ input[type="radio"]:first-child {
 							</tr>
 							<tr>
 								<th>아이디 *</th>
-								<td><input type="text" name="memberId" id="memberId"
-									style="width: 230px;" required> <input type="button"
-									value="ID 중복확인" id="idCheckBtn"></td>
+								<td>
+									<input type="text" name="memberId" id="memberId" style="width: 230px;" required>
+									<input type="button" value="ID 중복확인" id="idCheckBtn">
+								</td>
 							</tr>
 							<tr>
 								<th>이메일 *</th>
-								<td><input type="text" name="emailId" id="emailId"
-									style="width: 90px;" > @ <input type="text"
-									name="emailDomain" id="emailDomain" style="width: 90px;"
-									> <input type="button" value="이메일 인증"
-									id="emailCheckBtn"> <!-- margin-left 값을 32px에서 더 늘려서 조정 -->
+								<td>
+									<input type="text" name="emailId" id="emailId" style="width: 90px;" >
+									 @ <input type="text" name="emailDomain" id="emailDomain" style="width: 90px;"> 
+									<input type="button" value="이메일 인증" id="emailCheckBtn"> <!-- margin-left 값을 32px에서 더 늘려서 조정 -->
 									<select id="emailSelect" style="margin-left: 130px;">
 										<option value="">직접입력</option>
 										<option value="gmail.com">gmail.com</option>
@@ -209,7 +213,8 @@ input[type="radio"]:first-child {
 										<option value="daum.net">daum.net</option>
 										<option value="hanmail.net">hanmail.net</option>
 										<option value="nate.com">nate.com</option>
-								</select></td>
+									</select>
+								</td>
 							</tr>
 							<tr>
 								<th>패스워드 *</th>
@@ -253,10 +258,10 @@ input[type="radio"]:first-child {
 							</tr>
 							<tr>
 								<th>회원구분 *</th>
-								<td><input type="radio" name="eduType" id="school"
-									value="1" checked> <label for="school">학교 교사</label> <input
-									type="radio" name="eduType" id="institute" value="2"> <label
-									for="institute">학원 강사</label></td>
+								<td>
+								<input type="radio" name="eduType" id="school" value="1" checked><label for="school">학교 교사</label>
+								<input type="radio" name="eduType" id="institute" value="2"> <label for="institute">학원 강사</label>
+								</td>
 							</tr>
 							<tr>
 								<th>과목</th>
@@ -276,46 +281,48 @@ input[type="radio"]:first-child {
 								<td>
 									<!-- 학교 선택용 select 그룹 -->
 									<div id="school-select-group">
-										<select name="region" id="region"
-											onchange="districtSearch(event);">
-											<option value="">지역 선택</option>
-											<option value="서울">서울</option>
-							                <option value="경기">경기</option>
-											<option value="인천">인천</option>
-											<option value="부산">부산</option>
-											<option value="세종">세종</option>
-											<option value="광주">광주</option>
-											<option value="대구">대구</option>
-											<option value="대전">대전</option>
-											<option value="울산">울산</option>
-											<option value="강원">강원</option>
-											<option value="충남">충남</option>
-											<option value="충북">충북</option>
-											<option value="경남">경남</option>
-											<option value="경북">경북</option>
-											<option value="전남">전남</option>
-											<option value="전북">전북</option>
-											<option value="제주">제주</option>
-										</select>
-										<select class="child_school" id="district" onchange="schoolSearch(event);" style="width:88px">
-							                <option value=''>구/군</option>
-							            </select>
-							            <select class="child_school" id="school-type" onchange="schoolSearch({target:document.getElementById('district')});" style="width:108px">
-							                <option value="">초중고</option>
-							                <option value="초등학교">초등학교</option>
-							                <option value="중학교">중학교</option>
-							                <option value="고등학교">고등학교</option>
-							                <option value="고등학교">기타학교</option>
-							            </select>
-							            <!-- name에 standardCode 를 입력하여 회원정보에는 학교 코드가 저장되도록 설정 -->
-							            <select class="child_school" id="school-name" name="schoolNo" style="width:186px">
-							                <option value="">학교명</option>
-							            </select>
-									</div> <!-- 학원명 입력용 input -->
-									<div id="academy-input-group" style="display: none;">
-										<input type="text" name="academyName" id="academyName"
-											style="width: 320px;" placeholder="학원명을 입력하세요">
-									</div>
+										<div id="public-edu-input">
+											<select name="region" id="region" onchange="districtSearch(event);">
+												<option value="">지역 선택</option>
+												<option value="서울">서울</option>
+								                <option value="경기">경기</option>
+												<option value="인천">인천</option>
+												<option value="부산">부산</option>
+												<option value="세종">세종</option>
+												<option value="광주">광주</option>
+												<option value="대구">대구</option>
+												<option value="대전">대전</option>
+												<option value="울산">울산</option>
+												<option value="강원">강원</option>
+												<option value="충남">충남</option>
+												<option value="충북">충북</option>
+												<option value="경남">경남</option>
+												<option value="경북">경북</option>
+												<option value="전남">전남</option>
+												<option value="전북">전북</option>
+												<option value="제주">제주</option>
+											</select>
+											<select name="district" id="district" onchange="schoolSearch(event);">
+								                <option value=''>구/군</option>
+								            </select>
+										</div>
+							            <div id="school-edu-input">
+								            <select id="school-type" onchange="schoolSearch({target:document.getElementById('district')});">
+								                <option value="">초중고</option>
+								                <option value="초등학교">초등학교</option>
+								                <option value="중학교">중학교</option>
+								                <option value="고등학교">고등학교</option>
+								                <option value="고등학교">기타학교</option>
+								            </select>
+								            <!-- name에 standardCode 를 입력하여 회원정보에는 학교 코드가 저장되도록 설정 -->
+								            <select name="schoolName" id="school-name">
+								                <option value="">학교명</option>
+								            </select>
+							            </div>
+							            <div id="academy-edu-input" class="hidden">
+											<input type="text" name="academyName" id="academyName" placeholder="학원명을 입력하세요">
+							            </div>
+									</div> 
 								</td>
 							</tr>
 						</table>
@@ -358,24 +365,52 @@ $("#enroll-inner-header").click(function() {
 });
 
 $('input[name="eduType"]').on('change', function() {
-    const selectedType = $(this).val();
-    const schoolSelectGroup = $('#school-select-group');
-    const academyInputGroup = $('#academy-input-group');
+    const eduType = $(this).val();
     
-    if(selectedType === '1') {  // 학교 선택 시
-        // 학교 선택 그룹 표시, 학원 입력 숨김
-        schoolSelectGroup.show();
-        academyInputGroup.hide();
-        // 학교 선택 필드 초기화
-        $('#school-name').html('<option value="">학교명</option>');
+    if(eduType === '1') {  // 학교 선택 시
+        $("#school-edu-input").removeClass("hidden");
+        $("#academy-edu-input").addClass("hidden");
     } else {  // 학원 선택 시
-        // 학교 선택 그룹 숨김, 학원 입력 표시
-        schoolSelectGroup.hide();
-        academyInputGroup.show();
-        // 학원명 입력 필드 초기화
-        $('#academyName').val('');
-    }
+    	$("#school-edu-input").addClass("hidden");
+        $("#academy-edu-input").removeClass("hidden");
+	}
 });
+
+/* 전체지역 선택시 선택값에 맞는 구/군 출력 */
+function districtSearch(e) {
+	const select = document.getElementById("district");
+	select.innerHTML="<option value=''>구/군</option>";
+	const region=e.target.value;
+	fetch("${path}/post/district?region=" + region)
+		.then(response => response.json())
+		.then(data => {
+			data.forEach(district => {
+				const option = document.createElement("option");
+				option.value = district;
+				option.textContent = district;
+				select.appendChild(option);
+			});
+		})
+		.catch(error => console.error("Error : ",error));
+};
+/* 구/군 및 초중고 선택시, 선택값에 맞는 학교명 출력 */
+function schoolSearch(e) {
+	const select = document.getElementById("school-name");
+	select.innerHTML="<option value=''>학교명</option>";
+	const district = e.target.value;
+	const schoolType = document.getElementById("school-type").value;
+	fetch("${path}/post/school?district=" + district + "&schoolType=" + schoolType)
+		.then(response => response.json())
+		.then(data => {
+			data.forEach(school => {
+				const option = document.createElement("option");
+				option.value = school;
+				option.textContent = school;
+				select.appendChild(option);
+			});
+		})
+		.catch(error => console.error("Error : ",error));
+};
 </script>
 <script src="${path}/resources/js/enroll/enrollMember.js"></script>
 </body>

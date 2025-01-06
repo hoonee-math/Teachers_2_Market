@@ -1,12 +1,18 @@
 package com.ttt.controller.member;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.ibatis.session.SqlSession;
+
+import com.ttt.common.SqlSessionTemplate;
 
 @WebServlet("/member/enrollmain")
 public class ToMemberEnrollServlet extends HttpServlet {
@@ -32,6 +38,20 @@ public class ToMemberEnrollServlet extends HttpServlet {
                 return;
             }
         }
+		
+		//region 리스트 조회 로직
+		List<String> result = new ArrayList<>();
+	
+		try {
+			SqlSession sqlSession = SqlSessionTemplate.getSession();
+			result = sqlSession.selectList("post2.selectDistrict");
+			sqlSession.commit();
+			sqlSession.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("regions", result);
 		
 		request.getRequestDispatcher("/WEB-INF/views/enroll/enrollmain.jsp").forward(request, response);
 	}

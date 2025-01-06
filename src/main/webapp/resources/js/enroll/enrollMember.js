@@ -279,67 +279,16 @@ function validateForm() {
     return true;
 }
 
-/* 지역 선택시 해당 지역의 구/군 목록을 가져오는 함수 */
-function districtSearch(e) {
-    const select = $("#district");
-    select.html("<option value=''>구/군</option>");
-    const region = $(e.target).val();
-    
-    if(!region) return;
-    
-    $.ajax({
-		url: `${contextPath}/post/district`,  // contextPath 사용
-        data: { region: region },
-        success: function(data) {
-            // 응답 데이터 검증 추가
-            if(Array.isArray(data)) {
-                data.forEach(district => {
-                    const option = $("<option>")
-                        .val(district)
-                        .text(district);
-                    select.append(option);
-                });
-            } else {
-                console.error("Invalid response data format");
-            }
-        },
-		error: function(xhr, status, error) {
-		    console.error("Error:", error);
-		    alert("지역 정보를 불러오는데 실패했습니다.");
-		}
-    });
-}
 
-/* 구/군 선택시 해당 지역의 학교 목록을 가져오는 함수 */
-function schoolSearch(e) {
-    const select = $("#school-name");
-    select.html("<option value=''>학교명</option>");
-    const district = $(e.target).val();
-    const schoolType = $("#school-type").val();
-	
-	console.log(district,schoolType);
-    
-    if(!district || !schoolType) return;
-    
-    $.ajax({
-        url: `${contextPath}/post/school`,
-        data: { 
-            district: district,
-            schoolName: ""
-        },
-        success: function(data) {
-			if(Array.isArray(data)) {
-			    data.forEach(school => {
-			        const option = $("<option>")
-			            .val(school)
-			            .text(school);
-			        select.append(option);
-			    });
-			}
-        },
-        error: function(error) {
-		    console.error("Error:", error);
-		    alert("학교 정보를 불러오는데 실패했습니다.");
-		}
-    });
-}
+
+/* eduType 선택에 따라 지역,학교 선택칸 출력 */
+const selector = document.getElementById("selector");
+
+selector.addEventListener("change", function() {
+	const val = selector.value;
+	if(val==="8") {
+		$("#region-container").removeClass("hidden");
+	} else {
+		$("#region-container").addClass("hidden");
+	}
+});
