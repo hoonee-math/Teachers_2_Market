@@ -27,7 +27,7 @@ import com.ttt.dto.Product2;
 import com.ttt.service.PostService;
 import com.ttt.util.post.FileUploadUtil;
 
-@WebServlet("/post/write/*")
+@WebServlet(name="writePost", urlPatterns="/post/write/*")
 public class WritePostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

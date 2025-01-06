@@ -15,7 +15,7 @@ import com.ttt.dto.Image2;
 import com.ttt.dto.Post2;
 import com.ttt.service.PostService;
 
-@WebServlet("/post/viewpost")
+@WebServlet(name="viewPost", urlPatterns="/post/viewpost")
 public class ViewPostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	   

@@ -19,7 +19,7 @@ import com.ttt.dto.Post2;
 import com.ttt.service.BoardService;
 import com.ttt.service.PaymentService;
 
-@WebServlet("/payment/shoppinglist")
+@WebServlet(name="shoppingList", urlPatterns="/payment/shoppinglist")
 public class ShoppingListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

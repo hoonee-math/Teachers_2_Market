@@ -18,7 +18,7 @@ import com.ttt.dto.Image2;
 import com.ttt.service.BoardService;
 import com.ttt.service.PaymentService;
 
-@WebServlet("/payment/purchase")
+@WebServlet(name="purchase", urlPatterns="/payment/purchase")
 public class ToPurchaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
