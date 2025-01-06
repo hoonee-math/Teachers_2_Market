@@ -203,7 +203,7 @@
 						</div>
 					</c:if>
 					<!-- 상세 정보 내용 -->
-					<div class="post-content">내용아 떠라! ${post.postContent}</div>
+					<div class="post-content">${post.postContent}</div>
 				</div>
 			</section>
 			
@@ -403,11 +403,11 @@
 		);
 		
 		// 장바구니 버튼 클릭
-		$('.cart-btn').click(function() {
+		$('.post-cart-btn').click(function() {
 			//로그인 체크
 			if (!$('#memberNo').val()) {
 				alert("로그인이 필요한 서비스입니다.");
-				location.href = "{path}/member/login";
+				location.href = "${path}/member/login";
 				return;
 			}
 			//현재 페이지에서 필요한 데이터 가져오기
@@ -423,12 +423,16 @@
 				},
 				success: function(response) {
 					if (response.success) {
-						alert('장바구니에 추가되었습니다!');
+						alert(response.message);
+						if(response.redirect) {
+							location.href = response.redirect;
+						}
 					} else {
-						alert(response.message || '장바구니 추가에 실패하였습니다.');
+						alert(response.message);
 					}
 				},
 				error: function(xhr, status, error) {
+					console.error('Error:', error);
 					alert('장바구니 추가 중 오류가 발생하였습니다.');
 				}
 			});

@@ -27,41 +27,46 @@ public class ViewPostToShoppingListServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        JSONObject jsonResponse = new JSONObject();
+		
+		PrintWriter out = response.getWriter();
+		JSONObject jsonResponse = new JSONObject();
+		
+		try {
+			if(request.getParameter("postNo") == null || request.getParameter("memberNo") == null) {
+				throw new IllegalArgumentException("필수 파라미터가 누락되었습니다.");
+			}
         
-        // 파라미터 검증
-        if(request.getParameter("postNo") == null || request.getParameter("memberNo") == null) {
-            throw new IllegalArgumentException("필수 파라미터가 누락되었습니다.");
+	        int postNo = Integer.parseInt(request.getParameter("postNo"));
+	        int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+	        
+	        Post2 post = Post2.builder().postNo(postNo).build();
+	        Member2 member = Member2.builder().memberNo(memberNo).build();
+	        
+	        Cart2 cart = Cart2.builder()
+	                .post(post)
+	                .member(member)
+	                .build();
+	        
+	        // DB 저장 로직
+	        int result = new PaymentService().insertCart(cart);
+	        
+	        if (result > 0) {
+	        	jsonResponse.put("success", true);
+	        	jsonResponse.put("message", "장바구니에 추가되었습니다.");
+	        	jsonResponse.put("redirect",  request.getContextPath() + "/payment/shoppinglist");
+	        } else {
+	        	jsonResponse.put("success", false);
+	        	jsonResponse.put("message", "장바구니 추가에 실패하였습니다.");
+	        }
+        } catch (Exception e) {
+        	e.printStackTrace();
+        	jsonResponse.put("success", false);
+        	jsonResponse.put("message", "장바구니 추가 중 오류가 발생하였습니다.");
         }
         
-        int postNo = Integer.parseInt(request.getParameter("postNo"));
-        int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+        out.print(jsonResponse.toString());
+        out.flush();
         
-        Post2 post = Post2.builder().postNo(postNo).build();
-        Member2 member = Member2.builder().memberNo(memberNo).build();
-        
-        Cart2 cart = Cart2.builder()
-                .post(post)
-                .member(member)
-                .build();
-        
-        String msg, loc = "/";
-        // DB 저장 로직
-        try {
-        	int result = new PaymentService().insertCart(cart);
-        	msg="장바구니 등록 성공!";
-        	loc="/payment/shoppinglist";
-        } catch (RuntimeException e) {
-        	msg="장바구니 등록 실패";
-        	loc="/post/viewpost";
-        }
-        
-        request.setAttribute("msg", msg);
-        request.setAttribute("loc", loc);
-        
-        request.getRequestDispatcher("WEB-INF/views/common/msg.jsp").forward(request, response);
-       
     }
 	
 

@@ -44,7 +44,7 @@
 	
 	<insert id="insertCart" parameterType="cart2">
 		INSERT INTO CART2 (CART_NO, POST_NO, MEMBER_NO)
-			VALUES (SEQ_CART_NO.NEXTVAL, #{post.postNo}, #{member.memberNo})
+			VALUES (SEQ_CART2_NO.NEXTVAL, #{post.postNo}, #{member.memberNo})
 	</insert>
 	
 	<select id="selectShoppingList" parameterType="_int" resultMap="cartMap">
