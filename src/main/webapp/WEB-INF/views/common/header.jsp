@@ -55,4 +55,8 @@
 	$('#personal-btn-cart').click(function() {
 		location.assign("${path}/payment/shoppinglist");
 	})
-</script>
+	//로그아웃 서블릿 연결
+	$('#personal-btn-logout').click(function() {
+		location.assign("${path}/member/logout");
+	});
+ </script>
