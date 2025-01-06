@@ -171,11 +171,11 @@ input[type="radio"]:first-child {
 					<div id="enroll-inner-header">
 						<img class="logo-container"
 							src="${path}/resources/images/favicon.jpeg"
-							style="width: 60px; height: 60px; border-radius:10px;">
+							style="width: 60px; height: 60px; border-radius:50px;">
 						<p id="login-font">회원 정보 입력</p>
 						<img class="logo-container"
 							src="${path}/resources/images/favicon.jpeg"
-							style="width: 60px; height: 60px; border-radius:10px;">
+							style="width: 60px; height: 60px; border-radius:50px;">
 					</div>
 
 					<!-- 회원가입 폼 -->
@@ -279,12 +279,38 @@ input[type="radio"]:first-child {
 										<select name="region" id="region"
 											onchange="districtSearch(event);">
 											<option value="">지역 선택</option>
-										</select> <select name="district" id="district"
-											onchange="schoolSearch(event);">
-											<option value="">구/군 선택</option>
-										</select> <select name="schoolNo" id="school-name">
-											<option value="">학교명</option>
-										</select> <input type="button" value="확인" class="school-check-btn">
+											<option value="서울">서울</option>
+							                <option value="경기">경기</option>
+											<option value="인천">인천</option>
+											<option value="부산">부산</option>
+											<option value="세종">세종</option>
+											<option value="광주">광주</option>
+											<option value="대구">대구</option>
+											<option value="대전">대전</option>
+											<option value="울산">울산</option>
+											<option value="강원">강원</option>
+											<option value="충남">충남</option>
+											<option value="충북">충북</option>
+											<option value="경남">경남</option>
+											<option value="경북">경북</option>
+											<option value="전남">전남</option>
+											<option value="전북">전북</option>
+											<option value="제주">제주</option>
+										</select>
+										<select class="child_school" id="district" onchange="schoolSearch(event);" style="width:88px">
+							                <option value=''>구/군</option>
+							            </select>
+							            <select class="child_school" id="school-type" onchange="schoolSearch({target:document.getElementById('district')});" style="width:108px">
+							                <option value="">초중고</option>
+							                <option value="초등학교">초등학교</option>
+							                <option value="중학교">중학교</option>
+							                <option value="고등학교">고등학교</option>
+							                <option value="고등학교">기타학교</option>
+							            </select>
+							            <!-- name에 standardCode 를 입력하여 회원정보에는 학교 코드가 저장되도록 설정 -->
+							            <select class="child_school" id="school-name" name="schoolNo" style="width:186px">
+							                <option value="">학교명</option>
+							            </select>
 									</div> <!-- 학원명 입력용 input -->
 									<div id="academy-input-group" style="display: none;">
 										<input type="text" name="academyName" id="academyName"
@@ -327,11 +353,9 @@ $("#cancle").click(function() {
 });
 
 //로고 버튼 클릭시 메인페이지로 이동
-$(".logo-container").click(function() {
+$("#enroll-inner-header").click(function() {
     location.assign("${path}");
 });
-
-
 
 $('input[name="eduType"]').on('change', function() {
     const selectedType = $(this).val();

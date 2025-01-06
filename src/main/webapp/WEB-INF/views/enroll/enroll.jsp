@@ -108,7 +108,7 @@
 								<option value="hanmail.net">hanmail.net</option>
 								<option value="nate.com">nate.com</option>
 							</select>
-							<input type="button" value="이메일 인증" id="emailCheckBtn">
+							<input type="button" value="이메일 인증" id="emailCheckBtn" onclick="checkEmail()">
 						</td>
 					</tr>
 					<tr>

@@ -23,6 +23,8 @@ function initializeEventListeners() {
     // 주소 검색 이벤트
     $("#postcodeFindBtn").off("click").click(sample4_execDaumPostcode);
    
+	// 이메일 인증 버튼 클릭 이벤트 추가
+	$("#emailCheckBtn").off("click").click(checkEmail);
 }
 
 /**
@@ -129,59 +131,86 @@ $("#emailSelect").change(function() {
             $("#emailDomain").prop("readonly", true).val(selectedValue); // 선택된 도메인 설정
         }
     });
-/**
- * 이메일 인증 처리
- */
-function checkEmail() {
-    const emailId = $("#emailId").val();
-    const emailDomain = $("#emailDomain").val();
-    const email = emailId + '@' + emailDomain;
-    
-    if(!validateEmail(email)) {
-        alert("유효한 이메일 형식이 아닙니다.");
-        return;
-    }
-    
-    // 이메일 중복 체크
-    $.ajax({
-        url: `${contextPath}/auth/checkEmailDuplicate`,
-        type: "POST",
-        data: { email: email },
-        success: function(result) {
-            if(result.available) {
-                sendVerificationEmail(email);
-            } else {
-                alert("이미 사용중인 이메일입니다.");
-            }
-        },
-        error: function() {
-            alert("이메일 중복 확인 중 오류가 발생했습니다.");
-        }
-    });
-}
+	// 이메일 인증 처리
+	function checkEmail() {
+	    const emailId = $("#emailId").val();
+	    const emailDomain = $("#emailDomain").val();
+		const email = emailId + '@' + emailDomain;
+	    
+	    if(!emailId || !emailDomain) {
+	        alert("이메일을 입력해주세요.");
+	        return;
+	    }
+	    
+	    if(!validateEmail(email)) {
+	        alert("유효한 이메일 형식이 아닙니다.");
+	        return;
+	    }
 
-/**
- * 이메일 인증번호 발송
- */
-function sendVerificationEmail(email) {
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = `${contextPath}/auth/sendEmail`;
-    form.target = 'emailVerify';
-    
-    const emailInput = document.createElement('input');
-    emailInput.type = 'hidden';
-    emailInput.name = 'email';
-    emailInput.value = email;
-    
-    form.appendChild(emailInput);
-    
-    window.open('', 'emailVerify', 'width=400,height=300,left=500,top=200');
-    
-    document.body.appendChild(form);
-    form.submit();
-    document.body.removeChild(form);
-}
+		// 이메일 중복 체크
+		$.ajax({
+		    url: `${contextPath}/auth/checkEmailDuplicate.do`,
+		    method: "POST",
+		    data: { email: email, searchType: 'emailDuplicate'},
+		    success: function(response) {
+		        if(response.exists) {
+		            alert("이미 사용중인 이메일입니다.");
+		            return;
+		        } else {
+		            // 중복이 아닌 경우에만 인증 이메일 발송
+		            sendVerificationEmail(email);
+		        }
+		    },
+		    error: function() {
+		        alert("이미 사용중인 이메일 입니다.");
+		    }
+		});
+	}
+
+	// 인증 이메일 발송 함수 분리
+	function sendVerificationEmail(email) {
+	    const form = document.createElement('form');
+	    form.method = 'POST';
+	    form.action = `${contextPath}/auth/sendEmail`;
+	    form.target = 'emailVerify';
+	    
+	    const emailInput = document.createElement('input');
+	    emailInput.type = 'hidden';
+	    emailInput.name = 'email';
+	    emailInput.value = email;
+	    
+	    const typeInput = document.createElement('input');
+	    typeInput.type = 'hidden';
+	    typeInput.name = 'authType';
+	    typeInput.value = 'signup';
+	    
+	    form.appendChild(emailInput);
+	    form.appendChild(typeInput);
+	    
+	    window.open('', 'emailVerify', 'width=400,height=300,left=500,top=200');
+	    
+	    document.body.appendChild(form);
+	    form.submit();
+	    document.body.removeChild(form);
+	}
+
+	// 이메일 관련 입력값이 변경될 때마다 인증 상태 초기화
+	$("#emailId, #emailDomain, #emailSelect").on("change", function() {
+	    const existingHidden = $("input[name='emailVerified']");
+	    if(existingHidden.length > 0) {
+	        existingHidden.val("N");
+	        
+	        // 입력 필드 잠금 해제
+	        $("#emailId").prop("readonly", false);
+	        $("#emailDomain").prop("readonly", false);
+	        $("#emailSelect").prop("disabled", false);
+	        
+	        // 스타일 원복
+	        $("#emailId, #emailDomain").css("backgroundColor", "");
+	        $("input[value='이메일 인증']").prop("disabled", false)
+	            .css("backgroundColor", "");
+	    }
+	});
 
 /**
  * 이메일 형식 검사
@@ -248,4 +277,69 @@ function validateForm() {
     
     
     return true;
+}
+
+/* 지역 선택시 해당 지역의 구/군 목록을 가져오는 함수 */
+function districtSearch(e) {
+    const select = $("#district");
+    select.html("<option value=''>구/군</option>");
+    const region = $(e.target).val();
+    
+    if(!region) return;
+    
+    $.ajax({
+		url: `${contextPath}/post/district`,  // contextPath 사용
+        data: { region: region },
+        success: function(data) {
+            // 응답 데이터 검증 추가
+            if(Array.isArray(data)) {
+                data.forEach(district => {
+                    const option = $("<option>")
+                        .val(district)
+                        .text(district);
+                    select.append(option);
+                });
+            } else {
+                console.error("Invalid response data format");
+            }
+        },
+		error: function(xhr, status, error) {
+		    console.error("Error:", error);
+		    alert("지역 정보를 불러오는데 실패했습니다.");
+		}
+    });
+}
+
+/* 구/군 선택시 해당 지역의 학교 목록을 가져오는 함수 */
+function schoolSearch(e) {
+    const select = $("#school-name");
+    select.html("<option value=''>학교명</option>");
+    const district = $(e.target).val();
+    const schoolType = $("#school-type").val();
+	
+	console.log(district,schoolType);
+    
+    if(!district || !schoolType) return;
+    
+    $.ajax({
+        url: `${contextPath}/post/school`,
+        data: { 
+            district: district,
+            schoolName: ""
+        },
+        success: function(data) {
+			if(Array.isArray(data)) {
+			    data.forEach(school => {
+			        const option = $("<option>")
+			            .val(school)
+			            .text(school);
+			        select.append(option);
+			    });
+			}
+        },
+        error: function(error) {
+		    console.error("Error:", error);
+		    alert("학교 정보를 불러오는데 실패했습니다.");
+		}
+    });
 }
