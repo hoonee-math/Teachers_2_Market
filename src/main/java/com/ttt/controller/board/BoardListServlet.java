@@ -67,7 +67,7 @@ public class BoardListServlet extends HttpServlet {
 		int totalData = service.getTotalCount(Integer.parseInt(categoryNo));
 		
 		//페이징 처리
-		int pageBarSize = 5;
+		int pageBarSize = 10;
 		int totalPage = (int)Math.ceil((double)totalData/numPerPage);
 
 		int pageStart = ((cPage - 1) / pageBarSize) * pageBarSize + 1;

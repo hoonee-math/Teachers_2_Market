@@ -14,7 +14,7 @@ import org.jsoup.safety.Safelist;
 import com.ttt.dto.Post2;
 import com.ttt.service.PostService;
 
-@WebServlet("/post/notify")
+@WebServlet(name="viewNotify", urlPatterns="/post/notify")
 public class ViewNotifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	   
