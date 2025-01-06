@@ -80,14 +80,14 @@
         color: #6f6f6f;
     }
     #find-id {
+    	background-color: white;
+    	border-radius: 20px;
+    }
+    #find-pw {
 	    background-color: #fffadd;
         border-bottom: 2px solid #fff6c2;
         font-weight: bold;
         border-radius: 20px 0 0 0;
-    }
-    #find-pw {
-    	background-color: white;
-    	border-radius: 20px;
     }
     
     #input-info {
@@ -96,6 +96,12 @@
         color: #666;
         height: 300px;
         margin-top: 100px;
+    }
+    #input-id {
+    	width: 300px;
+    	border: 1px solid #cccccc;
+    	border-radius: 5px;
+    	padding: 10px;
     }
     #email-check {
         margin-top: 20px;
@@ -132,7 +138,8 @@
 						<div id="find-pw">비밀번호 찾기</div>
 					</div>
 					<div id="input-info">
-						<h3>아이디를 찾으려면 본인인증을 진행해주세요</h3>
+						<input type="text" id="input-id" placeholder="아이디를 입력하세요.">
+						<br>
 						<button id="email-check">이메일 인증</button>
 					</div>
 				</div>
@@ -155,8 +162,8 @@
 		location.assign("${path}");
 	});
 	
-	$("#find-pw").click(function () {
-		location.assign("${path}/member/findpw");
+	$("#find-id").click(function () {
+		location.assign("${path}/member/findid");
 	})
 </script>
 </body>
