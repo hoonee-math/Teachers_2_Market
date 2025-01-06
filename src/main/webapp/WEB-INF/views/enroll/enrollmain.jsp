@@ -193,7 +193,7 @@ input[type="radio"]:first-child {
 								<th>아이디 *</th>
 								<td><input type="text" name="memberId" id="memberId"
 									style="width: 230px;" required> <input type="button"
-									value="ID 중복확인" id="idCheckBtn" onclick="checkId()"></td>
+									value="ID 중복확인" id="idCheckBtn"></td>
 							</tr>
 							<tr>
 								<th>이메일 *</th>
