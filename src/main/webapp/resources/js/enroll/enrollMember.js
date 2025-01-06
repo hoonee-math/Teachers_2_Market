@@ -12,16 +12,16 @@ $(document).ready(function() {
  */
 function initializeEventListeners() {
     // 로고 클릭시 메인으로 이동
-    $(".logo-container").click(() => location.assign(contextPath));
+    $(".logo-container").off("click").click(() => location.assign(contextPath));
     
     // ID 중복 확인 이벤트
-    $("#idCheckBtn").click(checkId);
+    $("#idCheckBtn").off("click").click(checkId);
 	
 	// 비밀번호 일치여부 확인 이벤트
-	$("#password_2").keyup(validatePasswordMatch);
+	$("#password_2").off("keyup").keyup(validatePasswordMatch);
     
     // 주소 검색 이벤트
-    $("#postcodeFindBtn").click(sample4_execDaumPostcode);
+    $("#postcodeFindBtn").off("click").click(sample4_execDaumPostcode);
    
 }
 
@@ -61,7 +61,7 @@ function checkId() {
         dataType: "json",
         success: function(response) {
             console.log('서버 응답:', response);
-            if(response.exists) {
+            if(response === true) {
                 alert('이미 사용 중인 아이디입니다. 다른 아이디를 입력해주세요.');
             } else {
                 alert('사용 가능한 아이디입니다.');
