@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.ttt.common.PasswordEncoding;
 
 @WebFilter(servletNames= {
-		"memberEnroll", "memberLoginServlet"
+		"memberEnroll", "memberLoginServlet", "resetPassword", "updatePassword"
 })
 public class PasswordEncryptFilter extends HttpFilter implements Filter {
 	

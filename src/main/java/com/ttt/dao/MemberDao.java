@@ -41,4 +41,14 @@ public class MemberDao {
 	public Member2 checkMemberById(SqlSession session, String memberId) {
 		return session.selectOne("member2.selectMemberById", memberId);
 	}
+	
+	// 비밀번호 찾기
+	public Member2 selectMemberByIdAndEmail(SqlSession session, Member2 m) {
+	   return session.selectOne("member2.selectMemberByIdAndEmail", m);
+	}
+	// 비밀번호 변경
+	public int updatePassword(SqlSession session, Member2 m) {
+		return session.update("member2.updatePassword", m);
+	}
+	
 }

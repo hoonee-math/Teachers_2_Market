@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>이메일 인증</title>
 <script
-	src="${pageContext.request.contextPath }/resources/js/jquery-3.7.1.min.js"></script>
+	src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <style>
 #verify-container {
 	text-align: center;
@@ -43,7 +43,8 @@
 		</c:if>
 	</div>
 
-	<script>
+<script>
+$(document).ready(function() {
 	function closeVerifyWindow() {
 	    try {
 	    	// 세션에 인증 완료 상태 저장을 위한 요청
@@ -72,6 +73,10 @@
 	        alert("창을 닫는 중 오류가 발생했습니다.");
 	    }
 	}
-    </script>
+	
+    // closeVerifyWindow 함수를 전역 스코프에 등록
+    window.closeVerifyWindow = closeVerifyWindow;
+});
+</script>
 </body>
 </html>
