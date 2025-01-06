@@ -52,7 +52,6 @@
 	}
 	#login-font {
 		font-family:Sans-serif;
-		font-style: italic;
 		font-size: 40px;
 		color : grey;
 	}
@@ -119,16 +118,17 @@
 	    border: none;
 	    padding: 10px 20px;
 	    font-size: 16px;
-	    color: #cccccc;
 	    border-radius: 5px;
 	}
 	#cancle:hover {
 		background-color: #cccccc;
-		color: #6f6f6f;
 	}
 
 	#join:hover {
 	    background-color: #fff6c2;
+	}
+	.agreetext {
+		color:#6f6f6f;
 	}
     </style>
 </head>
@@ -144,17 +144,17 @@
 				<!-- 섹션 1 -->
 				<div id="logincheck-inner-container">
 					<div id="logincheck-inner-header">
-						<img class="logo-container" src="${path}/resources/images/favicon.jpeg" style="width:60px; height:60px;">
+						<img class="logo-container" src="${path}/resources/images/favicon.jpeg" style="width:60px; height:60px; border-radius:10px;">
 						<p id="login-font">회원 동의 약관</p>
-						<img class="logo-container" src="${path}/resources/images/favicon.jpeg" style="width:60px; height:60px;">
+						<img class="logo-container" src="${path}/resources/images/favicon.jpeg" style="width:60px; height:60px; border-radius:10px;">
 					</div>
 					<form id="logincheck-frm" action="${path}/member/enrollmain" method="post">
 					<div id=check-line>
-						<p>19세 이상 이신가요?</p><p class="login-mustcheck">(필수)</p>
+						<p class="agreetext">19세 이상 인가요?</p><p class="login-mustcheck">(필수)</p>
 						<input type="checkbox" name="sign" required>
 					</div>
 					<div id="check-line1">
-						<p>이용약관 동의</p><p class="login-mustcheck">(필수)</p>
+						<p class="agreetext">이용약관 동의</p><p class="login-mustcheck">(필수)</p>
 						<input type="checkbox" name="sign2" required>
 					</div>
 					<div id="check-content">
@@ -209,7 +209,7 @@
 						</div>
 					</div>	
 					<div id="check-line2">
-						<p>개인정보 처리방침 동의</p><p class="login-mustcheck">(필수)</p>
+						<p class="agreetext">개인정보 처리방침 동의</p><p class="login-mustcheck">(필수)</p>
 						<input type="checkbox" name="sign3" required>
 					</div>
 					<div id="check-content2">
@@ -355,7 +355,7 @@
 						</div>
 					</div>	
 					<div id="check-line3">
-						<p>광고성 정보 수신 동의</p>
+						<p class="agreetext">광고성 정보 수신 동의</p>
 						<input type="checkbox">
 					</div>
 					</form>
