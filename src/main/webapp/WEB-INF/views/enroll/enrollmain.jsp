@@ -214,7 +214,7 @@ input[type="radio"]:first-child {
 							<tr>
 								<th>패스워드 *</th>
 								<td><input type="password" name="memberPw" id="password_"
-									placeholder="대소문자, 숫자, 특수문자 포함"><br></td>
+									placeholder="8글자 이상, 대소문자, 숫자, 특수문자 포함"><br></td>
 							</tr>
 							<tr>
 								<th>패스워드확인 *</th>
