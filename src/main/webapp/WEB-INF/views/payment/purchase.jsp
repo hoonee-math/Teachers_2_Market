@@ -271,7 +271,7 @@
 	}
 	
 	function requestPay() {
-	    // 사용자 입력값 가져오기
+	    /* // 사용자 입력값 가져오기
 	    const orderName = document.getElementById("orderName").value;
 	    const totalAmount = document.getElementById("totalAmount").value;
 
@@ -279,15 +279,15 @@
 	    if (!orderName || !totalAmount) {
 	        alert("모든 값을 입력해주세요!");
 	        return;
-	    }
+	    } */
 	    
 	      PortOne.requestPayment({
-	        storeId: "store",
-	        paymentId: "test",
-	        orderName: $("#postTitle").val(),
+	        storeId: "store-df5b2e74-b293-47e9-af74-71229a11acda",
+	        paymentId: "testm5f69klh",
+	        orderName: "#postTitle에 들어간 value",
 	        totalAmount: 1000,
 	        currency: "KRW",
-	        channelKey: "channel-key",
+	        channelKey: "channel-key-d8b2cd6c-b899-4be5-a588-6a79d57ad611",
 	        payMethod: "CARD",
 	        card: {},
 	        customer: {
