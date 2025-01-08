@@ -8,7 +8,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="/WEB-INF/views/common/header.jsp" />
 <title>Error | 티꿀모아</title>
 <style>
 .error-container {
@@ -89,7 +88,6 @@
 </head>
 <body>
 <div id="wrap">
-    <jsp:include page="/WEB-INF/views/common/header.jsp" />
     
     <main>
         <div class="error-container">
