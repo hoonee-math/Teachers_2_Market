@@ -21,14 +21,6 @@ public class MemberLogoutServlet extends HttpServlet {
 		HttpSession session = request.getSession(false);
 		session.invalidate();
 		request.getRequestDispatcher("/").forward(request, response);
-		
-		
-		
-		
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);
 	}
 
 }
