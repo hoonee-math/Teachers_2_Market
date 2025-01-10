@@ -62,23 +62,7 @@
 						 data-delivery-fee="${item.product2.deliveryFee }"
 						 data-file-price="${item.file2.filePrice }"
 						 data-cart-no="${item.cartNo }">
-						 
-						 <!-- 상품 타입이 물품인 경우 -->
-						<c:if test="${item.post.productType==1 }">
-						 	<c:choose>
-						 		<c:when test="${item.product2.stockCount>0 }">
-						 			<input type="checkbox" class="select-btn" name="cartNo" value="${item.cartNo }">
-						 		</c:when>
-						 	</c:choose>
-						</c:if>
-						<!-- 상품 타입이 파일인 경우 -->
-						<c:if test="${item.post.productType==2 }">
-							<c:choose>
-						 		<c:when test="${salePeriod.compareTo(today) >= 0 }">
-						 			<input type="checkbox" class="select-btn" name="cartNo" value="${item.cartNo }">
-						 		</c:when>
-						 	</c:choose>
-						</c:if>
+						 <input type="checkbox" class="select-btn" name="cartNo" value="${item.cartNo }">
 						 
 						<table class="product-container">
 							<tr>
@@ -273,6 +257,33 @@
 			return;
 		}
 	    
+		// 선택된 상품 중 판매 종료된 상품이 있는지 확인
+		let hasSoldOut = false;
+		checkedItems.each(function() {
+			const container = $(this).closest('.list-container');
+			const productType = container.data('product-type');
+			
+			if(productType == 1) {
+				const stockCount = container.find('.list-content p').text().includes('판매종료');
+				if(stockCount) {
+					hasSoldOut = true;
+					return false;
+				}
+			} else if (producttype == 2) {
+				const isSoldOut = container.find('.list-content p').text().includes('판매종료');
+				if(isSoldOut) {
+					hasSoldOut = true;
+					return false;
+				}
+			}
+		});
+		
+		// 판매 종료 상품이 선택된 경우
+		if(hasSoldOut) {
+			alert('판매 종료된 상품이 포함되어 있습니다.\n판매 종료된 상품을 제외하고 선택해주세요.');
+			return;
+		}
+		
 		//선택된 각 상품의 정보를 폼에 추가
 		checkedItems.each(function() {
 			const cartNo = $(this).val();
