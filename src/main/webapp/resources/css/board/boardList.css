@@ -10,6 +10,29 @@
 	font-size: 20pt;
 	font-weight: bold;
 }
+.board-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+#btn-group {
+	display: flex;
+	gap: 10px;
+}
+#btn-group>input {
+	padding: 10px;
+	background-color: white;
+	border: 1px solid #cccccc;
+	font-size: medium;
+	border-radius: 5px;
+	cursor: pointer;
+}
+.hidden {
+	display: none;
+}
+.card-container.sold-out{
+	display: none;
+}
 ul {
 	list-style-type: none;
 	display: flex;

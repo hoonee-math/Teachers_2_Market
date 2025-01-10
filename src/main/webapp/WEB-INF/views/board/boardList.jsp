@@ -58,8 +58,13 @@
 					</c:forEach>
 				</div>
 			</section>
-			<p id="categoryTitle">${categoryTitle }</p>
-			
+			<div class="board-header">
+				<p id="categoryTitle">${categoryTitle }</p>
+				<div id="btn-group">
+					<input type="button" class="hidden" id="soldoutHidden" value="판매종료 숨기기">
+					<input type="button" class="hidden" id="soldoutView" value="판매종료 나타내기">
+				</div>
+			</div>
 				<c:forEach var="item" items="${posts }" varStatus="status">
 					<c:if test="${status.index % 4 ==0 }">
 						<section class="row card-section">
@@ -87,9 +92,7 @@
 								<!-- 판매물품 제목은 10글자까지, 
 									프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
 									ex) 하나둘셋넷다섯여섯...-->
-							<%-- <p><strong>판매물품 제목</strong></p> --%>
 							<p><strong>${item.postTitle}</strong></p>
-							<%-- <p>₩ 판매금액</p> --%>
 							<!-- 상품 타입이 물품인 경우 -->
 							<c:if test="${item.productType==1 }">
 								<!-- stockCount 변수에 재고 넣음 -->
@@ -156,9 +159,46 @@
 <!-- 10. 컴포넌트 JavaScript -->
 <!-- 11. 페이지별 JavaScript -->
 <script>
-	$('.card-container').click(function() {
-	    const postNo = $(this).data('post-no');
-	    location.assign(`${path}/post/viewpost?postNo=`+postNo);
+	$(document).ready(function() {
+		//초기 상태 설정
+		$('#soldoutHidden').show();
+		$('#soldoutView').hide();
+		
+		//판매종료 숨기기 버튼 클릭 이벤트
+		$('#soldoutHidden').click(function() {
+			$('.card-container').each(function() {
+				const container = $(this);
+				const productType = container.data('product-type');
+				let isSoldOut = false;
+				
+				isSoldOut = container.find('.card-content p').text().includes('판매종료');
+				
+				//판매 종료된 상품 숨기기
+				if(isSoldOut) {
+					container.addClass('sold-out');
+				}
+			});
+			
+			//버튼 토글
+			$(this).hide();
+			$('#soldoutView').show();
+		});
+		
+		//판매종료 나타내기 버튼 클릭 이벤트
+		$('#soldoutView').click(function() {
+			//숨겨진 상품 보여주기
+			$('.card-container').removeClass('sold-out');
+			
+			//버튼 토글
+			$(this).hide();
+			$('#soldoutHidden').show();
+		});
+		
+		//카드 클릭 이벤트
+		$('.card-container').click(function() {
+		    const postNo = $(this).data('post-no');
+		    location.assign(`${path}/post/viewpost?postNo=`+postNo);
+		});
 	});
 </script>
 </body>
