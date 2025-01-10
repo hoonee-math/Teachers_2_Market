@@ -55,6 +55,7 @@
 	    text-align: center;
 	}
 	#login-inner-container {
+		margin:30px;
 		display: flex;
 		flex-direction: column;
 		gap:10px;
@@ -74,9 +75,8 @@
 	    font-size: 16px;
 	    outline: none;
 	}
-	#login-btn {
-		margin-top:60px;
-		color:#6f6f6f;
+	.form-group {
+		padding: 20px;
 	}
 	#login-btn, #login-find {
 		background-color: #fffadd;
@@ -108,6 +108,9 @@
 					<div><p id="login-font">Login</p></div>
 					<div><input type="text" id="login-id" name="memberId" placeholder="아이디"></div>
 					<div><input type="password" id="login-pw" name="memberPw" placeholder="비밀번호"></div>
+					<div class="form-group">
+						<label> <input type="checkbox" name="remember" class="form-checkbox"> 로그인 상태 유지 </label>
+					</div>
 					<div><input type="button" id="login-btn" value="로그인"></div>
 					<div><a href="${path}/member/findid"/>
 					<input type="button" id="login-find" value="ID/PW찾기"></div>

@@ -217,6 +217,11 @@ select {
 	    location.assign("${path}");
 	});
 	
+	function initializeEventListeners() {
+	    // 주소 검색 이벤트
+	    $("#postcodeFindBtn").off("click").click(sample4_execDaumPostcode);
+	}
+	
 	// 우편번호 검색
 	function sample4_execDaumPostcode() {
 	    new daum.Postcode({

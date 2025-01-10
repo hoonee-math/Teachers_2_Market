@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,10 +14,10 @@ import com.ttt.dto.Member2;
 import com.ttt.service.MemberService;
 
 @WebServlet(name="memberLoginServlet", urlPatterns="/member/login.do")
-public class MemberLoingServlet extends HttpServlet {
+public class MemberLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public MemberLoingServlet() {
+    public MemberLoginServlet() {
         super();
     }
 
@@ -26,16 +27,28 @@ public class MemberLoingServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String memberId = request.getParameter("memberId");
 		String memberPw=request.getParameter("memberPw");
+		String saveId = request.getParameter("remember");
 		
 		Member2 m = new MemberService().selectMemberById(memberId);
-		
-		System.out.println("MemberLoginServlet.java : " + m);
 		
 		// 로그인 성공시 처리할 로직 (아이디, 비번 일치)
 		if(m!=null && m.getMemberPw().equals(memberPw)) {
 			// 로그인 유지를 위한 session 정보 저장
 			HttpSession session=request.getSession();
 			session.setAttribute("loginMember", m);
+			
+			// 로그인 유지 체크시 쿠키 생성 
+			if(saveId != null) {
+				Cookie c = new Cookie("saveId", m.getMemberId());
+				c.setMaxAge(7*24*60*60);
+				c.setPath("/");
+				response.addCookie(c);
+			} else {
+				Cookie c = new Cookie("saveId","");
+				c.setMaxAge(0);
+				c.setPath("/");
+				response.addCookie(c);
+			}
 			// 메인화면으로 리다이렉트 시킴! 이전 주소 날려버리고 재요청!
 			response.sendRedirect(request.getContextPath()); 
 		} else {
