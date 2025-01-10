@@ -295,7 +295,7 @@ function initializeFormHandlers() {
     // 취소
     $('#cancelBtn').on('click', function() {
         if(confirm('작성을 취소하시겠습니까? 작성중인 내용은 저장되지 않습니다.')) {
-            location.href = '/board/list';
+            location.href = contextPath;
         }
     });
 }
