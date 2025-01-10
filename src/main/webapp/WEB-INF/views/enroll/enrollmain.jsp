@@ -228,13 +228,13 @@ input[type="radio"]:first-child {
 							</tr>
 							<tr>
 								<th>전화번호 </th>
-								<td><input type="text" name="phone" id="phone"
+								<td><input type="text" name="phone" id="phone" placeholder="ex) 01012345678"
 									style="width: 270px;"><br>
 								</td>
 							</tr>
 							<tr>
 								<th>생년월일</th>
-								<td><input type="text" name="birthday" id="birthday" placeholder="예) 990209"
+								<td><input type="text" name="birthday" id="birthday" placeholder="ex) 001231"
 									style="width: 270px;"><br>
 								</td>
 							</tr>
