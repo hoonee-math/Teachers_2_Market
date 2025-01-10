@@ -78,10 +78,10 @@ public class PostDao {
 		return session.selectOne("post2.selectLastNotifyNo");
 	}
 	
-	public List<Post2> selectAllPost(SqlSession session, Map<String, Object> param) {
+	public List<Post2> selectAllPost(SqlSession session, Map<String, Integer> param) {
 		return session.selectList("post2.selectAllPost", param);
 	}
-	public List<Post2> selectAllPostById(SqlSession session, Map<String, Object> param) {
+	public List<Post2> selectAllPostById(SqlSession session, Map<String, Integer> param) {
 		return session.selectList("post2.selectAllPostById", param);
 	}
 	

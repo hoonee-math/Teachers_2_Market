@@ -123,7 +123,7 @@ public class PostService {
 	}
 	
 	//전체 게시물 불러오기
-	public List<Post2> selectAllPost(Map<String, Object> param) {
+	public List<Post2> selectAllPost(Map<String, Integer> param) {
 		SqlSession session = getSession();
 		List<Post2> posts = dao.selectAllPost(session, param);
 		session.close();
@@ -132,7 +132,7 @@ public class PostService {
 	}
 	
 	//회원별 게시물 불러오기
-	public List<Post2> selectAllPostById(Map<String, Object> param) {
+	public List<Post2> selectAllPostById(Map<String, Integer> param) {
 		SqlSession session = getSession();
 		List<Post2> posts = dao.selectAllPostById(session, param);
 		session.close();
