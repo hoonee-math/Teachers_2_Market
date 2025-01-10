@@ -7,18 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import com.ttt.dto.Member2;
 
 public class MemberDao {
-
-	/* 사용자 메뉴 - 만든 후 등록해놓기
-	 * 
-	 * */
-	
-	/* 관리자 메뉴 - 만든 후 등록해놓기
-	 * selectAllMember : 전체 멤버 리스트 출력
-	 * */
-	
-	
-	
-
 	// 관리자 메뉴 : 전체 멤버 리스트 출력
 	public List<Member2> selectAllMember(SqlSession session){
 		System.out.println("DAO - 전체 멤버 리스트 출력 시작");
@@ -54,5 +42,9 @@ public class MemberDao {
 	//아이디 찾기
 	public String selectMemberIdByNameAndEmail(SqlSession session, Member2 m) {
 		return session.selectOne("member2.selectMemberIdByNameAndEmail", m);
+	}
+	
+	public int updateMember(SqlSession session, Member2 m) {
+		return session.update("Member2.updateMember", m);
 	}
 }

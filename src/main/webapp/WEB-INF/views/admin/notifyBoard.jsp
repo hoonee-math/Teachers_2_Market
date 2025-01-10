@@ -81,7 +81,7 @@
 							<c:if test="${empty boards }">
 				            	<tr>
 				            		<td colspan="5" style="text-align: center;">
-				            			죄회된 결과가 없습니다.
+				            			조회된 결과가 없습니다.
 				            		</td>
 				            	</tr>
 				            </c:if>

@@ -68,4 +68,21 @@ public class MemberService {
 		String memberId = dao.selectMemberIdByNameAndEmail(session, m);
 		return memberId;
 	}
+	
+	public int updateMember(Member2 m) {
+		SqlSession session = getSession();
+		int result = 0;
+		try {
+			result = dao.updateMember(session, m);
+			if(result > 0) session.commit();
+			else session.rollback();
+		} catch (Exception e) {
+			e.printStackTrace();
+			session.rollback();
+			throw e;
+		} finally {
+			session.close();
+		}
+		return result;
+	}
 }

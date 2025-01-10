@@ -115,7 +115,7 @@ select {
 
 				<div class="main-content">
 					<p>
-						<img width="20px" src="${path}/resources/images/common/admin.png">
+						<img width="20px" src="${path}/resources/images/common/profile.png">
 						회원 정보 수정
 					</p>
 					<div id="main-box">
@@ -126,91 +126,52 @@ select {
 								<!-- form 태그 내부의 table 부분을 다음과 같이 완성합니다 -->
 								<table>
 									<tr>
-										<th>이름 입력 *</th>
-										<td><input type="text" id="memberName" name="memberName"
-											style="width: 230px;" required></td>
+										<th>이름 *</th>
+										<td>
+											<input type="text" id="memberName" name="memberName" value=${loginMember.memberName } style="width: 230px;" readOnly>
+										</td>
 									</tr>
 									<tr>
 										<th>아이디 *</th>
-										<td><input type="text" name="memberId" id="memberId"
-											style="width: 230px;" required> <input type="button"
-											value="ID 중복확인" id="idCheckBtn" onclick="checkId()"></td>
+										<td>
+											<input type="text" name="memberId" id="memberId" value="${loginMember.memberId }"style="width: 230px;" readOnly>
+										</td>
 									</tr>
 									<tr>
-										<th>이메일 *</th>
-										<td><input type="text" name="emailId" id="emailId"
-											style="width: 90px;" required> @ <input type="text"
-											name="emailDomain" id="emailDomain" style="width: 90px;"
-											required> <select id="emailSelect"
-											style="margin-left: 10px;">
-												<option value="">직접입력</option>
-												<option value="gmail.com">gmail.com</option>
-												<option value="naver.com">naver.com</option>
-												<option value="daum.net">daum.net</option>
-												<option value="hanmail.net">hanmail.net</option>
-												<option value="nate.com">nate.com</option>
-										</select> <input type="button" value="이메일 인증" id="emailCheckBtn">
-											<!-- margin-left 값을 32px에서 더 늘려서 조정 --></td>
+										<th>이메일</th>
+										<td>
+											<input type="text" name="emailId" id="emailId" value="${loginMember.email}" style="width: 230px;" readonly> 
+										</td>
 									</tr>
 									<tr>
-										<th>패스워드 *</th>
-										<td><input type="password" name="memberPw" id="password_"
-											placeholder="대소문자, 숫자, 특수문자 포함" required><br></td>
+										<th>패스워드</th>
+										<td>
+											<input type="password" name="memberPw" id="password_" placeholder="대소문자, 숫자, 특수문자 포함" required><br>
+										</td>
 									</tr>
 									<tr>
-										<th>패스워드확인 *</th>
-										<td><input type="password" id="password_2" required><br>
-											<span id="checkResult"></span></td>
+										<th>패스워드확인</th>
+										<td>
+											<input type="password" id="password_2" required><br>
+											<span id="checkResult"></span>
+										</td>
 									</tr>
 									<tr>
-										<th>닉네임</th>
-										<td><input type="text" name="memberNick" id="memberNick"
-											style="width: 320px;" placeholder="다른 사용자에게 보여줄 닉네임을 입력하세요."><br>
+										<th>전화번호</th>
+										<td><input type="text" name="phone" id="phone" value="${loginMember.phone}" placeholder="예)01055556666"><br>
 										</td>
 									</tr>
 									<tr>
 										<th>주소</th>
 										<td>
-											<div style="margin-bottom: 10px">
-												<input type="text" id="sample4_postcode" name="addressNo"
-													style="width: 200px;" placeholder="우편번호"> <input
-													type="button" id="postcodeFindBtn" value="우편번호 찾기"><br>
+											<div style="margin-bottom:10px">
+											<input type="text" id="sample4_postcode" name="addressNo" style="width:200px;" value="${addressNo != null ? addressNo : ''}" placeholder="우편번호">
+											<input type="button" id="postcodeFindBtn" value="우편번호 찾기"><br>
 											</div>
 											<div>
-												<input type="text" id="sample4_roadAddress"
-													name="addressRoad" placeholder="도로명주소"
-													style="width: 320px; margin-bottom: 10px;"> <span
-													id="guide" style="color: #999; display: none"></span> <input
-													type="text" id="sample4_detailAddress" name="addressDetail"
-													placeholder="상세주소" style="width: 320px;">
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<th>회원구분 *</th>
-										<td><input type="radio" name="eduType" id="school"
-											value="1" checked> <label for="school">학교 교사</label>
-											<input type="radio" name="eduType" id="institute" value="2">
-											<label for="institute">학원 강사</label></td>
-									</tr>
-									<tr class="school-name">
-										<th>학교/학원 이름 *</th>
-										<td>
-											<!-- 학교 선택용 select 그룹 -->
-											<div id="school-select-group">
-												<select name="region" id="region"
-													onchange="districtSearch(event);">
-													<option value="">지역 선택</option>
-												</select> <select name="district" id="district"
-													onchange="schoolSearch(event);">
-													<option value="">구/군 선택</option>
-												</select> <select name="schoolNo" id="school-name" required>
-													<option value="">학교명</option>
-												</select> <input type="button" value="확인" class="school-check-btn">
-											</div> <!-- 학원명 입력용 input -->
-											<div id="academy-input-group" style="display: none;">
-												<input type="text" name="academyName" id="academyName"
-													style="width: 320px;" placeholder="학원명을 입력하세요">
+											<input type="text" id="sample4_roadAddress" name="addressRoad" value="${addressRoad != null ? addressRoad : ''}" placeholder="도로명주소" style="width:200px;">
+											<span id="guide" style="color:#999;display:none"></span>
+											<input type="text" id="sample4_detailAddress" name="addressDetail" value="${addressDetail != null ? addressDetail : ''}" placeholder="상세주소" style="width: 200px;">
 											</div>
 										</td>
 									</tr>
@@ -224,7 +185,7 @@ select {
 									<div id="joindiv">
 										<input type="submit"
 											style="cursor: pointer; height: 50px; background-color: #fffadd; border: none;"
-											value="회원가입">
+											value="정보수정">
 									</div>
 								</div>
 							</form>
@@ -255,25 +216,36 @@ select {
 	$(".logo-container").click(function() {
 	    location.assign("${path}");
 	});
-	$('input[name="eduType"]').on('change', function() {
-	    const selectedType = $(this).val();
-	    const schoolSelectGroup = $('#school-select-group');
-	    const academyInputGroup = $('#academy-input-group');
-	    
-	    if(selectedType === '1') {  // 학교 선택 시
-	        // 학교 선택 그룹 표시, 학원 입력 숨김
-	        schoolSelectGroup.show();
-	        academyInputGroup.hide();
-	        // 학교 선택 필드 초기화
-	        $('#school-name').html('<option value="">학교명</option>');
-	    } else {  // 학원 선택 시
-	        // 학교 선택 그룹 숨김, 학원 입력 표시
-	        schoolSelectGroup.hide();
-	        academyInputGroup.show();
-	        // 학원명 입력 필드 초기화
-	        $('#academyName').val('');
-	    }
-	});
+	
+	// 우편번호 검색
+	function sample4_execDaumPostcode() {
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	            const roadAddr = data.roadAddress;
+	            let extraRoadAddr = '';
+
+	            if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+	                extraRoadAddr += data.bname;
+	            }
+	            if(data.buildingName !== '' && data.apartment === 'Y') {
+	                extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	            }
+	            
+	            // 우편번호와 주소 정보 입력
+	            $("#sample4_postcode").val(data.zonecode);
+	            $("#sample4_roadAddress").val(roadAddr);
+	            $("#sample4_detailAddress").val('');
+
+	            // 안내 텍스트 처리
+	            const $guide = $("#guide");
+	            if(data.autoRoadAddress) {
+	                $guide.html('(예상 도로명 주소 : ' + data.autoRoadAddress + extraRoadAddr + ')').show();
+	            } else {
+	                $guide.html('').hide();
+	            }
+	        }
+	    }).open();
+	}
 </script>
 	<!-- 8. 공통 JavaScript -->
 	<!-- 9. API/Ajax 관련 JavaScript -->

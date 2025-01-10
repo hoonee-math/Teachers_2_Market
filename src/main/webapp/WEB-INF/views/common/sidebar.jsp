@@ -37,30 +37,17 @@
 		</div>
 		<div class="side-btn-text">미취학</div>
 		
-		<div class="side-button" data-path="/board/purchasehistory">
-			<img src="${path }/resources/images/common/file.png" alt="내 자료실" class="side-img-icon">
+		<div class="side-button" data-path="/member/myinfo">
+			<img src="${path }/resources/images/common/profile.png" alt="마이 페이지" class="side-img-icon">
 		</div>
-		<div class="side-btn-text">구매이력</div>
+		<div class="side-btn-text">마이 페이지</div>
 		
 		<c:if test="${sessionScope.loginMember.memberId=='admin' }">
-			<div class="side-button">
+			<div class="side-button" data-path="/admin/menu">
 				<img src="${path }/resources/images/common/admin.png" alt="관리자 페이지" class="side-img-icon">
 			</div>
 			<div class="side-btn-text">관리자<br>페이지</div>
 		</c:if>
-		
-		<!-- 개발 과정 중 확인용 버튼들, 개발 완료 후 삭제 -->
-		<div class="side-button" data-path="/admin/menu">
-			<img src="${path }/resources/images/common/admin.png" alt="관리자 페이지" class="side-img-icon">
-		</div>
-		<div class="side-btn-text">임시 관리자메뉴</div>
-		
-		
-		<div class="side-button" data-path="/post/write/form">
-			<img src="${path }/resources/images/common/file.png" alt="내 자료실" class="side-img-icon">
-		</div>
-		<div class="side-btn-text">글쓰기 temp</div>
-		
 	</div>
 </div>
 

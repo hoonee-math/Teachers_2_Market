@@ -71,11 +71,17 @@
 		UPDATE MEMBER2 SET 
 			member_pw=#{memberPw}
 			WHERE email=#{email}
-	
 	</update>
 	
 	<!-- 아이디 찾기  -->
 	<select id="selectMemberIdByNameAndEmail" parameterType="member2" resultType="string">
 		SELECT MEMBER_ID FROM MEMBER2 WHERE MEMBER_NAME=#{memberName} AND EMAIL=#{email}
 	</select>
+	
+	<update id="updateMember" parameterType="member2">
+		UPDATE MEMBER2 SET
+			MEMBER_NAME=#{memberName}, MEMBER_ID=#{memberId}, EMAIL=#{email}, 
+			MEMBER_PW=#{memberPw}, PHONE=#{phone}, ADDRESS=#{address}
+		WHERE MEMBER_NO=#{memberNo}
+	</update>
 </mapper>

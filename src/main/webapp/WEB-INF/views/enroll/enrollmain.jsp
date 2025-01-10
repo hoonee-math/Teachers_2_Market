@@ -189,7 +189,7 @@ input[type="radio"]:first-child {
    						<input type="hidden" name="emailVerified" value="N">
 						<table>
 							<tr>
-								<th>이름 입력 *</th>
+								<th>이름 *</th>
 								<td><input type="text" id="memberName" name="memberName"
 									style="width: 230px;" required></td>
 							</tr>

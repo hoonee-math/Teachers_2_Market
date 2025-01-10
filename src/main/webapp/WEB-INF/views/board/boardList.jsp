@@ -54,7 +54,7 @@
 				<!-- 섹션 1 -->
 				<div id="notice-div">
 					<c:forEach var="notice" items="${notices }">
-						<p><strong>[공지] ${notice.postTitle }</strong></p>
+						<p><a href="${path }/post/viewpost?postNo=${p.postNo}"><strong>[공지] ${notice.postTitle }</strong></a></p>
 					</c:forEach>
 				</div>
 			</section>
