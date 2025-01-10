@@ -62,7 +62,24 @@
 						 data-delivery-fee="${item.product2.deliveryFee }"
 						 data-file-price="${item.file2.filePrice }"
 						 data-cart-no="${item.cartNo }">
-						<input type="checkbox" class="select-btn" name="cartNo" value="${item.cartNo }">
+						 
+						 <!-- 상품 타입이 물품인 경우 -->
+						<c:if test="${item.post.productType==1 }">
+						 	<c:choose>
+						 		<c:when test="${item.product2.stockCount>0 }">
+						 			<input type="checkbox" class="select-btn" name="cartNo" value="${item.cartNo }">
+						 		</c:when>
+						 	</c:choose>
+						</c:if>
+						<!-- 상품 타입이 파일인 경우 -->
+						<c:if test="${item.post.productType==2 }">
+							<c:choose>
+						 		<c:when test="${salePeriod.compareTo(today) >= 0 }">
+						 			<input type="checkbox" class="select-btn" name="cartNo" value="${item.cartNo }">
+						 		</c:when>
+						 	</c:choose>
+						</c:if>
+						 
 						<table class="product-container">
 							<tr>
 								<td class="list-img">
@@ -73,7 +90,7 @@
 										<!-- 판매 상품 제목 -->
 										<p><strong>${item.post.postTitle}</strong></p><br>
 										
-										<!-- 판매 상품 금액 -->
+										<!-- 상품 타입이 물품인 경우 -->
 										<c:if test="${item.post.productType==1 }">
 										<!-- stockCount 변수에 재고 넣음 -->
 										<c:set var="stockCount" value="${item.product2.stockCount }"/>

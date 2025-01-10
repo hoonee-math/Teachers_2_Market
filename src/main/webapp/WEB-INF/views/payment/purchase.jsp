@@ -200,17 +200,6 @@
 								</div>
 							</td>
 						</tr>
-						<tr>
-							<th>결제방식 선택</th>
-							<td>
-								<input type="radio" name="paymentMethod" id="paymentMethod0" value="무통장 입금">
-								<label for="paymentMethod0">무통장 입금</label>
-								<input type="radio" name="paymentMethod" id="paymentMethod1" value="카드 결제">
-								<label for="paymentMethod1">카드 결제</label>
-								<input type="radio" name="paymentMethod" id="paymentMethod2" value="휴대폰 결제">
-								<label for="paymentMethod2">휴대폰 결제</label>
-							</td>
-						</tr>
 					</table>
 				</div>
 				<br>
