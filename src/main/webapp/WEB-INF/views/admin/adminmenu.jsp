@@ -163,17 +163,6 @@
 							</div>
 						</div>	
 						<div class="mypage-card">
-							<h3>결제 정보 관리</h3>
-							<div><i class="bi bi-credit-card" style="font-size: 10rem; color: #ffcc00;"></i></div>
-							<div>
-								<p>결제 정보를 확인하고 관리하는</p>
-								<p>결제 정보 페이지로 이동합니다.</p>
-							</div>
-							<div>
-								<p style="margin-top:0px;border-bottom: 1px solid black;">결제 정보 확인하기</p>
-							</div>
-						</div>
-						<div class="mypage-card">
 							<h3>회원 관리</h3>
 							<div><i class="bi bi-person-fill-gear" style="font-size: 10rem; color: #ffcc00;"></i></div>
 							<div>
@@ -281,13 +270,8 @@
 		location.assign("${path}/admin/manage/post");
 	});
 
-	// 결제 정보 관리 카드
-	$(".mypage-card-container .mypage-card:nth-child(3)").click(function() {
-		location.assign("${path}/admin/manage/payment");
-	});
-
 	// 회원 관리 카드
-	$(".mypage-card-container .mypage-card:nth-child(4)").click(function() {
+	$(".mypage-card-container .mypage-card:nth-child(3)").click(function() {
 		location.assign("${path}/admin/manage/member");
 	});
 	

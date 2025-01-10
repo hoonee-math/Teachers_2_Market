@@ -40,22 +40,7 @@ public class AdminManageMemberSevlet extends HttpServlet {
 	        numPerPage = 5; // 기본값 5명씩 출력
 	    }
 	    
-//	    // 더미데이터 생성 (30명)
-//	    List<Map<String,Object>> members2 = new ArrayList<>();
-//	    for(int i=1; i<=30; i++) {
-//	        Map<String,Object> member = new HashMap<>();
-//	        member.put("memberNo", i);
-//	        member.put("memberId", "user" + i);
-//	        member.put("memberName", "사용자" + i);
-//	        member.put("email", "user" + i + "@example.com");
-//	        member.put("warningCount", (int)(Math.random() * 3));  // 0~2 사이 랜덤 경고횟수
-//	        member.put("enrollDate", new java.sql.Date(System.currentTimeMillis())); 
-//	        member.put("isDeleted", 0);
-//	        members2.add(member);
-//	    }
-	    
 	    List<Member2> allMembers= new AdminMemberService().selectAllMember();
-	    System.out.println("DB 실행 완료 : 리스트 출력 -> "+allMembers.toString());
 	    
 	    // 페이징 처리
 	    int totalData = allMembers.size();
@@ -70,7 +55,6 @@ public class AdminManageMemberSevlet extends HttpServlet {
 	    int end = Math.min(start + numPerPage, totalData);
 	    
 	    List<Member2> members = allMembers.subList(start, end);
-//		List<Map<String,Object>> currentPageMembers = members.subList(start, end);
 	    
 	    // 페이지바 HTML 생성
 	    StringBuilder pageBar = new StringBuilder();

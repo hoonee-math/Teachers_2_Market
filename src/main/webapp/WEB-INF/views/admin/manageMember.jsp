@@ -104,18 +104,18 @@
 						</colgroup>
 						<thead>
 							<tr>
-									<th class="checkbox-cell">
-										<input type="checkbox" id="selectAll" onclick="toggleAllCheckboxes()">
-									</th>
-									<th>회원번호</th>
-									<th>아이디</th>
-									<th>이름</th>
-									<th>이메일</th>
-									<th>신고접수</th>
-									<th>유효신고</th>
-									<th>경고횟수</th>
-									<th>가입일</th>
-									<th>상태</th>
+								<th class="checkbox-cell">
+									<input type="checkbox" id="selectAll" onclick="toggleAllCheckboxes()">
+								</th>
+								<th>회원번호</th>
+								<th>아이디</th>
+								<th>이름</th>
+								<th>이메일</th>
+								<th>신고접수</th>
+								<th>유효신고</th>
+								<th>경고횟수</th>
+								<th>가입일</th>
+								<th>상태</th>
 							</tr>
 						</thead>
 						<tbody>
