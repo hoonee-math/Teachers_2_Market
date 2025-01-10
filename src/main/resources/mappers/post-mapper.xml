@@ -285,7 +285,7 @@
 		SELECT * 
 		FROM (SELECT ROWNUM AS RNUM, P.*
 				FROM (SELECT * FROM POST2 
-						WHERE MEMBER_ID=#{memberId} 
+						WHERE MEMBER_NO=#{memberNo} 
 						ORDER BY POST_NO DESC) P)
 		WHERE RNUM BETWEEN #{start} AND #{end}
 	</select>

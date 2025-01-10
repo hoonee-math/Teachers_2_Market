@@ -1,4 +1,4 @@
-package com.ttt.controller.admin;
+package com.ttt.controller.board;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,20 +11,28 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.ttt.dto.Member2;
 import com.ttt.dto.Post2;
 import com.ttt.service.BoardService;
 import com.ttt.service.PostService;
 
-@WebServlet("/admin/manage/post")
-public class AdminManagePost extends HttpServlet {
+@WebServlet("/member/board/list")
+public class MemberPostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public AdminManagePost() {
+    public MemberPostServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession(false); //로그인 세션 가져오기(없으면 생성 하지않음)
+		Member2 m = new Member2();
+		m = (Member2)session.getAttribute("loginMember");
+		int memberNo = m.getMemberNo();
+		
+		
 		// 페이징 처리를 위한 현재 페이지 정보
 		int cPage = 1;
 		try {
@@ -37,10 +45,11 @@ public class AdminManagePost extends HttpServlet {
 		int numPerPage = 10;
 		
 		Map<String, Integer> param = Map.of(
-				"cPage",cPage);
+				"cPage",cPage,
+				"memberNo",memberNo);
 
 		// 게시글 데이터 불러오기
-		List<Post2> posts = new PostService().selectAllPost(param);
+		List<Post2> posts = new PostService().selectAllPostById(param);
 		//전체 게시글 수 조회
 		int totalData = posts.size();
 		

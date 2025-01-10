@@ -70,6 +70,7 @@
 						<label for="typeProduct">상품</label>
 						<input type="radio" id="typeFile" name="type" value="file">
 						<label for="typeFile">파일</label>
+						<p>"파일"은 등록일로부터 30일간 판매됩니다.</p>
 					</div>
 				</div>
 				

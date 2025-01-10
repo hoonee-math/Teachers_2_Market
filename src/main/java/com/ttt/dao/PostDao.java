@@ -79,10 +79,21 @@ public class PostDao {
 	}
 	
 	public List<Post2> selectAllPost(SqlSession session, Map<String, Integer> param) {
-		return session.selectList("post2.selectAllPost", param);
+		int cPage = param.get("cPage");
+		String memberId = param.get("memberId").toString();
+
+	    List<Post2> result = session.selectList("post2.selectAllPost",
+	            Map.of("memberId", memberId, "start", (cPage-1)*10+1, "end", cPage*10));
+		
+		return result;
 	}
 	public List<Post2> selectAllPostById(SqlSession session, Map<String, Integer> param) {
-		return session.selectList("post2.selectAllPostById", param);
-	}
+		int cPage = param.get("cPage");
+		int memberNo = param.get("memberNo");
+
+	    List<Post2> result = session.selectList("post2.selectAllPostById",
+	            Map.of("memberNo", memberNo, "start", (cPage-1)*10+1, "end", cPage*10));
+		
+		return result;	}
 	
 }

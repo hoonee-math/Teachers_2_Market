@@ -152,6 +152,17 @@
 							</div>
 						</div>	
 						<div class="mypage-card">
+							<h3>작성 글 관리</h3>
+							<div><i class="bi bi-layout-text-window-reverse" style="font-size: 10rem; color: #ffcc00;"></i></div>
+							<div>
+								<p>회원님이 작성한 글을 관리하는</p>
+								<p>글 관리 페이지로 이동합니다.</p>
+							</div>
+							<div>
+								<p style="margin-top:0px;border-bottom: 1px solid black;">전체 글 확인하기</p>
+							</div>
+						</div>	
+						<div class="mypage-card">
 							<h3>구매 내역 관리</h3>
 							<div><i class="bi bi-credit-card" style="font-size: 10rem; color: #ffcc00;"></i></div>
 							<div>
@@ -186,7 +197,7 @@
 
 	// 전체 글 관리 카드
 	$(".mypage-card-container .mypage-card:nth-child(2)").click(function() {
-		location.assign("${path}/admin/manage/post");
+		location.assign("${path}/member/board/list");
 	});
 
 	// 결제 정보 관리 카드
