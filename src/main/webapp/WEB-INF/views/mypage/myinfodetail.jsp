@@ -201,7 +201,27 @@ select {
 		<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 		<!-- wrap 태그 종료 -->
 	</div>
-	<script>
+<script>
+	//DOM이(페이지가) 로드되면 이벤트 리스너 초기화
+	$(document).ready(function() {
+	    initializeEventListeners();
+	    initializeFormValidation();
+	});
+	
+	/**
+	 * 기본 이벤트 리스너 초기화 함수
+	 */
+	function initializeEventListeners() {
+	    // 로고 클릭시 메인으로 이동
+	    $(".logo-container").off("click").click(() => location.assign(contextPath));
+	    
+		// 비밀번호 일치여부 확인 이벤트
+		$("#password_2").off("keyup").keyup(validatePasswordMatch);
+	    
+	    // 주소 검색 이벤트
+	    $("#postcodeFindBtn").off("click").click(sample4_execDaumPostcode);
+	}
+	
 	//서블릿에서 유효성 검사 후 알람 띄우기
 	<c:if test="${errorMessage != null}">
 	    alert('${errorMessage}');
@@ -216,12 +236,7 @@ select {
 	$(".logo-container").click(function() {
 	    location.assign("${path}");
 	});
-	
-	function initializeEventListeners() {
-	    // 주소 검색 이벤트
-	    $("#postcodeFindBtn").off("click").click(sample4_execDaumPostcode);
-	}
-	
+
 	// 우편번호 검색
 	function sample4_execDaumPostcode() {
 	    new daum.Postcode({

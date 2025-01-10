@@ -48,21 +48,6 @@ function initializeFormValidation() {
 
 // 회원가입 폼 유효성 검사
 function fn_invalidate() {
-	/*해당 페이지에서는 아이디 사용 x*/
-    /*const userId = $("#userId_").val();
-    if(userId.length < 4) {
-        alert("아이디는 4글자 이상 입력해 주세요.");
-        $("#userId_").focus();
-        return false;
-    }*/
-
-	/*이메일 인증 여부 확인
-	const emailVerified = $("input[name='emailVerified']").val();
-	if(emailVerified !== "Y") {
-	    alert("이메일 인증이 필요합니다.");
-	    return false;
-	}*/
-    
     const passwordReg = /(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*()]).{8,}/;
     const password = $("#password_2").val();
     if(!passwordReg.test(password)) {
@@ -72,7 +57,6 @@ function fn_invalidate() {
     return true;
 }
 
-
 // 아이디 중복검사를 실행하는 함수
 function checkId() {
     const memberId = $('#memberId').val();
@@ -81,7 +65,6 @@ function checkId() {
         alert('아이디를 입력해주세요.');
         return;
     }
-
     $.ajax({
         url: path + '/member/checkid', 
         type: "GET",
@@ -194,23 +177,23 @@ $("#emailSelect").change(function() {
 	    document.body.removeChild(form);
 	}
 
-	// 이메일 관련 입력값이 변경될 때마다 인증 상태 초기화
-	$("#emailId, #emailDomain, #emailSelect").on("change", function() {
-	    const existingHidden = $("input[name='emailVerified']");
-	    if(existingHidden.length > 0) {
-	        existingHidden.val("N");
-	        
-	        // 입력 필드 잠금 해제
-	        $("#emailId").prop("readonly", false);
-	        $("#emailDomain").prop("readonly", false);
-	        $("#emailSelect").prop("disabled", false);
-	        
-	        // 스타일 원복
-	        $("#emailId, #emailDomain").css("backgroundColor", "");
-	        $("input[value='이메일 인증']").prop("disabled", false)
-	            .css("backgroundColor", "");
-	    }
-	});
+// 이메일 관련 입력값이 변경될 때마다 인증 상태 초기화
+$("#emailId, #emailDomain, #emailSelect").on("change", function() {
+    const existingHidden = $("input[name='emailVerified']");
+    if(existingHidden.length > 0) {
+        existingHidden.val("N");
+        
+        // 입력 필드 잠금 해제
+        $("#emailId").prop("readonly", false);
+        $("#emailDomain").prop("readonly", false);
+        $("#emailSelect").prop("disabled", false);
+        
+        // 스타일 원복
+        $("#emailId, #emailDomain").css("backgroundColor", "");
+        $("input[value='이메일 인증']").prop("disabled", false)
+            .css("backgroundColor", "");
+    }
+});
 
 /**
  * 이메일 형식 검사
