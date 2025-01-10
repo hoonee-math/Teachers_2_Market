@@ -268,7 +268,7 @@
 								</c:choose>
 							</td>
 							<td style="text-align: left;">${post.postTitle}</td>
-							<td>${post.member.memberNick}</td>
+							<td>${post.member.memberName}</td>
 							<td>${post.viewCount}</td>
 							<td><fmt:formatDate value="${post.postDate}" pattern="yyyy-MM-dd" /></td>
 							<td>

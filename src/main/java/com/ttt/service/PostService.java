@@ -3,6 +3,7 @@ package com.ttt.service;
 import static com.ttt.common.SqlSessionTemplate.getSession;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -59,7 +60,6 @@ public class PostService {
 		int result = 0;
 		
 		try {
-			System.out.println("PostService.java 에 post 객체 전달 값: "+post.toString());
 			// 1. POST2 테이블 insert
 			result = dao.insertPost(session, post);
 			if (result <= 0)
@@ -68,7 +68,6 @@ public class PostService {
 			// 2. 생성된 postNo 조회
 			int postNo = dao.selectLastPostNo(session);
 			post.setPostNo(postNo);
-			System.out.println("postNo 조회: "+ postNo); //현재 여기서 계속 -1 만 출력되고 있음. selectLastPostNo 이게 실패한 것 같음
 
 			String memberId = post.getMember().getMemberId();
 
@@ -82,10 +81,8 @@ public class PostService {
 
 				// 3-2. 상품 이미지 저장
 				List<Image2> images = FileUploadUtil.saveImages(mr, webAppPath, memberId, postNo);
-				System.out.println("이미지 확인 : "+ images);
 				
 				for (Image2 img : images) {
-					System.out.println("이미지 확인 :"+ img);
 					img.setPostNo(postNo);
 					result = dao.insertImageByPostNo(session, img);
 					if (result <= 0)
@@ -123,5 +120,23 @@ public class PostService {
 		}
 	    
 	    return result;
+	}
+	
+	//전체 게시물 불러오기
+	public List<Post2> selectAllPost(Map<String, Object> param) {
+		SqlSession session = getSession();
+		List<Post2> posts = dao.selectAllPost(session, param);
+		session.close();
+		
+		return posts;
+	}
+	
+	//회원별 게시물 불러오기
+	public List<Post2> selectAllPostById(Map<String, Object> param) {
+		SqlSession session = getSession();
+		List<Post2> posts = dao.selectAllPostById(session, param);
+		session.close();
+		
+		return posts;
 	}
 }

@@ -47,22 +47,17 @@ public class WritePostServlet extends HttpServlet {
 
 			// 파일 저장 경로 확인 test
 			String webAppPath1 = new File("src/main/webapp").getAbsolutePath();
-			System.out.println("webAppPath1: " + webAppPath1);
 			// -> webAppPath1: C:\Windows\System32\src\main\webapp
 			String webAppPath2 = request.getServletContext().getRealPath("/");
-			System.out.println("webAppPath2: " + webAppPath2);
 			// -> webAppPath2: C:\GitHub\EduTech_Full_Stack\Teachers_Project\Teachers_2_Market\Teachers_2_Market\target\m2e-wtp\web-resources\
 			String webAppPath3 = getServletContext().getRealPath("../../../src/main/webapp/");
-			System.out.println("webAppPath3: " + webAppPath3);
 			// -> webAppPath3: null
 			String webAppPath4 = System.getProperty("user.dir") + "/src/main/webapp/";
-			System.out.println("webAppPath4: " + webAppPath4);
 			// -> webAppPath4: C:\Windows\System32/src/main/webapp/
 
 			// 방법 2: ClassLoader 사용
 			String webAppPath5 = new File(Thread.currentThread().getContextClassLoader().getResource("").getPath()
 					.replace("target/classes/", "src/main/webapp/")).getAbsolutePath();
-			System.out.println("webAppPath5: " + webAppPath5);
 			// -> webAppPath5: C:\GitHub\EduTech_Full_Stack\Teachers_Project\Teachers_2_Market\Teachers_2_Market\src\main\webapp
 			
 			break;
@@ -100,19 +95,14 @@ public class WritePostServlet extends HttpServlet {
 
 				// 2. 파일 저장 경로 설정
 				String webAppPath1 = new File("src/main/webapp").getAbsolutePath();
-				System.out.println("webAppPath1: " + webAppPath1);
 				String webAppPath2 = request.getServletContext().getRealPath("/");
-				System.out.println("webAppPath2: " + webAppPath2);
 				String webAppPath3 = getServletContext().getRealPath("../../../src/main/webapp/");
 				;
-				System.out.println("webAppPath3: " + webAppPath3);
 				String webAppPath4 = System.getProperty("user.dir") + "/src/main/webapp/";
-				System.out.println("webAppPath4: " + webAppPath4);
 
 				// 방법 2: ClassLoader 사용 -- 임시방편
 				String webAppPath = new File(Thread.currentThread().getContextClassLoader().getResource("").getPath()
 						.replace("target/classes/", "src/main/webapp/")).getAbsolutePath();
-				System.out.println("webAppPath: " + webAppPath);
 
 //				String uploadPath = FileUploadUtil.getUploadDirectory(webAppPath, FileUploadUtil.TEMP_DIR);
 //				System.out.println("uploadPath: " + uploadPath);

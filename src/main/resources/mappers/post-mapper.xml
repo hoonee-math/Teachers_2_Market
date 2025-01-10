@@ -272,4 +272,21 @@
 		AND SCHOOL_NAME LIKE '%' || #{schoolType}
 		ORDER BY SCHOOL_NAME
 	</select>
+	
+	
+	<select id="selectAllPost" parameterType="map" resultMap="postMap">
+		SELECT * 
+		FROM (SELECT ROWNUM AS RNUM, P.*
+				FROM (SELECT * FROM POST2 ORDER BY POST_NO DESC) P)
+		WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="selectAllPostById" parameterType="map" resultMap="postMap">
+		SELECT * 
+		FROM (SELECT ROWNUM AS RNUM, P.*
+				FROM (SELECT * FROM POST2 
+						WHERE MEMBER_ID=#{memberId} 
+						ORDER BY POST_NO DESC) P)
+		WHERE RNUM BETWEEN #{start} AND #{end}
+	</select>
 </mapper>

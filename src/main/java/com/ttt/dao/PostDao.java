@@ -1,13 +1,13 @@
 package com.ttt.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
 import com.ttt.dto.File2;
 import com.ttt.dto.Image2;
 import com.ttt.dto.Post2;
-import com.ttt.dto.Product2;
 
 public class PostDao {
 	
@@ -76,6 +76,13 @@ public class PostDao {
 	// insertNotify 로 등록한 공지사항의 번호를 조회하는 메서드
 	public int selectLastNotifyNo(SqlSession session) {
 		return session.selectOne("post2.selectLastNotifyNo");
+	}
+	
+	public List<Post2> selectAllPost(SqlSession session, Map<String, Object> param) {
+		return session.selectList("post2.selectAllPost", param);
+	}
+	public List<Post2> selectAllPostById(SqlSession session, Map<String, Object> param) {
+		return session.selectList("post2.selectAllPostById", param);
 	}
 	
 }
