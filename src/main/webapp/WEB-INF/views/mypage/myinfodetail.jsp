@@ -24,12 +24,9 @@
 <link rel="stylesheet" href="${path }/resources/css/common/footer.css">
 <!-- 3. 컴포넌트 CSS (각 요소) -->
 <!-- 4. 페이지별 CSS -->
-<link rel="stylesheet"
-	href="${path }/resources/css/board/purchaseHistory.css">
-<link rel="stylesheet"
-	href="${path }/resources/css/enroll/enrollMember.css">
-<link rel="stylesheet"
-	href="${path }/resources/css/enroll/termsofservice.css">
+<link rel="stylesheet" href="${path }/resources/css/board/purchaseHistory.css">
+<link rel="stylesheet" href="${path }/resources/css/enroll/enrollMember.css">
+<link rel="stylesheet" href="${path }/resources/css/enroll/termsofservice.css">
 <!-- 5. 외부 라이브러리 ex: jQuery (Bootstrap JS가 jQuery에 의존하므로 먼저 로드) -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <!-- 6. Bootstrap JS (jQuery 다음, 내부 스타일 전에) 또는 외부 라이브러리 -->
@@ -38,67 +35,6 @@
 <!-- 7. 내부 style 태그 -->
 <style>
 /* 입력 필드 스타일 추가 */
-button, input, select, textarea {
-	margin: 0;
-	padding: 0;
-}
-
-button, input, select, td, textarea, th {
-	font-size: 14px;
-	line-height: 1.5;
-	font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
-	color: #222;
-}
-/* 버튼 컨테이너 스타일 */
-#agree-button {
-	display: flex;
-	justify-content: center;
-	margin-top: 20px;
-	padding: 20px;
-	gap: 30px;
-}
-
-#main-box {
-	width: 800px;
-	height: auto;
-}
-
-table {
-	width: 100%;
-	border-spacing: 0;
-	margin: 20px 0;
-}
-
-td {
-	padding: 15px;
-	text-align: left;
-	border-bottom: 1px solid #ddd;
-	vertical-align: initial;
-}
-
-th {
-	width: 150px;
-	font-weight: normal;
-	vertical-align: initial;
-}
-
-input[type="text"], input[type="password"] {
-	padding: 8px;
-	border: 2px solid rgb(192, 192, 192);
-	border-radius: 4px;
-	background-color: #F9F9F9;
-}
-
-/* select 스타일 추가 */
-select {
-	padding: 6px 12px 11px 12px;
-	border: 2px solid #ddd;
-	border-radius: 4px;
-	font-size: 14px;
-	margin-left: 5px;
-	cursor: pointer;
-	background-color: #F9F9F9;
-}
 </style>
 </head>
 <body>
