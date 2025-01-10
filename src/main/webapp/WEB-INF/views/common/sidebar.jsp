@@ -37,11 +37,12 @@
 		</div>
 		<div class="side-btn-text">미취학</div>
 		
-		<div class="side-button" data-path="/member/myinfo">
-			<img src="${path }/resources/images/common/profile.png" alt="마이 페이지" class="side-img-icon">
-		</div>
-		<div class="side-btn-text">마이 페이지</div>
-		
+		<c:if test="${sessionScope.loginMember != null }">
+			<div class="side-button" data-path="/member/myinfo">
+				<img src="${path }/resources/images/common/profile.png" alt="마이 페이지" class="side-img-icon">
+			</div>
+			<div class="side-btn-text">마이 페이지</div>
+		</c:if>
 		<c:if test="${sessionScope.loginMember.memberId=='admin' }">
 			<div class="side-button" data-path="/admin/menu">
 				<img src="${path }/resources/images/common/admin.png" alt="관리자 페이지" class="side-img-icon">

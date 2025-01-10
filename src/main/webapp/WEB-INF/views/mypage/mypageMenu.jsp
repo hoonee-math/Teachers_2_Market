@@ -144,44 +144,22 @@
 							<h3>내 정보</h3>
 							<div><i class="bi bi-person-vcard" style="font-size: 10rem; color: #ffcc00;"></i></div>
 							<div>
-								<p>개인정보를 수정할 수 있는<p>
+								<p> 개인정보를 수정할 수 있는<p>
 								<p>내 정보 페이지로 이동합니다.</p>
 							</div>
 							<div>
 								<p style="margin-top:0px;border-bottom: 1px solid black;">내 정보 확인하기</p>
 							</div>
-						</div>
-						<div class="mypage-card">
-							<h3>전체 글 관리</h3>
-							<div><i class="bi bi-layout-text-window-reverse" style="font-size: 10rem; color: #ffcc00;"></i></div>
-							<div>
-								<p>회원들이 작성한 글을 관리하는</p>
-								<p>글 관리 페이지로 이동합니다.</p>
-							</div>
-							<div>
-								<p style="margin-top:0px;border-bottom: 1px solid black;">전체 글 확인하기</p>
-							</div>
 						</div>	
 						<div class="mypage-card">
-							<h3>결제 정보 관리</h3>
+							<h3>구매 내역 관리</h3>
 							<div><i class="bi bi-credit-card" style="font-size: 10rem; color: #ffcc00;"></i></div>
 							<div>
-								<p>결제 정보를 확인하고 관리하는</p>
+								<p>  구매 내역 정보를 확인하는</p>
 								<p>결제 정보 페이지로 이동합니다.</p>
 							</div>
 							<div>
 								<p style="margin-top:0px;border-bottom: 1px solid black;">결제 정보 확인하기</p>
-							</div>
-						</div>
-						<div class="mypage-card">
-							<h3>회원 관리</h3>
-							<div><i class="bi bi-person-fill-gear" style="font-size: 10rem; color: #ffcc00;"></i></div>
-							<div>
-								<p>신고 처리 등 회원을 관리하는</p>
-								<p>회원관리 페이지로 이동합니다.</p>
-							</div>
-							<div>
-								<p style="margin-top:0px;border-bottom: 1px solid black;">회원 목록 확인가기</p>
 							</div>
 						</div>
 					</div>
