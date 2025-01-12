@@ -27,21 +27,21 @@ public class FindPwServlet extends HttpServlet {
 		String email=request.getParameter("email");
 		String memberId=request.getParameter("memberId");
 		
-	    System.out.println("Received parameters:");
+	    System.out.println("이메일 인증, 이메일 정송 서비스 start");
 	    System.out.println("searchType: " + searchType);
-	    System.out.println("email: " + email);
-	    System.out.println("memberId: " + memberId);
+	    // System.out.println("email: " + email);
+	    // System.out.println("memberId: " + memberId);
 		
-		System.out.println(searchType + "," + email + ","+ memberId);
+		// System.out.println(searchType + "," + email + ","+ memberId);
 		
 		Member2 m = new Member2();
 		switch(searchType) {
-		case "emailDuplicate" : m.setEmail(email); System.out.println(m); break;
-		case "searchPassword" : m.setEmail(email); m.setMemberId(memberId);; System.out.println(m); break;
+		case "emailDuplicate" : m.setEmail(email);  break;
+		case "searchPassword" : m.setEmail(email); m.setMemberId(memberId); break;
 		}
 		
 		Member2 result=new MemberService().selectMemberByIdAndEmail(m);
-		System.out.println("Query result: " + result);
+		// System.out.println("Query result: " + result);
 
         response.setContentType("application/json");
         response.getWriter().write("{\"exists\": " + (result != null) + "}");

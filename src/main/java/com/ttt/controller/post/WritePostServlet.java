@@ -36,11 +36,13 @@ public class WritePostServlet extends HttpServlet {
 	// "/post/report/form"으로 들어오는 요청에 대해 게시글 등록 페이지 열어주기
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("writePostServlet 도착");
 		String uri = request.getRequestURI();
 		String path = uri.substring(request.getContextPath().length());
 
 		switch (path) {
 		case "/post/write/form":
+			System.out.println("writePostServlet /post/write/form 으로 맵핑 완료");
 			request.getRequestDispatcher("/WEB-INF/views/post/writepost.jsp").forward(request, response);
 			break;
 		default:
@@ -76,11 +78,6 @@ public class WritePostServlet extends HttpServlet {
 				}
 
 				// 2. 파일 저장 경로 설정
-				String webAppPath1 = new File("src/main/webapp").getAbsolutePath();
-				String webAppPath2 = request.getServletContext().getRealPath("/");
-				String webAppPath3 = getServletContext().getRealPath("../../../src/main/webapp/");
-				String webAppPath4 = System.getProperty("user.dir") + "/src/main/webapp/";
-
 				// 방법 2: ClassLoader 사용 -- 임시방편
 				String webAppPath = new File(Thread.currentThread().getContextClassLoader().getResource("").getPath()
 						.replace("target/classes/", "src/main/webapp/")).getAbsolutePath();
@@ -184,6 +181,7 @@ public class WritePostServlet extends HttpServlet {
 					post.setPostImg(images);
 				}
 				// 트랜잭션 처리
+				System.out.println("post등록을 시작합니다.");
 				PostService service = new PostService();
 				int result = service.insertPost(post, mr, uploadPath);
 
