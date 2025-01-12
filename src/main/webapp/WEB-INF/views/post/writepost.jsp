@@ -125,7 +125,7 @@
 							<div class="image-upload-box">
 								<!-- input을 label로 감싸서 처리 -->
 								<label for="imageUpload" class="upload-label">
-									<input type="file" id="imageUpload" multiple accept="image/*" style="display: none;">
+									<input type="file" id="imageUpload" name="imageUpload" multiple accept="image/*" style="display: none;">
 									<span>이미지 추가</span>
 								</label>
 							</div>
@@ -140,7 +140,7 @@
 				        <h3>판매할 파일</h3>
 				        <div class="file-upload-box">
 				            <label for="fileUpload" class="simple-upload-label">
-				                <input type="file" id="fileUpload" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.zip">
+				                <input type="file" id="fileUpload" name="fileUpload" multiple accept=".pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.zip">
 				                <i class="bi bi-plus"></i> 파일추가
 				            </label>
 				        </div>

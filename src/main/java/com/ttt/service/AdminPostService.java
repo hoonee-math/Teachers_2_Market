@@ -17,7 +17,6 @@ public class AdminPostService {
 			SqlSession session=getSession();
 		    int result = 0;
 			try {
-				System.out.println("공지사항 등록 Service 진입");
 				result = dao.insertNotify(session, p);
 		        if(result > 0) {
 		            // 성공시 생성된 공지사항 번호를 객체에 설정
@@ -27,7 +26,6 @@ public class AdminPostService {
 		        } else {
 		            session.rollback();
 		        }
-		        System.out.println("공지사항 등록 Service 완료");
 			} catch(Exception e) {
 				e.printStackTrace();
 		        session.rollback();

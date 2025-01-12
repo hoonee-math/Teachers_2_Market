@@ -81,9 +81,6 @@ public class WritePostServlet extends HttpServlet {
 				// 방법 2: ClassLoader 사용 -- 임시방편
 				String webAppPath = new File(Thread.currentThread().getContextClassLoader().getResource("").getPath()
 						.replace("target/classes/", "src/main/webapp/")).getAbsolutePath();
-
-//				String uploadPath = FileUploadUtil.getUploadDirectory(webAppPath, FileUploadUtil.TEMP_DIR);
-//				System.out.println("uploadPath: " + uploadPath);
 				
 				String uploadPath=request.getServletContext().getRealPath("/resources/images/upload/");
 				
@@ -100,7 +97,7 @@ public class WritePostServlet extends HttpServlet {
 				// 3. MultipartRequest 생성
 				MultipartRequest mr = new MultipartRequest(request, uploadPath, 1024 * 1024 * 100, // 100MB
 						"UTF-8", new DefaultFileRenamePolicy());
-				
+
 				// 4. Post2 객체 생성
 				Post2 post = Post2.builder().postTitle(mr.getParameter("postTitle"))
 					.postContent(mr.getParameter("postContent"))
