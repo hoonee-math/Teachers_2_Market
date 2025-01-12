@@ -33,7 +33,7 @@
 		</div>
 		<div class="side-btn-text">미취학</div>
 		
-		<c:if test="${sessionScope.loginMember != null }">
+		<c:if test="${sessionScope.loginMember != null && sessionScope.loginMember.memberId != 'admin'}">
 			<div class="side-button" data-path="/member/myinfo">
 				<img src="${path }/resources/images/common/profile.png" alt="마이 페이지" class="side-img-icon">
 			</div>
