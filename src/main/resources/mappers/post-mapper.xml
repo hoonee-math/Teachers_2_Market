@@ -50,7 +50,7 @@
 	    SELECT P.*, M.*, PR.*, F.*, I.*
 	    FROM (SELECT ROWNUM AS RNUM, P.*
 	          FROM (SELECT * FROM POST2 
-	          		WHERE CATEGORY_NO=#{categoryNo}
+	          		WHERE CATEGORY_NO=#{categoryNo} AND PRODUCT_TYPE != 0
 	          		ORDER BY POST_NO DESC)P
 	         ) P
 	    LEFT JOIN MEMBER2 M ON P.MEMBER_NO = M.MEMBER_NO

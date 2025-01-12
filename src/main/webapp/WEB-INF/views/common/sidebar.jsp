@@ -7,10 +7,6 @@
 
 <div class="side-container" style="width:60px">
 	<div class="container">
-		<div class="side-button" data-category="6">
-			<img src="${path }/resources/images/common/fire.png" alt="인기글" class="side-img-icon"/>
-		</div>
-		<div class="side-btn-text">인기글</div>
 		
 		<div class="side-button" data-category="5">
 			<img src="${path }/resources/images/common/exam.png" alt="n수생" class="side-img-icon">
