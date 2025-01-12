@@ -260,9 +260,10 @@
 	}
 	
 	function requestPay() {
-	    /* // 사용자 입력값 가져오기
-	    const orderName = document.getElementById("orderName").value;
-	    const totalAmount = document.getElementById("totalAmount").value;
+	    // 사용자 입력값 가져오기
+		const postTitle = "${carts[0].post.postTitle}";
+      	const cartCount = ${carts.size()};
+      	const orderTitle = cartCount > 1 ? postTitle + " 외 " + (cartCount - 1) + "건" : postTitle;
 
 	    // 필수 데이터 확인
 	    if (!orderName || !totalAmount) {
@@ -273,18 +274,18 @@
 	      PortOne.requestPayment({
 	        storeId: "store-df5b2e74-b293-47e9-af74-71229a11acda",
 	        paymentId: "testm5f69klh",
-	        orderName: "#postTitle에 들어간 value",
-	        totalAmount: 1000,
+	        orderName: orderTitle,
+	        totalAmount: ${totalPrice},
 	        currency: "KRW",
 	        channelKey: "channel-key-d8b2cd6c-b899-4be5-a588-6a79d57ad611",
 	        payMethod: "CARD",
 	        card: {},
 	        customer: {
-	          customerId: "user_m5f69vse",
-	          fullName: "123",
-	          firstName: "123",
-	          phoneNumber: "010-1111-1111",
-	          email: "123@gmail.com",
+	          customerId: "${sessionScope.loginMember.memberId}",
+	          fullName: "${sessionScope.loginMember.memberName}",
+	          firstName: "123", //클로드의 말로는 선택옵션이라서 지워도 된다고 하네요!
+	          phoneNumber: "${sessionScope.loginMember.phone}",
+	          email: "${sessionScope.loginMember.email}",
 	        },
 	      });
 	    }
