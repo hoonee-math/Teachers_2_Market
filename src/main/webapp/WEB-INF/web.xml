@@ -6,7 +6,7 @@
 	
 	<!-- 파일 업로드를 처리할 서블릿 설정 -->
 	<servlet>
-		<servlet-name>WritePostServlet</servlet-name>
+		<servlet-name>writePost</servlet-name>
 		<servlet-class>com.ttt.controller.post.WritePostServlet</servlet-class>
 		<multipart-config>
 			<max-file-size>20971520</max-file-size>		   <!-- 20MB -->
@@ -24,6 +24,12 @@
 	<session-config>
 		<session-timeout>30</session-timeout>
 	</session-config>
+	
+	    <!-- 1. web.xml에 업로드 경로 설정 추가 -->
+	<context-param>
+	    <param-name>uploadPath</param-name>
+	    <param-value>/resources/images/profile</param-value>
+	</context-param>
 	
 	<!-- 에러 페이지 설정 -->
 	<error-page>

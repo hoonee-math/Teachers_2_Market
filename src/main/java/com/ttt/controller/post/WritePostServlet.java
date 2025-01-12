@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -109,9 +111,9 @@ public class WritePostServlet extends HttpServlet {
 				
 				String uploadPath=request.getServletContext().getRealPath("/resources/images/upload/");
 				
-				
 				// 2. 디렉토리 존재 여부 확인 및 생성
 				File directory = new File(uploadPath);
+				
 				if (!directory.exists()) {
 					boolean created = directory.mkdirs();
 					if (!created) {
@@ -119,11 +121,10 @@ public class WritePostServlet extends HttpServlet {
 						System.out.println("디렉토리 생성 실패: " + uploadPath);
 					}
 				}
-
 				// 3. MultipartRequest 생성
 				MultipartRequest mr = new MultipartRequest(request, uploadPath, 1024 * 1024 * 100, // 100MB
 						"UTF-8", new DefaultFileRenamePolicy());
-
+				
 				// 4. Post2 객체 생성
 				Post2 post = Post2.builder().postTitle(mr.getParameter("postTitle"))
 					.postContent(mr.getParameter("postContent"))
@@ -188,6 +189,9 @@ public class WritePostServlet extends HttpServlet {
 						if (fileName.startsWith("upfile")) { // 상품 이미지 파일
 							oriname = mr.getOriginalFileName(fileName);
 							renamed = mr.getFilesystemName(fileName);
+							
+					        // 실제 파일 존재 여부 확인
+					        File uploadedFile = new File(uploadPath + renamed);
 							if (oriname != null) {
 								Image2 img = Image2.builder()
 									.oriname(oriname)
@@ -200,7 +204,6 @@ public class WritePostServlet extends HttpServlet {
 					}
 					post.setPostImg(images);
 				}
-
 				// 트랜잭션 처리
 				PostService service = new PostService();
 				int result = service.insertPost(post, mr, webAppPath);
