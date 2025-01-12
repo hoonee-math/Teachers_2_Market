@@ -6,7 +6,7 @@
 	
 	<!-- 파일 업로드를 처리할 서블릿 설정 -->
 	<servlet>
-		<servlet-name>writePost</servlet-name>
+		<servlet-name>WritePostServlet</servlet-name>
 		<servlet-class>com.ttt.controller.post.WritePostServlet</servlet-class>
 		<multipart-config>
 			<max-file-size>20971520</max-file-size>		   <!-- 20MB -->
@@ -15,10 +15,10 @@
 		</multipart-config>
 	</servlet>
 	
-	<servlet-mapping>
+<!-- 	<servlet-mapping>
 		<servlet-name>writePost</servlet-name>
 		<url-pattern>/post/write</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
 	
 	<!-- 세션 설정 -->
 	<session-config>
