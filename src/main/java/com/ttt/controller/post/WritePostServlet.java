@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -27,8 +25,6 @@ import com.ttt.dto.Member2;
 import com.ttt.dto.Post2;
 import com.ttt.dto.Product2;
 import com.ttt.service.PostService;
-import com.ttt.util.post.FileUploadUtil;
-
 @WebServlet(name="writePost", urlPatterns="/post/write/*")
 public class WritePostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -40,28 +36,14 @@ public class WritePostServlet extends HttpServlet {
 	// "/post/report/form"으로 들어오는 요청에 대해 게시글 등록 페이지 열어주기
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("writePostServlet 도착");
 		String uri = request.getRequestURI();
 		String path = uri.substring(request.getContextPath().length());
 
 		switch (path) {
 		case "/post/write/form":
+			System.out.println("writePostServlet /post/write/form 으로 맵핑 완료");
 			request.getRequestDispatcher("/WEB-INF/views/post/writepost.jsp").forward(request, response);
-
-			// 파일 저장 경로 확인 test
-			String webAppPath1 = new File("src/main/webapp").getAbsolutePath();
-			// -> webAppPath1: C:\Windows\System32\src\main\webapp
-			String webAppPath2 = request.getServletContext().getRealPath("/");
-			// -> webAppPath2: C:\GitHub\EduTech_Full_Stack\Teachers_Project\Teachers_2_Market\Teachers_2_Market\target\m2e-wtp\web-resources\
-			String webAppPath3 = getServletContext().getRealPath("../../../src/main/webapp/");
-			// -> webAppPath3: null
-			String webAppPath4 = System.getProperty("user.dir") + "/src/main/webapp/";
-			// -> webAppPath4: C:\Windows\System32/src/main/webapp/
-
-			// 방법 2: ClassLoader 사용
-			String webAppPath5 = new File(Thread.currentThread().getContextClassLoader().getResource("").getPath()
-					.replace("target/classes/", "src/main/webapp/")).getAbsolutePath();
-			// -> webAppPath5: C:\GitHub\EduTech_Full_Stack\Teachers_Project\Teachers_2_Market\Teachers_2_Market\src\main\webapp
-			
 			break;
 		default:
 			request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
@@ -96,12 +78,6 @@ public class WritePostServlet extends HttpServlet {
 				}
 
 				// 2. 파일 저장 경로 설정
-				String webAppPath1 = new File("src/main/webapp").getAbsolutePath();
-				String webAppPath2 = request.getServletContext().getRealPath("/");
-				String webAppPath3 = getServletContext().getRealPath("../../../src/main/webapp/");
-				;
-				String webAppPath4 = System.getProperty("user.dir") + "/src/main/webapp/";
-
 				// 방법 2: ClassLoader 사용 -- 임시방편
 				String webAppPath = new File(Thread.currentThread().getContextClassLoader().getResource("").getPath()
 						.replace("target/classes/", "src/main/webapp/")).getAbsolutePath();
@@ -205,8 +181,9 @@ public class WritePostServlet extends HttpServlet {
 					post.setPostImg(images);
 				}
 				// 트랜잭션 처리
+				System.out.println("post등록을 시작합니다.");
 				PostService service = new PostService();
-				int result = service.insertPost(post, mr, webAppPath);
+				int result = service.insertPost(post, mr, uploadPath);
 
 				if (result > 0) {
 					responseData.put("success", true);

@@ -132,7 +132,7 @@ $("#emailSelect").change(function() {
 
 		// 이메일 중복 체크
 		$.ajax({
-		    url: `${contextPath}/auth/checkEmailDuplicate.do`,
+		    url: path + '/auth/checkEmailDuplicate.do',
 		    method: "POST",
 		    data: { email: email, searchType: 'emailDuplicate'},
 		    success: function(response) {
@@ -154,7 +154,7 @@ $("#emailSelect").change(function() {
 	function sendVerificationEmail(email) {
 	    const form = document.createElement('form');
 	    form.method = 'POST';
-	    form.action = `${contextPath}/auth/sendEmail`;
+	    form.action = path + '/auth/sendEmail';
 	    form.target = 'emailVerify';
 	    
 	    const emailInput = document.createElement('input');

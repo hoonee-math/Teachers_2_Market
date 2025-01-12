@@ -45,6 +45,7 @@ public class MemberEnrollEndServlet extends HttpServlet {
 			subjectNo = Integer.parseInt(request.getParameter("subjectNo"));
 		}catch(Exception e) {
 			System.out.println("파싱오류");
+			e.printStackTrace();
 		};
 		
 		Member2 m = Member2.builder()

@@ -47,7 +47,7 @@ public class ReportServlet extends HttpServlet {
             response.setContentType("application/json;charset=UTF-8");
             PrintWriter out = response.getWriter();
             JSONObject jsonResponse = new JSONObject();
-            System.out.println(jsonResponse +"out:"+out);
+            System.out.println("신고처리 report 서비스 start");
             try {
                 // 신고 데이터 받아오기
 				/*
