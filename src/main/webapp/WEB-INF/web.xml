@@ -16,7 +16,7 @@
 	</servlet>
 	
 	<servlet-mapping>
-		<servlet-name>WritePostServlet</servlet-name>
+		<servlet-name>writePost</servlet-name>
 		<url-pattern>/post/write</url-pattern>
 	</servlet-mapping>
 	
