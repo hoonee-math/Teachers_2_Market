@@ -100,12 +100,15 @@
 	
 	<!-- 메인 페이지에서 사용할 인기글 조회 로직 -->
 	<select id="selectPostByPopular" resultMap="postMap">
-		SELECT * 
-		FROM (SELECT * FROM post2 
+		SELECT P.*, M.*, PR.*, F.*, I.*
+	    FROM (SELECT * FROM post2 
 			WHERE PRODUCT_TYPE != 0
-			ORDER BY VIEW_COUNT DESC)
-			LEFT JOIN MEMBER2 USING (MEMBER_NO)
-		WHERE 8 >= ROWNUM
+			ORDER BY VIEW_COUNT DESC) P
+	    LEFT JOIN MEMBER2 M ON P.MEMBER_NO = M.MEMBER_NO
+	    LEFT JOIN PRODUCT2 PR ON P.POST_NO = PR.POST_NO
+	    LEFT JOIN FILE2 F ON P.POST_NO = F.POST_NO
+	    LEFT JOIN IMAGE2 I ON P.POST_NO = I.POST_NO
+	    WHERE 8 >= ROWNUM
 	</select>
 	
 	<!-- adminmenu.jsp 공지사항 상단고정 상태 토글 -->

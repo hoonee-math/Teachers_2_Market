@@ -56,7 +56,7 @@
 				</div>
 			</section>
 				<c:forEach var="item" items="${populars }" varStatus="status">
-					<c:if test="${status.index % 4 ==0 }">
+		<c:if test="${status.index % 4 ==0 }">
 						<section class="row card-section">
 					</c:if>
 					<div class="card-container" data-post-no="${item.postNo}">
@@ -82,9 +82,7 @@
 								<!-- 판매물품 제목은 10글자까지, 
 									프론트 구현할 때 c:if 사용해서 10글자가 넘는 경우 9 글자까지 출력하고 뒤에 ...붙이기 
 									ex) 하나둘셋넷다섯여섯...-->
-							<%-- <p><strong>판매물품 제목</strong></p> --%>
 							<p><strong>${item.postTitle}</strong></p>
-							<%-- <p>₩ 판매금액</p> --%>
 							<!-- 상품 타입이 물품인 경우 -->
 							<c:if test="${item.productType==1 }">
 								<!-- stockCount 변수에 재고 넣음 -->
