@@ -127,10 +127,10 @@
 					</div>
 					<!-- 배송 정보 -->
 					<div class="post-delivery-info">
-						<c:if test="${post.product2.hasDeliveryFee == 1}">
+						<c:if test="${post.product2.hasDeliveryFee == 0}">
 							<p>무료배송</p>
 						</c:if>
-						<c:if test="${post.product2.hasDeliveryFee == 0}">
+						<c:if test="${post.product2.hasDeliveryFee == 1}">
 							<p>
 								배송비: 
 								<fmt:formatNumber value="${post.product2.deliveryFee}" pattern="#,###" />

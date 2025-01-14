@@ -82,7 +82,7 @@ public class WritePostServlet extends HttpServlet {
 				String webAppPath = new File(Thread.currentThread().getContextClassLoader().getResource("").getPath()
 						.replace("target/classes/", "src/main/webapp/")).getAbsolutePath();
 				
-				String uploadPath=request.getServletContext().getRealPath("/resources/images/upload/");
+				String uploadPath=request.getServletContext().getRealPath("/");
 				
 				// 2. 디렉토리 존재 여부 확인 및 생성
 				File directory = new File(uploadPath);

@@ -89,10 +89,10 @@
 												</c:if>
 												
 												<!-- 상품 배송비 -->
-												<c:if test="${item.product2.hasDeliveryFee == 1}">
+												<c:if test="${item.product2.hasDeliveryFee == 0}">
 													<p><strong>무료배송</strong></p>
 												</c:if>
-												<c:if test="${item.product2.hasDeliveryFee == 0}">
+												<c:if test="${item.product2.hasDeliveryFee == 1}">
 													<p><strong>
 														배송비: 
 														<fmt:formatNumber value="${item.product2.deliveryFee}" pattern="#,###" />

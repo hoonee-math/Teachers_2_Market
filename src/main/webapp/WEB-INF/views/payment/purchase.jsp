@@ -258,6 +258,12 @@
 			$('#customDeliveryRequest').val('');
 		}
 	}
+	function generatePaymentId() {
+	    // 타임스탬프 + 랜덤 문자열 조합으로 고유 ID 생성
+	    const timestamp = new Date().getTime();
+	    const randomStr = Math.random().toString(36).substring(2, 15);
+	    return `pay_${timestamp}_${randomStr}`;
+	}
 	
 	function requestPay() {
 	    // 사용자 입력값 가져오기
@@ -265,15 +271,9 @@
       	const cartCount = ${carts.size()};
       	const orderTitle = cartCount > 1 ? postTitle + " 외 " + (cartCount - 1) + "건" : postTitle;
 
-	    // 필수 데이터 확인
-	    if (!orderName || !totalAmount) {
-	        alert("모든 값을 입력해주세요!");
-	        return;
-	    } */
-	    
 	      PortOne.requestPayment({
 	        storeId: "store-df5b2e74-b293-47e9-af74-71229a11acda",
-	        paymentId: "testm5f69klh",
+	        paymentId: generatePaymentId(),
 	        orderName: orderTitle,
 	        totalAmount: ${totalPrice},
 	        currency: "KRW",
@@ -287,6 +287,8 @@
 	          phoneNumber: "${sessionScope.loginMember.phone}",
 	          email: "${sessionScope.loginMember.email}",
 	        },
+	        successUrl: "${path}/payment/requestpay/success",    // 성공시 리디렉션 URL
+	        failUrl: "${path}/payment/requestpay/fail",          // 실패시 리디렉션 URL
 	      });
 	    }
 </script>
